@@ -10,6 +10,11 @@
       "StackName": "amplify-tibiservice-dev-151606",
       "StackId": "arn:aws:cloudformation:us-east-2:775952047413:stack/amplify-tibiservice-dev-151606/8e8611d0-3699-11ec-90ad-0ada6e370bfe",
       "AmplifyAppId": "d2fsbyc8v5822g"
+    },
+    "categories": {
+      "auth": {
+        "tibiservice91fe12e4": {}
+      }
     }
   }
 }
