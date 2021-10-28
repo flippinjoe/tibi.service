@@ -6,6 +6,8 @@ export const getTibi = /* GraphQL */ `
   query GetTibi($id: ID!) {
     getTibi(id: $id) {
       id
+      firstName
+      lastName
       createdAt
       updatedAt
       owner
@@ -21,6 +23,8 @@ export const listTibis = /* GraphQL */ `
     listTibis(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        firstName
+        lastName
         createdAt
         updatedAt
         owner

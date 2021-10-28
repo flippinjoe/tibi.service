@@ -1,3 +1,4 @@
+import Auth from '@aws-amplify/auth';
 import React, { useEffect, useState } from 'react'
 import { createContext, useContext } from "react";
 
@@ -5,14 +6,17 @@ import { createContext, useContext } from "react";
 
 const authService = {
     signIn: async (username: string, password: string) => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve({ username, created: new Date(), id: Math.random()* 100000})
-            }, 3000);
-        })
+
+        return Auth.signIn(username, password)
+        
+        // return new Promise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         resolve({ username, created: new Date(), id: Math.random()* 100000})
+        //     }, 3000);
+        // })
     },
     signOut: async () => {
-        return null
+        return Auth.signOut()
     }
 }
 
@@ -54,23 +58,18 @@ export const useProvideAuth = () => {
 
 
     useEffect(() => {
-        try {
-            console.group('login')
-            console.log('Attempting to restore login');
-            
-            const data = localStorage.getItem('_u')
-            if (data && data.length > 0) {
-                const obj = JSON.parse(data)
-                if (obj) {
-                    console.log(`Restored `, obj)
-                    setUser(obj)
-                }
+        (async () => {
+            try {
+                console.group('login')
+                console.log('Attempting to restore login');
+                const res = await Auth.currentUserInfo()
+                console.log(res)
+                setUser(res)
+            } catch (err) {
+                console.error(err)
             }
-            console.groupEnd()
-        } catch (err) {
-            console.error(err)
-        }
-        setInitialized(true)
+            setInitialized(true)
+        })()
     }, [])
 
     useEffect(() => {

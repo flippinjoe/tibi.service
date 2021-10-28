@@ -1,3 +1,4 @@
+import Auth from '@aws-amplify/auth'
 import { useState, useEffect,useCallback } from 'react'
 
 import { useLocation, useHistory } from 'react-router-dom'
@@ -17,12 +18,24 @@ const LoginPage = () => {
         () => {
             auth.signIn(username, password)
             .then(value => {
+
+                // TODO: See if we have a `TibiUser` setup.  If not then we need to push to the
+                // more details screen
+
+
                 history.replace(from);
             })
             .catch(err => { console.error(err) })
         },
         [auth, username, password, from, history]
     )
+
+    useEffect(() => {
+        /// If we're already authed, then ignore this
+        if (auth.initialized && auth.user && !loading) {
+            history.replace(from)
+        }
+    }, [auth.initialized, auth.user, from, history, loading])
 
     useEffect(() => {
 
@@ -33,7 +46,7 @@ const LoginPage = () => {
     }, [loading])
     
     
-    const login = () => {
+    const login = async () => {
         setLoading(true)
     }
 

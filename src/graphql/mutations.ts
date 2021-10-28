@@ -9,6 +9,8 @@ export const createTibi = /* GraphQL */ `
   ) {
     createTibi(input: $input, condition: $condition) {
       id
+      firstName
+      lastName
       createdAt
       updatedAt
       owner
@@ -22,6 +24,8 @@ export const updateTibi = /* GraphQL */ `
   ) {
     updateTibi(input: $input, condition: $condition) {
       id
+      firstName
+      lastName
       createdAt
       updatedAt
       owner
@@ -35,6 +39,8 @@ export const deleteTibi = /* GraphQL */ `
   ) {
     deleteTibi(input: $input, condition: $condition) {
       id
+      firstName
+      lastName
       createdAt
       updatedAt
       owner
