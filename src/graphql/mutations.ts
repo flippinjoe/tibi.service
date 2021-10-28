@@ -2,45 +2,42 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
+export const createTibi = /* GraphQL */ `
+  mutation CreateTibi(
+    $input: CreateTibiInput!
+    $condition: ModelTibiConditionInput
   ) {
-    createTodo(input: $input, condition: $condition) {
+    createTibi(input: $input, condition: $condition) {
       id
-      name
-      description
       createdAt
       updatedAt
+      owner
     }
   }
 `;
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
+export const updateTibi = /* GraphQL */ `
+  mutation UpdateTibi(
+    $input: UpdateTibiInput!
+    $condition: ModelTibiConditionInput
   ) {
-    updateTodo(input: $input, condition: $condition) {
+    updateTibi(input: $input, condition: $condition) {
       id
-      name
-      description
       createdAt
       updatedAt
+      owner
     }
   }
 `;
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
+export const deleteTibi = /* GraphQL */ `
+  mutation DeleteTibi(
+    $input: DeleteTibiInput!
+    $condition: ModelTibiConditionInput
   ) {
-    deleteTodo(input: $input, condition: $condition) {
+    deleteTibi(input: $input, condition: $condition) {
       id
-      name
-      description
       createdAt
       updatedAt
+      owner
     }
   }
 `;

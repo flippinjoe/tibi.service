@@ -2,36 +2,33 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTodo = /* GraphQL */ `
-  subscription OnCreateTodo {
-    onCreateTodo {
+export const onCreateTibi = /* GraphQL */ `
+  subscription OnCreateTibi($owner: String) {
+    onCreateTibi(owner: $owner) {
       id
-      name
-      description
       createdAt
       updatedAt
+      owner
     }
   }
 `;
-export const onUpdateTodo = /* GraphQL */ `
-  subscription OnUpdateTodo {
-    onUpdateTodo {
+export const onUpdateTibi = /* GraphQL */ `
+  subscription OnUpdateTibi($owner: String) {
+    onUpdateTibi(owner: $owner) {
       id
-      name
-      description
       createdAt
       updatedAt
+      owner
     }
   }
 `;
-export const onDeleteTodo = /* GraphQL */ `
-  subscription OnDeleteTodo {
-    onDeleteTodo {
+export const onDeleteTibi = /* GraphQL */ `
+  subscription OnDeleteTibi($owner: String) {
+    onDeleteTibi(owner: $owner) {
       id
-      name
-      description
       createdAt
       updatedAt
+      owner
     }
   }
 `;

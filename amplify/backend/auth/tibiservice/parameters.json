@@ -58,5 +58,12 @@
     "thirdPartyAuth": false,
     "authProviders": [],
     "usernameCaseSensitive": false,
-    "dependsOn": []
+    "dependsOn": [],
+    "hostedUI": true,
+    "hostedUIDomainName": "dxl4y8izilc3",
+    "authProvidersUserPool": [
+        "SignInWithApple"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"SignInWithApple\",\"authorize_scopes\":\"email\",\"AttributeMapping\":{\"email\":\"email\"}}]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://localhost:3000\",\"https://dev.tibi.app\"],\"LogoutURLs\":[\"https://localhost:3000\",\"https://dev.tibi.app\"]}"
 }

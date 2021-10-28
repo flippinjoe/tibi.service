@@ -2,30 +2,28 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getTodo = /* GraphQL */ `
-  query GetTodo($id: ID!) {
-    getTodo(id: $id) {
+export const getTibi = /* GraphQL */ `
+  query GetTibi($id: ID!) {
+    getTibi(id: $id) {
       id
-      name
-      description
       createdAt
       updatedAt
+      owner
     }
   }
 `;
-export const listTodos = /* GraphQL */ `
-  query ListTodos(
-    $filter: ModelTodoFilterInput
+export const listTibis = /* GraphQL */ `
+  query ListTibis(
+    $filter: ModelTibiFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listTibis(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        name
-        description
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }

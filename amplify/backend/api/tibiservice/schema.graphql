@@ -1,5 +1,17 @@
-type Todo @model {
+
+type Tibi @model 
+@auth(rules: [
+
+  { allow: public, operations: [read]},
+  
+  ## Owners can do everything
+  { allow: owner },
+  
+  # Admin users can access any operation.
+  { allow: groups, groups: ["admin"] }
+]) {
   id: ID!
-  name: String!
-  description: String
+  
+  firstName: String!
+  lastName: String!
 }
