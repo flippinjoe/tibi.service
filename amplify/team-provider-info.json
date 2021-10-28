@@ -16,42 +16,5 @@
         "tibiservice": {}
       }
     }
-  },
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-tibiservice-dev-151606-authRole",
-      "UnauthRoleArn": "arn:aws:iam::775952047413:role/amplify-tibiservice-dev-151606-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::775952047413:role/amplify-tibiservice-dev-151606-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-tibiservice-dev-151606-deployment",
-      "UnauthRoleName": "amplify-tibiservice-dev-151606-unauthRole",
-      "StackName": "amplify-tibiservice-dev-151606",
-      "StackId": "arn:aws:cloudformation:us-east-2:775952047413:stack/amplify-tibiservice-dev-151606/8e8611d0-3699-11ec-90ad-0ada6e370bfe",
-      "AmplifyAppId": "d2fsbyc8v5822g"
-    },
-    "categories": {
-      "auth": {
-        "tibiservice91fe12e4": {},
-        "tibiservice": {}
-      }
-    }
-  },
-  "prod": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-tibiservice-prod-144152-authRole",
-      "UnauthRoleArn": "arn:aws:iam::775952047413:role/amplify-tibiservice-prod-144152-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::775952047413:role/amplify-tibiservice-prod-144152-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-tibiservice-prod-144152-deployment",
-      "UnauthRoleName": "amplify-tibiservice-prod-144152-unauthRole",
-      "StackName": "amplify-tibiservice-prod-144152",
-      "StackId": "arn:aws:cloudformation:us-east-2:775952047413:stack/amplify-tibiservice-prod-144152/1a76b530-3827-11ec-84db-0aab8753e8a8",
-      "AmplifyAppId": "d2fsbyc8v5822g"
-    },
-    "categories": {
-      "auth": {
-        "tibiservice": {}
-      }
-    }
   }
 }
