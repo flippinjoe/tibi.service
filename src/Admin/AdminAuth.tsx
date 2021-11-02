@@ -34,7 +34,7 @@ export const PrivateRoute = ({ children, component: SomeC, ...rest }: RouteProps
                 />
               )
             : (
-                <p>Loading...</p>
+                <p>Initializing...</p>
             )
         )
       }

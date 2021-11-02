@@ -1,5 +1,5 @@
 
-type Tibi @model 
+type User @model 
 @auth(rules: [
   
   ## Owners can do everything
@@ -13,5 +13,42 @@ type Tibi @model
   
 
   firstName: String!
-  lastName: String! 
+  lastName: String!
+
+
+  establishments: [EstablishmentTibi] @connection(keyName: "byUser", fields: ["id"])
+}
+
+
+type Establishment @model
+@auth(rules: [
+  ## Owners can do everything
+  { allow: owner },
+  
+  ## Admin users can access any operation.
+  { allow: groups, groups: ["admin"] }
+]) {
+  id: ID!
+
+  ## This is either sole-proprieter or organization
+  type: String
+  
+
+  tibis: [EstablishmentTibi] @connection(keyName: "byEstablishment", fields: ["id"])
+}
+
+
+type EstablishmentTibi
+@model(queries: null)
+@key(name: "byEstablishment", fields: ["establishmentId", "userId"])
+@key(name: "byUser", fields: ["userId", "establishmentId"])
+@auth(rules: [
+  { allow: owner },
+  { allow: groups, groups: ["admin"] }
+]) {
+  id: ID!
+  userId: ID!
+  establishmentId: ID!
+  establishment: Establishment! @connection(fields: ["establishmentId"])
+  user: User! @connection(fields: ["userId"])
 }
