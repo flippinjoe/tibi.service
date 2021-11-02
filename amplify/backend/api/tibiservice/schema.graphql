@@ -6,9 +6,8 @@ type Tibi @model
   { allow: owner },
   
   # Admin users can access any operation.
-  { allow: groups, groups: ["admin"] },
+  { allow: groups, groups: ["admin"] }
 
-  { allow: public, operations: [read] }
 ]) {
   id: ID!
   
