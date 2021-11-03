@@ -63,6 +63,7 @@ export const createEstablishment = /* GraphQL */ `
   ) {
     createEstablishment(input: $input, condition: $condition) {
       id
+      name
       type
       tibis {
         nextToken
@@ -80,6 +81,7 @@ export const updateEstablishment = /* GraphQL */ `
   ) {
     updateEstablishment(input: $input, condition: $condition) {
       id
+      name
       type
       tibis {
         nextToken
@@ -97,6 +99,7 @@ export const deleteEstablishment = /* GraphQL */ `
   ) {
     deleteEstablishment(input: $input, condition: $condition) {
       id
+      name
       type
       tibis {
         nextToken
@@ -118,6 +121,7 @@ export const createEstablishmentTibi = /* GraphQL */ `
       establishmentId
       establishment {
         id
+        name
         type
         createdAt
         updatedAt
@@ -148,6 +152,7 @@ export const updateEstablishmentTibi = /* GraphQL */ `
       establishmentId
       establishment {
         id
+        name
         type
         createdAt
         updatedAt
@@ -178,6 +183,7 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
       establishmentId
       establishment {
         id
+        name
         type
         createdAt
         updatedAt

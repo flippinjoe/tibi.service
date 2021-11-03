@@ -40,6 +40,7 @@ export const getEstablishment = /* GraphQL */ `
   query GetEstablishment($id: ID!) {
     getEstablishment(id: $id) {
       id
+      name
       type
       tibis {
         nextToken
@@ -59,6 +60,7 @@ export const listEstablishments = /* GraphQL */ `
     listEstablishments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        name
         type
         createdAt
         updatedAt

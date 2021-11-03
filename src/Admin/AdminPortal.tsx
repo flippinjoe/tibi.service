@@ -11,6 +11,7 @@ import theme from './utils/theme'
 import { Box } from '@mui/system';
 import Header from './components/Header'
 import EstablishmentList from './screens/establishments/EstablishmentList'
+import EstablishmentEdit from './screens/establishments/EstablishmentEdit'
 
 const drawerWidth = 256;
 
@@ -50,7 +51,7 @@ const AdminRouter = () => {
                 <Switch>
                   <Route path="/admin/login" component={Login} />
                   <PrivateRoute exact path="/admin/establishments" component={EstablishmentList} />
-                  
+                  <PrivateRoute exact path="/admin/establishments/:id" component={EstablishmentEdit} />
                   <PrivateRoute exact path="/" component={Home} />
                 </Switch>
               </Router>

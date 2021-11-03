@@ -30,6 +30,9 @@ type Establishment @model
 ]) {
   id: ID!
 
+  ## Name for establishment
+  name: String
+
   ## This is either sole-proprieter or organization
   type: String
   

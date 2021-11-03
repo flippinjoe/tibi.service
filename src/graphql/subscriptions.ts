@@ -51,6 +51,7 @@ export const onCreateEstablishment = /* GraphQL */ `
   subscription OnCreateEstablishment($owner: String) {
     onCreateEstablishment(owner: $owner) {
       id
+      name
       type
       tibis {
         nextToken
@@ -65,6 +66,7 @@ export const onUpdateEstablishment = /* GraphQL */ `
   subscription OnUpdateEstablishment($owner: String) {
     onUpdateEstablishment(owner: $owner) {
       id
+      name
       type
       tibis {
         nextToken
@@ -79,6 +81,7 @@ export const onDeleteEstablishment = /* GraphQL */ `
   subscription OnDeleteEstablishment($owner: String) {
     onDeleteEstablishment(owner: $owner) {
       id
+      name
       type
       tibis {
         nextToken
@@ -97,6 +100,7 @@ export const onCreateEstablishmentTibi = /* GraphQL */ `
       establishmentId
       establishment {
         id
+        name
         type
         createdAt
         updatedAt
@@ -124,6 +128,7 @@ export const onUpdateEstablishmentTibi = /* GraphQL */ `
       establishmentId
       establishment {
         id
+        name
         type
         createdAt
         updatedAt
@@ -151,6 +156,7 @@ export const onDeleteEstablishmentTibi = /* GraphQL */ `
       establishmentId
       establishment {
         id
+        name
         type
         createdAt
         updatedAt

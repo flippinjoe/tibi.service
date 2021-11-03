@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material"
+import { Grid, Typography, Stack, Container} from "@mui/material"
 import { useEffect, useState } from "react"
 
 type ListerProps<T> = {
@@ -36,7 +36,17 @@ const Lister = <T, >(props: ListerProps<T>) => {
 
     return (
         <Grid container alignItems="center" spacing={1}>
-            <Typography>{props.title}</Typography>
+            <Typography variant="h4">{props.title}</Typography>
+            <Container>
+            <Stack
+                direction="column"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                spacing={0}
+                >
+                    {list}
+                </Stack>
+            </Container>
         </Grid>
         // <h1>{props.title}</h1>
         // <div className='list'>

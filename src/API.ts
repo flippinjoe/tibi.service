@@ -88,6 +88,7 @@ export type EstablishmentTibi = {
 export type Establishment = {
   __typename: "Establishment",
   id: string,
+  name?: string | null,
   type?: string | null,
   tibis?: ModelEstablishmentTibiConnection | null,
   createdAt: string,
@@ -107,10 +108,12 @@ export type DeleteUserInput = {
 
 export type CreateEstablishmentInput = {
   id?: string | null,
+  name?: string | null,
   type?: string | null,
 };
 
 export type ModelEstablishmentConditionInput = {
+  name?: ModelStringInput | null,
   type?: ModelStringInput | null,
   and?: Array< ModelEstablishmentConditionInput | null > | null,
   or?: Array< ModelEstablishmentConditionInput | null > | null,
@@ -119,6 +122,7 @@ export type ModelEstablishmentConditionInput = {
 
 export type UpdateEstablishmentInput = {
   id: string,
+  name?: string | null,
   type?: string | null,
 };
 
@@ -183,6 +187,7 @@ export type ModelUserConnection = {
 
 export type ModelEstablishmentFilterInput = {
   id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
   type?: ModelStringInput | null,
   and?: Array< ModelEstablishmentFilterInput | null > | null,
   or?: Array< ModelEstablishmentFilterInput | null > | null,
@@ -267,6 +272,7 @@ export type CreateEstablishmentMutation = {
   createEstablishment?:  {
     __typename: "Establishment",
     id: string,
+    name?: string | null,
     type?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -287,6 +293,7 @@ export type UpdateEstablishmentMutation = {
   updateEstablishment?:  {
     __typename: "Establishment",
     id: string,
+    name?: string | null,
     type?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -307,6 +314,7 @@ export type DeleteEstablishmentMutation = {
   deleteEstablishment?:  {
     __typename: "Establishment",
     id: string,
+    name?: string | null,
     type?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -332,6 +340,7 @@ export type CreateEstablishmentTibiMutation = {
     establishment:  {
       __typename: "Establishment",
       id: string,
+      name?: string | null,
       type?: string | null,
       createdAt: string,
       updatedAt: string,
@@ -366,6 +375,7 @@ export type UpdateEstablishmentTibiMutation = {
     establishment:  {
       __typename: "Establishment",
       id: string,
+      name?: string | null,
       type?: string | null,
       createdAt: string,
       updatedAt: string,
@@ -400,6 +410,7 @@ export type DeleteEstablishmentTibiMutation = {
     establishment:  {
       __typename: "Establishment",
       id: string,
+      name?: string | null,
       type?: string | null,
       createdAt: string,
       updatedAt: string,
@@ -470,6 +481,7 @@ export type GetEstablishmentQuery = {
   getEstablishment?:  {
     __typename: "Establishment",
     id: string,
+    name?: string | null,
     type?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -493,6 +505,7 @@ export type ListEstablishmentsQuery = {
     items?:  Array< {
       __typename: "Establishment",
       id: string,
+      name?: string | null,
       type?: string | null,
       createdAt: string,
       updatedAt: string,
@@ -570,6 +583,7 @@ export type OnCreateEstablishmentSubscription = {
   onCreateEstablishment?:  {
     __typename: "Establishment",
     id: string,
+    name?: string | null,
     type?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -589,6 +603,7 @@ export type OnUpdateEstablishmentSubscription = {
   onUpdateEstablishment?:  {
     __typename: "Establishment",
     id: string,
+    name?: string | null,
     type?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -608,6 +623,7 @@ export type OnDeleteEstablishmentSubscription = {
   onDeleteEstablishment?:  {
     __typename: "Establishment",
     id: string,
+    name?: string | null,
     type?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -632,6 +648,7 @@ export type OnCreateEstablishmentTibiSubscription = {
     establishment:  {
       __typename: "Establishment",
       id: string,
+      name?: string | null,
       type?: string | null,
       createdAt: string,
       updatedAt: string,
@@ -665,6 +682,7 @@ export type OnUpdateEstablishmentTibiSubscription = {
     establishment:  {
       __typename: "Establishment",
       id: string,
+      name?: string | null,
       type?: string | null,
       createdAt: string,
       updatedAt: string,
@@ -698,6 +716,7 @@ export type OnDeleteEstablishmentTibiSubscription = {
     establishment:  {
       __typename: "Establishment",
       id: string,
+      name?: string | null,
       type?: string | null,
       createdAt: string,
       updatedAt: string,
