@@ -63,5 +63,27 @@
         }
       }
     }
+  },
+  "storage": {
+    "tibiIosData": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "tibiservice",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "userPoolGroups",
+          "attributes": [
+            "tibiCognitoPoolGroupRole"
+          ]
+        }
+      ]
+    }
   }
 }

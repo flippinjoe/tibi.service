@@ -185,6 +185,10 @@ Parameters:
   authProviders:
     Type: CommaDelimitedList
       
+  oAuthMetadata:
+    Type: String
+  
+            
   hostedUIProviderCreds:
     Type: String
   
@@ -192,11 +196,6 @@ Parameters:
   appleAppId:
     Type: String
   
-            
-  oAuthMetadata:
-    Type: String
-  
-            
             
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
