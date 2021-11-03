@@ -1,4 +1,3 @@
-
 AWSTemplateFormatVersion: 2010-09-09
 
 Parameters:
@@ -72,10 +71,6 @@ Parameters:
   requiredAttributes:
     Type: CommaDelimitedList
       
-        
-  aliasAttributes:
-    Type: CommaDelimitedList
-      
   
   userpoolClientGenerateSecret:
     Type: String
@@ -100,6 +95,10 @@ Parameters:
   userpoolClientSetAttributes:
     Type: String
             
+        
+  aliasAttributes:
+    Type: CommaDelimitedList
+      
   sharedId:
     Type: String
   
@@ -139,14 +138,6 @@ Parameters:
     Type: String
             
   
-  thirdPartyAuth:
-    Type: String
-            
-        
-  authProviders:
-    Type: CommaDelimitedList
-      
-  
   usernameCaseSensitive:
     Type: String
             
@@ -154,11 +145,30 @@ Parameters:
   dependsOn:
     Type: CommaDelimitedList
       
-            
   
   hostedUI:
     Type: String
             
+        
+  signinwithappleAuthorizeScopes:
+    Type: CommaDelimitedList
+      
+  triggers:
+    Type: String
+  
+            
+      
+  parentStack:
+    Type: String
+        
+  
+  breakCircularDependency:
+    Type: String
+            
+        
+  permissions:
+    Type: CommaDelimitedList
+      
   hostedUIDomainName:
     Type: String
   
@@ -171,13 +181,22 @@ Parameters:
     Type: String
   
             
+        
+  authProviders:
+    Type: CommaDelimitedList
+      
   hostedUIProviderCreds:
+    Type: String
+  
+            
+  appleAppId:
     Type: String
   
             
   oAuthMetadata:
     Type: String
   
+            
             
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
@@ -240,25 +259,18 @@ Resources:
       
       
       
-      AutoVerifiedAttributes:
+      AutoVerifiedAttributes: !Ref autoVerifiedAttributes
       
-        - email
-      
-      
-      
-      EmailVerificationMessage: !Ref emailVerificationMessage
-      EmailVerificationSubject: !Ref emailVerificationSubject
       
       Policies:
         PasswordPolicy:
           MinimumLength: !Ref passwordPolicyMinLength
-          RequireLowercase: true
-          RequireNumbers: true
-          RequireSymbols: true
-          RequireUppercase: true
+          RequireLowercase: false
+          RequireNumbers: false
+          RequireSymbols: false
+          RequireUppercase: false
       
       UsernameAttributes: !Ref usernameAttributes
-      
       
       MfaConfiguration: !Ref mfaConfiguration
       SmsVerificationMessage: !Ref smsVerificationMessage
@@ -337,7 +349,7 @@ Resources:
             - '};'
       Handler: index.handler
       Runtime: nodejs12.x
-      Timeout: 300
+      Timeout: '300'
       Role: !GetAtt
         - UserPoolClientRole
         - Arn
@@ -463,7 +475,7 @@ Resources:
 
       Handler: index.handler
       Runtime: nodejs12.x
-      Timeout: 300
+      Timeout: '300'
       Role: !GetAtt
         - UserPoolClientRole
         - Arn
@@ -615,7 +627,7 @@ Resources:
 
       Handler: index.handler
       Runtime: nodejs12.x
-      Timeout: 300
+      Timeout: '300'
       Role: !GetAtt
         - UserPoolClientRole
         - Arn
@@ -714,7 +726,7 @@ Resources:
 
       Handler: index.handler
       Runtime: nodejs12.x
-      Timeout: 300
+      Timeout: '300'
       Role: !GetAtt
         - UserPoolClientRole
         - Arn
@@ -845,5 +857,8 @@ Outputs :
   
   
   
+  
+  AppleWebClient:
+    Value: !Ref appleAppId
   
   
