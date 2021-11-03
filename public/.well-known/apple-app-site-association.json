@@ -1,0 +1,19 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "MNJGRRQPNJ.com.joesapps.tibi",
+                "paths": [
+                    "*"
+                ]
+            }
+        ]
+    },
+    "appclips": {
+        "apps": ["MNJGRRQPNJ.com.joesapps.tibi.Clip"]
+    },
+    "webcredentials": {
+        "apps": [ "MNJGRRQPNJ.com.joesapps.tibi" ]
+     }
+}

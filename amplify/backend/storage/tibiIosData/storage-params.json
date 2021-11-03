@@ -1,0 +1,9 @@
+{
+    "groupPermissionMap": {
+        "tibiCognitoPool": [
+            "create/update",
+            "read",
+            "delete"
+        ]
+    }
+}
