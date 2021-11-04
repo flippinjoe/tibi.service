@@ -8,6 +8,7 @@ export const onCreateUser = /* GraphQL */ `
       id
       firstName
       lastName
+      imageUrl
       establishments {
         nextToken
       }
@@ -23,6 +24,7 @@ export const onUpdateUser = /* GraphQL */ `
       id
       firstName
       lastName
+      imageUrl
       establishments {
         nextToken
       }
@@ -38,8 +40,105 @@ export const onDeleteUser = /* GraphQL */ `
       id
       firstName
       lastName
+      imageUrl
       establishments {
         nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateImagePath = /* GraphQL */ `
+  subscription OnCreateImagePath($owner: String) {
+    onCreateImagePath(owner: $owner) {
+      id
+      key
+      location
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateImagePath = /* GraphQL */ `
+  subscription OnUpdateImagePath($owner: String) {
+    onUpdateImagePath(owner: $owner) {
+      id
+      key
+      location
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteImagePath = /* GraphQL */ `
+  subscription OnDeleteImagePath($owner: String) {
+    onDeleteImagePath(owner: $owner) {
+      id
+      key
+      location
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateOccupation = /* GraphQL */ `
+  subscription OnCreateOccupation($owner: String) {
+    onCreateOccupation(owner: $owner) {
+      id
+      establishmentId
+      name
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateOccupation = /* GraphQL */ `
+  subscription OnUpdateOccupation($owner: String) {
+    onUpdateOccupation(owner: $owner) {
+      id
+      establishmentId
+      name
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteOccupation = /* GraphQL */ `
+  subscription OnDeleteOccupation($owner: String) {
+    onDeleteOccupation(owner: $owner) {
+      id
+      establishmentId
+      name
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -53,7 +152,11 @@ export const onCreateEstablishment = /* GraphQL */ `
       id
       name
       type
+      website
       tibis {
+        nextToken
+      }
+      occupations {
         nextToken
       }
       createdAt
@@ -68,7 +171,11 @@ export const onUpdateEstablishment = /* GraphQL */ `
       id
       name
       type
+      website
       tibis {
+        nextToken
+      }
+      occupations {
         nextToken
       }
       createdAt
@@ -83,7 +190,11 @@ export const onDeleteEstablishment = /* GraphQL */ `
       id
       name
       type
+      website
       tibis {
+        nextToken
+      }
+      occupations {
         nextToken
       }
       createdAt
@@ -102,6 +213,7 @@ export const onCreateEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
+        website
         createdAt
         updatedAt
         owner
@@ -110,10 +222,12 @@ export const onCreateEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
+        imageUrl
         createdAt
         updatedAt
         owner
       }
+      roles
       createdAt
       updatedAt
       owner
@@ -130,6 +244,7 @@ export const onUpdateEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
+        website
         createdAt
         updatedAt
         owner
@@ -138,10 +253,12 @@ export const onUpdateEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
+        imageUrl
         createdAt
         updatedAt
         owner
       }
+      roles
       createdAt
       updatedAt
       owner
@@ -158,6 +275,7 @@ export const onDeleteEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
+        website
         createdAt
         updatedAt
         owner
@@ -166,10 +284,12 @@ export const onDeleteEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
+        imageUrl
         createdAt
         updatedAt
         owner
       }
+      roles
       createdAt
       updatedAt
       owner

@@ -14,9 +14,47 @@ type User @model
 
   firstName: String!
   lastName: String!
+  
+  imageUrl: AWSURL!
 
 
   establishments: [EstablishmentTibi] @connection(keyName: "byUser", fields: ["id"])
+}
+
+
+enum ImageLocation {
+  system
+  assets
+  remote
+}
+
+enum EstablishmentType {
+  hotel
+  custom
+}
+
+
+type ImagePath @model
+@auth(rules: [
+  { allow: owner },
+  { allow: groups, groups: ["admin"] }
+]) {
+  key: String!
+  location: ImageLocation!
+}
+
+type Occupation @model
+@key(name: "byEstablishment", fields: ["establishmentId", "name"])
+@auth(rules: [
+
+  { allow: owner },
+  { allow: groups, groups: ["admin"] }
+]) {
+  id: ID!
+  establishmentId: ID!
+  name: String!
+
+  backgroundImage: ImagePath! @connection
 }
 
 
@@ -31,13 +69,18 @@ type Establishment @model
   id: ID!
 
   ## Name for establishment
-  name: String
+  name: String!
 
   ## This is either sole-proprieter or organization
-  type: String
+  type: EstablishmentType!
+
+
+  website: AWSURL
+
   
 
   tibis: [EstablishmentTibi] @connection(keyName: "byEstablishment", fields: ["id"])
+  occupations: [Occupation] @connection(keyName: "byEstablishment", fields: ["id"])
 }
 
 
@@ -54,4 +97,5 @@ type EstablishmentTibi
   establishmentId: ID!
   establishment: Establishment! @connection(fields: ["establishmentId"])
   user: User! @connection(fields: ["userId"])
+  roles: [String]!
 }

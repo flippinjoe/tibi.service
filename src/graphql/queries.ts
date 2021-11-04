@@ -8,6 +8,7 @@ export const getUser = /* GraphQL */ `
       id
       firstName
       lastName
+      imageUrl
       establishments {
         nextToken
       }
@@ -28,6 +29,77 @@ export const listUsers = /* GraphQL */ `
         id
         firstName
         lastName
+        imageUrl
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getImagePath = /* GraphQL */ `
+  query GetImagePath($id: ID!) {
+    getImagePath(id: $id) {
+      id
+      key
+      location
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listImagePaths = /* GraphQL */ `
+  query ListImagePaths(
+    $filter: ModelImagePathFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listImagePaths(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getOccupation = /* GraphQL */ `
+  query GetOccupation($id: ID!) {
+    getOccupation(id: $id) {
+      id
+      establishmentId
+      name
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listOccupations = /* GraphQL */ `
+  query ListOccupations(
+    $filter: ModelOccupationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listOccupations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        establishmentId
+        name
         createdAt
         updatedAt
         owner
@@ -42,7 +114,11 @@ export const getEstablishment = /* GraphQL */ `
       id
       name
       type
+      website
       tibis {
+        nextToken
+      }
+      occupations {
         nextToken
       }
       createdAt
@@ -62,6 +138,7 @@ export const listEstablishments = /* GraphQL */ `
         id
         name
         type
+        website
         createdAt
         updatedAt
         owner

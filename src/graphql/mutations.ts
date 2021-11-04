@@ -11,6 +11,7 @@ export const createUser = /* GraphQL */ `
       id
       firstName
       lastName
+      imageUrl
       establishments {
         nextToken
       }
@@ -29,6 +30,7 @@ export const updateUser = /* GraphQL */ `
       id
       firstName
       lastName
+      imageUrl
       establishments {
         nextToken
       }
@@ -47,8 +49,123 @@ export const deleteUser = /* GraphQL */ `
       id
       firstName
       lastName
+      imageUrl
       establishments {
         nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createImagePath = /* GraphQL */ `
+  mutation CreateImagePath(
+    $input: CreateImagePathInput!
+    $condition: ModelImagePathConditionInput
+  ) {
+    createImagePath(input: $input, condition: $condition) {
+      id
+      key
+      location
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateImagePath = /* GraphQL */ `
+  mutation UpdateImagePath(
+    $input: UpdateImagePathInput!
+    $condition: ModelImagePathConditionInput
+  ) {
+    updateImagePath(input: $input, condition: $condition) {
+      id
+      key
+      location
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteImagePath = /* GraphQL */ `
+  mutation DeleteImagePath(
+    $input: DeleteImagePathInput!
+    $condition: ModelImagePathConditionInput
+  ) {
+    deleteImagePath(input: $input, condition: $condition) {
+      id
+      key
+      location
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createOccupation = /* GraphQL */ `
+  mutation CreateOccupation(
+    $input: CreateOccupationInput!
+    $condition: ModelOccupationConditionInput
+  ) {
+    createOccupation(input: $input, condition: $condition) {
+      id
+      establishmentId
+      name
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateOccupation = /* GraphQL */ `
+  mutation UpdateOccupation(
+    $input: UpdateOccupationInput!
+    $condition: ModelOccupationConditionInput
+  ) {
+    updateOccupation(input: $input, condition: $condition) {
+      id
+      establishmentId
+      name
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteOccupation = /* GraphQL */ `
+  mutation DeleteOccupation(
+    $input: DeleteOccupationInput!
+    $condition: ModelOccupationConditionInput
+  ) {
+    deleteOccupation(input: $input, condition: $condition) {
+      id
+      establishmentId
+      name
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
       }
       createdAt
       updatedAt
@@ -65,7 +182,11 @@ export const createEstablishment = /* GraphQL */ `
       id
       name
       type
+      website
       tibis {
+        nextToken
+      }
+      occupations {
         nextToken
       }
       createdAt
@@ -83,7 +204,11 @@ export const updateEstablishment = /* GraphQL */ `
       id
       name
       type
+      website
       tibis {
+        nextToken
+      }
+      occupations {
         nextToken
       }
       createdAt
@@ -101,7 +226,11 @@ export const deleteEstablishment = /* GraphQL */ `
       id
       name
       type
+      website
       tibis {
+        nextToken
+      }
+      occupations {
         nextToken
       }
       createdAt
@@ -123,6 +252,7 @@ export const createEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
+        website
         createdAt
         updatedAt
         owner
@@ -131,10 +261,12 @@ export const createEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
+        imageUrl
         createdAt
         updatedAt
         owner
       }
+      roles
       createdAt
       updatedAt
       owner
@@ -154,6 +286,7 @@ export const updateEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
+        website
         createdAt
         updatedAt
         owner
@@ -162,10 +295,12 @@ export const updateEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
+        imageUrl
         createdAt
         updatedAt
         owner
       }
+      roles
       createdAt
       updatedAt
       owner
@@ -185,6 +320,7 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
+        website
         createdAt
         updatedAt
         owner
@@ -193,10 +329,12 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
+        imageUrl
         createdAt
         updatedAt
         owner
       }
+      roles
       createdAt
       updatedAt
       owner
