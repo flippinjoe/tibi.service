@@ -1,26 +1,19 @@
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-  } from "react-router-dom";
-  
-import AdminPortal from './Admin/AdminPortal'
-import PublicHome from './PublicApp/App'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import AdminPortal from './Admin/AdminPortal';
+import AdminPortal2 from './Admin/NewAdminEntry';
+import PublicHome from './PublicApp/App';
 
-  export default function App() {
-    return (
-      <Router>
-          {/* A <Switch> looks through its children <Route>s and
+export default function App() {
+  return (
+    <Router>
+      {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
-          <Switch>
-            <Route path="/admin">
-              <AdminPortal />
-            </Route>
-            <Route path="/">
-              <PublicHome />
-            </Route>
-          </Switch>
-      </Router>
-    );
-  }
+      <Routes>
+        <Route path="/admin2/*" element={<AdminPortal2 />} />
+        <Route path="/admin" element={<AdminPortal />} />
+        <Route path="/" element={<PublicHome />} />
+      </Routes>
+    </Router>
+  );
+}

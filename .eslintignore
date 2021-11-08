@@ -1,0 +1,15 @@
+// .eslintignore
+build/*
+public/*
+src/react-app-env.d.ts
+src/reportWebVitals.ts
+src/service-worker.ts
+src/serviceWorkerRegistration.ts
+src/setupTests.ts
+src/aws-exports.js
+
+
+src/reportWebVitals.js
+src/service-worker.js
+src/serviceWorkerRegistration.js
+src/setupTests.js
