@@ -1,3 +1,5 @@
+import amplifyConfig from '../aws-exports';
+
 export const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -10,8 +12,8 @@ export const firebaseConfig = {
 };
 
 export const cognitoConfig = {
-  userPoolId: process.env.REACT_APP_AWS_COGNITO_USER_POOL_ID,
-  clientId: process.env.REACT_APP_AWS_COGNITO_CLIENT_ID
+  userPoolId: amplifyConfig.aws_user_pools_id,
+  clientId: amplifyConfig.aws_user_pools_web_client_id
 };
 
 export const auth0Config = {
