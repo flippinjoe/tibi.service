@@ -39,6 +39,8 @@ export default function DashboardLayout() {
   const { collapseClick } = useCollapseDrawer();
   const [open, setOpen] = useState(false);
 
+  console.log(`DashboardLayout`);
+
   return (
     <RootStyle>
       <DashboardNavbar onOpenSidebar={() => setOpen(true)} />

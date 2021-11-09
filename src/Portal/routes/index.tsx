@@ -40,187 +40,191 @@ const Loadable = (Component: React.ElementType) => (props: any) => {
 };
 
 export default function Router() {
-  return useRoutes([
-    {
-      path: 'auth',
-      children: [
-        {
-          path: 'login',
-          element: (
-            <GuestGuard>
-              <Login />
-            </GuestGuard>
-          )
-        },
-        {
-          path: 'register',
-          element: (
-            <GuestGuard>
-              <Register />
-            </GuestGuard>
-          )
-        },
-        { path: 'login-unprotected', element: <Login /> },
-        { path: 'register-unprotected', element: <Register /> },
-        { path: 'reset-password', element: <ResetPassword /> },
-        { path: 'verify', element: <VerifyCode /> }
-      ]
-    },
+  console.log(`Portal.routes.index - Router`);
+  return useRoutes(
+    [
+      {
+        path: 'auth',
+        children: [
+          {
+            path: 'login',
+            element: (
+              <GuestGuard>
+                <Login />
+              </GuestGuard>
+            )
+          },
+          {
+            path: 'register',
+            element: (
+              <GuestGuard>
+                <Register />
+              </GuestGuard>
+            )
+          },
+          { path: 'login-unprotected', element: <Login /> },
+          { path: 'register-unprotected', element: <Register /> },
+          { path: 'reset-password', element: <ResetPassword /> },
+          { path: 'verify', element: <VerifyCode /> }
+        ]
+      },
 
-    // Dashboard Routes
-    {
-      path: 'dashboard',
-      element: (
-        <AuthGuard>
-          <DashboardLayout />
-        </AuthGuard>
-      ),
-      children: [
-        { element: <Navigate to="/dashboard/app" replace /> },
-        { path: 'app', element: <GeneralApp /> },
-        { path: 'ecommerce', element: <GeneralEcommerce /> },
-        { path: 'analytics', element: <GeneralAnalytics /> },
-        { path: 'banking', element: <GeneralBanking /> },
-        { path: 'booking', element: <GeneralBooking /> },
+      // Dashboard Routes
+      {
+        path: 'dashboard',
+        element: (
+          <AuthGuard>
+            <DashboardLayout />
+          </AuthGuard>
+        ),
+        children: [
+          { element: <Navigate to="dashboard/app" replace /> },
+          { path: 'app', element: <GeneralApp /> },
+          { path: 'ecommerce', element: <GeneralEcommerce /> },
+          { path: 'analytics', element: <GeneralAnalytics /> },
+          { path: 'banking', element: <GeneralBanking /> },
+          { path: 'booking', element: <GeneralBooking /> },
 
-        {
-          path: 'e-commerce',
-          children: [
-            { element: <Navigate to="/dashboard/e-commerce/shop" replace /> },
-            { path: 'shop', element: <EcommerceShop /> },
-            { path: 'product/:name', element: <EcommerceProductDetails /> },
-            { path: 'list', element: <EcommerceProductList /> },
-            { path: 'product/new', element: <EcommerceProductCreate /> },
-            { path: 'product/:name/edit', element: <EcommerceProductCreate /> },
-            { path: 'checkout', element: <EcommerceCheckout /> },
-            { path: 'invoice', element: <EcommerceInvoice /> }
-          ]
-        },
-        {
-          path: 'user',
-          children: [
-            { element: <Navigate to="/dashboard/user/profile" replace /> },
-            { path: 'profile', element: <UserProfile /> },
-            { path: 'cards', element: <UserCards /> },
-            { path: 'list', element: <UserList /> },
-            { path: 'new', element: <UserCreate /> },
-            { path: ':name/edit', element: <UserCreate /> },
-            { path: 'account', element: <UserAccount /> }
-          ]
-        },
-        {
-          path: 'blog',
-          children: [
-            { element: <Navigate to="/dashboard/blog/posts" replace /> },
-            { path: 'posts', element: <BlogPosts /> },
-            { path: 'post/:title', element: <BlogPost /> },
-            { path: 'new-post', element: <BlogNewPost /> }
-          ]
-        },
-        {
-          path: 'mail',
-          children: [
-            { element: <Navigate to="/dashboard/mail/all" replace /> },
-            { path: 'label/:customLabel', element: <Mail /> },
-            { path: 'label/:customLabel/:mailId', element: <Mail /> },
-            { path: ':systemLabel', element: <Mail /> },
-            { path: ':systemLabel/:mailId', element: <Mail /> }
-          ]
-        },
-        {
-          path: 'chat',
-          children: [
-            { element: <Chat /> },
-            { path: 'new', element: <Chat /> },
-            { path: ':conversationKey', element: <Chat /> }
-          ]
-        },
-        { path: 'calendar', element: <Calendar /> },
-        { path: 'kanban', element: <Kanban /> }
-      ]
-    },
+          {
+            path: 'e-commerce',
+            children: [
+              { element: <Navigate to="/dashboard/e-commerce/shop" replace /> },
+              { path: 'shop', element: <EcommerceShop /> },
+              { path: 'product/:name', element: <EcommerceProductDetails /> },
+              { path: 'list', element: <EcommerceProductList /> },
+              { path: 'product/new', element: <EcommerceProductCreate /> },
+              { path: 'product/:name/edit', element: <EcommerceProductCreate /> },
+              { path: 'checkout', element: <EcommerceCheckout /> },
+              { path: 'invoice', element: <EcommerceInvoice /> }
+            ]
+          },
+          {
+            path: 'user',
+            children: [
+              { element: <Navigate to="/dashboard/user/profile" replace /> },
+              { path: 'profile', element: <UserProfile /> },
+              { path: 'cards', element: <UserCards /> },
+              { path: 'list', element: <UserList /> },
+              { path: 'new', element: <UserCreate /> },
+              { path: ':name/edit', element: <UserCreate /> },
+              { path: 'account', element: <UserAccount /> }
+            ]
+          },
+          {
+            path: 'blog',
+            children: [
+              { element: <Navigate to="/dashboard/blog/posts" replace /> },
+              { path: 'posts', element: <BlogPosts /> },
+              { path: 'post/:title', element: <BlogPost /> },
+              { path: 'new-post', element: <BlogNewPost /> }
+            ]
+          },
+          {
+            path: 'mail',
+            children: [
+              { element: <Navigate to="/dashboard/mail/all" replace /> },
+              { path: 'label/:customLabel', element: <Mail /> },
+              { path: 'label/:customLabel/:mailId', element: <Mail /> },
+              { path: ':systemLabel', element: <Mail /> },
+              { path: ':systemLabel/:mailId', element: <Mail /> }
+            ]
+          },
+          {
+            path: 'chat',
+            children: [
+              { element: <Chat /> },
+              { path: 'new', element: <Chat /> },
+              { path: ':conversationKey', element: <Chat /> }
+            ]
+          },
+          { path: 'calendar', element: <Calendar /> },
+          { path: 'kanban', element: <Kanban /> }
+        ]
+      },
 
-    // Main Routes
-    {
-      path: '*',
-      element: <LogoOnlyLayout />,
-      children: [
-        { path: 'coming-soon', element: <ComingSoon /> },
-        { path: 'maintenance', element: <Maintenance /> },
-        { path: 'pricing', element: <Pricing /> },
-        { path: 'payment', element: <Payment /> },
-        { path: '500', element: <Page500 /> },
-        { path: '404', element: <NotFound /> },
-        { path: '*', element: <Navigate to="/404" replace /> }
-      ]
-    },
-    {
-      path: '/',
-      element: <MainLayout />,
-      children: [
-        { element: <LandingPage /> },
-        { path: 'about-us', element: <About /> },
-        { path: 'contact-us', element: <Contact /> },
-        { path: 'faqs', element: <Faqs /> },
-        {
-          path: 'components',
-          children: [
-            { element: <ComponentsOverview /> },
-            // FOUNDATIONS
-            { path: 'color', element: <Color /> },
-            { path: 'typography', element: <Typography /> },
-            { path: 'shadows', element: <Shadows /> },
-            { path: 'grid', element: <Grid /> },
-            { path: 'icons', element: <Icons /> },
-            // MATERIAL UI
-            { path: 'accordion', element: <Accordion /> },
-            { path: 'alert', element: <Alert /> },
-            { path: 'autocomplete', element: <Autocomplete /> },
-            { path: 'avatar', element: <Avatar /> },
-            { path: 'badge', element: <Badge /> },
-            { path: 'breadcrumbs', element: <Breadcrumb /> },
-            { path: 'buttons', element: <Buttons /> },
-            { path: 'checkbox', element: <Checkbox /> },
-            { path: 'chip', element: <Chip /> },
-            { path: 'dialog', element: <Dialog /> },
-            { path: 'label', element: <Label /> },
-            { path: 'list', element: <List /> },
-            { path: 'menu', element: <Menu /> },
-            { path: 'pagination', element: <Pagination /> },
-            { path: 'pickers', element: <Pickers /> },
-            { path: 'popover', element: <Popover /> },
-            { path: 'progress', element: <Progress /> },
-            { path: 'radio-button', element: <RadioButtons /> },
-            { path: 'rating', element: <Rating /> },
-            { path: 'slider', element: <Slider /> },
-            { path: 'snackbar', element: <Snackbar /> },
-            { path: 'stepper', element: <Stepper /> },
-            { path: 'switch', element: <Switches /> },
-            { path: 'table', element: <Table /> },
-            { path: 'tabs', element: <Tabs /> },
-            { path: 'textfield', element: <Textfield /> },
-            { path: 'timeline', element: <Timeline /> },
-            { path: 'tooltip', element: <Tooltip /> },
-            { path: 'transfer-list', element: <TransferList /> },
-            { path: 'tree-view', element: <TreeView /> },
-            { path: 'data-grid', element: <DataGrid /> },
-            // EXTRA COMPONENTS
-            { path: 'chart', element: <Charts /> },
-            { path: 'map', element: <Map /> },
-            { path: 'editor', element: <Editor /> },
-            { path: 'copy-to-clipboard', element: <CopyToClipboard /> },
-            { path: 'upload', element: <Upload /> },
-            { path: 'carousel', element: <Carousel /> },
-            { path: 'multi-language', element: <MultiLanguage /> },
-            { path: 'animate', element: <Animate /> },
-            { path: 'mega-menu', element: <MegaMenu /> },
-            { path: 'form-validation', element: <FormValidation /> }
-          ]
-        }
-      ]
-    },
-    { path: '*', element: <Navigate to="/404" replace /> }
-  ]);
+      // Main Routes
+      {
+        path: '*',
+        element: <LogoOnlyLayout />,
+        children: [
+          { path: 'coming-soon', element: <ComingSoon /> },
+          { path: 'maintenance', element: <Maintenance /> },
+          { path: 'pricing', element: <Pricing /> },
+          { path: 'payment', element: <Payment /> },
+          { path: '500', element: <Page500 /> },
+          { path: '404', element: <NotFound /> },
+          { path: '*', element: <Navigate to="/404" replace /> }
+        ]
+      },
+      {
+        path: '/',
+        element: <MainLayout />,
+        children: [
+          { element: <LandingPage /> },
+          { path: 'about-us', element: <About /> },
+          { path: 'contact-us', element: <Contact /> },
+          { path: 'faqs', element: <Faqs /> },
+          {
+            path: 'components',
+            children: [
+              { element: <ComponentsOverview /> },
+              // FOUNDATIONS
+              { path: 'color', element: <Color /> },
+              { path: 'typography', element: <Typography /> },
+              { path: 'shadows', element: <Shadows /> },
+              { path: 'grid', element: <Grid /> },
+              { path: 'icons', element: <Icons /> },
+              // MATERIAL UI
+              { path: 'accordion', element: <Accordion /> },
+              { path: 'alert', element: <Alert /> },
+              { path: 'autocomplete', element: <Autocomplete /> },
+              { path: 'avatar', element: <Avatar /> },
+              { path: 'badge', element: <Badge /> },
+              { path: 'breadcrumbs', element: <Breadcrumb /> },
+              { path: 'buttons', element: <Buttons /> },
+              { path: 'checkbox', element: <Checkbox /> },
+              { path: 'chip', element: <Chip /> },
+              { path: 'dialog', element: <Dialog /> },
+              { path: 'label', element: <Label /> },
+              { path: 'list', element: <List /> },
+              { path: 'menu', element: <Menu /> },
+              { path: 'pagination', element: <Pagination /> },
+              { path: 'pickers', element: <Pickers /> },
+              { path: 'popover', element: <Popover /> },
+              { path: 'progress', element: <Progress /> },
+              { path: 'radio-button', element: <RadioButtons /> },
+              { path: 'rating', element: <Rating /> },
+              { path: 'slider', element: <Slider /> },
+              { path: 'snackbar', element: <Snackbar /> },
+              { path: 'stepper', element: <Stepper /> },
+              { path: 'switch', element: <Switches /> },
+              { path: 'table', element: <Table /> },
+              { path: 'tabs', element: <Tabs /> },
+              { path: 'textfield', element: <Textfield /> },
+              { path: 'timeline', element: <Timeline /> },
+              { path: 'tooltip', element: <Tooltip /> },
+              { path: 'transfer-list', element: <TransferList /> },
+              { path: 'tree-view', element: <TreeView /> },
+              { path: 'data-grid', element: <DataGrid /> },
+              // EXTRA COMPONENTS
+              { path: 'chart', element: <Charts /> },
+              { path: 'map', element: <Map /> },
+              { path: 'editor', element: <Editor /> },
+              { path: 'copy-to-clipboard', element: <CopyToClipboard /> },
+              { path: 'upload', element: <Upload /> },
+              { path: 'carousel', element: <Carousel /> },
+              { path: 'multi-language', element: <MultiLanguage /> },
+              { path: 'animate', element: <Animate /> },
+              { path: 'mega-menu', element: <MegaMenu /> },
+              { path: 'form-validation', element: <FormValidation /> }
+            ]
+          }
+        ]
+      },
+      { path: '*', element: <Navigate to="/404" replace /> }
+    ],
+    ''
+  );
 }
 
 // IMPORT COMPONENTS

@@ -2,18 +2,13 @@ import {
   Button,
   FormControl,
   FormHelperText,
-  Grid,
   Input,
   InputLabel,
   Stack,
   Typography
 } from '@mui/material';
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router';
-
-type EditParams = {
-  id: string;
-};
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 
 export type CrudEditProps<T> = {
   title: string;

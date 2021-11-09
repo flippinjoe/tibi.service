@@ -1,6 +1,6 @@
 import API, { GraphQLResult } from '@aws-amplify/api';
 import { graphqlOperation } from 'aws-amplify';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../Admin/contexts/AuthContext';
 import { User } from '../API';
 import { getUser } from '../graphql/queries';
