@@ -1,3 +1,6 @@
+// mock api
+import './Portal/_apis_';
+
 // i18n
 import './Portal/locales/i18n';
 
