@@ -2,6 +2,36 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const syncUsers = /* GraphQL */ `
+  query SyncUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUsers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        firstName
+        lastName
+        imageUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -11,7 +41,11 @@ export const getUser = /* GraphQL */ `
       imageUrl
       establishments {
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -30,11 +64,44 @@ export const listUsers = /* GraphQL */ `
         firstName
         lastName
         imageUrl
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncImagePaths = /* GraphQL */ `
+  query SyncImagePaths(
+    $filter: ModelImagePathFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncImagePaths(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        key
+        location
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -44,6 +111,9 @@ export const getImagePath = /* GraphQL */ `
       id
       key
       location
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -61,11 +131,44 @@ export const listImagePaths = /* GraphQL */ `
         id
         key
         location
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncOccupations = /* GraphQL */ `
+  query SyncOccupations(
+    $filter: ModelOccupationFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncOccupations(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        establishmentId
+        name
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -79,10 +182,16 @@ export const getOccupation = /* GraphQL */ `
         id
         key
         location
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -100,11 +209,45 @@ export const listOccupations = /* GraphQL */ `
         id
         establishmentId
         name
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncEstablishmentTibis = /* GraphQL */ `
+  query SyncEstablishmentTibis(
+    $filter: ModelEstablishmentTibiFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncEstablishmentTibis(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        userId
+        establishmentId
+        roles
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -117,10 +260,15 @@ export const getEstablishment = /* GraphQL */ `
       website
       tibis {
         nextToken
+        startedAt
       }
       occupations {
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -139,11 +287,45 @@ export const listEstablishments = /* GraphQL */ `
         name
         type
         website
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncEstablishments = /* GraphQL */ `
+  query SyncEstablishments(
+    $filter: ModelEstablishmentFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncEstablishments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        type
+        website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+      startedAt
     }
   }
 `;

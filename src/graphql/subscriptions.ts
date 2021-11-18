@@ -3,15 +3,19 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($owner: String) {
-    onCreateUser(owner: $owner) {
+  subscription OnCreateUser {
+    onCreateUser {
       id
       firstName
       lastName
       imageUrl
       establishments {
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -19,15 +23,19 @@ export const onCreateUser = /* GraphQL */ `
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($owner: String) {
-    onUpdateUser(owner: $owner) {
+  subscription OnUpdateUser {
+    onUpdateUser {
       id
       firstName
       lastName
       imageUrl
       establishments {
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -35,15 +43,19 @@ export const onUpdateUser = /* GraphQL */ `
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($owner: String) {
-    onDeleteUser(owner: $owner) {
+  subscription OnDeleteUser {
+    onDeleteUser {
       id
       firstName
       lastName
       imageUrl
       establishments {
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -56,6 +68,9 @@ export const onCreateImagePath = /* GraphQL */ `
       id
       key
       location
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -68,6 +83,9 @@ export const onUpdateImagePath = /* GraphQL */ `
       id
       key
       location
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -80,6 +98,9 @@ export const onDeleteImagePath = /* GraphQL */ `
       id
       key
       location
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -87,8 +108,8 @@ export const onDeleteImagePath = /* GraphQL */ `
   }
 `;
 export const onCreateOccupation = /* GraphQL */ `
-  subscription OnCreateOccupation($owner: String) {
-    onCreateOccupation(owner: $owner) {
+  subscription OnCreateOccupation {
+    onCreateOccupation {
       id
       establishmentId
       name
@@ -96,10 +117,16 @@ export const onCreateOccupation = /* GraphQL */ `
         id
         key
         location
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -107,8 +134,8 @@ export const onCreateOccupation = /* GraphQL */ `
   }
 `;
 export const onUpdateOccupation = /* GraphQL */ `
-  subscription OnUpdateOccupation($owner: String) {
-    onUpdateOccupation(owner: $owner) {
+  subscription OnUpdateOccupation {
+    onUpdateOccupation {
       id
       establishmentId
       name
@@ -116,10 +143,16 @@ export const onUpdateOccupation = /* GraphQL */ `
         id
         key
         location
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -127,8 +160,8 @@ export const onUpdateOccupation = /* GraphQL */ `
   }
 `;
 export const onDeleteOccupation = /* GraphQL */ `
-  subscription OnDeleteOccupation($owner: String) {
-    onDeleteOccupation(owner: $owner) {
+  subscription OnDeleteOccupation {
+    onDeleteOccupation {
       id
       establishmentId
       name
@@ -136,67 +169,16 @@ export const onDeleteOccupation = /* GraphQL */ `
         id
         key
         location
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onCreateEstablishment = /* GraphQL */ `
-  subscription OnCreateEstablishment($owner: String) {
-    onCreateEstablishment(owner: $owner) {
-      id
-      name
-      type
-      website
-      tibis {
-        nextToken
-      }
-      occupations {
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateEstablishment = /* GraphQL */ `
-  subscription OnUpdateEstablishment($owner: String) {
-    onUpdateEstablishment(owner: $owner) {
-      id
-      name
-      type
-      website
-      tibis {
-        nextToken
-      }
-      occupations {
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteEstablishment = /* GraphQL */ `
-  subscription OnDeleteEstablishment($owner: String) {
-    onDeleteEstablishment(owner: $owner) {
-      id
-      name
-      type
-      website
-      tibis {
-        nextToken
-      }
-      occupations {
-        nextToken
-      }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -204,92 +186,191 @@ export const onDeleteEstablishment = /* GraphQL */ `
   }
 `;
 export const onCreateEstablishmentTibi = /* GraphQL */ `
-  subscription OnCreateEstablishmentTibi($owner: String) {
-    onCreateEstablishmentTibi(owner: $owner) {
+  subscription OnCreateEstablishmentTibi {
+    onCreateEstablishmentTibi {
       id
       userId
       establishmentId
-      establishment {
-        id
-        name
-        type
-        website
-        createdAt
-        updatedAt
-        owner
-      }
       user {
         id
         firstName
         lastName
         imageUrl
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       roles
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
+      establishment {
+        id
+        name
+        type
+        website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
       owner
     }
   }
 `;
 export const onUpdateEstablishmentTibi = /* GraphQL */ `
-  subscription OnUpdateEstablishmentTibi($owner: String) {
-    onUpdateEstablishmentTibi(owner: $owner) {
+  subscription OnUpdateEstablishmentTibi {
+    onUpdateEstablishmentTibi {
       id
       userId
       establishmentId
-      establishment {
-        id
-        name
-        type
-        website
-        createdAt
-        updatedAt
-        owner
-      }
       user {
         id
         firstName
         lastName
         imageUrl
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       roles
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      establishment {
+        id
+        name
+        type
+        website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteEstablishmentTibi = /* GraphQL */ `
+  subscription OnDeleteEstablishmentTibi {
+    onDeleteEstablishmentTibi {
+      id
+      userId
+      establishmentId
+      user {
+        id
+        firstName
+        lastName
+        imageUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      roles
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      establishment {
+        id
+        name
+        type
+        website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
+    }
+  }
+`;
+export const onCreateEstablishment = /* GraphQL */ `
+  subscription OnCreateEstablishment {
+    onCreateEstablishment {
+      id
+      name
+      type
+      website
+      tibis {
+        nextToken
+        startedAt
+      }
+      occupations {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
     }
   }
 `;
-export const onDeleteEstablishmentTibi = /* GraphQL */ `
-  subscription OnDeleteEstablishmentTibi($owner: String) {
-    onDeleteEstablishmentTibi(owner: $owner) {
+export const onUpdateEstablishment = /* GraphQL */ `
+  subscription OnUpdateEstablishment {
+    onUpdateEstablishment {
       id
-      userId
-      establishmentId
-      establishment {
-        id
-        name
-        type
-        website
-        createdAt
-        updatedAt
-        owner
+      name
+      type
+      website
+      tibis {
+        nextToken
+        startedAt
       }
-      user {
-        id
-        firstName
-        lastName
-        imageUrl
-        createdAt
-        updatedAt
-        owner
+      occupations {
+        nextToken
+        startedAt
       }
-      roles
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteEstablishment = /* GraphQL */ `
+  subscription OnDeleteEstablishment {
+    onDeleteEstablishment {
+      id
+      name
+      type
+      website
+      tibis {
+        nextToken
+        startedAt
+      }
+      occupations {
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner

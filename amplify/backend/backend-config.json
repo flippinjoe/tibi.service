@@ -59,7 +59,15 @@
               "userPoolId": "authtibiservice"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 365,
+                "description": "default backend api key"
+              }
+            }
+          ]
         }
       }
     }
