@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authtibiservice"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 365,
+        "keyDescription": "default backend api key"
+      }
+    ],
+    "conflictResolution": {},
+    "apiName": "tibiservice",
+    "gqlSchemaPath": "/Users/joe/dev/contracts/tibi/tibi.service/amplify/backend/api/tibiservice/schema.graphql"
+  }
+}
