@@ -4,9 +4,9 @@ type User @model
   
   ## Owners can do everything
   { allow: owner, operations: [create, update, delete] },
-  
+
   # Admin users can access any operation.
-  { allow: groups, groups: ["admin"] }
+  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
 
 ]) {
   id: ID!
@@ -36,8 +36,11 @@ enum EstablishmentType {
 
 type ImagePath @model
 @auth(rules: [
-  { allow: owner },
-  { allow: groups, groups: ["admin"] }
+  ## Owners can do everything
+  { allow: owner, operations: [create, update, delete] },
+
+  # Admin users can access any operation.
+  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
 ]) {
   key: String!
   location: ImageLocation!
@@ -47,11 +50,14 @@ type Occupation @model
 @key(name: "byEstablishment", fields: ["establishmentId", "name"])
 @auth(rules: [
 
+  ## Owners can do everything
   { allow: owner, operations: [create, update, delete] },
-  { allow: groups, groups: ["admin"] }
+
+  # Admin users can access any operation.
+  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
 ]) {
   id: ID!
-  establishmentId: ID!
+  establishmentId: ID
   name: String!
 
   backgroundImage: ImagePath! @connection
@@ -62,11 +68,18 @@ type Establishment @model
 @auth(rules: [
   ## Owners can do everything
   { allow: owner, operations: [create, update, delete] },
-  
-  ## Admin users can access any operation.
-  { allow: groups, groups: ["admin"] },
 
-  { allow: public, operations: [read] }
+  # Admin users can access any operation.
+  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
+
+  # { allow: groups, operations: [read] },
+  
+  # ## Admin users can access any operation.
+  # { allow: groups, groups: ["admin"] },
+
+  # { allow: groups, operations: [read] },
+
+  # { allow: public, operations: [read] }
 ]) {
   id: ID!
 
@@ -77,6 +90,7 @@ type Establishment @model
   type: EstablishmentType!
 
 
+  imageUrl: AWSURL
   website: AWSURL
 
   
@@ -91,8 +105,11 @@ type EstablishmentTibi
 @key(name: "byEstablishment", fields: ["establishmentId", "userId"])
 @key(name: "byUser", fields: ["userId", "establishmentId"])
 @auth(rules: [
+  ## Owners can do everything
   { allow: owner, operations: [create, update, delete] },
-  { allow: groups, groups: ["admin"] }
+
+  # Admin users can access any operation.
+  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
 ]) {
   id: ID!
   userId: ID!

@@ -221,6 +221,7 @@ export const createEstablishment = /* GraphQL */ `
       id
       name
       type
+      imageUrl
       website
       tibis {
         nextToken
@@ -248,6 +249,7 @@ export const updateEstablishment = /* GraphQL */ `
       id
       name
       type
+      imageUrl
       website
       tibis {
         nextToken
@@ -275,6 +277,7 @@ export const deleteEstablishment = /* GraphQL */ `
       id
       name
       type
+      imageUrl
       website
       tibis {
         nextToken
@@ -302,6 +305,19 @@ export const createEstablishmentTibi = /* GraphQL */ `
       id
       userId
       establishmentId
+      establishment {
+        id
+        name
+        type
+        imageUrl
+        website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
       user {
         id
         firstName
@@ -320,18 +336,6 @@ export const createEstablishmentTibi = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      establishment {
-        id
-        name
-        type
-        website
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
       owner
     }
   }
@@ -345,6 +349,19 @@ export const updateEstablishmentTibi = /* GraphQL */ `
       id
       userId
       establishmentId
+      establishment {
+        id
+        name
+        type
+        imageUrl
+        website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
       user {
         id
         firstName
@@ -363,18 +380,6 @@ export const updateEstablishmentTibi = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      establishment {
-        id
-        name
-        type
-        website
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
       owner
     }
   }
@@ -388,6 +393,19 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
       id
       userId
       establishmentId
+      establishment {
+        id
+        name
+        type
+        imageUrl
+        website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
       user {
         id
         firstName
@@ -406,18 +424,6 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      establishment {
-        id
-        name
-        type
-        website
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
       owner
     }
   }

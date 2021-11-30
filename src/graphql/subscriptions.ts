@@ -63,8 +63,8 @@ export const onDeleteUser = /* GraphQL */ `
   }
 `;
 export const onCreateImagePath = /* GraphQL */ `
-  subscription OnCreateImagePath($owner: String) {
-    onCreateImagePath(owner: $owner) {
+  subscription OnCreateImagePath {
+    onCreateImagePath {
       id
       key
       location
@@ -78,8 +78,8 @@ export const onCreateImagePath = /* GraphQL */ `
   }
 `;
 export const onUpdateImagePath = /* GraphQL */ `
-  subscription OnUpdateImagePath($owner: String) {
-    onUpdateImagePath(owner: $owner) {
+  subscription OnUpdateImagePath {
+    onUpdateImagePath {
       id
       key
       location
@@ -93,8 +93,8 @@ export const onUpdateImagePath = /* GraphQL */ `
   }
 `;
 export const onDeleteImagePath = /* GraphQL */ `
-  subscription OnDeleteImagePath($owner: String) {
-    onDeleteImagePath(owner: $owner) {
+  subscription OnDeleteImagePath {
+    onDeleteImagePath {
       id
       key
       location
@@ -185,132 +185,13 @@ export const onDeleteOccupation = /* GraphQL */ `
     }
   }
 `;
-export const onCreateEstablishmentTibi = /* GraphQL */ `
-  subscription OnCreateEstablishmentTibi {
-    onCreateEstablishmentTibi {
-      id
-      userId
-      establishmentId
-      user {
-        id
-        firstName
-        lastName
-        imageUrl
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      roles
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      establishment {
-        id
-        name
-        type
-        website
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      owner
-    }
-  }
-`;
-export const onUpdateEstablishmentTibi = /* GraphQL */ `
-  subscription OnUpdateEstablishmentTibi {
-    onUpdateEstablishmentTibi {
-      id
-      userId
-      establishmentId
-      user {
-        id
-        firstName
-        lastName
-        imageUrl
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      roles
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      establishment {
-        id
-        name
-        type
-        website
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      owner
-    }
-  }
-`;
-export const onDeleteEstablishmentTibi = /* GraphQL */ `
-  subscription OnDeleteEstablishmentTibi {
-    onDeleteEstablishmentTibi {
-      id
-      userId
-      establishmentId
-      user {
-        id
-        firstName
-        lastName
-        imageUrl
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      roles
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      establishment {
-        id
-        name
-        type
-        website
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      owner
-    }
-  }
-`;
 export const onCreateEstablishment = /* GraphQL */ `
   subscription OnCreateEstablishment {
     onCreateEstablishment {
       id
       name
       type
+      imageUrl
       website
       tibis {
         nextToken
@@ -335,6 +216,7 @@ export const onUpdateEstablishment = /* GraphQL */ `
       id
       name
       type
+      imageUrl
       website
       tibis {
         nextToken
@@ -359,6 +241,7 @@ export const onDeleteEstablishment = /* GraphQL */ `
       id
       name
       type
+      imageUrl
       website
       tibis {
         nextToken
@@ -368,6 +251,129 @@ export const onDeleteEstablishment = /* GraphQL */ `
         nextToken
         startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateEstablishmentTibi = /* GraphQL */ `
+  subscription OnCreateEstablishmentTibi {
+    onCreateEstablishmentTibi {
+      id
+      userId
+      establishmentId
+      establishment {
+        id
+        name
+        type
+        imageUrl
+        website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      user {
+        id
+        firstName
+        lastName
+        imageUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      roles
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateEstablishmentTibi = /* GraphQL */ `
+  subscription OnUpdateEstablishmentTibi {
+    onUpdateEstablishmentTibi {
+      id
+      userId
+      establishmentId
+      establishment {
+        id
+        name
+        type
+        imageUrl
+        website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      user {
+        id
+        firstName
+        lastName
+        imageUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      roles
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteEstablishmentTibi = /* GraphQL */ `
+  subscription OnDeleteEstablishmentTibi {
+    onDeleteEstablishmentTibi {
+      id
+      userId
+      establishmentId
+      establishment {
+        id
+        name
+        type
+        imageUrl
+        website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      user {
+        id
+        firstName
+        lastName
+        imageUrl
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      roles
       _version
       _deleted
       _lastChangedAt

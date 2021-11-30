@@ -94,8 +94,7 @@ export const schema = {
                                 "operations": [
                                     "create",
                                     "update",
-                                    "delete",
-                                    "read"
+                                    "delete"
                                 ]
                             }
                         ]
@@ -218,8 +217,7 @@ export const schema = {
                                 "operations": [
                                     "create",
                                     "update",
-                                    "delete",
-                                    "read"
+                                    "delete"
                                 ]
                             }
                         ]
@@ -251,6 +249,13 @@ export const schema = {
                         "enum": "EstablishmentType"
                     },
                     "isRequired": true,
+                    "attributes": []
+                },
+                "imageUrl": {
+                    "name": "imageUrl",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "website": {
@@ -337,14 +342,7 @@ export const schema = {
                                 "operations": [
                                     "create",
                                     "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "read"
+                                    "delete"
                                 ]
                             }
                         ]
@@ -366,7 +364,7 @@ export const schema = {
                     "name": "establishmentId",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "name": {
@@ -448,8 +446,7 @@ export const schema = {
                                 "operations": [
                                     "create",
                                     "update",
-                                    "delete",
-                                    "read"
+                                    "delete"
                                 ]
                             }
                         ]
@@ -515,13 +512,12 @@ export const schema = {
                                 "provider": "userPools",
                                 "ownerField": "owner",
                                 "allow": "owner",
-                                "identityClaim": "cognito:username",
                                 "operations": [
                                     "create",
                                     "update",
-                                    "delete",
-                                    "read"
-                                ]
+                                    "delete"
+                                ],
+                                "identityClaim": "cognito:username"
                             },
                             {
                                 "groupClaim": "cognito:groups",
@@ -533,8 +529,7 @@ export const schema = {
                                 "operations": [
                                     "create",
                                     "update",
-                                    "delete",
-                                    "read"
+                                    "delete"
                                 ]
                             }
                         ]
@@ -561,5 +556,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "abc67841a8cd67c66b0bec4994b9cde8"
+    "version": "fc0cbf0ebc9dbf829efb7e0d367b8d34"
 };

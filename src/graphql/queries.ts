@@ -221,14 +221,14 @@ export const listOccupations = /* GraphQL */ `
     }
   }
 `;
-export const syncEstablishmentTibis = /* GraphQL */ `
-  query SyncEstablishmentTibis(
-    $filter: ModelEstablishmentTibiFilterInput
+export const syncEstablishments = /* GraphQL */ `
+  query SyncEstablishments(
+    $filter: ModelEstablishmentFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncEstablishmentTibis(
+    syncEstablishments(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -236,9 +236,10 @@ export const syncEstablishmentTibis = /* GraphQL */ `
     ) {
       items {
         id
-        userId
-        establishmentId
-        roles
+        name
+        type
+        imageUrl
+        website
         _version
         _deleted
         _lastChangedAt
@@ -257,6 +258,7 @@ export const getEstablishment = /* GraphQL */ `
       id
       name
       type
+      imageUrl
       website
       tibis {
         nextToken
@@ -286,6 +288,7 @@ export const listEstablishments = /* GraphQL */ `
         id
         name
         type
+        imageUrl
         website
         _version
         _deleted
@@ -299,14 +302,14 @@ export const listEstablishments = /* GraphQL */ `
     }
   }
 `;
-export const syncEstablishments = /* GraphQL */ `
-  query SyncEstablishments(
-    $filter: ModelEstablishmentFilterInput
+export const syncEstablishmentTibis = /* GraphQL */ `
+  query SyncEstablishmentTibis(
+    $filter: ModelEstablishmentTibiFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncEstablishments(
+    syncEstablishmentTibis(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -314,9 +317,9 @@ export const syncEstablishments = /* GraphQL */ `
     ) {
       items {
         id
-        name
-        type
-        website
+        userId
+        establishmentId
+        roles
         _version
         _deleted
         _lastChangedAt

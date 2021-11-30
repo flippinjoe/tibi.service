@@ -86,6 +86,7 @@ export type EstablishmentTibi = {
   id: string,
   userId: string,
   establishmentId: string,
+  establishment: Establishment,
   user: User,
   roles: Array< string | null >,
   _version: number,
@@ -93,7 +94,6 @@ export type EstablishmentTibi = {
   _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
-  establishment: Establishment,
   owner?: string | null,
 };
 
@@ -102,6 +102,7 @@ export type Establishment = {
   id: string,
   name: string,
   type: EstablishmentType,
+  imageUrl?: string | null,
   website?: string | null,
   tibis?: ModelEstablishmentTibiConnection | null,
   occupations?: ModelOccupationConnection | null,
@@ -129,7 +130,7 @@ export type ModelOccupationConnection = {
 export type Occupation = {
   __typename: "Occupation",
   id: string,
-  establishmentId: string,
+  establishmentId?: string | null,
   name: string,
   backgroundImage: ImagePath,
   _version: number,
@@ -206,7 +207,7 @@ export type DeleteImagePathInput = {
 
 export type CreateOccupationInput = {
   id?: string | null,
-  establishmentId: string,
+  establishmentId?: string | null,
   name: string,
   _version?: number | null,
   occupationBackgroundImageId: string,
@@ -253,6 +254,7 @@ export type CreateEstablishmentInput = {
   id?: string | null,
   name: string,
   type: EstablishmentType,
+  imageUrl?: string | null,
   website?: string | null,
   _version?: number | null,
 };
@@ -260,6 +262,7 @@ export type CreateEstablishmentInput = {
 export type ModelEstablishmentConditionInput = {
   name?: ModelStringInput | null,
   type?: ModelEstablishmentTypeInput | null,
+  imageUrl?: ModelStringInput | null,
   website?: ModelStringInput | null,
   and?: Array< ModelEstablishmentConditionInput | null > | null,
   or?: Array< ModelEstablishmentConditionInput | null > | null,
@@ -275,6 +278,7 @@ export type UpdateEstablishmentInput = {
   id: string,
   name?: string | null,
   type?: EstablishmentType | null,
+  imageUrl?: string | null,
   website?: string | null,
   _version?: number | null,
 };
@@ -355,20 +359,11 @@ export type ModelOccupationFilterInput = {
   not?: ModelOccupationFilterInput | null,
 };
 
-export type ModelEstablishmentTibiFilterInput = {
-  id?: ModelIDInput | null,
-  userId?: ModelIDInput | null,
-  establishmentId?: ModelIDInput | null,
-  roles?: ModelStringInput | null,
-  and?: Array< ModelEstablishmentTibiFilterInput | null > | null,
-  or?: Array< ModelEstablishmentTibiFilterInput | null > | null,
-  not?: ModelEstablishmentTibiFilterInput | null,
-};
-
 export type ModelEstablishmentFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   type?: ModelEstablishmentTypeInput | null,
+  imageUrl?: ModelStringInput | null,
   website?: ModelStringInput | null,
   and?: Array< ModelEstablishmentFilterInput | null > | null,
   or?: Array< ModelEstablishmentFilterInput | null > | null,
@@ -380,6 +375,16 @@ export type ModelEstablishmentConnection = {
   items?:  Array<Establishment | null > | null,
   nextToken?: string | null,
   startedAt?: number | null,
+};
+
+export type ModelEstablishmentTibiFilterInput = {
+  id?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
+  establishmentId?: ModelIDInput | null,
+  roles?: ModelStringInput | null,
+  and?: Array< ModelEstablishmentTibiFilterInput | null > | null,
+  or?: Array< ModelEstablishmentTibiFilterInput | null > | null,
+  not?: ModelEstablishmentTibiFilterInput | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -529,7 +534,7 @@ export type CreateOccupationMutation = {
   createOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId: string,
+    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -561,7 +566,7 @@ export type UpdateOccupationMutation = {
   updateOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId: string,
+    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -593,7 +598,7 @@ export type DeleteOccupationMutation = {
   deleteOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId: string,
+    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -627,6 +632,7 @@ export type CreateEstablishmentMutation = {
     id: string,
     name: string,
     type: EstablishmentType,
+    imageUrl?: string | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -658,6 +664,7 @@ export type UpdateEstablishmentMutation = {
     id: string,
     name: string,
     type: EstablishmentType,
+    imageUrl?: string | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -689,6 +696,7 @@ export type DeleteEstablishmentMutation = {
     id: string,
     name: string,
     type: EstablishmentType,
+    imageUrl?: string | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -720,6 +728,20 @@ export type CreateEstablishmentTibiMutation = {
     id: string,
     userId: string,
     establishmentId: string,
+    establishment:  {
+      __typename: "Establishment",
+      id: string,
+      name: string,
+      type: EstablishmentType,
+      imageUrl?: string | null,
+      website?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
     user:  {
       __typename: "User",
       id: string,
@@ -739,19 +761,6 @@ export type CreateEstablishmentTibiMutation = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
-    establishment:  {
-      __typename: "Establishment",
-      id: string,
-      name: string,
-      type: EstablishmentType,
-      website?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
     owner?: string | null,
   } | null,
 };
@@ -767,6 +776,20 @@ export type UpdateEstablishmentTibiMutation = {
     id: string,
     userId: string,
     establishmentId: string,
+    establishment:  {
+      __typename: "Establishment",
+      id: string,
+      name: string,
+      type: EstablishmentType,
+      imageUrl?: string | null,
+      website?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
     user:  {
       __typename: "User",
       id: string,
@@ -786,19 +809,6 @@ export type UpdateEstablishmentTibiMutation = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
-    establishment:  {
-      __typename: "Establishment",
-      id: string,
-      name: string,
-      type: EstablishmentType,
-      website?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
     owner?: string | null,
   } | null,
 };
@@ -814,6 +824,20 @@ export type DeleteEstablishmentTibiMutation = {
     id: string,
     userId: string,
     establishmentId: string,
+    establishment:  {
+      __typename: "Establishment",
+      id: string,
+      name: string,
+      type: EstablishmentType,
+      imageUrl?: string | null,
+      website?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
     user:  {
       __typename: "User",
       id: string,
@@ -833,19 +857,6 @@ export type DeleteEstablishmentTibiMutation = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
-    establishment:  {
-      __typename: "Establishment",
-      id: string,
-      name: string,
-      type: EstablishmentType,
-      website?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
     owner?: string | null,
   } | null,
 };
@@ -1015,7 +1026,7 @@ export type SyncOccupationsQuery = {
     items?:  Array< {
       __typename: "Occupation",
       id: string,
-      establishmentId: string,
+      establishmentId?: string | null,
       name: string,
       _version: number,
       _deleted?: boolean | null,
@@ -1037,7 +1048,7 @@ export type GetOccupationQuery = {
   getOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId: string,
+    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -1072,7 +1083,7 @@ export type ListOccupationsQuery = {
     items?:  Array< {
       __typename: "Occupation",
       id: string,
-      establishmentId: string,
+      establishmentId?: string | null,
       name: string,
       _version: number,
       _deleted?: boolean | null,
@@ -1086,22 +1097,23 @@ export type ListOccupationsQuery = {
   } | null,
 };
 
-export type SyncEstablishmentTibisQueryVariables = {
-  filter?: ModelEstablishmentTibiFilterInput | null,
+export type SyncEstablishmentsQueryVariables = {
+  filter?: ModelEstablishmentFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncEstablishmentTibisQuery = {
-  syncEstablishmentTibis?:  {
-    __typename: "ModelEstablishmentTibiConnection",
+export type SyncEstablishmentsQuery = {
+  syncEstablishments?:  {
+    __typename: "ModelEstablishmentConnection",
     items?:  Array< {
-      __typename: "EstablishmentTibi",
+      __typename: "Establishment",
       id: string,
-      userId: string,
-      establishmentId: string,
-      roles: Array< string | null >,
+      name: string,
+      type: EstablishmentType,
+      imageUrl?: string | null,
+      website?: string | null,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
@@ -1124,6 +1136,7 @@ export type GetEstablishmentQuery = {
     id: string,
     name: string,
     type: EstablishmentType,
+    imageUrl?: string | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -1158,6 +1171,7 @@ export type ListEstablishmentsQuery = {
       id: string,
       name: string,
       type: EstablishmentType,
+      imageUrl?: string | null,
       website?: string | null,
       _version: number,
       _deleted?: boolean | null,
@@ -1171,22 +1185,22 @@ export type ListEstablishmentsQuery = {
   } | null,
 };
 
-export type SyncEstablishmentsQueryVariables = {
-  filter?: ModelEstablishmentFilterInput | null,
+export type SyncEstablishmentTibisQueryVariables = {
+  filter?: ModelEstablishmentTibiFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncEstablishmentsQuery = {
-  syncEstablishments?:  {
-    __typename: "ModelEstablishmentConnection",
+export type SyncEstablishmentTibisQuery = {
+  syncEstablishmentTibis?:  {
+    __typename: "ModelEstablishmentTibiConnection",
     items?:  Array< {
-      __typename: "Establishment",
+      __typename: "EstablishmentTibi",
       id: string,
-      name: string,
-      type: EstablishmentType,
-      website?: string | null,
+      userId: string,
+      establishmentId: string,
+      roles: Array< string | null >,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
@@ -1262,10 +1276,6 @@ export type OnDeleteUserSubscription = {
   } | null,
 };
 
-export type OnCreateImagePathSubscriptionVariables = {
-  owner?: string | null,
-};
-
 export type OnCreateImagePathSubscription = {
   onCreateImagePath?:  {
     __typename: "ImagePath",
@@ -1281,10 +1291,6 @@ export type OnCreateImagePathSubscription = {
   } | null,
 };
 
-export type OnUpdateImagePathSubscriptionVariables = {
-  owner?: string | null,
-};
-
 export type OnUpdateImagePathSubscription = {
   onUpdateImagePath?:  {
     __typename: "ImagePath",
@@ -1298,10 +1304,6 @@ export type OnUpdateImagePathSubscription = {
     updatedAt: string,
     owner?: string | null,
   } | null,
-};
-
-export type OnDeleteImagePathSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnDeleteImagePathSubscription = {
@@ -1323,7 +1325,7 @@ export type OnCreateOccupationSubscription = {
   onCreateOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId: string,
+    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -1350,7 +1352,7 @@ export type OnUpdateOccupationSubscription = {
   onUpdateOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId: string,
+    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -1377,7 +1379,7 @@ export type OnDeleteOccupationSubscription = {
   onDeleteOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId: string,
+    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -1400,138 +1402,13 @@ export type OnDeleteOccupationSubscription = {
   } | null,
 };
 
-export type OnCreateEstablishmentTibiSubscription = {
-  onCreateEstablishmentTibi?:  {
-    __typename: "EstablishmentTibi",
-    id: string,
-    userId: string,
-    establishmentId: string,
-    user:  {
-      __typename: "User",
-      id: string,
-      firstName: string,
-      lastName: string,
-      imageUrl: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
-    roles: Array< string | null >,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    establishment:  {
-      __typename: "Establishment",
-      id: string,
-      name: string,
-      type: EstablishmentType,
-      website?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateEstablishmentTibiSubscription = {
-  onUpdateEstablishmentTibi?:  {
-    __typename: "EstablishmentTibi",
-    id: string,
-    userId: string,
-    establishmentId: string,
-    user:  {
-      __typename: "User",
-      id: string,
-      firstName: string,
-      lastName: string,
-      imageUrl: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
-    roles: Array< string | null >,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    establishment:  {
-      __typename: "Establishment",
-      id: string,
-      name: string,
-      type: EstablishmentType,
-      website?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteEstablishmentTibiSubscription = {
-  onDeleteEstablishmentTibi?:  {
-    __typename: "EstablishmentTibi",
-    id: string,
-    userId: string,
-    establishmentId: string,
-    user:  {
-      __typename: "User",
-      id: string,
-      firstName: string,
-      lastName: string,
-      imageUrl: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
-    roles: Array< string | null >,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    establishment:  {
-      __typename: "Establishment",
-      id: string,
-      name: string,
-      type: EstablishmentType,
-      website?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
-    owner?: string | null,
-  } | null,
-};
-
 export type OnCreateEstablishmentSubscription = {
   onCreateEstablishment?:  {
     __typename: "Establishment",
     id: string,
     name: string,
     type: EstablishmentType,
+    imageUrl?: string | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -1558,6 +1435,7 @@ export type OnUpdateEstablishmentSubscription = {
     id: string,
     name: string,
     type: EstablishmentType,
+    imageUrl?: string | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -1584,6 +1462,7 @@ export type OnDeleteEstablishmentSubscription = {
     id: string,
     name: string,
     type: EstablishmentType,
+    imageUrl?: string | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -1595,6 +1474,135 @@ export type OnDeleteEstablishmentSubscription = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateEstablishmentTibiSubscription = {
+  onCreateEstablishmentTibi?:  {
+    __typename: "EstablishmentTibi",
+    id: string,
+    userId: string,
+    establishmentId: string,
+    establishment:  {
+      __typename: "Establishment",
+      id: string,
+      name: string,
+      type: EstablishmentType,
+      imageUrl?: string | null,
+      website?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    user:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      imageUrl: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    roles: Array< string | null >,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateEstablishmentTibiSubscription = {
+  onUpdateEstablishmentTibi?:  {
+    __typename: "EstablishmentTibi",
+    id: string,
+    userId: string,
+    establishmentId: string,
+    establishment:  {
+      __typename: "Establishment",
+      id: string,
+      name: string,
+      type: EstablishmentType,
+      imageUrl?: string | null,
+      website?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    user:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      imageUrl: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    roles: Array< string | null >,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteEstablishmentTibiSubscription = {
+  onDeleteEstablishmentTibi?:  {
+    __typename: "EstablishmentTibi",
+    id: string,
+    userId: string,
+    establishmentId: string,
+    establishment:  {
+      __typename: "Establishment",
+      id: string,
+      name: string,
+      type: EstablishmentType,
+      imageUrl?: string | null,
+      website?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    user:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      imageUrl: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    roles: Array< string | null >,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,

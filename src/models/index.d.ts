@@ -60,6 +60,7 @@ export declare class Establishment {
   readonly id: string;
   readonly name: string;
   readonly type: EstablishmentType | keyof typeof EstablishmentType;
+  readonly imageUrl?: string;
   readonly website?: string;
   readonly tibis?: (EstablishmentTibi | null)[];
   readonly occupations?: (Occupation | null)[];
@@ -71,7 +72,7 @@ export declare class Establishment {
 
 export declare class Occupation {
   readonly id: string;
-  readonly establishmentId: string;
+  readonly establishmentId?: string;
   readonly name: string;
   readonly backgroundImage: ImagePath;
   readonly createdAt?: string;
