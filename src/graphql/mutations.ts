@@ -14,11 +14,7 @@ export const createUser = /* GraphQL */ `
       imageUrl
       establishments {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -37,11 +33,7 @@ export const updateUser = /* GraphQL */ `
       imageUrl
       establishments {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -60,11 +52,7 @@ export const deleteUser = /* GraphQL */ `
       imageUrl
       establishments {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -80,9 +68,6 @@ export const createImagePath = /* GraphQL */ `
       id
       key
       location
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -98,9 +83,6 @@ export const updateImagePath = /* GraphQL */ `
       id
       key
       location
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -116,9 +98,6 @@ export const deleteImagePath = /* GraphQL */ `
       id
       key
       location
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -138,16 +117,10 @@ export const createOccupation = /* GraphQL */ `
         id
         key
         location
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -167,16 +140,10 @@ export const updateOccupation = /* GraphQL */ `
         id
         key
         location
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -196,16 +163,10 @@ export const deleteOccupation = /* GraphQL */ `
         id
         key
         location
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -225,15 +186,10 @@ export const createEstablishment = /* GraphQL */ `
       website
       tibis {
         nextToken
-        startedAt
       }
       occupations {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -253,15 +209,10 @@ export const updateEstablishment = /* GraphQL */ `
       website
       tibis {
         nextToken
-        startedAt
       }
       occupations {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -281,15 +232,10 @@ export const deleteEstablishment = /* GraphQL */ `
       website
       tibis {
         nextToken
-        startedAt
       }
       occupations {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -311,9 +257,6 @@ export const createEstablishmentTibi = /* GraphQL */ `
         type
         imageUrl
         website
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
@@ -323,17 +266,11 @@ export const createEstablishmentTibi = /* GraphQL */ `
         firstName
         lastName
         imageUrl
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       roles
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -355,9 +292,6 @@ export const updateEstablishmentTibi = /* GraphQL */ `
         type
         imageUrl
         website
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
@@ -367,17 +301,11 @@ export const updateEstablishmentTibi = /* GraphQL */ `
         firstName
         lastName
         imageUrl
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       roles
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -399,9 +327,6 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
         type
         imageUrl
         website
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
@@ -411,17 +336,11 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
         firstName
         lastName
         imageUrl
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       roles
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
