@@ -149,3 +149,70 @@ export const listEstablishments = /* GraphQL */ `
     }
   }
 `;
+export const getWallet = /* GraphQL */ `
+  query GetWallet($id: ID!) {
+    getWallet(id: $id) {
+      id
+      cryptoHash
+      cryptoBalance
+      payments {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listWallets = /* GraphQL */ `
+  query ListWallets(
+    $filter: ModelWalletFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listWallets(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        cryptoHash
+        cryptoBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getPayment = /* GraphQL */ `
+  query GetPayment($id: ID!) {
+    getPayment(id: $id) {
+      id
+      walletId
+      name
+      token
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listPayments = /* GraphQL */ `
+  query ListPayments(
+    $filter: ModelPaymentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPayments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        walletId
+        name
+        token
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;

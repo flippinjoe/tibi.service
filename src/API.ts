@@ -72,7 +72,7 @@ export type User = {
 
 export type ModelEstablishmentTibiConnection = {
   __typename: "ModelEstablishmentTibiConnection",
-  items?:  Array<EstablishmentTibi | null > | null,
+  items:  Array<EstablishmentTibi >,
   nextToken?: string | null,
 };
 
@@ -111,7 +111,7 @@ export enum EstablishmentType {
 
 export type ModelOccupationConnection = {
   __typename: "ModelOccupationConnection",
-  items?:  Array<Occupation | null > | null,
+  items:  Array<Occupation >,
   nextToken?: string | null,
 };
 
@@ -286,6 +286,85 @@ export type DeleteEstablishmentTibiInput = {
   id: string,
 };
 
+export type CreateWalletInput = {
+  id?: string | null,
+  cryptoHash?: string | null,
+  cryptoBalance?: string | null,
+};
+
+export type ModelWalletConditionInput = {
+  cryptoHash?: ModelStringInput | null,
+  cryptoBalance?: ModelStringInput | null,
+  and?: Array< ModelWalletConditionInput | null > | null,
+  or?: Array< ModelWalletConditionInput | null > | null,
+  not?: ModelWalletConditionInput | null,
+};
+
+export type Wallet = {
+  __typename: "Wallet",
+  id: string,
+  cryptoHash?: string | null,
+  cryptoBalance?: string | null,
+  payments?: ModelPaymentConnection | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type ModelPaymentConnection = {
+  __typename: "ModelPaymentConnection",
+  items:  Array<Payment >,
+  nextToken?: string | null,
+};
+
+export type Payment = {
+  __typename: "Payment",
+  id: string,
+  walletId: string,
+  name?: string | null,
+  token?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateWalletInput = {
+  id: string,
+  cryptoHash?: string | null,
+  cryptoBalance?: string | null,
+};
+
+export type DeleteWalletInput = {
+  id: string,
+};
+
+export type CreatePaymentInput = {
+  id?: string | null,
+  walletId: string,
+  name?: string | null,
+  token?: string | null,
+};
+
+export type ModelPaymentConditionInput = {
+  walletId?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  token?: ModelStringInput | null,
+  and?: Array< ModelPaymentConditionInput | null > | null,
+  or?: Array< ModelPaymentConditionInput | null > | null,
+  not?: ModelPaymentConditionInput | null,
+};
+
+export type UpdatePaymentInput = {
+  id: string,
+  walletId?: string | null,
+  name?: string | null,
+  token?: string | null,
+};
+
+export type DeletePaymentInput = {
+  id: string,
+};
+
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   firstName?: ModelStringInput | null,
@@ -298,7 +377,7 @@ export type ModelUserFilterInput = {
 
 export type ModelUserConnection = {
   __typename: "ModelUserConnection",
-  items?:  Array<User | null > | null,
+  items:  Array<User >,
   nextToken?: string | null,
 };
 
@@ -312,7 +391,7 @@ export type ModelImagePathFilterInput = {
 
 export type ModelImagePathConnection = {
   __typename: "ModelImagePathConnection",
-  items?:  Array<ImagePath | null > | null,
+  items:  Array<ImagePath >,
   nextToken?: string | null,
 };
 
@@ -338,8 +417,33 @@ export type ModelEstablishmentFilterInput = {
 
 export type ModelEstablishmentConnection = {
   __typename: "ModelEstablishmentConnection",
-  items?:  Array<Establishment | null > | null,
+  items:  Array<Establishment >,
   nextToken?: string | null,
+};
+
+export type ModelWalletFilterInput = {
+  id?: ModelIDInput | null,
+  cryptoHash?: ModelStringInput | null,
+  cryptoBalance?: ModelStringInput | null,
+  and?: Array< ModelWalletFilterInput | null > | null,
+  or?: Array< ModelWalletFilterInput | null > | null,
+  not?: ModelWalletFilterInput | null,
+};
+
+export type ModelWalletConnection = {
+  __typename: "ModelWalletConnection",
+  items:  Array<Wallet >,
+  nextToken?: string | null,
+};
+
+export type ModelPaymentFilterInput = {
+  id?: ModelIDInput | null,
+  walletId?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  token?: ModelStringInput | null,
+  and?: Array< ModelPaymentFilterInput | null > | null,
+  or?: Array< ModelPaymentFilterInput | null > | null,
+  not?: ModelPaymentFilterInput | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -735,6 +839,123 @@ export type DeleteEstablishmentTibiMutation = {
   } | null,
 };
 
+export type CreateWalletMutationVariables = {
+  input: CreateWalletInput,
+  condition?: ModelWalletConditionInput | null,
+};
+
+export type CreateWalletMutation = {
+  createWallet?:  {
+    __typename: "Wallet",
+    id: string,
+    cryptoHash?: string | null,
+    cryptoBalance?: string | null,
+    payments?:  {
+      __typename: "ModelPaymentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateWalletMutationVariables = {
+  input: UpdateWalletInput,
+  condition?: ModelWalletConditionInput | null,
+};
+
+export type UpdateWalletMutation = {
+  updateWallet?:  {
+    __typename: "Wallet",
+    id: string,
+    cryptoHash?: string | null,
+    cryptoBalance?: string | null,
+    payments?:  {
+      __typename: "ModelPaymentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteWalletMutationVariables = {
+  input: DeleteWalletInput,
+  condition?: ModelWalletConditionInput | null,
+};
+
+export type DeleteWalletMutation = {
+  deleteWallet?:  {
+    __typename: "Wallet",
+    id: string,
+    cryptoHash?: string | null,
+    cryptoBalance?: string | null,
+    payments?:  {
+      __typename: "ModelPaymentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreatePaymentMutationVariables = {
+  input: CreatePaymentInput,
+  condition?: ModelPaymentConditionInput | null,
+};
+
+export type CreatePaymentMutation = {
+  createPayment?:  {
+    __typename: "Payment",
+    id: string,
+    walletId: string,
+    name?: string | null,
+    token?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdatePaymentMutationVariables = {
+  input: UpdatePaymentInput,
+  condition?: ModelPaymentConditionInput | null,
+};
+
+export type UpdatePaymentMutation = {
+  updatePayment?:  {
+    __typename: "Payment",
+    id: string,
+    walletId: string,
+    name?: string | null,
+    token?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeletePaymentMutationVariables = {
+  input: DeletePaymentInput,
+  condition?: ModelPaymentConditionInput | null,
+};
+
+export type DeletePaymentMutation = {
+  deletePayment?:  {
+    __typename: "Payment",
+    id: string,
+    walletId: string,
+    name?: string | null,
+    token?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
 export type GetUserQueryVariables = {
   id: string,
 };
@@ -765,7 +986,7 @@ export type ListUsersQueryVariables = {
 export type ListUsersQuery = {
   listUsers?:  {
     __typename: "ModelUserConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "User",
       id: string,
       firstName: string,
@@ -774,7 +995,7 @@ export type ListUsersQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null > | null,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -804,7 +1025,7 @@ export type ListImagePathsQueryVariables = {
 export type ListImagePathsQuery = {
   listImagePaths?:  {
     __typename: "ModelImagePathConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "ImagePath",
       id: string,
       key: string,
@@ -812,7 +1033,7 @@ export type ListImagePathsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null > | null,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -851,7 +1072,7 @@ export type ListOccupationsQueryVariables = {
 export type ListOccupationsQuery = {
   listOccupations?:  {
     __typename: "ModelOccupationConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Occupation",
       id: string,
       establishmentId?: string | null,
@@ -859,7 +1080,7 @@ export type ListOccupationsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null > | null,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -899,7 +1120,7 @@ export type ListEstablishmentsQueryVariables = {
 export type ListEstablishmentsQuery = {
   listEstablishments?:  {
     __typename: "ModelEstablishmentConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Establishment",
       id: string,
       name: string,
@@ -909,7 +1130,89 @@ export type ListEstablishmentsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null > | null,
+    } >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetWalletQueryVariables = {
+  id: string,
+};
+
+export type GetWalletQuery = {
+  getWallet?:  {
+    __typename: "Wallet",
+    id: string,
+    cryptoHash?: string | null,
+    cryptoBalance?: string | null,
+    payments?:  {
+      __typename: "ModelPaymentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListWalletsQueryVariables = {
+  filter?: ModelWalletFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListWalletsQuery = {
+  listWallets?:  {
+    __typename: "ModelWalletConnection",
+    items:  Array< {
+      __typename: "Wallet",
+      id: string,
+      cryptoHash?: string | null,
+      cryptoBalance?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetPaymentQueryVariables = {
+  id: string,
+};
+
+export type GetPaymentQuery = {
+  getPayment?:  {
+    __typename: "Payment",
+    id: string,
+    walletId: string,
+    name?: string | null,
+    token?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListPaymentsQueryVariables = {
+  filter?: ModelPaymentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPaymentsQuery = {
+  listPayments?:  {
+    __typename: "ModelPaymentConnection",
+    items:  Array< {
+      __typename: "Payment",
+      id: string,
+      walletId: string,
+      name?: string | null,
+      token?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -1226,6 +1529,93 @@ export type OnDeleteEstablishmentTibiSubscription = {
       owner?: string | null,
     },
     roles: Array< string | null >,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateWalletSubscription = {
+  onCreateWallet?:  {
+    __typename: "Wallet",
+    id: string,
+    cryptoHash?: string | null,
+    cryptoBalance?: string | null,
+    payments?:  {
+      __typename: "ModelPaymentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateWalletSubscription = {
+  onUpdateWallet?:  {
+    __typename: "Wallet",
+    id: string,
+    cryptoHash?: string | null,
+    cryptoBalance?: string | null,
+    payments?:  {
+      __typename: "ModelPaymentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteWalletSubscription = {
+  onDeleteWallet?:  {
+    __typename: "Wallet",
+    id: string,
+    cryptoHash?: string | null,
+    cryptoBalance?: string | null,
+    payments?:  {
+      __typename: "ModelPaymentConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreatePaymentSubscription = {
+  onCreatePayment?:  {
+    __typename: "Payment",
+    id: string,
+    walletId: string,
+    name?: string | null,
+    token?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdatePaymentSubscription = {
+  onUpdatePayment?:  {
+    __typename: "Payment",
+    id: string,
+    walletId: string,
+    name?: string | null,
+    token?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeletePaymentSubscription = {
+  onDeletePayment?:  {
+    __typename: "Payment",
+    id: string,
+    walletId: string,
+    name?: string | null,
+    token?: string | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
