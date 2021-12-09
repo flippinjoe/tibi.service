@@ -15,8 +15,9 @@ type User @model
   firstName: String!
   lastName: String!
   
-  imageUrl: AWSURL!
 
+  backgroundImage: ImagePath @connection
+  profileImage: ImagePath @connection
 
   establishments: [EstablishmentTibi] @connection(keyName: "byUser", fields: ["id"])
 }
@@ -26,6 +27,7 @@ enum ImageLocation {
   system
   assets
   remote
+  s3
 }
 
 enum EstablishmentType {
@@ -71,15 +73,6 @@ type Establishment @model
 
   # Admin users can access any operation.
   { allow: groups, groups: ["admin"], operations: [create, update, delete] },
-
-  # { allow: groups, operations: [read] },
-  
-  # ## Admin users can access any operation.
-  # { allow: groups, groups: ["admin"] },
-
-  # { allow: groups, operations: [read] },
-
-  # { allow: public, operations: [read] }
 ]) {
   id: ID!
 
@@ -117,4 +110,58 @@ type EstablishmentTibi
   establishment: Establishment! @connection(fields: ["establishmentId"])
   user: User! @connection(fields: ["userId"])
   roles: [String]!
+}
+
+
+
+
+
+
+# Payments
+enum PaymentType {
+  credit
+  debit
+  applePay
+  crypto
+}
+
+type Wallet @model 
+@auth(rules: [
+  
+  ## Owners can do everything
+  { allow: owner, operations: [create, update, delete] },
+
+  # Admin users can access any operation.
+  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
+
+]) {
+  id: ID!
+  
+  cryptoHash: String
+  cryptoBalance: String
+
+  payments: [Payment] @connection(keyName: "byWallet", fields: ["id"])
+}
+
+
+type Payment @model
+@key(name: "byWallet", fields: ["walletId"])
+@auth(rules: [
+  
+  ## Owners can do everything
+  { allow: owner, operations: [create, update, delete] },
+
+  # Admin users can access any operation.
+  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
+
+]) {
+  id: ID!
+
+  walletId: ID!
+  
+  name: String
+
+  # This is the tokenized version of the payment.
+  # for a crypt wallet, this would be the wallet address
+  token: String
 }

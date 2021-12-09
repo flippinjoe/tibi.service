@@ -11,7 +11,22 @@ export const createUser = /* GraphQL */ `
       id
       firstName
       lastName
-      imageUrl
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      profileImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
       establishments {
         nextToken
       }
@@ -30,7 +45,22 @@ export const updateUser = /* GraphQL */ `
       id
       firstName
       lastName
-      imageUrl
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      profileImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
       establishments {
         nextToken
       }
@@ -49,7 +79,22 @@ export const deleteUser = /* GraphQL */ `
       id
       firstName
       lastName
-      imageUrl
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      profileImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
       establishments {
         nextToken
       }
@@ -265,7 +310,6 @@ export const createEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
-        imageUrl
         createdAt
         updatedAt
         owner
@@ -300,7 +344,6 @@ export const updateEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
-        imageUrl
         createdAt
         updatedAt
         owner
@@ -335,12 +378,113 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
-        imageUrl
         createdAt
         updatedAt
         owner
       }
       roles
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createWallet = /* GraphQL */ `
+  mutation CreateWallet(
+    $input: CreateWalletInput!
+    $condition: ModelWalletConditionInput
+  ) {
+    createWallet(input: $input, condition: $condition) {
+      id
+      cryptoHash
+      cryptoBalance
+      payments {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateWallet = /* GraphQL */ `
+  mutation UpdateWallet(
+    $input: UpdateWalletInput!
+    $condition: ModelWalletConditionInput
+  ) {
+    updateWallet(input: $input, condition: $condition) {
+      id
+      cryptoHash
+      cryptoBalance
+      payments {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteWallet = /* GraphQL */ `
+  mutation DeleteWallet(
+    $input: DeleteWalletInput!
+    $condition: ModelWalletConditionInput
+  ) {
+    deleteWallet(input: $input, condition: $condition) {
+      id
+      cryptoHash
+      cryptoBalance
+      payments {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createPayment = /* GraphQL */ `
+  mutation CreatePayment(
+    $input: CreatePaymentInput!
+    $condition: ModelPaymentConditionInput
+  ) {
+    createPayment(input: $input, condition: $condition) {
+      id
+      walletId
+      name
+      token
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updatePayment = /* GraphQL */ `
+  mutation UpdatePayment(
+    $input: UpdatePaymentInput!
+    $condition: ModelPaymentConditionInput
+  ) {
+    updatePayment(input: $input, condition: $condition) {
+      id
+      walletId
+      name
+      token
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deletePayment = /* GraphQL */ `
+  mutation DeletePayment(
+    $input: DeletePaymentInput!
+    $condition: ModelPaymentConditionInput
+  ) {
+    deletePayment(input: $input, condition: $condition) {
+      id
+      walletId
+      name
+      token
       createdAt
       updatedAt
       owner

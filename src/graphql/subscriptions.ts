@@ -8,7 +8,22 @@ export const onCreateUser = /* GraphQL */ `
       id
       firstName
       lastName
-      imageUrl
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      profileImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
       establishments {
         nextToken
       }
@@ -24,7 +39,22 @@ export const onUpdateUser = /* GraphQL */ `
       id
       firstName
       lastName
-      imageUrl
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      profileImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
       establishments {
         nextToken
       }
@@ -40,7 +70,22 @@ export const onDeleteUser = /* GraphQL */ `
       id
       firstName
       lastName
-      imageUrl
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      profileImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
       establishments {
         nextToken
       }
@@ -226,7 +271,6 @@ export const onCreateEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
-        imageUrl
         createdAt
         updatedAt
         owner
@@ -258,7 +302,6 @@ export const onUpdateEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
-        imageUrl
         createdAt
         updatedAt
         owner
@@ -290,12 +333,95 @@ export const onDeleteEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
-        imageUrl
         createdAt
         updatedAt
         owner
       }
       roles
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateWallet = /* GraphQL */ `
+  subscription OnCreateWallet {
+    onCreateWallet {
+      id
+      cryptoHash
+      cryptoBalance
+      payments {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateWallet = /* GraphQL */ `
+  subscription OnUpdateWallet {
+    onUpdateWallet {
+      id
+      cryptoHash
+      cryptoBalance
+      payments {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteWallet = /* GraphQL */ `
+  subscription OnDeleteWallet {
+    onDeleteWallet {
+      id
+      cryptoHash
+      cryptoBalance
+      payments {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreatePayment = /* GraphQL */ `
+  subscription OnCreatePayment {
+    onCreatePayment {
+      id
+      walletId
+      name
+      token
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdatePayment = /* GraphQL */ `
+  subscription OnUpdatePayment {
+    onUpdatePayment {
+      id
+      walletId
+      name
+      token
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeletePayment = /* GraphQL */ `
+  subscription OnDeletePayment {
+    onDeletePayment {
+      id
+      walletId
+      name
+      token
       createdAt
       updatedAt
       owner
