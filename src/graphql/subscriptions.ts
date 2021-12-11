@@ -8,7 +8,22 @@ export const onCreateUser = /* GraphQL */ `
       id
       firstName
       lastName
-      imageUrl
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      profileImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
       establishments {
         nextToken
       }
@@ -24,7 +39,22 @@ export const onUpdateUser = /* GraphQL */ `
       id
       firstName
       lastName
-      imageUrl
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      profileImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
       establishments {
         nextToken
       }
@@ -40,7 +70,22 @@ export const onDeleteUser = /* GraphQL */ `
       id
       firstName
       lastName
-      imageUrl
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      profileImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
       establishments {
         nextToken
       }
@@ -226,7 +271,6 @@ export const onCreateEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
-        imageUrl
         createdAt
         updatedAt
         owner
@@ -258,7 +302,6 @@ export const onUpdateEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
-        imageUrl
         createdAt
         updatedAt
         owner
@@ -290,7 +333,6 @@ export const onDeleteEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
-        imageUrl
         createdAt
         updatedAt
         owner

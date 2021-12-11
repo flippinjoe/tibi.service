@@ -15,8 +15,9 @@ type User @model
   firstName: String!
   lastName: String!
   
-  imageUrl: AWSURL!
 
+  backgroundImage: ImagePath @connection
+  profileImage: ImagePath @connection
 
   establishments: [EstablishmentTibi] @connection(keyName: "byUser", fields: ["id"])
 }
@@ -26,6 +27,7 @@ enum ImageLocation {
   system
   assets
   remote
+  s3
 }
 
 enum EstablishmentType {

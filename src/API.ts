@@ -6,13 +6,13 @@ export type CreateUserInput = {
   id?: string | null,
   firstName: string,
   lastName: string,
-  imageUrl: string,
+  userBackgroundImageId?: string | null,
+  userProfileImageId?: string | null,
 };
 
 export type ModelUserConditionInput = {
   firstName?: ModelStringInput | null,
   lastName?: ModelStringInput | null,
-  imageUrl?: ModelStringInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -63,12 +63,31 @@ export type User = {
   id: string,
   firstName: string,
   lastName: string,
-  imageUrl: string,
+  backgroundImage?: ImagePath | null,
+  profileImage?: ImagePath | null,
   establishments?: ModelEstablishmentTibiConnection | null,
   createdAt: string,
   updatedAt: string,
   owner?: string | null,
 };
+
+export type ImagePath = {
+  __typename: "ImagePath",
+  id: string,
+  key: string,
+  location: ImageLocation,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export enum ImageLocation {
+  system = "system",
+  assets = "assets",
+  remote = "remote",
+  s3 = "s3",
+}
+
 
 export type ModelEstablishmentTibiConnection = {
   __typename: "ModelEstablishmentTibiConnection",
@@ -126,28 +145,12 @@ export type Occupation = {
   owner?: string | null,
 };
 
-export type ImagePath = {
-  __typename: "ImagePath",
-  id: string,
-  key: string,
-  location: ImageLocation,
-  createdAt: string,
-  updatedAt: string,
-  owner?: string | null,
-};
-
-export enum ImageLocation {
-  system = "system",
-  assets = "assets",
-  remote = "remote",
-}
-
-
 export type UpdateUserInput = {
   id: string,
   firstName?: string | null,
   lastName?: string | null,
-  imageUrl?: string | null,
+  userBackgroundImageId?: string | null,
+  userProfileImageId?: string | null,
 };
 
 export type DeleteUserInput = {
@@ -369,7 +372,6 @@ export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   firstName?: ModelStringInput | null,
   lastName?: ModelStringInput | null,
-  imageUrl?: ModelStringInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -457,7 +459,24 @@ export type CreateUserMutation = {
     id: string,
     firstName: string,
     lastName: string,
-    imageUrl: string,
+    backgroundImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+    profileImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     establishments?:  {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
@@ -479,7 +498,24 @@ export type UpdateUserMutation = {
     id: string,
     firstName: string,
     lastName: string,
-    imageUrl: string,
+    backgroundImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+    profileImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     establishments?:  {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
@@ -501,7 +537,24 @@ export type DeleteUserMutation = {
     id: string,
     firstName: string,
     lastName: string,
-    imageUrl: string,
+    backgroundImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+    profileImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     establishments?:  {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
@@ -749,7 +802,6 @@ export type CreateEstablishmentTibiMutation = {
       id: string,
       firstName: string,
       lastName: string,
-      imageUrl: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -788,7 +840,6 @@ export type UpdateEstablishmentTibiMutation = {
       id: string,
       firstName: string,
       lastName: string,
-      imageUrl: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -827,7 +878,6 @@ export type DeleteEstablishmentTibiMutation = {
       id: string,
       firstName: string,
       lastName: string,
-      imageUrl: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -966,7 +1016,24 @@ export type GetUserQuery = {
     id: string,
     firstName: string,
     lastName: string,
-    imageUrl: string,
+    backgroundImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+    profileImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     establishments?:  {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
@@ -991,7 +1058,6 @@ export type ListUsersQuery = {
       id: string,
       firstName: string,
       lastName: string,
-      imageUrl: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1223,7 +1289,24 @@ export type OnCreateUserSubscription = {
     id: string,
     firstName: string,
     lastName: string,
-    imageUrl: string,
+    backgroundImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+    profileImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     establishments?:  {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
@@ -1240,7 +1323,24 @@ export type OnUpdateUserSubscription = {
     id: string,
     firstName: string,
     lastName: string,
-    imageUrl: string,
+    backgroundImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+    profileImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     establishments?:  {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
@@ -1257,7 +1357,24 @@ export type OnDeleteUserSubscription = {
     id: string,
     firstName: string,
     lastName: string,
-    imageUrl: string,
+    backgroundImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
+    profileImage?:  {
+      __typename: "ImagePath",
+      id: string,
+      key: string,
+      location: ImageLocation,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     establishments?:  {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
@@ -1455,7 +1572,6 @@ export type OnCreateEstablishmentTibiSubscription = {
       id: string,
       firstName: string,
       lastName: string,
-      imageUrl: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1489,7 +1605,6 @@ export type OnUpdateEstablishmentTibiSubscription = {
       id: string,
       firstName: string,
       lastName: string,
-      imageUrl: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1523,7 +1638,6 @@ export type OnDeleteEstablishmentTibiSubscription = {
       id: string,
       firstName: string,
       lastName: string,
-      imageUrl: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,

@@ -8,7 +8,22 @@ export const getUser = /* GraphQL */ `
       id
       firstName
       lastName
-      imageUrl
+      backgroundImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
+      profileImage {
+        id
+        key
+        location
+        createdAt
+        updatedAt
+        owner
+      }
       establishments {
         nextToken
       }
@@ -29,7 +44,6 @@ export const listUsers = /* GraphQL */ `
         id
         firstName
         lastName
-        imageUrl
         createdAt
         updatedAt
         owner
