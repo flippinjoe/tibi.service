@@ -11,6 +11,8 @@ export const createUser = /* GraphQL */ `
       id
       firstName
       lastName
+      availableBalance
+      pendingBalance
       backgroundImage {
         id
         key
@@ -45,6 +47,8 @@ export const updateUser = /* GraphQL */ `
       id
       firstName
       lastName
+      availableBalance
+      pendingBalance
       backgroundImage {
         id
         key
@@ -79,6 +83,8 @@ export const deleteUser = /* GraphQL */ `
       id
       firstName
       lastName
+      availableBalance
+      pendingBalance
       backgroundImage {
         id
         key
@@ -310,6 +316,8 @@ export const createEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
+        availableBalance
+        pendingBalance
         createdAt
         updatedAt
         owner
@@ -344,6 +352,8 @@ export const updateEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
+        availableBalance
+        pendingBalance
         createdAt
         updatedAt
         owner
@@ -378,6 +388,8 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
+        availableBalance
+        pendingBalance
         createdAt
         updatedAt
         owner
@@ -452,6 +464,10 @@ export const createPayment = /* GraphQL */ `
       id
       walletId
       name
+      fee
+      isDefault
+      type
+      description
       token
       createdAt
       updatedAt
@@ -468,6 +484,10 @@ export const updatePayment = /* GraphQL */ `
       id
       walletId
       name
+      fee
+      isDefault
+      type
+      description
       token
       createdAt
       updatedAt
@@ -484,7 +504,155 @@ export const deletePayment = /* GraphQL */ `
       id
       walletId
       name
+      fee
+      isDefault
+      type
+      description
       token
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const createTransaction = /* GraphQL */ `
+  mutation CreateTransaction(
+    $input: CreateTransactionInput!
+    $condition: ModelTransactionConditionInput
+  ) {
+    createTransaction(input: $input, condition: $condition) {
+      id
+      amount
+      status
+      payment {
+        id
+        walletId
+        name
+        fee
+        isDefault
+        type
+        description
+        token
+        createdAt
+        updatedAt
+        owner
+      }
+      source {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      destination {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateTransaction = /* GraphQL */ `
+  mutation UpdateTransaction(
+    $input: UpdateTransactionInput!
+    $condition: ModelTransactionConditionInput
+  ) {
+    updateTransaction(input: $input, condition: $condition) {
+      id
+      amount
+      status
+      payment {
+        id
+        walletId
+        name
+        fee
+        isDefault
+        type
+        description
+        token
+        createdAt
+        updatedAt
+        owner
+      }
+      source {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      destination {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteTransaction = /* GraphQL */ `
+  mutation DeleteTransaction(
+    $input: DeleteTransactionInput!
+    $condition: ModelTransactionConditionInput
+  ) {
+    deleteTransaction(input: $input, condition: $condition) {
+      id
+      amount
+      status
+      payment {
+        id
+        walletId
+        name
+        fee
+        isDefault
+        type
+        description
+        token
+        createdAt
+        updatedAt
+        owner
+      }
+      source {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      destination {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
       createdAt
       updatedAt
       owner

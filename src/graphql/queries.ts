@@ -8,6 +8,8 @@ export const getUser = /* GraphQL */ `
       id
       firstName
       lastName
+      availableBalance
+      pendingBalance
       backgroundImage {
         id
         key
@@ -44,6 +46,8 @@ export const listUsers = /* GraphQL */ `
         id
         firstName
         lastName
+        availableBalance
+        pendingBalance
         createdAt
         updatedAt
         owner
@@ -203,6 +207,10 @@ export const getPayment = /* GraphQL */ `
       id
       walletId
       name
+      fee
+      isDefault
+      type
+      description
       token
       createdAt
       updatedAt
@@ -221,7 +229,75 @@ export const listPayments = /* GraphQL */ `
         id
         walletId
         name
+        fee
+        isDefault
+        type
+        description
         token
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getTransaction = /* GraphQL */ `
+  query GetTransaction($id: ID!) {
+    getTransaction(id: $id) {
+      id
+      amount
+      status
+      payment {
+        id
+        walletId
+        name
+        fee
+        isDefault
+        type
+        description
+        token
+        createdAt
+        updatedAt
+        owner
+      }
+      source {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      destination {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listTransactions = /* GraphQL */ `
+  query ListTransactions(
+    $filter: ModelTransactionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTransactions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        amount
+        status
         createdAt
         updatedAt
         owner

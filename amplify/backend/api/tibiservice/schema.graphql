@@ -11,14 +11,20 @@ type User @model
 ]) {
   id: ID!
   
-
+  ## Some fields
   firstName: String!
   lastName: String!
   
 
+  ## Wallet amounts here
+  availableBalance: Float
+  pendingBalance: Float
+
+  ## Images
   backgroundImage: ImagePath @connection
   profileImage: ImagePath @connection
 
+  ## Attachments
   establishments: [EstablishmentTibi] @connection(keyName: "byUser", fields: ["id"])
 }
 
@@ -144,6 +150,13 @@ type Wallet @model
 }
 
 
+enum TransactionStatus {
+  pending
+  complete
+  refunded
+}
+
+## Payment represents an amount
 type Payment @model
 @key(name: "byWallet", fields: ["walletId"])
 @auth(rules: [
@@ -161,7 +174,36 @@ type Payment @model
   
   name: String
 
+  fee: Float
+
+  isDefault: Boolean
+
+  type: PaymentType
+
+  description: String
+
   # This is the tokenized version of the payment.
   # for a crypt wallet, this would be the wallet address
   token: String
+}
+
+
+type Transaction @model
+@auth(rules: [
+  
+  ## Owners can do everything
+  { allow: owner, operations: [create, update, delete] },
+
+  # Admin users can access any operation.
+  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
+
+]) {
+  id: ID!
+
+  amount: Float
+  status: TransactionStatus
+
+  payment: Payment! @connection
+  source: User! @connection
+  destination: User! @connection
 }

@@ -6,6 +6,8 @@ export type CreateUserInput = {
   id?: string | null,
   firstName: string,
   lastName: string,
+  availableBalance?: number | null,
+  pendingBalance?: number | null,
   userBackgroundImageId?: string | null,
   userProfileImageId?: string | null,
 };
@@ -13,6 +15,8 @@ export type CreateUserInput = {
 export type ModelUserConditionInput = {
   firstName?: ModelStringInput | null,
   lastName?: ModelStringInput | null,
+  availableBalance?: ModelFloatInput | null,
+  pendingBalance?: ModelFloatInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -58,11 +62,25 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type User = {
   __typename: "User",
   id: string,
   firstName: string,
   lastName: string,
+  availableBalance?: number | null,
+  pendingBalance?: number | null,
   backgroundImage?: ImagePath | null,
   profileImage?: ImagePath | null,
   establishments?: ModelEstablishmentTibiConnection | null,
@@ -149,6 +167,8 @@ export type UpdateUserInput = {
   id: string,
   firstName?: string | null,
   lastName?: string | null,
+  availableBalance?: number | null,
+  pendingBalance?: number | null,
   userBackgroundImageId?: string | null,
   userProfileImageId?: string | null,
 };
@@ -325,11 +345,23 @@ export type Payment = {
   id: string,
   walletId: string,
   name?: string | null,
+  fee?: number | null,
+  isDefault?: boolean | null,
+  type?: PaymentType | null,
+  description?: string | null,
   token?: string | null,
   createdAt: string,
   updatedAt: string,
   owner?: string | null,
 };
+
+export enum PaymentType {
+  credit = "credit",
+  debit = "debit",
+  applePay = "applePay",
+  crypto = "crypto",
+}
+
 
 export type UpdateWalletInput = {
   id: string,
@@ -345,22 +377,46 @@ export type CreatePaymentInput = {
   id?: string | null,
   walletId: string,
   name?: string | null,
+  fee?: number | null,
+  isDefault?: boolean | null,
+  type?: PaymentType | null,
+  description?: string | null,
   token?: string | null,
 };
 
 export type ModelPaymentConditionInput = {
   walletId?: ModelIDInput | null,
   name?: ModelStringInput | null,
+  fee?: ModelFloatInput | null,
+  isDefault?: ModelBooleanInput | null,
+  type?: ModelPaymentTypeInput | null,
+  description?: ModelStringInput | null,
   token?: ModelStringInput | null,
   and?: Array< ModelPaymentConditionInput | null > | null,
   or?: Array< ModelPaymentConditionInput | null > | null,
   not?: ModelPaymentConditionInput | null,
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelPaymentTypeInput = {
+  eq?: PaymentType | null,
+  ne?: PaymentType | null,
+};
+
 export type UpdatePaymentInput = {
   id: string,
   walletId?: string | null,
   name?: string | null,
+  fee?: number | null,
+  isDefault?: boolean | null,
+  type?: PaymentType | null,
+  description?: string | null,
   token?: string | null,
 };
 
@@ -368,10 +424,67 @@ export type DeletePaymentInput = {
   id: string,
 };
 
+export type CreateTransactionInput = {
+  id?: string | null,
+  amount?: number | null,
+  status?: TransactionStatus | null,
+  transactionPaymentId: string,
+  transactionSourceId: string,
+  transactionDestinationId: string,
+};
+
+export enum TransactionStatus {
+  pending = "pending",
+  complete = "complete",
+  refunded = "refunded",
+}
+
+
+export type ModelTransactionConditionInput = {
+  amount?: ModelFloatInput | null,
+  status?: ModelTransactionStatusInput | null,
+  and?: Array< ModelTransactionConditionInput | null > | null,
+  or?: Array< ModelTransactionConditionInput | null > | null,
+  not?: ModelTransactionConditionInput | null,
+};
+
+export type ModelTransactionStatusInput = {
+  eq?: TransactionStatus | null,
+  ne?: TransactionStatus | null,
+};
+
+export type Transaction = {
+  __typename: "Transaction",
+  id: string,
+  amount?: number | null,
+  status?: TransactionStatus | null,
+  payment: Payment,
+  source: User,
+  destination: User,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateTransactionInput = {
+  id: string,
+  amount?: number | null,
+  status?: TransactionStatus | null,
+  transactionPaymentId?: string | null,
+  transactionSourceId?: string | null,
+  transactionDestinationId?: string | null,
+};
+
+export type DeleteTransactionInput = {
+  id: string,
+};
+
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   firstName?: ModelStringInput | null,
   lastName?: ModelStringInput | null,
+  availableBalance?: ModelFloatInput | null,
+  pendingBalance?: ModelFloatInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -442,10 +555,29 @@ export type ModelPaymentFilterInput = {
   id?: ModelIDInput | null,
   walletId?: ModelIDInput | null,
   name?: ModelStringInput | null,
+  fee?: ModelFloatInput | null,
+  isDefault?: ModelBooleanInput | null,
+  type?: ModelPaymentTypeInput | null,
+  description?: ModelStringInput | null,
   token?: ModelStringInput | null,
   and?: Array< ModelPaymentFilterInput | null > | null,
   or?: Array< ModelPaymentFilterInput | null > | null,
   not?: ModelPaymentFilterInput | null,
+};
+
+export type ModelTransactionFilterInput = {
+  id?: ModelIDInput | null,
+  amount?: ModelFloatInput | null,
+  status?: ModelTransactionStatusInput | null,
+  and?: Array< ModelTransactionFilterInput | null > | null,
+  or?: Array< ModelTransactionFilterInput | null > | null,
+  not?: ModelTransactionFilterInput | null,
+};
+
+export type ModelTransactionConnection = {
+  __typename: "ModelTransactionConnection",
+  items:  Array<Transaction >,
+  nextToken?: string | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -459,6 +591,8 @@ export type CreateUserMutation = {
     id: string,
     firstName: string,
     lastName: string,
+    availableBalance?: number | null,
+    pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       id: string,
@@ -498,6 +632,8 @@ export type UpdateUserMutation = {
     id: string,
     firstName: string,
     lastName: string,
+    availableBalance?: number | null,
+    pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       id: string,
@@ -537,6 +673,8 @@ export type DeleteUserMutation = {
     id: string,
     firstName: string,
     lastName: string,
+    availableBalance?: number | null,
+    pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       id: string,
@@ -802,6 +940,8 @@ export type CreateEstablishmentTibiMutation = {
       id: string,
       firstName: string,
       lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -840,6 +980,8 @@ export type UpdateEstablishmentTibiMutation = {
       id: string,
       firstName: string,
       lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -878,6 +1020,8 @@ export type DeleteEstablishmentTibiMutation = {
       id: string,
       firstName: string,
       lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -963,6 +1107,10 @@ export type CreatePaymentMutation = {
     id: string,
     walletId: string,
     name?: string | null,
+    fee?: number | null,
+    isDefault?: boolean | null,
+    type?: PaymentType | null,
+    description?: string | null,
     token?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -981,6 +1129,10 @@ export type UpdatePaymentMutation = {
     id: string,
     walletId: string,
     name?: string | null,
+    fee?: number | null,
+    isDefault?: boolean | null,
+    type?: PaymentType | null,
+    description?: string | null,
     token?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -999,7 +1151,170 @@ export type DeletePaymentMutation = {
     id: string,
     walletId: string,
     name?: string | null,
+    fee?: number | null,
+    isDefault?: boolean | null,
+    type?: PaymentType | null,
+    description?: string | null,
     token?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateTransactionMutationVariables = {
+  input: CreateTransactionInput,
+  condition?: ModelTransactionConditionInput | null,
+};
+
+export type CreateTransactionMutation = {
+  createTransaction?:  {
+    __typename: "Transaction",
+    id: string,
+    amount?: number | null,
+    status?: TransactionStatus | null,
+    payment:  {
+      __typename: "Payment",
+      id: string,
+      walletId: string,
+      name?: string | null,
+      fee?: number | null,
+      isDefault?: boolean | null,
+      type?: PaymentType | null,
+      description?: string | null,
+      token?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    source:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    destination:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateTransactionMutationVariables = {
+  input: UpdateTransactionInput,
+  condition?: ModelTransactionConditionInput | null,
+};
+
+export type UpdateTransactionMutation = {
+  updateTransaction?:  {
+    __typename: "Transaction",
+    id: string,
+    amount?: number | null,
+    status?: TransactionStatus | null,
+    payment:  {
+      __typename: "Payment",
+      id: string,
+      walletId: string,
+      name?: string | null,
+      fee?: number | null,
+      isDefault?: boolean | null,
+      type?: PaymentType | null,
+      description?: string | null,
+      token?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    source:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    destination:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteTransactionMutationVariables = {
+  input: DeleteTransactionInput,
+  condition?: ModelTransactionConditionInput | null,
+};
+
+export type DeleteTransactionMutation = {
+  deleteTransaction?:  {
+    __typename: "Transaction",
+    id: string,
+    amount?: number | null,
+    status?: TransactionStatus | null,
+    payment:  {
+      __typename: "Payment",
+      id: string,
+      walletId: string,
+      name?: string | null,
+      fee?: number | null,
+      isDefault?: boolean | null,
+      type?: PaymentType | null,
+      description?: string | null,
+      token?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    source:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    destination:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1016,6 +1331,8 @@ export type GetUserQuery = {
     id: string,
     firstName: string,
     lastName: string,
+    availableBalance?: number | null,
+    pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       id: string,
@@ -1058,6 +1375,8 @@ export type ListUsersQuery = {
       id: string,
       firstName: string,
       lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1253,6 +1572,10 @@ export type GetPaymentQuery = {
     id: string,
     walletId: string,
     name?: string | null,
+    fee?: number | null,
+    isDefault?: boolean | null,
+    type?: PaymentType | null,
+    description?: string | null,
     token?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -1274,7 +1597,85 @@ export type ListPaymentsQuery = {
       id: string,
       walletId: string,
       name?: string | null,
+      fee?: number | null,
+      isDefault?: boolean | null,
+      type?: PaymentType | null,
+      description?: string | null,
       token?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetTransactionQueryVariables = {
+  id: string,
+};
+
+export type GetTransactionQuery = {
+  getTransaction?:  {
+    __typename: "Transaction",
+    id: string,
+    amount?: number | null,
+    status?: TransactionStatus | null,
+    payment:  {
+      __typename: "Payment",
+      id: string,
+      walletId: string,
+      name?: string | null,
+      fee?: number | null,
+      isDefault?: boolean | null,
+      type?: PaymentType | null,
+      description?: string | null,
+      token?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    source:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    destination:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListTransactionsQueryVariables = {
+  filter?: ModelTransactionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListTransactionsQuery = {
+  listTransactions?:  {
+    __typename: "ModelTransactionConnection",
+    items:  Array< {
+      __typename: "Transaction",
+      id: string,
+      amount?: number | null,
+      status?: TransactionStatus | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1289,6 +1690,8 @@ export type OnCreateUserSubscription = {
     id: string,
     firstName: string,
     lastName: string,
+    availableBalance?: number | null,
+    pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       id: string,
@@ -1323,6 +1726,8 @@ export type OnUpdateUserSubscription = {
     id: string,
     firstName: string,
     lastName: string,
+    availableBalance?: number | null,
+    pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       id: string,
@@ -1357,6 +1762,8 @@ export type OnDeleteUserSubscription = {
     id: string,
     firstName: string,
     lastName: string,
+    availableBalance?: number | null,
+    pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       id: string,
@@ -1572,6 +1979,8 @@ export type OnCreateEstablishmentTibiSubscription = {
       id: string,
       firstName: string,
       lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1605,6 +2014,8 @@ export type OnUpdateEstablishmentTibiSubscription = {
       id: string,
       firstName: string,
       lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1638,6 +2049,8 @@ export type OnDeleteEstablishmentTibiSubscription = {
       id: string,
       firstName: string,
       lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1703,6 +2116,10 @@ export type OnCreatePaymentSubscription = {
     id: string,
     walletId: string,
     name?: string | null,
+    fee?: number | null,
+    isDefault?: boolean | null,
+    type?: PaymentType | null,
+    description?: string | null,
     token?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -1716,6 +2133,10 @@ export type OnUpdatePaymentSubscription = {
     id: string,
     walletId: string,
     name?: string | null,
+    fee?: number | null,
+    isDefault?: boolean | null,
+    type?: PaymentType | null,
+    description?: string | null,
     token?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -1729,7 +2150,155 @@ export type OnDeletePaymentSubscription = {
     id: string,
     walletId: string,
     name?: string | null,
+    fee?: number | null,
+    isDefault?: boolean | null,
+    type?: PaymentType | null,
+    description?: string | null,
     token?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateTransactionSubscription = {
+  onCreateTransaction?:  {
+    __typename: "Transaction",
+    id: string,
+    amount?: number | null,
+    status?: TransactionStatus | null,
+    payment:  {
+      __typename: "Payment",
+      id: string,
+      walletId: string,
+      name?: string | null,
+      fee?: number | null,
+      isDefault?: boolean | null,
+      type?: PaymentType | null,
+      description?: string | null,
+      token?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    source:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    destination:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateTransactionSubscription = {
+  onUpdateTransaction?:  {
+    __typename: "Transaction",
+    id: string,
+    amount?: number | null,
+    status?: TransactionStatus | null,
+    payment:  {
+      __typename: "Payment",
+      id: string,
+      walletId: string,
+      name?: string | null,
+      fee?: number | null,
+      isDefault?: boolean | null,
+      type?: PaymentType | null,
+      description?: string | null,
+      token?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    source:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    destination:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteTransactionSubscription = {
+  onDeleteTransaction?:  {
+    __typename: "Transaction",
+    id: string,
+    amount?: number | null,
+    status?: TransactionStatus | null,
+    payment:  {
+      __typename: "Payment",
+      id: string,
+      walletId: string,
+      name?: string | null,
+      fee?: number | null,
+      isDefault?: boolean | null,
+      type?: PaymentType | null,
+      description?: string | null,
+      token?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    source:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    destination:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
     createdAt: string,
     updatedAt: string,
     owner?: string | null,

@@ -8,6 +8,8 @@ export const onCreateUser = /* GraphQL */ `
       id
       firstName
       lastName
+      availableBalance
+      pendingBalance
       backgroundImage {
         id
         key
@@ -39,6 +41,8 @@ export const onUpdateUser = /* GraphQL */ `
       id
       firstName
       lastName
+      availableBalance
+      pendingBalance
       backgroundImage {
         id
         key
@@ -70,6 +74,8 @@ export const onDeleteUser = /* GraphQL */ `
       id
       firstName
       lastName
+      availableBalance
+      pendingBalance
       backgroundImage {
         id
         key
@@ -271,6 +277,8 @@ export const onCreateEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
+        availableBalance
+        pendingBalance
         createdAt
         updatedAt
         owner
@@ -302,6 +310,8 @@ export const onUpdateEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
+        availableBalance
+        pendingBalance
         createdAt
         updatedAt
         owner
@@ -333,6 +343,8 @@ export const onDeleteEstablishmentTibi = /* GraphQL */ `
         id
         firstName
         lastName
+        availableBalance
+        pendingBalance
         createdAt
         updatedAt
         owner
@@ -395,6 +407,10 @@ export const onCreatePayment = /* GraphQL */ `
       id
       walletId
       name
+      fee
+      isDefault
+      type
+      description
       token
       createdAt
       updatedAt
@@ -408,6 +424,10 @@ export const onUpdatePayment = /* GraphQL */ `
       id
       walletId
       name
+      fee
+      isDefault
+      type
+      description
       token
       createdAt
       updatedAt
@@ -421,7 +441,146 @@ export const onDeletePayment = /* GraphQL */ `
       id
       walletId
       name
+      fee
+      isDefault
+      type
+      description
       token
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateTransaction = /* GraphQL */ `
+  subscription OnCreateTransaction {
+    onCreateTransaction {
+      id
+      amount
+      status
+      payment {
+        id
+        walletId
+        name
+        fee
+        isDefault
+        type
+        description
+        token
+        createdAt
+        updatedAt
+        owner
+      }
+      source {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      destination {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateTransaction = /* GraphQL */ `
+  subscription OnUpdateTransaction {
+    onUpdateTransaction {
+      id
+      amount
+      status
+      payment {
+        id
+        walletId
+        name
+        fee
+        isDefault
+        type
+        description
+        token
+        createdAt
+        updatedAt
+        owner
+      }
+      source {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      destination {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteTransaction = /* GraphQL */ `
+  subscription OnDeleteTransaction {
+    onDeleteTransaction {
+      id
+      amount
+      status
+      payment {
+        id
+        walletId
+        name
+        fee
+        isDefault
+        type
+        description
+        token
+        createdAt
+        updatedAt
+        owner
+      }
+      source {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
+      destination {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        owner
+      }
       createdAt
       updatedAt
       owner
