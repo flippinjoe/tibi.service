@@ -3,8 +3,8 @@ type User
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
-    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
-    { allow: private, provider: iam, operations: [read] },
+    { allow: groups, groups: ["admin"], operations: [create, update, delete] }, 
+    { allow: private, operations: [read] },
     { allow: public, operations: [read] }
   ]
 ) {
@@ -35,8 +35,8 @@ type ImagePath @model
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
-    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
-    { allow: private, provider: iam, operations: [read] },
+    { allow: groups, groups: ["admin"], operations: [create, update, delete] }, 
+    { allow: private, operations: [read] },
     { allow: public, operations: [read] }
   ]
 ) {
@@ -49,8 +49,8 @@ type Occupation
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
-    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
-    { allow: private, provider: iam, operations: [read] },
+    { allow: groups, groups: ["admin"], operations: [create, update, delete] }, 
+    { allow: private, operations: [read] },
     { allow: public, operations: [read] }
   ]
 ) {
@@ -84,8 +84,8 @@ type EstablishmentTibi
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
-    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
-    { allow: private, provider: iam, operations: [read] },
+    { allow: groups, groups: ["admin"], operations: [create, update, delete] }, 
+    { allow: private, operations: [read] },
     { allow: public, operations: [read] }
   ]
 ) {
@@ -109,8 +109,8 @@ type Wallet
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
-    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
-    { allow: private, provider: iam, operations: [read] },
+    { allow: groups, groups: ["admin"], operations: [create, update, delete] }, 
+    { allow: private, operations: [read] },
     { allow: public, operations: [read] }
   ]
 ) {
@@ -130,8 +130,8 @@ type Payment @model
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
-    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
-    { allow: private, provider: iam, operations: [read] },
+    { allow: groups, groups: ["admin"], operations: [create, update, delete] }, 
+    { allow: private, operations: [read] },
     { allow: public, operations: [read] }
   ]
 ) {
@@ -150,8 +150,8 @@ type Transaction
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
-    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
-    { allow: private, provider: iam, operations: [read] },
+    { allow: groups, groups: ["admin"], operations: [create, update, delete] }, 
+    { allow: private, operations: [read] },
     { allow: public, operations: [read] }
   ]
 ) {
