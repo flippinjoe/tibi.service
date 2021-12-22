@@ -50,7 +50,7 @@ const getUserForId = async (id) => {
   //   return graphqlData.data.data.getMemberFinance
 }
 
-const updateUserAvailableBalance = async (id, availableBalance) => {
+const updateUserAvailableBalance = async (user, availableBalance) => {
   const updateUserMutation = gql`
   mutation UpdateUser(
     $input: UpdateUserInput!
@@ -69,11 +69,13 @@ const updateUserAvailableBalance = async (id, availableBalance) => {
     print(updateUserMutation), 
     { 
       input: {
-        id: id,
+        id: user.id,
+        owner: user.owner,
         availableBalance: availableBalance
       }
     }
   );
+  console.log(graphqlData)
   const { updateUser } = graphqlData.data
   console.log(graphqlData.data)
   return updateUser
@@ -92,7 +94,7 @@ exports.handler = async (event) => {
   /// Bump the receiver balance by "amount"
   const user = await getUserForId(receiverId)
   const curAmount = user.availableBalance || 0
-  const res = await updateUserAvailableBalance(user.id, curAmount + amount)
+  const res = await updateUserAvailableBalance(user, curAmount + amount)
 
   //eslint-disable-line
   console.log(JSON.stringify(res, null, 2));

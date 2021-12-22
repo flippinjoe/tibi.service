@@ -4,7 +4,7 @@ type User
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
     { allow: groups, groups: ["admin"], operations: [create, update, delete] }, 
-    { allow: private, operations: [read] },
+    { allow: private, operations: [read, update] },
     { allow: public, operations: [read] }
   ]
 ) {
