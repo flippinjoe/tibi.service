@@ -14,17 +14,17 @@ export const createUser = /* GraphQL */ `
       availableBalance
       pendingBalance
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       profileImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
@@ -34,6 +34,8 @@ export const createUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      userBackgroundImageId
+      userProfileImageId
       owner
     }
   }
@@ -50,17 +52,17 @@ export const updateUser = /* GraphQL */ `
       availableBalance
       pendingBalance
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       profileImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
@@ -70,6 +72,8 @@ export const updateUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      userBackgroundImageId
+      userProfileImageId
       owner
     }
   }
@@ -86,17 +90,17 @@ export const deleteUser = /* GraphQL */ `
       availableBalance
       pendingBalance
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       profileImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
@@ -106,6 +110,8 @@ export const deleteUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      userBackgroundImageId
+      userProfileImageId
       owner
     }
   }
@@ -116,9 +122,9 @@ export const createImagePath = /* GraphQL */ `
     $condition: ModelImagePathConditionInput
   ) {
     createImagePath(input: $input, condition: $condition) {
-      id
       key
       location
+      id
       createdAt
       updatedAt
       owner
@@ -131,9 +137,9 @@ export const updateImagePath = /* GraphQL */ `
     $condition: ModelImagePathConditionInput
   ) {
     updateImagePath(input: $input, condition: $condition) {
-      id
       key
       location
+      id
       createdAt
       updatedAt
       owner
@@ -146,9 +152,9 @@ export const deleteImagePath = /* GraphQL */ `
     $condition: ModelImagePathConditionInput
   ) {
     deleteImagePath(input: $input, condition: $condition) {
-      id
       key
       location
+      id
       createdAt
       updatedAt
       owner
@@ -165,15 +171,16 @@ export const createOccupation = /* GraphQL */ `
       establishmentId
       name
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       createdAt
       updatedAt
+      occupationBackgroundImageId
       owner
     }
   }
@@ -188,15 +195,16 @@ export const updateOccupation = /* GraphQL */ `
       establishmentId
       name
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       createdAt
       updatedAt
+      occupationBackgroundImageId
       owner
     }
   }
@@ -211,15 +219,16 @@ export const deleteOccupation = /* GraphQL */ `
       establishmentId
       name
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       createdAt
       updatedAt
+      occupationBackgroundImageId
       owner
     }
   }
@@ -320,6 +329,8 @@ export const createEstablishmentTibi = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       roles
@@ -356,6 +367,8 @@ export const updateEstablishmentTibi = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       roles
@@ -392,6 +405,8 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       roles
@@ -545,6 +560,8 @@ export const createTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       destination {
@@ -555,10 +572,15 @@ export const createTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       createdAt
       updatedAt
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       owner
     }
   }
@@ -593,6 +615,8 @@ export const updateTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       destination {
@@ -603,10 +627,15 @@ export const updateTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       createdAt
       updatedAt
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       owner
     }
   }
@@ -641,6 +670,8 @@ export const deleteTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       destination {
@@ -651,10 +682,15 @@ export const deleteTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       createdAt
       updatedAt
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       owner
     }
   }

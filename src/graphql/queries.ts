@@ -11,17 +11,17 @@ export const getUser = /* GraphQL */ `
       availableBalance
       pendingBalance
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       profileImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
@@ -31,6 +31,8 @@ export const getUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      userBackgroundImageId
+      userProfileImageId
       owner
     }
   }
@@ -50,6 +52,8 @@ export const listUsers = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       nextToken
@@ -59,9 +63,9 @@ export const listUsers = /* GraphQL */ `
 export const getImagePath = /* GraphQL */ `
   query GetImagePath($id: ID!) {
     getImagePath(id: $id) {
-      id
       key
       location
+      id
       createdAt
       updatedAt
       owner
@@ -76,9 +80,9 @@ export const listImagePaths = /* GraphQL */ `
   ) {
     listImagePaths(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
@@ -94,15 +98,16 @@ export const getOccupation = /* GraphQL */ `
       establishmentId
       name
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       createdAt
       updatedAt
+      occupationBackgroundImageId
       owner
     }
   }
@@ -120,6 +125,7 @@ export const listOccupations = /* GraphQL */ `
         name
         createdAt
         updatedAt
+        occupationBackgroundImageId
         owner
       }
       nextToken
@@ -159,6 +165,65 @@ export const listEstablishments = /* GraphQL */ `
         type
         imageUrl
         website
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getEstablishmentTibi = /* GraphQL */ `
+  query GetEstablishmentTibi($id: ID!) {
+    getEstablishmentTibi(id: $id) {
+      id
+      userId
+      establishmentId
+      establishment {
+        id
+        name
+        type
+        imageUrl
+        website
+        createdAt
+        updatedAt
+        owner
+      }
+      user {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        createdAt
+        updatedAt
+        userBackgroundImageId
+        userProfileImageId
+        owner
+      }
+      roles
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listEstablishmentTibis = /* GraphQL */ `
+  query ListEstablishmentTibis(
+    $filter: ModelEstablishmentTibiFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEstablishmentTibis(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userId
+        establishmentId
+        roles
         createdAt
         updatedAt
         owner
@@ -269,6 +334,8 @@ export const getTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       destination {
@@ -279,10 +346,15 @@ export const getTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       createdAt
       updatedAt
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       owner
     }
   }
@@ -300,6 +372,9 @@ export const listTransactions = /* GraphQL */ `
         status
         createdAt
         updatedAt
+        transactionPaymentId
+        transactionSourceId
+        transactionDestinationId
         owner
       }
       nextToken

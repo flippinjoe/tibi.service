@@ -1,33 +1,23 @@
-
-type User @model 
-@auth(rules: [
-  
-  ## Owners can do everything
-  { allow: owner, operations: [create, update, delete] },
-
-  # Admin users can access any operation.
-  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
-
-]) {
+type User 
+@model 
+@auth(
+  rules: [
+    { allow: owner, operations: [read, create, update, delete] }, 
+    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, operations: [read]  }
+  ]
+) {
   id: ID!
-  
-  ## Some fields
   firstName: String!
   lastName: String!
-  
-
-  ## Wallet amounts here
   availableBalance: Float
   pendingBalance: Float
+  backgroundImage: ImagePath @hasOne
 
-  ## Images
-  backgroundImage: ImagePath @connection
-  profileImage: ImagePath @connection
-
-  ## Attachments
-  establishments: [EstablishmentTibi] @connection(keyName: "byUser", fields: ["id"])
+  profileImage: ImagePath @hasOne
+  establishments: [EstablishmentTibi] @hasMany(indexName: "byUser", fields: ["id"])
 }
-
 
 enum ImageLocation {
   system
@@ -41,89 +31,37 @@ enum EstablishmentType {
   custom
 }
 
-
-type ImagePath @model
-@auth(rules: [
-  ## Owners can do everything
-  { allow: owner, operations: [create, update, delete] },
-
-  # Admin users can access any operation.
-  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
-]) {
+type ImagePath @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
   key: String!
   location: ImageLocation!
 }
 
-type Occupation @model
-@key(name: "byEstablishment", fields: ["establishmentId", "name"])
-@auth(rules: [
-
-  ## Owners can do everything
-  { allow: owner, operations: [create, update, delete] },
-
-  # Admin users can access any operation.
-  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
-]) {
+type Occupation @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
   id: ID!
-  establishmentId: ID
+  establishmentId: ID @index(name: "byEstablishment", sortKeyFields: ["name"])
   name: String!
-
-  backgroundImage: ImagePath! @connection
+  backgroundImage: ImagePath! @hasOne
 }
 
-
-type Establishment @model
-@auth(rules: [
-  ## Owners can do everything
-  { allow: owner, operations: [create, update, delete] },
-
-  # Admin users can access any operation.
-  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
-]) {
+type Establishment @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
   id: ID!
-
-  ## Name for establishment
   name: String!
-
-  ## This is either sole-proprieter or organization
   type: EstablishmentType!
-
-
   imageUrl: AWSURL
   website: AWSURL
-
-  
-
-  tibis: [EstablishmentTibi] @connection(keyName: "byEstablishment", fields: ["id"])
-  occupations: [Occupation] @connection(keyName: "byEstablishment", fields: ["id"])
+  tibis: [EstablishmentTibi] @hasMany(indexName: "byEstablishment", fields: ["id"])
+  occupations: [Occupation] @hasMany(indexName: "byEstablishment", fields: ["id"])
 }
 
-
-type EstablishmentTibi
-@model(queries: null)
-@key(name: "byEstablishment", fields: ["establishmentId", "userId"])
-@key(name: "byUser", fields: ["userId", "establishmentId"])
-@auth(rules: [
-  ## Owners can do everything
-  { allow: owner, operations: [create, update, delete] },
-
-  # Admin users can access any operation.
-  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
-]) {
+type EstablishmentTibi @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
   id: ID!
-  userId: ID!
-  establishmentId: ID!
-  establishment: Establishment! @connection(fields: ["establishmentId"])
-  user: User! @connection(fields: ["userId"])
+  userId: ID! @index(name: "byUser", sortKeyFields: ["establishmentId"])
+  establishmentId: ID! @index(name: "byEstablishment", sortKeyFields: ["userId"])
+  establishment: Establishment! @belongsTo(fields: ["establishmentId"])
+  user: User! @belongsTo(fields: ["userId"])
   roles: [String]!
 }
 
-
-
-
-
-
-# Payments
 enum PaymentType {
   credit
   debit
@@ -131,24 +69,12 @@ enum PaymentType {
   crypto
 }
 
-type Wallet @model 
-@auth(rules: [
-  
-  ## Owners can do everything
-  { allow: owner, operations: [create, update, delete] },
-
-  # Admin users can access any operation.
-  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
-
-]) {
+type Wallet @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
   id: ID!
-  
   cryptoHash: String
   cryptoBalance: String
-
-  payments: [Payment] @connection(keyName: "byWallet", fields: ["id"])
+  payments: [Payment] @hasMany(indexName: "byWallet", fields: ["id"])
 }
-
 
 enum TransactionStatus {
   pending
@@ -156,54 +82,22 @@ enum TransactionStatus {
   refunded
 }
 
-## Payment represents an amount
-type Payment @model
-@key(name: "byWallet", fields: ["walletId"])
-@auth(rules: [
-  
-  ## Owners can do everything
-  { allow: owner, operations: [create, update, delete] },
-
-  # Admin users can access any operation.
-  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
-
-]) {
+type Payment @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
   id: ID!
-
-  walletId: ID!
-  
+  walletId: ID! @index(name: "byWallet")
   name: String
-
   fee: Float
-
   isDefault: Boolean
-
   type: PaymentType
-
   description: String
-
-  # This is the tokenized version of the payment.
-  # for a crypt wallet, this would be the wallet address
   token: String
 }
 
-
-type Transaction @model
-@auth(rules: [
-  
-  ## Owners can do everything
-  { allow: owner, operations: [create, update, delete] },
-
-  # Admin users can access any operation.
-  { allow: groups, groups: ["admin"], operations: [create, update, delete] },
-
-]) {
+type Transaction @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
   id: ID!
-
   amount: Float
   status: TransactionStatus
-
-  payment: Payment! @connection
-  source: User! @connection
-  destination: User! @connection
+  payment: Payment! @hasOne
+  source: User! @hasOne
+  destination: User! @hasOne
 }

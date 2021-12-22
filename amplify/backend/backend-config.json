@@ -66,6 +66,9 @@
                 "apiKeyExpirationDays": 365,
                 "description": "default backend api key"
               }
+            },
+            {
+              "authenticationType": "AWS_IAM"
             }
           ]
         }
@@ -89,6 +92,24 @@
           "resourceName": "userPoolGroups",
           "attributes": [
             "tibiCognitoPoolGroupRole"
+          ]
+        }
+      ]
+    }
+  },
+  "function": {
+    "transactionBalanceTrigger": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "tibiservice",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
           ]
         }
       ]

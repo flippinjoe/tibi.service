@@ -17,6 +17,12 @@
           "appleAppId": "com.joesapps.tibi"
         },
         "userPoolGroups": {}
+      },
+      "function": {
+        "transactionBalanceTrigger": {
+          "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
+          "s3Key": "amplify-builds/transactionBalanceTrigger-534d6a456244735a4e59-build.zip"
+        }
       }
     }
   }

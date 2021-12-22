@@ -18,6 +18,7 @@ export type AmplifyDependentResourcesAttributes = {
     },
     "api": {
         "tibiservice": {
+            "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
         }
@@ -26,6 +27,14 @@ export type AmplifyDependentResourcesAttributes = {
         "tibiIosData": {
             "BucketName": "string",
             "Region": "string"
+        }
+    },
+    "function": {
+        "transactionBalanceTrigger": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
         }
     }
 }

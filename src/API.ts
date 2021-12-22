@@ -20,6 +20,8 @@ export type ModelUserConditionInput = {
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
+  userBackgroundImageId?: ModelIDInput | null,
+  userProfileImageId?: ModelIDInput | null,
 };
 
 export type ModelStringInput = {
@@ -74,6 +76,22 @@ export type ModelFloatInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
 export type User = {
   __typename: "User",
   id: string,
@@ -86,14 +104,16 @@ export type User = {
   establishments?: ModelEstablishmentTibiConnection | null,
   createdAt: string,
   updatedAt: string,
+  userBackgroundImageId?: string | null,
+  userProfileImageId?: string | null,
   owner?: string | null,
 };
 
 export type ImagePath = {
   __typename: "ImagePath",
-  id: string,
   key: string,
   location: ImageLocation,
+  id: string,
   createdAt: string,
   updatedAt: string,
   owner?: string | null,
@@ -109,7 +129,7 @@ export enum ImageLocation {
 
 export type ModelEstablishmentTibiConnection = {
   __typename: "ModelEstablishmentTibiConnection",
-  items:  Array<EstablishmentTibi >,
+  items:  Array<EstablishmentTibi | null >,
   nextToken?: string | null,
 };
 
@@ -148,7 +168,7 @@ export enum EstablishmentType {
 
 export type ModelOccupationConnection = {
   __typename: "ModelOccupationConnection",
-  items:  Array<Occupation >,
+  items:  Array<Occupation | null >,
   nextToken?: string | null,
 };
 
@@ -160,6 +180,7 @@ export type Occupation = {
   backgroundImage: ImagePath,
   createdAt: string,
   updatedAt: string,
+  occupationBackgroundImageId: string,
   owner?: string | null,
 };
 
@@ -178,9 +199,9 @@ export type DeleteUserInput = {
 };
 
 export type CreateImagePathInput = {
-  id?: string | null,
   key: string,
   location: ImageLocation,
+  id?: string | null,
 };
 
 export type ModelImagePathConditionInput = {
@@ -218,22 +239,7 @@ export type ModelOccupationConditionInput = {
   and?: Array< ModelOccupationConditionInput | null > | null,
   or?: Array< ModelOccupationConditionInput | null > | null,
   not?: ModelOccupationConditionInput | null,
-};
-
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
+  occupationBackgroundImageId?: ModelIDInput | null,
 };
 
 export type UpdateOccupationInput = {
@@ -336,7 +342,7 @@ export type Wallet = {
 
 export type ModelPaymentConnection = {
   __typename: "ModelPaymentConnection",
-  items:  Array<Payment >,
+  items:  Array<Payment | null >,
   nextToken?: string | null,
 };
 
@@ -446,6 +452,9 @@ export type ModelTransactionConditionInput = {
   and?: Array< ModelTransactionConditionInput | null > | null,
   or?: Array< ModelTransactionConditionInput | null > | null,
   not?: ModelTransactionConditionInput | null,
+  transactionPaymentId?: ModelIDInput | null,
+  transactionSourceId?: ModelIDInput | null,
+  transactionDestinationId?: ModelIDInput | null,
 };
 
 export type ModelTransactionStatusInput = {
@@ -463,6 +472,9 @@ export type Transaction = {
   destination: User,
   createdAt: string,
   updatedAt: string,
+  transactionPaymentId: string,
+  transactionSourceId: string,
+  transactionDestinationId: string,
   owner?: string | null,
 };
 
@@ -488,11 +500,13 @@ export type ModelUserFilterInput = {
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
+  userBackgroundImageId?: ModelIDInput | null,
+  userProfileImageId?: ModelIDInput | null,
 };
 
 export type ModelUserConnection = {
   __typename: "ModelUserConnection",
-  items:  Array<User >,
+  items:  Array<User | null >,
   nextToken?: string | null,
 };
 
@@ -506,7 +520,7 @@ export type ModelImagePathFilterInput = {
 
 export type ModelImagePathConnection = {
   __typename: "ModelImagePathConnection",
-  items:  Array<ImagePath >,
+  items:  Array<ImagePath | null >,
   nextToken?: string | null,
 };
 
@@ -517,6 +531,7 @@ export type ModelOccupationFilterInput = {
   and?: Array< ModelOccupationFilterInput | null > | null,
   or?: Array< ModelOccupationFilterInput | null > | null,
   not?: ModelOccupationFilterInput | null,
+  occupationBackgroundImageId?: ModelIDInput | null,
 };
 
 export type ModelEstablishmentFilterInput = {
@@ -532,8 +547,18 @@ export type ModelEstablishmentFilterInput = {
 
 export type ModelEstablishmentConnection = {
   __typename: "ModelEstablishmentConnection",
-  items:  Array<Establishment >,
+  items:  Array<Establishment | null >,
   nextToken?: string | null,
+};
+
+export type ModelEstablishmentTibiFilterInput = {
+  id?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
+  establishmentId?: ModelIDInput | null,
+  roles?: ModelStringInput | null,
+  and?: Array< ModelEstablishmentTibiFilterInput | null > | null,
+  or?: Array< ModelEstablishmentTibiFilterInput | null > | null,
+  not?: ModelEstablishmentTibiFilterInput | null,
 };
 
 export type ModelWalletFilterInput = {
@@ -547,7 +572,7 @@ export type ModelWalletFilterInput = {
 
 export type ModelWalletConnection = {
   __typename: "ModelWalletConnection",
-  items:  Array<Wallet >,
+  items:  Array<Wallet | null >,
   nextToken?: string | null,
 };
 
@@ -572,11 +597,14 @@ export type ModelTransactionFilterInput = {
   and?: Array< ModelTransactionFilterInput | null > | null,
   or?: Array< ModelTransactionFilterInput | null > | null,
   not?: ModelTransactionFilterInput | null,
+  transactionPaymentId?: ModelIDInput | null,
+  transactionSourceId?: ModelIDInput | null,
+  transactionDestinationId?: ModelIDInput | null,
 };
 
 export type ModelTransactionConnection = {
   __typename: "ModelTransactionConnection",
-  items:  Array<Transaction >,
+  items:  Array<Transaction | null >,
   nextToken?: string | null,
 };
 
@@ -595,18 +623,18 @@ export type CreateUserMutation = {
     pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     } | null,
     profileImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -617,6 +645,8 @@ export type CreateUserMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    userBackgroundImageId?: string | null,
+    userProfileImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -636,18 +666,18 @@ export type UpdateUserMutation = {
     pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     } | null,
     profileImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -658,6 +688,8 @@ export type UpdateUserMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    userBackgroundImageId?: string | null,
+    userProfileImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -677,18 +709,18 @@ export type DeleteUserMutation = {
     pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     } | null,
     profileImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -699,6 +731,8 @@ export type DeleteUserMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    userBackgroundImageId?: string | null,
+    userProfileImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -711,9 +745,9 @@ export type CreateImagePathMutationVariables = {
 export type CreateImagePathMutation = {
   createImagePath?:  {
     __typename: "ImagePath",
-    id: string,
     key: string,
     location: ImageLocation,
+    id: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -728,9 +762,9 @@ export type UpdateImagePathMutationVariables = {
 export type UpdateImagePathMutation = {
   updateImagePath?:  {
     __typename: "ImagePath",
-    id: string,
     key: string,
     location: ImageLocation,
+    id: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -745,9 +779,9 @@ export type DeleteImagePathMutationVariables = {
 export type DeleteImagePathMutation = {
   deleteImagePath?:  {
     __typename: "ImagePath",
-    id: string,
     key: string,
     location: ImageLocation,
+    id: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -767,15 +801,16 @@ export type CreateOccupationMutation = {
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
 };
@@ -793,15 +828,16 @@ export type UpdateOccupationMutation = {
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
 };
@@ -819,15 +855,16 @@ export type DeleteOccupationMutation = {
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
 };
@@ -944,6 +981,8 @@ export type CreateEstablishmentTibiMutation = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     roles: Array< string | null >,
@@ -984,6 +1023,8 @@ export type UpdateEstablishmentTibiMutation = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     roles: Array< string | null >,
@@ -1024,6 +1065,8 @@ export type DeleteEstablishmentTibiMutation = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     roles: Array< string | null >,
@@ -1196,6 +1239,8 @@ export type CreateTransactionMutation = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     destination:  {
@@ -1207,10 +1252,15 @@ export type CreateTransactionMutation = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };
@@ -1249,6 +1299,8 @@ export type UpdateTransactionMutation = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     destination:  {
@@ -1260,10 +1312,15 @@ export type UpdateTransactionMutation = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };
@@ -1302,6 +1359,8 @@ export type DeleteTransactionMutation = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     destination:  {
@@ -1313,10 +1372,15 @@ export type DeleteTransactionMutation = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };
@@ -1335,18 +1399,18 @@ export type GetUserQuery = {
     pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     } | null,
     profileImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1357,6 +1421,8 @@ export type GetUserQuery = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    userBackgroundImageId?: string | null,
+    userProfileImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -1379,8 +1445,10 @@ export type ListUsersQuery = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1392,9 +1460,9 @@ export type GetImagePathQueryVariables = {
 export type GetImagePathQuery = {
   getImagePath?:  {
     __typename: "ImagePath",
-    id: string,
     key: string,
     location: ImageLocation,
+    id: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1412,13 +1480,13 @@ export type ListImagePathsQuery = {
     __typename: "ModelImagePathConnection",
     items:  Array< {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1435,15 +1503,16 @@ export type GetOccupationQuery = {
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
 };
@@ -1464,8 +1533,9 @@ export type ListOccupationsQuery = {
       name: string,
       createdAt: string,
       updatedAt: string,
+      occupationBackgroundImageId: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1515,7 +1585,71 @@ export type ListEstablishmentsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetEstablishmentTibiQueryVariables = {
+  id: string,
+};
+
+export type GetEstablishmentTibiQuery = {
+  getEstablishmentTibi?:  {
+    __typename: "EstablishmentTibi",
+    id: string,
+    userId: string,
+    establishmentId: string,
+    establishment:  {
+      __typename: "Establishment",
+      id: string,
+      name: string,
+      type: EstablishmentType,
+      imageUrl?: string | null,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    },
+    user:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
+      owner?: string | null,
+    },
+    roles: Array< string | null >,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListEstablishmentTibisQueryVariables = {
+  filter?: ModelEstablishmentTibiFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListEstablishmentTibisQuery = {
+  listEstablishmentTibis?:  {
+    __typename: "ModelEstablishmentTibiConnection",
+    items:  Array< {
+      __typename: "EstablishmentTibi",
+      id: string,
+      userId: string,
+      establishmentId: string,
+      roles: Array< string | null >,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1557,7 +1691,7 @@ export type ListWalletsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1605,7 +1739,7 @@ export type ListPaymentsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1643,6 +1777,8 @@ export type GetTransactionQuery = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     destination:  {
@@ -1654,10 +1790,15 @@ export type GetTransactionQuery = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };
@@ -1678,8 +1819,11 @@ export type ListTransactionsQuery = {
       status?: TransactionStatus | null,
       createdAt: string,
       updatedAt: string,
+      transactionPaymentId: string,
+      transactionSourceId: string,
+      transactionDestinationId: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1694,18 +1838,18 @@ export type OnCreateUserSubscription = {
     pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     } | null,
     profileImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1716,6 +1860,8 @@ export type OnCreateUserSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    userBackgroundImageId?: string | null,
+    userProfileImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -1730,18 +1876,18 @@ export type OnUpdateUserSubscription = {
     pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     } | null,
     profileImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1752,6 +1898,8 @@ export type OnUpdateUserSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    userBackgroundImageId?: string | null,
+    userProfileImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -1766,18 +1914,18 @@ export type OnDeleteUserSubscription = {
     pendingBalance?: number | null,
     backgroundImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     } | null,
     profileImage?:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -1788,6 +1936,8 @@ export type OnDeleteUserSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    userBackgroundImageId?: string | null,
+    userProfileImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -1795,9 +1945,9 @@ export type OnDeleteUserSubscription = {
 export type OnCreateImagePathSubscription = {
   onCreateImagePath?:  {
     __typename: "ImagePath",
-    id: string,
     key: string,
     location: ImageLocation,
+    id: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1807,9 +1957,9 @@ export type OnCreateImagePathSubscription = {
 export type OnUpdateImagePathSubscription = {
   onUpdateImagePath?:  {
     __typename: "ImagePath",
-    id: string,
     key: string,
     location: ImageLocation,
+    id: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1819,9 +1969,9 @@ export type OnUpdateImagePathSubscription = {
 export type OnDeleteImagePathSubscription = {
   onDeleteImagePath?:  {
     __typename: "ImagePath",
-    id: string,
     key: string,
     location: ImageLocation,
+    id: string,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -1836,15 +1986,16 @@ export type OnCreateOccupationSubscription = {
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
 };
@@ -1857,15 +2008,16 @@ export type OnUpdateOccupationSubscription = {
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
 };
@@ -1878,15 +2030,16 @@ export type OnDeleteOccupationSubscription = {
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
-      id: string,
       key: string,
       location: ImageLocation,
+      id: string,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
 };
@@ -1983,6 +2136,8 @@ export type OnCreateEstablishmentTibiSubscription = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     roles: Array< string | null >,
@@ -2018,6 +2173,8 @@ export type OnUpdateEstablishmentTibiSubscription = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     roles: Array< string | null >,
@@ -2053,6 +2210,8 @@ export type OnDeleteEstablishmentTibiSubscription = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     roles: Array< string | null >,
@@ -2190,6 +2349,8 @@ export type OnCreateTransactionSubscription = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     destination:  {
@@ -2201,10 +2362,15 @@ export type OnCreateTransactionSubscription = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };
@@ -2238,6 +2404,8 @@ export type OnUpdateTransactionSubscription = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     destination:  {
@@ -2249,10 +2417,15 @@ export type OnUpdateTransactionSubscription = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };
@@ -2286,6 +2459,8 @@ export type OnDeleteTransactionSubscription = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     destination:  {
@@ -2297,10 +2472,15 @@ export type OnDeleteTransactionSubscription = {
       pendingBalance?: number | null,
       createdAt: string,
       updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
       owner?: string | null,
     },
     createdAt: string,
     updatedAt: string,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };

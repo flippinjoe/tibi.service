@@ -11,17 +11,17 @@ export const onCreateUser = /* GraphQL */ `
       availableBalance
       pendingBalance
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       profileImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
@@ -31,6 +31,8 @@ export const onCreateUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      userBackgroundImageId
+      userProfileImageId
       owner
     }
   }
@@ -44,17 +46,17 @@ export const onUpdateUser = /* GraphQL */ `
       availableBalance
       pendingBalance
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       profileImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
@@ -64,6 +66,8 @@ export const onUpdateUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      userBackgroundImageId
+      userProfileImageId
       owner
     }
   }
@@ -77,17 +81,17 @@ export const onDeleteUser = /* GraphQL */ `
       availableBalance
       pendingBalance
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       profileImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
@@ -97,6 +101,8 @@ export const onDeleteUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      userBackgroundImageId
+      userProfileImageId
       owner
     }
   }
@@ -104,9 +110,9 @@ export const onDeleteUser = /* GraphQL */ `
 export const onCreateImagePath = /* GraphQL */ `
   subscription OnCreateImagePath {
     onCreateImagePath {
-      id
       key
       location
+      id
       createdAt
       updatedAt
       owner
@@ -116,9 +122,9 @@ export const onCreateImagePath = /* GraphQL */ `
 export const onUpdateImagePath = /* GraphQL */ `
   subscription OnUpdateImagePath {
     onUpdateImagePath {
-      id
       key
       location
+      id
       createdAt
       updatedAt
       owner
@@ -128,9 +134,9 @@ export const onUpdateImagePath = /* GraphQL */ `
 export const onDeleteImagePath = /* GraphQL */ `
   subscription OnDeleteImagePath {
     onDeleteImagePath {
-      id
       key
       location
+      id
       createdAt
       updatedAt
       owner
@@ -144,15 +150,16 @@ export const onCreateOccupation = /* GraphQL */ `
       establishmentId
       name
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       createdAt
       updatedAt
+      occupationBackgroundImageId
       owner
     }
   }
@@ -164,15 +171,16 @@ export const onUpdateOccupation = /* GraphQL */ `
       establishmentId
       name
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       createdAt
       updatedAt
+      occupationBackgroundImageId
       owner
     }
   }
@@ -184,15 +192,16 @@ export const onDeleteOccupation = /* GraphQL */ `
       establishmentId
       name
       backgroundImage {
-        id
         key
         location
+        id
         createdAt
         updatedAt
         owner
       }
       createdAt
       updatedAt
+      occupationBackgroundImageId
       owner
     }
   }
@@ -281,6 +290,8 @@ export const onCreateEstablishmentTibi = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       roles
@@ -314,6 +325,8 @@ export const onUpdateEstablishmentTibi = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       roles
@@ -347,6 +360,8 @@ export const onDeleteEstablishmentTibi = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       roles
@@ -479,6 +494,8 @@ export const onCreateTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       destination {
@@ -489,10 +506,15 @@ export const onCreateTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       createdAt
       updatedAt
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       owner
     }
   }
@@ -524,6 +546,8 @@ export const onUpdateTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       destination {
@@ -534,10 +558,15 @@ export const onUpdateTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       createdAt
       updatedAt
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       owner
     }
   }
@@ -569,6 +598,8 @@ export const onDeleteTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       destination {
@@ -579,10 +610,15 @@ export const onDeleteTransaction = /* GraphQL */ `
         pendingBalance
         createdAt
         updatedAt
+        userBackgroundImageId
+        userProfileImageId
         owner
       }
       createdAt
       updatedAt
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       owner
     }
   }

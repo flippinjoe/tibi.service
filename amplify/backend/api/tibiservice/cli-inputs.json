@@ -11,6 +11,9 @@
         "mode": "API_KEY",
         "expirationTime": 365,
         "keyDescription": "default backend api key"
+      },
+      {
+        "mode": "AWS_IAM"
       }
     ],
     "conflictResolution": {},
