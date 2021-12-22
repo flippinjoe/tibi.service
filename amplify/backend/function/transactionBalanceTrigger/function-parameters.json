@@ -4,8 +4,7 @@
     "api": {
       "tibiservice": [
         "Query",
-        "Mutation",
-        "Subscription"
+        "Mutation"
       ]
     }
   }

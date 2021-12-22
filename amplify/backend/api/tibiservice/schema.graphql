@@ -5,7 +5,7 @@ type User
     { allow: owner, operations: [read, create, update, delete] }, 
     { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
     { allow: private, provider: iam, operations: [read] },
-    { allow: public, operations: [read]  }
+    { allow: public, operations: [read] }
   ]
 ) {
   id: ID!
@@ -31,19 +31,45 @@ enum EstablishmentType {
   custom
 }
 
-type ImagePath @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
+type ImagePath @model 
+@auth(
+  rules: [
+    { allow: owner, operations: [read, create, update, delete] }, 
+    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, operations: [read] }
+  ]
+) {
   key: String!
   location: ImageLocation!
 }
 
-type Occupation @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
+type Occupation 
+@model 
+@auth(
+  rules: [
+    { allow: owner, operations: [read, create, update, delete] }, 
+    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, operations: [read] }
+  ]
+) {
   id: ID!
   establishmentId: ID @index(name: "byEstablishment", sortKeyFields: ["name"])
   name: String!
   backgroundImage: ImagePath! @hasOne
 }
 
-type Establishment @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
+type Establishment 
+@model 
+@auth(
+  rules: [
+    { allow: owner, operations: [read, create, update, delete] }, 
+    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, operations: [read] }
+  ]
+) {
   id: ID!
   name: String!
   type: EstablishmentType!
@@ -53,7 +79,16 @@ type Establishment @model @auth(rules: [{allow: owner, operations: [create, upda
   occupations: [Occupation] @hasMany(indexName: "byEstablishment", fields: ["id"])
 }
 
-type EstablishmentTibi @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
+type EstablishmentTibi 
+@model 
+@auth(
+  rules: [
+    { allow: owner, operations: [read, create, update, delete] }, 
+    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, operations: [read] }
+  ]
+) {
   id: ID!
   userId: ID! @index(name: "byUser", sortKeyFields: ["establishmentId"])
   establishmentId: ID! @index(name: "byEstablishment", sortKeyFields: ["userId"])
@@ -69,7 +104,16 @@ enum PaymentType {
   crypto
 }
 
-type Wallet @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
+type Wallet 
+@model 
+@auth(
+  rules: [
+    { allow: owner, operations: [read, create, update, delete] }, 
+    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, operations: [read] }
+  ]
+) {
   id: ID!
   cryptoHash: String
   cryptoBalance: String
@@ -82,7 +126,15 @@ enum TransactionStatus {
   refunded
 }
 
-type Payment @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
+type Payment @model 
+@auth(
+  rules: [
+    { allow: owner, operations: [read, create, update, delete] }, 
+    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, operations: [read] }
+  ]
+) {
   id: ID!
   walletId: ID! @index(name: "byWallet")
   name: String
@@ -93,7 +145,16 @@ type Payment @model @auth(rules: [{allow: owner, operations: [create, update, de
   token: String
 }
 
-type Transaction @model @auth(rules: [{allow: owner, operations: [create, update, delete]}, {allow: groups, groups: ["admin"], operations: [create, update, delete]}, {allow: private, operations: [read]}]) {
+type Transaction 
+@model 
+@auth(
+  rules: [
+    { allow: owner, operations: [read, create, update, delete] }, 
+    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
+    { allow: private, provider: iam, operations: [read] },
+    { allow: public, operations: [read] }
+  ]
+) {
   id: ID!
   amount: Float
   status: TransactionStatus
