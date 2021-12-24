@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
+  subscription OnCreateUser($owner: String) {
+    onCreateUser(owner: $owner) {
       id
       firstName
       lastName
@@ -38,8 +38,8 @@ export const onCreateUser = /* GraphQL */ `
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
+  subscription OnUpdateUser($owner: String) {
+    onUpdateUser(owner: $owner) {
       id
       firstName
       lastName
@@ -73,8 +73,8 @@ export const onUpdateUser = /* GraphQL */ `
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
+  subscription OnDeleteUser($owner: String) {
+    onDeleteUser(owner: $owner) {
       id
       firstName
       lastName
@@ -108,8 +108,8 @@ export const onDeleteUser = /* GraphQL */ `
   }
 `;
 export const onCreateImagePath = /* GraphQL */ `
-  subscription OnCreateImagePath {
-    onCreateImagePath {
+  subscription OnCreateImagePath($owner: String) {
+    onCreateImagePath(owner: $owner) {
       key
       location
       id
@@ -120,8 +120,8 @@ export const onCreateImagePath = /* GraphQL */ `
   }
 `;
 export const onUpdateImagePath = /* GraphQL */ `
-  subscription OnUpdateImagePath {
-    onUpdateImagePath {
+  subscription OnUpdateImagePath($owner: String) {
+    onUpdateImagePath(owner: $owner) {
       key
       location
       id
@@ -132,8 +132,8 @@ export const onUpdateImagePath = /* GraphQL */ `
   }
 `;
 export const onDeleteImagePath = /* GraphQL */ `
-  subscription OnDeleteImagePath {
-    onDeleteImagePath {
+  subscription OnDeleteImagePath($owner: String) {
+    onDeleteImagePath(owner: $owner) {
       key
       location
       id
@@ -144,8 +144,8 @@ export const onDeleteImagePath = /* GraphQL */ `
   }
 `;
 export const onCreateOccupation = /* GraphQL */ `
-  subscription OnCreateOccupation {
-    onCreateOccupation {
+  subscription OnCreateOccupation($owner: String) {
+    onCreateOccupation(owner: $owner) {
       id
       establishmentId
       name
@@ -165,8 +165,8 @@ export const onCreateOccupation = /* GraphQL */ `
   }
 `;
 export const onUpdateOccupation = /* GraphQL */ `
-  subscription OnUpdateOccupation {
-    onUpdateOccupation {
+  subscription OnUpdateOccupation($owner: String) {
+    onUpdateOccupation(owner: $owner) {
       id
       establishmentId
       name
@@ -186,8 +186,8 @@ export const onUpdateOccupation = /* GraphQL */ `
   }
 `;
 export const onDeleteOccupation = /* GraphQL */ `
-  subscription OnDeleteOccupation {
-    onDeleteOccupation {
+  subscription OnDeleteOccupation($owner: String) {
+    onDeleteOccupation(owner: $owner) {
       id
       establishmentId
       name
@@ -207,8 +207,8 @@ export const onDeleteOccupation = /* GraphQL */ `
   }
 `;
 export const onCreateEstablishment = /* GraphQL */ `
-  subscription OnCreateEstablishment {
-    onCreateEstablishment {
+  subscription OnCreateEstablishment($owner: String) {
+    onCreateEstablishment(owner: $owner) {
       id
       name
       type
@@ -227,8 +227,8 @@ export const onCreateEstablishment = /* GraphQL */ `
   }
 `;
 export const onUpdateEstablishment = /* GraphQL */ `
-  subscription OnUpdateEstablishment {
-    onUpdateEstablishment {
+  subscription OnUpdateEstablishment($owner: String) {
+    onUpdateEstablishment(owner: $owner) {
       id
       name
       type
@@ -247,8 +247,8 @@ export const onUpdateEstablishment = /* GraphQL */ `
   }
 `;
 export const onDeleteEstablishment = /* GraphQL */ `
-  subscription OnDeleteEstablishment {
-    onDeleteEstablishment {
+  subscription OnDeleteEstablishment($owner: String) {
+    onDeleteEstablishment(owner: $owner) {
       id
       name
       type
@@ -267,8 +267,8 @@ export const onDeleteEstablishment = /* GraphQL */ `
   }
 `;
 export const onCreateEstablishmentTibi = /* GraphQL */ `
-  subscription OnCreateEstablishmentTibi {
-    onCreateEstablishmentTibi {
+  subscription OnCreateEstablishmentTibi($owner: String) {
+    onCreateEstablishmentTibi(owner: $owner) {
       id
       userId
       establishmentId
@@ -302,8 +302,8 @@ export const onCreateEstablishmentTibi = /* GraphQL */ `
   }
 `;
 export const onUpdateEstablishmentTibi = /* GraphQL */ `
-  subscription OnUpdateEstablishmentTibi {
-    onUpdateEstablishmentTibi {
+  subscription OnUpdateEstablishmentTibi($owner: String) {
+    onUpdateEstablishmentTibi(owner: $owner) {
       id
       userId
       establishmentId
@@ -337,8 +337,8 @@ export const onUpdateEstablishmentTibi = /* GraphQL */ `
   }
 `;
 export const onDeleteEstablishmentTibi = /* GraphQL */ `
-  subscription OnDeleteEstablishmentTibi {
-    onDeleteEstablishmentTibi {
+  subscription OnDeleteEstablishmentTibi($owner: String) {
+    onDeleteEstablishmentTibi(owner: $owner) {
       id
       userId
       establishmentId
@@ -372,8 +372,8 @@ export const onDeleteEstablishmentTibi = /* GraphQL */ `
   }
 `;
 export const onCreateWallet = /* GraphQL */ `
-  subscription OnCreateWallet {
-    onCreateWallet {
+  subscription OnCreateWallet($owner: String) {
+    onCreateWallet(owner: $owner) {
       id
       cryptoHash
       cryptoBalance
@@ -387,8 +387,8 @@ export const onCreateWallet = /* GraphQL */ `
   }
 `;
 export const onUpdateWallet = /* GraphQL */ `
-  subscription OnUpdateWallet {
-    onUpdateWallet {
+  subscription OnUpdateWallet($owner: String) {
+    onUpdateWallet(owner: $owner) {
       id
       cryptoHash
       cryptoBalance
@@ -402,8 +402,8 @@ export const onUpdateWallet = /* GraphQL */ `
   }
 `;
 export const onDeleteWallet = /* GraphQL */ `
-  subscription OnDeleteWallet {
-    onDeleteWallet {
+  subscription OnDeleteWallet($owner: String) {
+    onDeleteWallet(owner: $owner) {
       id
       cryptoHash
       cryptoBalance
@@ -417,8 +417,8 @@ export const onDeleteWallet = /* GraphQL */ `
   }
 `;
 export const onCreatePayment = /* GraphQL */ `
-  subscription OnCreatePayment {
-    onCreatePayment {
+  subscription OnCreatePayment($owner: String) {
+    onCreatePayment(owner: $owner) {
       id
       walletId
       name
@@ -434,8 +434,8 @@ export const onCreatePayment = /* GraphQL */ `
   }
 `;
 export const onUpdatePayment = /* GraphQL */ `
-  subscription OnUpdatePayment {
-    onUpdatePayment {
+  subscription OnUpdatePayment($owner: String) {
+    onUpdatePayment(owner: $owner) {
       id
       walletId
       name
@@ -451,8 +451,8 @@ export const onUpdatePayment = /* GraphQL */ `
   }
 `;
 export const onDeletePayment = /* GraphQL */ `
-  subscription OnDeletePayment {
-    onDeletePayment {
+  subscription OnDeletePayment($owner: String) {
+    onDeletePayment(owner: $owner) {
       id
       walletId
       name
@@ -468,8 +468,8 @@ export const onDeletePayment = /* GraphQL */ `
   }
 `;
 export const onCreateTransaction = /* GraphQL */ `
-  subscription OnCreateTransaction {
-    onCreateTransaction {
+  subscription OnCreateTransaction($owner: String) {
+    onCreateTransaction(owner: $owner) {
       id
       amount
       status
@@ -520,8 +520,8 @@ export const onCreateTransaction = /* GraphQL */ `
   }
 `;
 export const onUpdateTransaction = /* GraphQL */ `
-  subscription OnUpdateTransaction {
-    onUpdateTransaction {
+  subscription OnUpdateTransaction($owner: String) {
+    onUpdateTransaction(owner: $owner) {
       id
       amount
       status
@@ -572,8 +572,8 @@ export const onUpdateTransaction = /* GraphQL */ `
   }
 `;
 export const onDeleteTransaction = /* GraphQL */ `
-  subscription OnDeleteTransaction {
-    onDeleteTransaction {
+  subscription OnDeleteTransaction($owner: String) {
+    onDeleteTransaction(owner: $owner) {
       id
       amount
       status

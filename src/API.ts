@@ -1828,6 +1828,10 @@ export type ListTransactionsQuery = {
   } | null,
 };
 
+export type OnCreateUserSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnCreateUserSubscription = {
   onCreateUser?:  {
     __typename: "User",
@@ -1864,6 +1868,10 @@ export type OnCreateUserSubscription = {
     userProfileImageId?: string | null,
     owner?: string | null,
   } | null,
+};
+
+export type OnUpdateUserSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdateUserSubscription = {
@@ -1904,6 +1912,10 @@ export type OnUpdateUserSubscription = {
   } | null,
 };
 
+export type OnDeleteUserSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnDeleteUserSubscription = {
   onDeleteUser?:  {
     __typename: "User",
@@ -1942,6 +1954,10 @@ export type OnDeleteUserSubscription = {
   } | null,
 };
 
+export type OnCreateImagePathSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnCreateImagePathSubscription = {
   onCreateImagePath?:  {
     __typename: "ImagePath",
@@ -1952,6 +1968,10 @@ export type OnCreateImagePathSubscription = {
     updatedAt: string,
     owner?: string | null,
   } | null,
+};
+
+export type OnUpdateImagePathSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdateImagePathSubscription = {
@@ -1966,6 +1986,10 @@ export type OnUpdateImagePathSubscription = {
   } | null,
 };
 
+export type OnDeleteImagePathSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnDeleteImagePathSubscription = {
   onDeleteImagePath?:  {
     __typename: "ImagePath",
@@ -1976,6 +2000,10 @@ export type OnDeleteImagePathSubscription = {
     updatedAt: string,
     owner?: string | null,
   } | null,
+};
+
+export type OnCreateOccupationSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreateOccupationSubscription = {
@@ -2000,6 +2028,10 @@ export type OnCreateOccupationSubscription = {
   } | null,
 };
 
+export type OnUpdateOccupationSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnUpdateOccupationSubscription = {
   onUpdateOccupation?:  {
     __typename: "Occupation",
@@ -2020,6 +2052,10 @@ export type OnUpdateOccupationSubscription = {
     occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
+};
+
+export type OnDeleteOccupationSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnDeleteOccupationSubscription = {
@@ -2044,6 +2080,10 @@ export type OnDeleteOccupationSubscription = {
   } | null,
 };
 
+export type OnCreateEstablishmentSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnCreateEstablishmentSubscription = {
   onCreateEstablishment?:  {
     __typename: "Establishment",
@@ -2064,6 +2104,10 @@ export type OnCreateEstablishmentSubscription = {
     updatedAt: string,
     owner?: string | null,
   } | null,
+};
+
+export type OnUpdateEstablishmentSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdateEstablishmentSubscription = {
@@ -2088,6 +2132,10 @@ export type OnUpdateEstablishmentSubscription = {
   } | null,
 };
 
+export type OnDeleteEstablishmentSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnDeleteEstablishmentSubscription = {
   onDeleteEstablishment?:  {
     __typename: "Establishment",
@@ -2108,6 +2156,10 @@ export type OnDeleteEstablishmentSubscription = {
     updatedAt: string,
     owner?: string | null,
   } | null,
+};
+
+export type OnCreateEstablishmentTibiSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreateEstablishmentTibiSubscription = {
@@ -2147,6 +2199,10 @@ export type OnCreateEstablishmentTibiSubscription = {
   } | null,
 };
 
+export type OnUpdateEstablishmentTibiSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnUpdateEstablishmentTibiSubscription = {
   onUpdateEstablishmentTibi?:  {
     __typename: "EstablishmentTibi",
@@ -2182,6 +2238,10 @@ export type OnUpdateEstablishmentTibiSubscription = {
     updatedAt: string,
     owner?: string | null,
   } | null,
+};
+
+export type OnDeleteEstablishmentTibiSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnDeleteEstablishmentTibiSubscription = {
@@ -2221,6 +2281,10 @@ export type OnDeleteEstablishmentTibiSubscription = {
   } | null,
 };
 
+export type OnCreateWalletSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnCreateWalletSubscription = {
   onCreateWallet?:  {
     __typename: "Wallet",
@@ -2235,6 +2299,10 @@ export type OnCreateWalletSubscription = {
     updatedAt: string,
     owner?: string | null,
   } | null,
+};
+
+export type OnUpdateWalletSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnUpdateWalletSubscription = {
@@ -2253,6 +2321,10 @@ export type OnUpdateWalletSubscription = {
   } | null,
 };
 
+export type OnDeleteWalletSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnDeleteWalletSubscription = {
   onDeleteWallet?:  {
     __typename: "Wallet",
@@ -2267,6 +2339,10 @@ export type OnDeleteWalletSubscription = {
     updatedAt: string,
     owner?: string | null,
   } | null,
+};
+
+export type OnCreatePaymentSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreatePaymentSubscription = {
@@ -2286,6 +2362,10 @@ export type OnCreatePaymentSubscription = {
   } | null,
 };
 
+export type OnUpdatePaymentSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnUpdatePaymentSubscription = {
   onUpdatePayment?:  {
     __typename: "Payment",
@@ -2303,6 +2383,10 @@ export type OnUpdatePaymentSubscription = {
   } | null,
 };
 
+export type OnDeletePaymentSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnDeletePaymentSubscription = {
   onDeletePayment?:  {
     __typename: "Payment",
@@ -2318,6 +2402,10 @@ export type OnDeletePaymentSubscription = {
     updatedAt: string,
     owner?: string | null,
   } | null,
+};
+
+export type OnCreateTransactionSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnCreateTransactionSubscription = {
@@ -2375,6 +2463,10 @@ export type OnCreateTransactionSubscription = {
   } | null,
 };
 
+export type OnUpdateTransactionSubscriptionVariables = {
+  owner?: string | null,
+};
+
 export type OnUpdateTransactionSubscription = {
   onUpdateTransaction?:  {
     __typename: "Transaction",
@@ -2428,6 +2520,10 @@ export type OnUpdateTransactionSubscription = {
     transactionDestinationId: string,
     owner?: string | null,
   } | null,
+};
+
+export type OnDeleteTransactionSubscriptionVariables = {
+  owner?: string | null,
 };
 
 export type OnDeleteTransactionSubscription = {
