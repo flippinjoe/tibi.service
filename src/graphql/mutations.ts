@@ -13,6 +13,7 @@ export const createUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
+      tippingActive
       backgroundImage {
         key
         location
@@ -51,6 +52,7 @@ export const updateUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
+      tippingActive
       backgroundImage {
         key
         location
@@ -89,6 +91,7 @@ export const deleteUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
+      tippingActive
       backgroundImage {
         key
         location
@@ -327,6 +330,7 @@ export const createEstablishmentTibi = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -365,6 +369,7 @@ export const updateEstablishmentTibi = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -403,6 +408,7 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -539,6 +545,9 @@ export const createTransaction = /* GraphQL */ `
       id
       amount
       status
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       payment {
         id
         walletId
@@ -558,6 +567,7 @@ export const createTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -570,6 +580,7 @@ export const createTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -578,9 +589,6 @@ export const createTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      transactionPaymentId
-      transactionSourceId
-      transactionDestinationId
       owner
     }
   }
@@ -594,6 +602,9 @@ export const updateTransaction = /* GraphQL */ `
       id
       amount
       status
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       payment {
         id
         walletId
@@ -613,6 +624,7 @@ export const updateTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -625,6 +637,7 @@ export const updateTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -633,9 +646,6 @@ export const updateTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      transactionPaymentId
-      transactionSourceId
-      transactionDestinationId
       owner
     }
   }
@@ -649,6 +659,9 @@ export const deleteTransaction = /* GraphQL */ `
       id
       amount
       status
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       payment {
         id
         walletId
@@ -668,6 +681,7 @@ export const deleteTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -680,6 +694,7 @@ export const deleteTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -688,9 +703,6 @@ export const deleteTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      transactionPaymentId
-      transactionSourceId
-      transactionDestinationId
       owner
     }
   }

@@ -10,6 +10,7 @@ export const onCreateUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
+      tippingActive
       backgroundImage {
         key
         location
@@ -45,6 +46,7 @@ export const onUpdateUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
+      tippingActive
       backgroundImage {
         key
         location
@@ -80,6 +82,7 @@ export const onDeleteUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
+      tippingActive
       backgroundImage {
         key
         location
@@ -288,6 +291,7 @@ export const onCreateEstablishmentTibi = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -323,6 +327,7 @@ export const onUpdateEstablishmentTibi = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -358,6 +363,7 @@ export const onDeleteEstablishmentTibi = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -473,6 +479,9 @@ export const onCreateTransaction = /* GraphQL */ `
       id
       amount
       status
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       payment {
         id
         walletId
@@ -492,6 +501,7 @@ export const onCreateTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -504,6 +514,7 @@ export const onCreateTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -512,9 +523,6 @@ export const onCreateTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      transactionPaymentId
-      transactionSourceId
-      transactionDestinationId
       owner
     }
   }
@@ -525,6 +533,9 @@ export const onUpdateTransaction = /* GraphQL */ `
       id
       amount
       status
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       payment {
         id
         walletId
@@ -544,6 +555,7 @@ export const onUpdateTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -556,6 +568,7 @@ export const onUpdateTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -564,9 +577,6 @@ export const onUpdateTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      transactionPaymentId
-      transactionSourceId
-      transactionDestinationId
       owner
     }
   }
@@ -577,6 +587,9 @@ export const onDeleteTransaction = /* GraphQL */ `
       id
       amount
       status
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       payment {
         id
         walletId
@@ -596,6 +609,7 @@ export const onDeleteTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -608,6 +622,7 @@ export const onDeleteTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -616,9 +631,6 @@ export const onDeleteTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      transactionPaymentId
-      transactionSourceId
-      transactionDestinationId
       owner
     }
   }

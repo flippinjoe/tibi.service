@@ -10,6 +10,7 @@ export const getUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
+      tippingActive
       backgroundImage {
         key
         location
@@ -50,6 +51,7 @@ export const listUsers = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -195,6 +197,7 @@ export const getEstablishmentTibi = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -215,6 +218,34 @@ export const listEstablishmentTibis = /* GraphQL */ `
     $nextToken: String
   ) {
     listEstablishmentTibis(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userId
+        establishmentId
+        roles
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const usersByEstablishment = /* GraphQL */ `
+  query UsersByEstablishment(
+    $establishmentId: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelEstablishmentTibiFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    usersByEstablishment(
+      establishmentId: $establishmentId
+      sortDirection: $sortDirection
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -313,6 +344,9 @@ export const getTransaction = /* GraphQL */ `
       id
       amount
       status
+      transactionPaymentId
+      transactionSourceId
+      transactionDestinationId
       payment {
         id
         walletId
@@ -332,6 +366,7 @@ export const getTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -344,6 +379,7 @@ export const getTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        tippingActive
         createdAt
         updatedAt
         userBackgroundImageId
@@ -352,9 +388,6 @@ export const getTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      transactionPaymentId
-      transactionSourceId
-      transactionDestinationId
       owner
     }
   }
@@ -370,11 +403,11 @@ export const listTransactions = /* GraphQL */ `
         id
         amount
         status
-        createdAt
-        updatedAt
         transactionPaymentId
         transactionSourceId
         transactionDestinationId
+        createdAt
+        updatedAt
         owner
       }
       nextToken

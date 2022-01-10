@@ -8,6 +8,7 @@ export type CreateUserInput = {
   lastName: string,
   availableBalance?: number | null,
   pendingBalance?: number | null,
+  tippingActive?: boolean | null,
   userBackgroundImageId?: string | null,
   userProfileImageId?: string | null,
 };
@@ -17,6 +18,7 @@ export type ModelUserConditionInput = {
   lastName?: ModelStringInput | null,
   availableBalance?: ModelFloatInput | null,
   pendingBalance?: ModelFloatInput | null,
+  tippingActive?: ModelBooleanInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -76,6 +78,13 @@ export type ModelFloatInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type ModelIDInput = {
   ne?: string | null,
   eq?: string | null,
@@ -99,6 +108,7 @@ export type User = {
   lastName: string,
   availableBalance?: number | null,
   pendingBalance?: number | null,
+  tippingActive?: boolean | null,
   backgroundImage?: ImagePath | null,
   profileImage?: ImagePath | null,
   establishments?: ModelEstablishmentTibiConnection | null,
@@ -190,6 +200,7 @@ export type UpdateUserInput = {
   lastName?: string | null,
   availableBalance?: number | null,
   pendingBalance?: number | null,
+  tippingActive?: boolean | null,
   userBackgroundImageId?: string | null,
   userProfileImageId?: string | null,
 };
@@ -403,13 +414,6 @@ export type ModelPaymentConditionInput = {
   not?: ModelPaymentConditionInput | null,
 };
 
-export type ModelBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
 export type ModelPaymentTypeInput = {
   eq?: PaymentType | null,
   ne?: PaymentType | null,
@@ -449,12 +453,12 @@ export enum TransactionStatus {
 export type ModelTransactionConditionInput = {
   amount?: ModelFloatInput | null,
   status?: ModelTransactionStatusInput | null,
-  and?: Array< ModelTransactionConditionInput | null > | null,
-  or?: Array< ModelTransactionConditionInput | null > | null,
-  not?: ModelTransactionConditionInput | null,
   transactionPaymentId?: ModelIDInput | null,
   transactionSourceId?: ModelIDInput | null,
   transactionDestinationId?: ModelIDInput | null,
+  and?: Array< ModelTransactionConditionInput | null > | null,
+  or?: Array< ModelTransactionConditionInput | null > | null,
+  not?: ModelTransactionConditionInput | null,
 };
 
 export type ModelTransactionStatusInput = {
@@ -467,14 +471,14 @@ export type Transaction = {
   id: string,
   amount?: number | null,
   status?: TransactionStatus | null,
+  transactionPaymentId: string,
+  transactionSourceId: string,
+  transactionDestinationId: string,
   payment: Payment,
   source: User,
   destination: User,
   createdAt: string,
   updatedAt: string,
-  transactionPaymentId: string,
-  transactionSourceId: string,
-  transactionDestinationId: string,
   owner?: string | null,
 };
 
@@ -497,6 +501,7 @@ export type ModelUserFilterInput = {
   lastName?: ModelStringInput | null,
   availableBalance?: ModelFloatInput | null,
   pendingBalance?: ModelFloatInput | null,
+  tippingActive?: ModelBooleanInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -561,6 +566,12 @@ export type ModelEstablishmentTibiFilterInput = {
   not?: ModelEstablishmentTibiFilterInput | null,
 };
 
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelWalletFilterInput = {
   id?: ModelIDInput | null,
   cryptoHash?: ModelStringInput | null,
@@ -594,12 +605,12 @@ export type ModelTransactionFilterInput = {
   id?: ModelIDInput | null,
   amount?: ModelFloatInput | null,
   status?: ModelTransactionStatusInput | null,
-  and?: Array< ModelTransactionFilterInput | null > | null,
-  or?: Array< ModelTransactionFilterInput | null > | null,
-  not?: ModelTransactionFilterInput | null,
   transactionPaymentId?: ModelIDInput | null,
   transactionSourceId?: ModelIDInput | null,
   transactionDestinationId?: ModelIDInput | null,
+  and?: Array< ModelTransactionFilterInput | null > | null,
+  or?: Array< ModelTransactionFilterInput | null > | null,
+  not?: ModelTransactionFilterInput | null,
 };
 
 export type ModelTransactionConnection = {
@@ -621,6 +632,7 @@ export type CreateUserMutation = {
     lastName: string,
     availableBalance?: number | null,
     pendingBalance?: number | null,
+    tippingActive?: boolean | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       key: string,
@@ -664,6 +676,7 @@ export type UpdateUserMutation = {
     lastName: string,
     availableBalance?: number | null,
     pendingBalance?: number | null,
+    tippingActive?: boolean | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       key: string,
@@ -707,6 +720,7 @@ export type DeleteUserMutation = {
     lastName: string,
     availableBalance?: number | null,
     pendingBalance?: number | null,
+    tippingActive?: boolean | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       key: string,
@@ -979,6 +993,7 @@ export type CreateEstablishmentTibiMutation = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1021,6 +1036,7 @@ export type UpdateEstablishmentTibiMutation = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1063,6 +1079,7 @@ export type DeleteEstablishmentTibiMutation = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1216,6 +1233,9 @@ export type CreateTransactionMutation = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -1237,6 +1257,7 @@ export type CreateTransactionMutation = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1250,6 +1271,7 @@ export type CreateTransactionMutation = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1258,9 +1280,6 @@ export type CreateTransactionMutation = {
     },
     createdAt: string,
     updatedAt: string,
-    transactionPaymentId: string,
-    transactionSourceId: string,
-    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };
@@ -1276,6 +1295,9 @@ export type UpdateTransactionMutation = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -1297,6 +1319,7 @@ export type UpdateTransactionMutation = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1310,6 +1333,7 @@ export type UpdateTransactionMutation = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1318,9 +1342,6 @@ export type UpdateTransactionMutation = {
     },
     createdAt: string,
     updatedAt: string,
-    transactionPaymentId: string,
-    transactionSourceId: string,
-    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };
@@ -1336,6 +1357,9 @@ export type DeleteTransactionMutation = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -1357,6 +1381,7 @@ export type DeleteTransactionMutation = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1370,6 +1395,7 @@ export type DeleteTransactionMutation = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1378,9 +1404,6 @@ export type DeleteTransactionMutation = {
     },
     createdAt: string,
     updatedAt: string,
-    transactionPaymentId: string,
-    transactionSourceId: string,
-    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };
@@ -1397,6 +1420,7 @@ export type GetUserQuery = {
     lastName: string,
     availableBalance?: number | null,
     pendingBalance?: number | null,
+    tippingActive?: boolean | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       key: string,
@@ -1443,6 +1467,7 @@ export type ListUsersQuery = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1618,6 +1643,7 @@ export type GetEstablishmentTibiQuery = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1639,6 +1665,31 @@ export type ListEstablishmentTibisQueryVariables = {
 
 export type ListEstablishmentTibisQuery = {
   listEstablishmentTibis?:  {
+    __typename: "ModelEstablishmentTibiConnection",
+    items:  Array< {
+      __typename: "EstablishmentTibi",
+      id: string,
+      userId: string,
+      establishmentId: string,
+      roles: Array< string | null >,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type UsersByEstablishmentQueryVariables = {
+  establishmentId?: string | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelEstablishmentTibiFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type UsersByEstablishmentQuery = {
+  usersByEstablishment?:  {
     __typename: "ModelEstablishmentTibiConnection",
     items:  Array< {
       __typename: "EstablishmentTibi",
@@ -1754,6 +1805,9 @@ export type GetTransactionQuery = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -1775,6 +1829,7 @@ export type GetTransactionQuery = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1788,6 +1843,7 @@ export type GetTransactionQuery = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -1796,9 +1852,6 @@ export type GetTransactionQuery = {
     },
     createdAt: string,
     updatedAt: string,
-    transactionPaymentId: string,
-    transactionSourceId: string,
-    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };
@@ -1817,11 +1870,11 @@ export type ListTransactionsQuery = {
       id: string,
       amount?: number | null,
       status?: TransactionStatus | null,
-      createdAt: string,
-      updatedAt: string,
       transactionPaymentId: string,
       transactionSourceId: string,
       transactionDestinationId: string,
+      createdAt: string,
+      updatedAt: string,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
@@ -1840,6 +1893,7 @@ export type OnCreateUserSubscription = {
     lastName: string,
     availableBalance?: number | null,
     pendingBalance?: number | null,
+    tippingActive?: boolean | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       key: string,
@@ -1882,6 +1936,7 @@ export type OnUpdateUserSubscription = {
     lastName: string,
     availableBalance?: number | null,
     pendingBalance?: number | null,
+    tippingActive?: boolean | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       key: string,
@@ -1924,6 +1979,7 @@ export type OnDeleteUserSubscription = {
     lastName: string,
     availableBalance?: number | null,
     pendingBalance?: number | null,
+    tippingActive?: boolean | null,
     backgroundImage?:  {
       __typename: "ImagePath",
       key: string,
@@ -2186,6 +2242,7 @@ export type OnCreateEstablishmentTibiSubscription = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -2227,6 +2284,7 @@ export type OnUpdateEstablishmentTibiSubscription = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -2268,6 +2326,7 @@ export type OnDeleteEstablishmentTibiSubscription = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -2414,6 +2473,9 @@ export type OnCreateTransactionSubscription = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -2435,6 +2497,7 @@ export type OnCreateTransactionSubscription = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -2448,6 +2511,7 @@ export type OnCreateTransactionSubscription = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -2456,9 +2520,6 @@ export type OnCreateTransactionSubscription = {
     },
     createdAt: string,
     updatedAt: string,
-    transactionPaymentId: string,
-    transactionSourceId: string,
-    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };
@@ -2473,6 +2534,9 @@ export type OnUpdateTransactionSubscription = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -2494,6 +2558,7 @@ export type OnUpdateTransactionSubscription = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -2507,6 +2572,7 @@ export type OnUpdateTransactionSubscription = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -2515,9 +2581,6 @@ export type OnUpdateTransactionSubscription = {
     },
     createdAt: string,
     updatedAt: string,
-    transactionPaymentId: string,
-    transactionSourceId: string,
-    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };
@@ -2532,6 +2595,9 @@ export type OnDeleteTransactionSubscription = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    transactionPaymentId: string,
+    transactionSourceId: string,
+    transactionDestinationId: string,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -2553,6 +2619,7 @@ export type OnDeleteTransactionSubscription = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -2566,6 +2633,7 @@ export type OnDeleteTransactionSubscription = {
       lastName: string,
       availableBalance?: number | null,
       pendingBalance?: number | null,
+      tippingActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
       userBackgroundImageId?: string | null,
@@ -2574,9 +2642,6 @@ export type OnDeleteTransactionSubscription = {
     },
     createdAt: string,
     updatedAt: string,
-    transactionPaymentId: string,
-    transactionSourceId: string,
-    transactionDestinationId: string,
     owner?: string | null,
   } | null,
 };

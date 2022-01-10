@@ -1,10 +1,14 @@
+
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }
+
+
 type User 
 @model 
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
     { allow: groups, groups: ["admin"], operations: [create, update, delete] },
-    { allow: private, provider: iam, operations: [read, update] },
+    { allow: private, operations: [read, create] },
 
     ## TODO: We want to remove this, but currently the lambda permissions hate us
     { allow: public, operations: [read, update] }
@@ -15,8 +19,10 @@ type User
   lastName: String!
   availableBalance: Float
   pendingBalance: Float
-  backgroundImage: ImagePath @hasOne
 
+  tippingActive: Boolean
+
+  backgroundImage: ImagePath @hasOne
   profileImage: ImagePath @hasOne
   establishments: [EstablishmentTibi] @hasMany(indexName: "byUser", fields: ["id"])
 }
@@ -86,16 +92,17 @@ type EstablishmentTibi
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
-    { allow: groups, groups: ["admin"], operations: [create, update, delete] }, 
-    { allow: private, operations: [read] },
-    { allow: public, operations: [read] }
+    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] },
+    { allow: private, operations: [read, create] },
+    { allow: public, operations: [read, create] }
   ]
 ) {
   id: ID!
   userId: ID! @index(name: "byUser", sortKeyFields: ["establishmentId"])
-  establishmentId: ID! @index(name: "byEstablishment", sortKeyFields: ["userId"])
+  establishmentId: ID! @index(name: "byEstablishment", queryField: "usersByEstablishment")
   establishment: Establishment! @belongsTo(fields: ["establishmentId"])
   user: User! @belongsTo(fields: ["userId"])
+
   roles: [String]!
 }
 
@@ -131,10 +138,10 @@ enum TransactionStatus {
 type Payment @model 
 @auth(
   rules: [
-    { allow: owner, operations: [read, create, update, delete] }, 
-    { allow: groups, groups: ["admin"], operations: [create, update, delete] }, 
-    { allow: private, operations: [read] },
-    { allow: public, operations: [read] }
+    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
+    { allow: private, operations: [read, create] },
+    { allow: public, operations: [read, create] },
+    { allow: owner }
   ]
 ) {
   id: ID!
@@ -151,16 +158,21 @@ type Transaction
 @model 
 @auth(
   rules: [
-    { allow: owner, operations: [read, create, update, delete] }, 
-    { allow: groups, groups: ["admin"], operations: [create, update, delete] }, 
-    { allow: private, operations: [read] },
-    { allow: public, operations: [read] }
+    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
+    { allow: private, operations: [read, create] },
+    { allow: public, operations: [read, create] },
+    { allow: owner }
   ]
 ) {
   id: ID!
   amount: Float
   status: TransactionStatus
-  payment: Payment! @hasOne
-  source: User! @hasOne
-  destination: User! @hasOne
+
+  transactionPaymentId: ID!
+  transactionSourceId: ID!
+  transactionDestinationId: ID!
+
+  payment: Payment! @hasOne(fields: ["transactionPaymentId"])
+  source: User! @hasOne(fields: ["transactionSourceId"])
+  destination: User! @hasOne(fields: ["transactionDestinationId"])
 }
