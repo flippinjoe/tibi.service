@@ -139,7 +139,7 @@ export enum ImageLocation {
 
 export type ModelEstablishmentTibiConnection = {
   __typename: "ModelEstablishmentTibiConnection",
-  items:  Array<EstablishmentTibi | null >,
+  items:  Array<EstablishmentTibi >,
   nextToken?: string | null,
 };
 
@@ -178,7 +178,7 @@ export enum EstablishmentType {
 
 export type ModelOccupationConnection = {
   __typename: "ModelOccupationConnection",
-  items:  Array<Occupation | null >,
+  items:  Array<Occupation >,
   nextToken?: string | null,
 };
 
@@ -353,7 +353,7 @@ export type Wallet = {
 
 export type ModelPaymentConnection = {
   __typename: "ModelPaymentConnection",
-  items:  Array<Payment | null >,
+  items:  Array<Payment >,
   nextToken?: string | null,
 };
 
@@ -511,7 +511,7 @@ export type ModelUserFilterInput = {
 
 export type ModelUserConnection = {
   __typename: "ModelUserConnection",
-  items:  Array<User | null >,
+  items:  Array<User >,
   nextToken?: string | null,
 };
 
@@ -525,7 +525,7 @@ export type ModelImagePathFilterInput = {
 
 export type ModelImagePathConnection = {
   __typename: "ModelImagePathConnection",
-  items:  Array<ImagePath | null >,
+  items:  Array<ImagePath >,
   nextToken?: string | null,
 };
 
@@ -552,7 +552,7 @@ export type ModelEstablishmentFilterInput = {
 
 export type ModelEstablishmentConnection = {
   __typename: "ModelEstablishmentConnection",
-  items:  Array<Establishment | null >,
+  items:  Array<Establishment >,
   nextToken?: string | null,
 };
 
@@ -583,7 +583,7 @@ export type ModelWalletFilterInput = {
 
 export type ModelWalletConnection = {
   __typename: "ModelWalletConnection",
-  items:  Array<Wallet | null >,
+  items:  Array<Wallet >,
   nextToken?: string | null,
 };
 
@@ -615,7 +615,7 @@ export type ModelTransactionFilterInput = {
 
 export type ModelTransactionConnection = {
   __typename: "ModelTransactionConnection",
-  items:  Array<Transaction | null >,
+  items:  Array<Transaction >,
   nextToken?: string | null,
 };
 
@@ -1473,7 +1473,7 @@ export type ListUsersQuery = {
       userBackgroundImageId?: string | null,
       userProfileImageId?: string | null,
       owner?: string | null,
-    } | null >,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -1511,7 +1511,7 @@ export type ListImagePathsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null >,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -1560,7 +1560,7 @@ export type ListOccupationsQuery = {
       updatedAt: string,
       occupationBackgroundImageId: string,
       owner?: string | null,
-    } | null >,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -1610,7 +1610,7 @@ export type ListEstablishmentsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null >,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -1675,7 +1675,7 @@ export type ListEstablishmentTibisQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null >,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -1700,7 +1700,7 @@ export type UsersByEstablishmentQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null >,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -1742,7 +1742,7 @@ export type ListWalletsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null >,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -1790,7 +1790,7 @@ export type ListPaymentsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null >,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -1876,7 +1876,7 @@ export type ListTransactionsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null >,
+    } >,
     nextToken?: string | null,
   } | null,
 };
