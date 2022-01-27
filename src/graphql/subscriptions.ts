@@ -423,8 +423,8 @@ export const onDeleteWallet = /* GraphQL */ `
   }
 `;
 export const onCreatePayment = /* GraphQL */ `
-  subscription OnCreatePayment($owner: String) {
-    onCreatePayment(owner: $owner) {
+  subscription OnCreatePayment {
+    onCreatePayment {
       id
       walletId
       name
@@ -435,13 +435,12 @@ export const onCreatePayment = /* GraphQL */ `
       token
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdatePayment = /* GraphQL */ `
-  subscription OnUpdatePayment($owner: String) {
-    onUpdatePayment(owner: $owner) {
+  subscription OnUpdatePayment {
+    onUpdatePayment {
       id
       walletId
       name
@@ -452,13 +451,12 @@ export const onUpdatePayment = /* GraphQL */ `
       token
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeletePayment = /* GraphQL */ `
-  subscription OnDeletePayment($owner: String) {
-    onDeletePayment(owner: $owner) {
+  subscription OnDeletePayment {
+    onDeletePayment {
       id
       walletId
       name
@@ -469,13 +467,12 @@ export const onDeletePayment = /* GraphQL */ `
       token
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onCreateTransaction = /* GraphQL */ `
-  subscription OnCreateTransaction($owner: String) {
-    onCreateTransaction(owner: $owner) {
+  subscription OnCreateTransaction {
+    onCreateTransaction {
       id
       amount
       status
@@ -493,7 +490,6 @@ export const onCreateTransaction = /* GraphQL */ `
         token
         createdAt
         updatedAt
-        owner
       }
       source {
         id
@@ -523,13 +519,12 @@ export const onCreateTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateTransaction = /* GraphQL */ `
-  subscription OnUpdateTransaction($owner: String) {
-    onUpdateTransaction(owner: $owner) {
+  subscription OnUpdateTransaction {
+    onUpdateTransaction {
       id
       amount
       status
@@ -547,7 +542,6 @@ export const onUpdateTransaction = /* GraphQL */ `
         token
         createdAt
         updatedAt
-        owner
       }
       source {
         id
@@ -577,13 +571,12 @@ export const onUpdateTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteTransaction = /* GraphQL */ `
-  subscription OnDeleteTransaction($owner: String) {
-    onDeleteTransaction(owner: $owner) {
+  subscription OnDeleteTransaction {
+    onDeleteTransaction {
       id
       amount
       status
@@ -601,7 +594,6 @@ export const onDeleteTransaction = /* GraphQL */ `
         token
         createdAt
         updatedAt
-        owner
       }
       source {
         id
@@ -631,7 +623,6 @@ export const onDeleteTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;

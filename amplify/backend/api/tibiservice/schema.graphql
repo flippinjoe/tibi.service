@@ -138,10 +138,11 @@ enum TransactionStatus {
 type Payment @model 
 @auth(
   rules: [
-    { allow: groups, groups: ["admin"], operations: [read, create, update, delete] }, 
     { allow: private, operations: [read, create, update, delete] },
-    { allow: public, operations: [read, create] },
-    { allow: owner }
+    { allow: private, provider: iam, operations: [read, create, update, delete] }
+
+    ## TODO: We want to remove this, but currently the lambda permissions hate us
+    { allow: public, operations: [read, update] }
   ]
 ) {
   id: ID!
@@ -158,9 +159,8 @@ type Transaction
 @model 
 @auth(
   rules: [
-    { allow: owner, operations: [read, create, update, delete] }, 
-    { allow: groups, groups: ["admin"], operations: [create, update, delete] },
     { allow: private, operations: [read, create, update, delete] },
+    { allow: private, provider: iam, operations: [read, create, update, delete] }
 
     ## TODO: We want to remove this, but currently the lambda permissions hate us
     { allow: public, operations: [read, update] }

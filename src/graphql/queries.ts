@@ -310,7 +310,6 @@ export const getPayment = /* GraphQL */ `
       token
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -332,7 +331,6 @@ export const listPayments = /* GraphQL */ `
         token
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -358,7 +356,6 @@ export const getTransaction = /* GraphQL */ `
         token
         createdAt
         updatedAt
-        owner
       }
       source {
         id
@@ -388,7 +385,6 @@ export const getTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -408,7 +404,6 @@ export const listTransactions = /* GraphQL */ `
         transactionDestinationId
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }

@@ -492,7 +492,6 @@ export const createPayment = /* GraphQL */ `
       token
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -512,7 +511,6 @@ export const updatePayment = /* GraphQL */ `
       token
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -532,7 +530,6 @@ export const deletePayment = /* GraphQL */ `
       token
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -559,7 +556,6 @@ export const createTransaction = /* GraphQL */ `
         token
         createdAt
         updatedAt
-        owner
       }
       source {
         id
@@ -589,7 +585,6 @@ export const createTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -616,7 +611,6 @@ export const updateTransaction = /* GraphQL */ `
         token
         createdAt
         updatedAt
-        owner
       }
       source {
         id
@@ -646,7 +640,6 @@ export const updateTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -673,7 +666,6 @@ export const deleteTransaction = /* GraphQL */ `
         token
         createdAt
         updatedAt
-        owner
       }
       source {
         id
@@ -703,7 +695,6 @@ export const deleteTransaction = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;

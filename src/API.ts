@@ -370,7 +370,6 @@ export type Payment = {
   token?: string | null,
   createdAt: string,
   updatedAt: string,
-  owner?: string | null,
 };
 
 export enum PaymentType {
@@ -480,7 +479,6 @@ export type Transaction = {
   destination: User,
   createdAt: string,
   updatedAt: string,
-  owner?: string | null,
 };
 
 export type UpdateTransactionInput = {
@@ -1175,7 +1173,6 @@ export type CreatePaymentMutation = {
     token?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1197,7 +1194,6 @@ export type UpdatePaymentMutation = {
     token?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1219,7 +1215,6 @@ export type DeletePaymentMutation = {
     token?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1249,7 +1244,6 @@ export type CreateTransactionMutation = {
       token?: string | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     source:  {
       __typename: "User",
@@ -1281,7 +1275,6 @@ export type CreateTransactionMutation = {
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1311,7 +1304,6 @@ export type UpdateTransactionMutation = {
       token?: string | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     source:  {
       __typename: "User",
@@ -1343,7 +1335,6 @@ export type UpdateTransactionMutation = {
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1373,7 +1364,6 @@ export type DeleteTransactionMutation = {
       token?: string | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     source:  {
       __typename: "User",
@@ -1405,7 +1395,6 @@ export type DeleteTransactionMutation = {
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1765,7 +1754,6 @@ export type GetPaymentQuery = {
     token?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1790,7 +1778,6 @@ export type ListPaymentsQuery = {
       token?: string | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1821,7 +1808,6 @@ export type GetTransactionQuery = {
       token?: string | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     source:  {
       __typename: "User",
@@ -1853,7 +1839,6 @@ export type GetTransactionQuery = {
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1876,7 +1861,6 @@ export type ListTransactionsQuery = {
       transactionDestinationId: string,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -2401,10 +2385,6 @@ export type OnDeleteWalletSubscription = {
   } | null,
 };
 
-export type OnCreatePaymentSubscriptionVariables = {
-  owner?: string | null,
-};
-
 export type OnCreatePaymentSubscription = {
   onCreatePayment?:  {
     __typename: "Payment",
@@ -2418,12 +2398,7 @@ export type OnCreatePaymentSubscription = {
     token?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnUpdatePaymentSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnUpdatePaymentSubscription = {
@@ -2439,12 +2414,7 @@ export type OnUpdatePaymentSubscription = {
     token?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnDeletePaymentSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnDeletePaymentSubscription = {
@@ -2460,12 +2430,7 @@ export type OnDeletePaymentSubscription = {
     token?: string | null,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnCreateTransactionSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnCreateTransactionSubscription = {
@@ -2489,7 +2454,6 @@ export type OnCreateTransactionSubscription = {
       token?: string | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     source:  {
       __typename: "User",
@@ -2521,12 +2485,7 @@ export type OnCreateTransactionSubscription = {
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnUpdateTransactionSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnUpdateTransactionSubscription = {
@@ -2550,7 +2509,6 @@ export type OnUpdateTransactionSubscription = {
       token?: string | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     source:  {
       __typename: "User",
@@ -2582,12 +2540,7 @@ export type OnUpdateTransactionSubscription = {
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
-};
-
-export type OnDeleteTransactionSubscriptionVariables = {
-  owner?: string | null,
 };
 
 export type OnDeleteTransactionSubscription = {
@@ -2611,7 +2564,6 @@ export type OnDeleteTransactionSubscription = {
       token?: string | null,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     },
     source:  {
       __typename: "User",
@@ -2643,6 +2595,5 @@ export type OnDeleteTransactionSubscription = {
     },
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
