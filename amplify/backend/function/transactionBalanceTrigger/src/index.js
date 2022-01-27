@@ -109,6 +109,32 @@ const updateUserAvailableBalance = async (user, availableBalance) => {
       firstName
       lastName
       availableBalance
+      pendingBalance
+      tippingActive
+      backgroundImage {
+        key
+        location
+        id
+        createdAt
+        updatedAt
+        owner
+      }
+      profileImage {
+        key
+        location
+        id
+        createdAt
+        updatedAt
+        owner
+      }
+      establishments {
+        nextToken
+      }
+      createdAt
+      updatedAt
+      userBackgroundImageId
+      userProfileImageId
+      owner
     }
   }
   `
