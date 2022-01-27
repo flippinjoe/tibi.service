@@ -237,7 +237,7 @@ export const listEstablishmentTibis = /* GraphQL */ `
 `;
 export const usersByEstablishment = /* GraphQL */ `
   query UsersByEstablishment(
-    $establishmentId: ID
+    $establishmentId: ID!
     $sortDirection: ModelSortDirection
     $filter: ModelEstablishmentTibiFilterInput
     $limit: Int

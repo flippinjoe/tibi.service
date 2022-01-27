@@ -139,7 +139,7 @@ export enum ImageLocation {
 
 export type ModelEstablishmentTibiConnection = {
   __typename: "ModelEstablishmentTibiConnection",
-  items:  Array<EstablishmentTibi >,
+  items:  Array<EstablishmentTibi | null >,
   nextToken?: string | null,
 };
 
@@ -178,7 +178,7 @@ export enum EstablishmentType {
 
 export type ModelOccupationConnection = {
   __typename: "ModelOccupationConnection",
-  items:  Array<Occupation >,
+  items:  Array<Occupation | null >,
   nextToken?: string | null,
 };
 
@@ -231,6 +231,7 @@ export type ModelImageLocationInput = {
 export type UpdateImagePathInput = {
   key?: string | null,
   location?: ImageLocation | null,
+  id: string,
 };
 
 export type DeleteImagePathInput = {
@@ -353,7 +354,7 @@ export type Wallet = {
 
 export type ModelPaymentConnection = {
   __typename: "ModelPaymentConnection",
-  items:  Array<Payment >,
+  items:  Array<Payment | null >,
   nextToken?: string | null,
 };
 
@@ -511,7 +512,7 @@ export type ModelUserFilterInput = {
 
 export type ModelUserConnection = {
   __typename: "ModelUserConnection",
-  items:  Array<User >,
+  items:  Array<User | null >,
   nextToken?: string | null,
 };
 
@@ -525,7 +526,7 @@ export type ModelImagePathFilterInput = {
 
 export type ModelImagePathConnection = {
   __typename: "ModelImagePathConnection",
-  items:  Array<ImagePath >,
+  items:  Array<ImagePath | null >,
   nextToken?: string | null,
 };
 
@@ -552,7 +553,7 @@ export type ModelEstablishmentFilterInput = {
 
 export type ModelEstablishmentConnection = {
   __typename: "ModelEstablishmentConnection",
-  items:  Array<Establishment >,
+  items:  Array<Establishment | null >,
   nextToken?: string | null,
 };
 
@@ -583,7 +584,7 @@ export type ModelWalletFilterInput = {
 
 export type ModelWalletConnection = {
   __typename: "ModelWalletConnection",
-  items:  Array<Wallet >,
+  items:  Array<Wallet | null >,
   nextToken?: string | null,
 };
 
@@ -615,7 +616,7 @@ export type ModelTransactionFilterInput = {
 
 export type ModelTransactionConnection = {
   __typename: "ModelTransactionConnection",
-  items:  Array<Transaction >,
+  items:  Array<Transaction | null >,
   nextToken?: string | null,
 };
 
@@ -1473,7 +1474,7 @@ export type ListUsersQuery = {
       userBackgroundImageId?: string | null,
       userProfileImageId?: string | null,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1511,7 +1512,7 @@ export type ListImagePathsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1560,7 +1561,7 @@ export type ListOccupationsQuery = {
       updatedAt: string,
       occupationBackgroundImageId: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1610,7 +1611,7 @@ export type ListEstablishmentsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1675,13 +1676,13 @@ export type ListEstablishmentTibisQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
 
 export type UsersByEstablishmentQueryVariables = {
-  establishmentId?: string | null,
+  establishmentId: string,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelEstablishmentTibiFilterInput | null,
   limit?: number | null,
@@ -1700,7 +1701,7 @@ export type UsersByEstablishmentQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1742,7 +1743,7 @@ export type ListWalletsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1790,7 +1791,7 @@ export type ListPaymentsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
@@ -1876,7 +1877,7 @@ export type ListTransactionsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } >,
+    } | null >,
     nextToken?: string | null,
   } | null,
 };
