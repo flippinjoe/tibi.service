@@ -9,8 +9,14 @@ export type CreateUserInput = {
   availableBalance?: number | null,
   pendingBalance?: number | null,
   tippingActive?: boolean | null,
+  location?: LocationInput | null,
   userBackgroundImageId?: string | null,
   userProfileImageId?: string | null,
+};
+
+export type LocationInput = {
+  lat: number,
+  lon: number,
 };
 
 export type ModelUserConditionInput = {
@@ -112,6 +118,7 @@ export type User = {
   backgroundImage?: ImagePath | null,
   profileImage?: ImagePath | null,
   establishments?: ModelEstablishmentTibiConnection | null,
+  location?: Location | null,
   createdAt: string,
   updatedAt: string,
   userBackgroundImageId?: string | null,
@@ -161,12 +168,13 @@ export type Establishment = {
   id: string,
   name: string,
   type: EstablishmentType,
-  imageUrl?: string | null,
+  image?: ImagePath | null,
   website?: string | null,
   tibis?: ModelEstablishmentTibiConnection | null,
   occupations?: ModelOccupationConnection | null,
   createdAt: string,
   updatedAt: string,
+  establishmentImageId?: string | null,
   owner?: string | null,
 };
 
@@ -194,6 +202,12 @@ export type Occupation = {
   owner?: string | null,
 };
 
+export type Location = {
+  __typename: "Location",
+  lat: number,
+  lon: number,
+};
+
 export type UpdateUserInput = {
   id: string,
   firstName?: string | null,
@@ -201,6 +215,7 @@ export type UpdateUserInput = {
   availableBalance?: number | null,
   pendingBalance?: number | null,
   tippingActive?: boolean | null,
+  location?: LocationInput | null,
   userBackgroundImageId?: string | null,
   userProfileImageId?: string | null,
 };
@@ -269,18 +284,18 @@ export type CreateEstablishmentInput = {
   id?: string | null,
   name: string,
   type: EstablishmentType,
-  imageUrl?: string | null,
   website?: string | null,
+  establishmentImageId?: string | null,
 };
 
 export type ModelEstablishmentConditionInput = {
   name?: ModelStringInput | null,
   type?: ModelEstablishmentTypeInput | null,
-  imageUrl?: ModelStringInput | null,
   website?: ModelStringInput | null,
   and?: Array< ModelEstablishmentConditionInput | null > | null,
   or?: Array< ModelEstablishmentConditionInput | null > | null,
   not?: ModelEstablishmentConditionInput | null,
+  establishmentImageId?: ModelIDInput | null,
 };
 
 export type ModelEstablishmentTypeInput = {
@@ -292,8 +307,8 @@ export type UpdateEstablishmentInput = {
   id: string,
   name?: string | null,
   type?: EstablishmentType | null,
-  imageUrl?: string | null,
   website?: string | null,
+  establishmentImageId?: string | null,
 };
 
 export type DeleteEstablishmentInput = {
@@ -494,6 +509,47 @@ export type DeleteTransactionInput = {
   id: string,
 };
 
+export type CreateNotificationInput = {
+  id?: string | null,
+  userId: string,
+  read?: boolean | null,
+  title: string,
+  details: string,
+};
+
+export type ModelNotificationConditionInput = {
+  userId?: ModelIDInput | null,
+  read?: ModelBooleanInput | null,
+  title?: ModelStringInput | null,
+  details?: ModelStringInput | null,
+  and?: Array< ModelNotificationConditionInput | null > | null,
+  or?: Array< ModelNotificationConditionInput | null > | null,
+  not?: ModelNotificationConditionInput | null,
+};
+
+export type Notification = {
+  __typename: "Notification",
+  id: string,
+  userId: string,
+  read?: boolean | null,
+  title: string,
+  details: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateNotificationInput = {
+  id: string,
+  userId?: string | null,
+  read?: boolean | null,
+  title?: string | null,
+  details?: string | null,
+};
+
+export type DeleteNotificationInput = {
+  id: string,
+};
+
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   firstName?: ModelStringInput | null,
@@ -512,6 +568,158 @@ export type ModelUserConnection = {
   __typename: "ModelUserConnection",
   items:  Array<User | null >,
   nextToken?: string | null,
+};
+
+export type SearchableUserFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  firstName?: SearchableStringFilterInput | null,
+  lastName?: SearchableStringFilterInput | null,
+  availableBalance?: SearchableFloatFilterInput | null,
+  pendingBalance?: SearchableFloatFilterInput | null,
+  tippingActive?: SearchableBooleanFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  userBackgroundImageId?: SearchableIDFilterInput | null,
+  userProfileImageId?: SearchableIDFilterInput | null,
+  and?: Array< SearchableUserFilterInput | null > | null,
+  or?: Array< SearchableUserFilterInput | null > | null,
+  not?: SearchableUserFilterInput | null,
+};
+
+export type SearchableIDFilterInput = {
+  ne?: string | null,
+  gt?: string | null,
+  lt?: string | null,
+  gte?: string | null,
+  lte?: string | null,
+  eq?: string | null,
+  match?: string | null,
+  matchPhrase?: string | null,
+  matchPhrasePrefix?: string | null,
+  multiMatch?: string | null,
+  exists?: boolean | null,
+  wildcard?: string | null,
+  regexp?: string | null,
+  range?: Array< string | null > | null,
+};
+
+export type SearchableStringFilterInput = {
+  ne?: string | null,
+  gt?: string | null,
+  lt?: string | null,
+  gte?: string | null,
+  lte?: string | null,
+  eq?: string | null,
+  match?: string | null,
+  matchPhrase?: string | null,
+  matchPhrasePrefix?: string | null,
+  multiMatch?: string | null,
+  exists?: boolean | null,
+  wildcard?: string | null,
+  regexp?: string | null,
+  range?: Array< string | null > | null,
+};
+
+export type SearchableFloatFilterInput = {
+  ne?: number | null,
+  gt?: number | null,
+  lt?: number | null,
+  gte?: number | null,
+  lte?: number | null,
+  eq?: number | null,
+  range?: Array< number | null > | null,
+};
+
+export type SearchableBooleanFilterInput = {
+  eq?: boolean | null,
+  ne?: boolean | null,
+};
+
+export type SearchableUserSortInput = {
+  field?: SearchableUserSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableUserSortableFields {
+  id = "id",
+  firstName = "firstName",
+  lastName = "lastName",
+  availableBalance = "availableBalance",
+  pendingBalance = "pendingBalance",
+  tippingActive = "tippingActive",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+  userBackgroundImageId = "userBackgroundImageId",
+  userProfileImageId = "userProfileImageId",
+}
+
+
+export enum SearchableSortDirection {
+  asc = "asc",
+  desc = "desc",
+}
+
+
+export type SearchableUserAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableUserAggregateField,
+};
+
+export enum SearchableAggregateType {
+  terms = "terms",
+  avg = "avg",
+  min = "min",
+  max = "max",
+  sum = "sum",
+}
+
+
+export enum SearchableUserAggregateField {
+  id = "id",
+  firstName = "firstName",
+  lastName = "lastName",
+  availableBalance = "availableBalance",
+  pendingBalance = "pendingBalance",
+  tippingActive = "tippingActive",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+  userBackgroundImageId = "userBackgroundImageId",
+  userProfileImageId = "userProfileImageId",
+}
+
+
+export type SearchableUserConnection = {
+  __typename: "SearchableUserConnection",
+  items:  Array<User | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
+export type SearchableAggregateResult = {
+  __typename: "SearchableAggregateResult",
+  name: string,
+  result?: SearchableAggregateGenericResult | null,
+};
+
+export type SearchableAggregateGenericResult = SearchableAggregateScalarResult | SearchableAggregateBucketResult
+
+
+export type SearchableAggregateScalarResult = {
+  __typename: "SearchableAggregateScalarResult",
+  value: number,
+};
+
+export type SearchableAggregateBucketResult = {
+  __typename: "SearchableAggregateBucketResult",
+  buckets?:  Array<SearchableAggregateBucketResultItem | null > | null,
+};
+
+export type SearchableAggregateBucketResultItem = {
+  __typename: "SearchableAggregateBucketResultItem",
+  key: string,
+  doc_count: number,
 };
 
 export type ModelImagePathFilterInput = {
@@ -542,17 +750,70 @@ export type ModelEstablishmentFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   type?: ModelEstablishmentTypeInput | null,
-  imageUrl?: ModelStringInput | null,
   website?: ModelStringInput | null,
   and?: Array< ModelEstablishmentFilterInput | null > | null,
   or?: Array< ModelEstablishmentFilterInput | null > | null,
   not?: ModelEstablishmentFilterInput | null,
+  establishmentImageId?: ModelIDInput | null,
 };
 
 export type ModelEstablishmentConnection = {
   __typename: "ModelEstablishmentConnection",
   items:  Array<Establishment | null >,
   nextToken?: string | null,
+};
+
+export type SearchableEstablishmentFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  name?: SearchableStringFilterInput | null,
+  website?: SearchableStringFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  establishmentImageId?: SearchableIDFilterInput | null,
+  type?: SearchableStringFilterInput | null,
+  and?: Array< SearchableEstablishmentFilterInput | null > | null,
+  or?: Array< SearchableEstablishmentFilterInput | null > | null,
+  not?: SearchableEstablishmentFilterInput | null,
+};
+
+export type SearchableEstablishmentSortInput = {
+  field?: SearchableEstablishmentSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableEstablishmentSortableFields {
+  id = "id",
+  name = "name",
+  website = "website",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+  establishmentImageId = "establishmentImageId",
+}
+
+
+export type SearchableEstablishmentAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableEstablishmentAggregateField,
+};
+
+export enum SearchableEstablishmentAggregateField {
+  id = "id",
+  name = "name",
+  type = "type",
+  website = "website",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+  establishmentImageId = "establishmentImageId",
+}
+
+
+export type SearchableEstablishmentConnection = {
+  __typename: "SearchableEstablishmentConnection",
+  items:  Array<Establishment | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
 };
 
 export type ModelEstablishmentTibiFilterInput = {
@@ -618,6 +879,23 @@ export type ModelTransactionConnection = {
   nextToken?: string | null,
 };
 
+export type ModelNotificationFilterInput = {
+  id?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
+  read?: ModelBooleanInput | null,
+  title?: ModelStringInput | null,
+  details?: ModelStringInput | null,
+  and?: Array< ModelNotificationFilterInput | null > | null,
+  or?: Array< ModelNotificationFilterInput | null > | null,
+  not?: ModelNotificationFilterInput | null,
+};
+
+export type ModelNotificationConnection = {
+  __typename: "ModelNotificationConnection",
+  items:  Array<Notification | null >,
+  nextToken?: string | null,
+};
+
 export type CreateUserMutationVariables = {
   input: CreateUserInput,
   condition?: ModelUserConditionInput | null,
@@ -653,6 +931,11 @@ export type CreateUserMutation = {
     establishments?:  {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
+    } | null,
+    location?:  {
+      __typename: "Location",
+      lat: number,
+      lon: number,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -698,6 +981,11 @@ export type UpdateUserMutation = {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
     } | null,
+    location?:  {
+      __typename: "Location",
+      lat: number,
+      lon: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     userBackgroundImageId?: string | null,
@@ -741,6 +1029,11 @@ export type DeleteUserMutation = {
     establishments?:  {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
+    } | null,
+    location?:  {
+      __typename: "Location",
+      lat: number,
+      lon: number,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -893,7 +1186,15 @@ export type CreateEstablishmentMutation = {
     id: string,
     name: string,
     type: EstablishmentType,
-    imageUrl?: string | null,
+    image?:  {
+      __typename: "ImagePath",
+      key: string,
+      location: ImageLocation,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -905,6 +1206,7 @@ export type CreateEstablishmentMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    establishmentImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -920,7 +1222,15 @@ export type UpdateEstablishmentMutation = {
     id: string,
     name: string,
     type: EstablishmentType,
-    imageUrl?: string | null,
+    image?:  {
+      __typename: "ImagePath",
+      key: string,
+      location: ImageLocation,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -932,6 +1242,7 @@ export type UpdateEstablishmentMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    establishmentImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -947,7 +1258,15 @@ export type DeleteEstablishmentMutation = {
     id: string,
     name: string,
     type: EstablishmentType,
-    imageUrl?: string | null,
+    image?:  {
+      __typename: "ImagePath",
+      key: string,
+      location: ImageLocation,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -959,6 +1278,7 @@ export type DeleteEstablishmentMutation = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    establishmentImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -979,10 +1299,10 @@ export type CreateEstablishmentTibiMutation = {
       id: string,
       name: string,
       type: EstablishmentType,
-      imageUrl?: string | null,
       website?: string | null,
       createdAt: string,
       updatedAt: string,
+      establishmentImageId?: string | null,
       owner?: string | null,
     },
     user:  {
@@ -1022,10 +1342,10 @@ export type UpdateEstablishmentTibiMutation = {
       id: string,
       name: string,
       type: EstablishmentType,
-      imageUrl?: string | null,
       website?: string | null,
       createdAt: string,
       updatedAt: string,
+      establishmentImageId?: string | null,
       owner?: string | null,
     },
     user:  {
@@ -1065,10 +1385,10 @@ export type DeleteEstablishmentTibiMutation = {
       id: string,
       name: string,
       type: EstablishmentType,
-      imageUrl?: string | null,
       website?: string | null,
       createdAt: string,
       updatedAt: string,
+      establishmentImageId?: string | null,
       owner?: string | null,
     },
     user:  {
@@ -1398,6 +1718,60 @@ export type DeleteTransactionMutation = {
   } | null,
 };
 
+export type CreateNotificationMutationVariables = {
+  input: CreateNotificationInput,
+  condition?: ModelNotificationConditionInput | null,
+};
+
+export type CreateNotificationMutation = {
+  createNotification?:  {
+    __typename: "Notification",
+    id: string,
+    userId: string,
+    read?: boolean | null,
+    title: string,
+    details: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateNotificationMutationVariables = {
+  input: UpdateNotificationInput,
+  condition?: ModelNotificationConditionInput | null,
+};
+
+export type UpdateNotificationMutation = {
+  updateNotification?:  {
+    __typename: "Notification",
+    id: string,
+    userId: string,
+    read?: boolean | null,
+    title: string,
+    details: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteNotificationMutationVariables = {
+  input: DeleteNotificationInput,
+  condition?: ModelNotificationConditionInput | null,
+};
+
+export type DeleteNotificationMutation = {
+  deleteNotification?:  {
+    __typename: "Notification",
+    id: string,
+    userId: string,
+    read?: boolean | null,
+    title: string,
+    details: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetUserQueryVariables = {
   id: string,
 };
@@ -1433,6 +1807,11 @@ export type GetUserQuery = {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
     } | null,
+    location?:  {
+      __typename: "Location",
+      lat: number,
+      lon: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     userBackgroundImageId?: string | null,
@@ -1465,6 +1844,53 @@ export type ListUsersQuery = {
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
+  } | null,
+};
+
+export type SearchUsersQueryVariables = {
+  filter?: SearchableUserFilterInput | null,
+  sort?: Array< SearchableUserSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableUserAggregationInput | null > | null,
+};
+
+export type SearchUsersQuery = {
+  searchUsers?:  {
+    __typename: "SearchableUserConnection",
+    items:  Array< {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      tippingActive?: boolean | null,
+      createdAt: string,
+      updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
   } | null,
 };
 
@@ -1565,7 +1991,15 @@ export type GetEstablishmentQuery = {
     id: string,
     name: string,
     type: EstablishmentType,
-    imageUrl?: string | null,
+    image?:  {
+      __typename: "ImagePath",
+      key: string,
+      location: ImageLocation,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -1577,6 +2011,7 @@ export type GetEstablishmentQuery = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    establishmentImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -1595,13 +2030,57 @@ export type ListEstablishmentsQuery = {
       id: string,
       name: string,
       type: EstablishmentType,
-      imageUrl?: string | null,
       website?: string | null,
       createdAt: string,
       updatedAt: string,
+      establishmentImageId?: string | null,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
+  } | null,
+};
+
+export type SearchEstablishmentsQueryVariables = {
+  filter?: SearchableEstablishmentFilterInput | null,
+  sort?: Array< SearchableEstablishmentSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableEstablishmentAggregationInput | null > | null,
+};
+
+export type SearchEstablishmentsQuery = {
+  searchEstablishments?:  {
+    __typename: "SearchableEstablishmentConnection",
+    items:  Array< {
+      __typename: "Establishment",
+      id: string,
+      name: string,
+      type: EstablishmentType,
+      website?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      establishmentImageId?: string | null,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
   } | null,
 };
 
@@ -1620,10 +2099,10 @@ export type GetEstablishmentTibiQuery = {
       id: string,
       name: string,
       type: EstablishmentType,
-      imageUrl?: string | null,
       website?: string | null,
       createdAt: string,
       updatedAt: string,
+      establishmentImageId?: string | null,
       owner?: string | null,
     },
     user:  {
@@ -1866,6 +2345,71 @@ export type ListTransactionsQuery = {
   } | null,
 };
 
+export type GetNotificationQueryVariables = {
+  id: string,
+};
+
+export type GetNotificationQuery = {
+  getNotification?:  {
+    __typename: "Notification",
+    id: string,
+    userId: string,
+    read?: boolean | null,
+    title: string,
+    details: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListNotificationsQueryVariables = {
+  filter?: ModelNotificationFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListNotificationsQuery = {
+  listNotifications?:  {
+    __typename: "ModelNotificationConnection",
+    items:  Array< {
+      __typename: "Notification",
+      id: string,
+      userId: string,
+      read?: boolean | null,
+      title: string,
+      details: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ByUserQueryVariables = {
+  userId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelNotificationFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ByUserQuery = {
+  byUser?:  {
+    __typename: "ModelNotificationConnection",
+    items:  Array< {
+      __typename: "Notification",
+      id: string,
+      userId: string,
+      read?: boolean | null,
+      title: string,
+      details: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateUserSubscriptionVariables = {
   owner?: string | null,
 };
@@ -1900,6 +2444,11 @@ export type OnCreateUserSubscription = {
     establishments?:  {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
+    } | null,
+    location?:  {
+      __typename: "Location",
+      lat: number,
+      lon: number,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -1944,6 +2493,11 @@ export type OnUpdateUserSubscription = {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
     } | null,
+    location?:  {
+      __typename: "Location",
+      lat: number,
+      lon: number,
+    } | null,
     createdAt: string,
     updatedAt: string,
     userBackgroundImageId?: string | null,
@@ -1986,6 +2540,11 @@ export type OnDeleteUserSubscription = {
     establishments?:  {
       __typename: "ModelEstablishmentTibiConnection",
       nextToken?: string | null,
+    } | null,
+    location?:  {
+      __typename: "Location",
+      lat: number,
+      lon: number,
     } | null,
     createdAt: string,
     updatedAt: string,
@@ -2131,7 +2690,15 @@ export type OnCreateEstablishmentSubscription = {
     id: string,
     name: string,
     type: EstablishmentType,
-    imageUrl?: string | null,
+    image?:  {
+      __typename: "ImagePath",
+      key: string,
+      location: ImageLocation,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -2143,6 +2710,7 @@ export type OnCreateEstablishmentSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    establishmentImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -2157,7 +2725,15 @@ export type OnUpdateEstablishmentSubscription = {
     id: string,
     name: string,
     type: EstablishmentType,
-    imageUrl?: string | null,
+    image?:  {
+      __typename: "ImagePath",
+      key: string,
+      location: ImageLocation,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -2169,6 +2745,7 @@ export type OnUpdateEstablishmentSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    establishmentImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -2183,7 +2760,15 @@ export type OnDeleteEstablishmentSubscription = {
     id: string,
     name: string,
     type: EstablishmentType,
-    imageUrl?: string | null,
+    image?:  {
+      __typename: "ImagePath",
+      key: string,
+      location: ImageLocation,
+      id: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null,
     website?: string | null,
     tibis?:  {
       __typename: "ModelEstablishmentTibiConnection",
@@ -2195,6 +2780,7 @@ export type OnDeleteEstablishmentSubscription = {
     } | null,
     createdAt: string,
     updatedAt: string,
+    establishmentImageId?: string | null,
     owner?: string | null,
   } | null,
 };
@@ -2214,10 +2800,10 @@ export type OnCreateEstablishmentTibiSubscription = {
       id: string,
       name: string,
       type: EstablishmentType,
-      imageUrl?: string | null,
       website?: string | null,
       createdAt: string,
       updatedAt: string,
+      establishmentImageId?: string | null,
       owner?: string | null,
     },
     user:  {
@@ -2256,10 +2842,10 @@ export type OnUpdateEstablishmentTibiSubscription = {
       id: string,
       name: string,
       type: EstablishmentType,
-      imageUrl?: string | null,
       website?: string | null,
       createdAt: string,
       updatedAt: string,
+      establishmentImageId?: string | null,
       owner?: string | null,
     },
     user:  {
@@ -2298,10 +2884,10 @@ export type OnDeleteEstablishmentTibiSubscription = {
       id: string,
       name: string,
       type: EstablishmentType,
-      imageUrl?: string | null,
       website?: string | null,
       createdAt: string,
       updatedAt: string,
+      establishmentImageId?: string | null,
       owner?: string | null,
     },
     user:  {
@@ -2593,6 +3179,45 @@ export type OnDeleteTransactionSubscription = {
       userProfileImageId?: string | null,
       owner?: string | null,
     },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateNotificationSubscription = {
+  onCreateNotification?:  {
+    __typename: "Notification",
+    id: string,
+    userId: string,
+    read?: boolean | null,
+    title: string,
+    details: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateNotificationSubscription = {
+  onUpdateNotification?:  {
+    __typename: "Notification",
+    id: string,
+    userId: string,
+    read?: boolean | null,
+    title: string,
+    details: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteNotificationSubscription = {
+  onDeleteNotification?:  {
+    __typename: "Notification",
+    id: string,
+    userId: string,
+    read?: boolean | null,
+    title: string,
+    details: string,
     createdAt: string,
     updatedAt: string,
   } | null,

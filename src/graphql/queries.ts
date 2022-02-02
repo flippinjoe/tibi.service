@@ -30,6 +30,10 @@ export const getUser = /* GraphQL */ `
       establishments {
         nextToken
       }
+      location {
+        lat
+        lon
+      }
       createdAt
       updatedAt
       userBackgroundImageId
@@ -59,6 +63,55 @@ export const listUsers = /* GraphQL */ `
         owner
       }
       nextToken
+    }
+  }
+`;
+export const searchUsers = /* GraphQL */ `
+  query SearchUsers(
+    $filter: SearchableUserFilterInput
+    $sort: [SearchableUserSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableUserAggregationInput]
+  ) {
+    searchUsers(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        tippingActive
+        createdAt
+        updatedAt
+        userBackgroundImageId
+        userProfileImageId
+        owner
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -140,7 +193,14 @@ export const getEstablishment = /* GraphQL */ `
       id
       name
       type
-      imageUrl
+      image {
+        key
+        location
+        id
+        createdAt
+        updatedAt
+        owner
+      }
       website
       tibis {
         nextToken
@@ -150,6 +210,7 @@ export const getEstablishment = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      establishmentImageId
       owner
     }
   }
@@ -165,13 +226,59 @@ export const listEstablishments = /* GraphQL */ `
         id
         name
         type
-        imageUrl
         website
         createdAt
         updatedAt
+        establishmentImageId
         owner
       }
       nextToken
+    }
+  }
+`;
+export const searchEstablishments = /* GraphQL */ `
+  query SearchEstablishments(
+    $filter: SearchableEstablishmentFilterInput
+    $sort: [SearchableEstablishmentSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableEstablishmentAggregationInput]
+  ) {
+    searchEstablishments(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        name
+        type
+        website
+        createdAt
+        updatedAt
+        establishmentImageId
+        owner
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -185,10 +292,10 @@ export const getEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
-        imageUrl
         website
         createdAt
         updatedAt
+        establishmentImageId
         owner
       }
       user {
@@ -402,6 +509,67 @@ export const listTransactions = /* GraphQL */ `
         transactionPaymentId
         transactionSourceId
         transactionDestinationId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getNotification = /* GraphQL */ `
+  query GetNotification($id: ID!) {
+    getNotification(id: $id) {
+      id
+      userId
+      read
+      title
+      details
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listNotifications = /* GraphQL */ `
+  query ListNotifications(
+    $filter: ModelNotificationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userId
+        read
+        title
+        details
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const byUser = /* GraphQL */ `
+  query ByUser(
+    $userId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelNotificationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byUser(
+      userId: $userId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userId
+        read
+        title
+        details
         createdAt
         updatedAt
       }

@@ -21,7 +21,7 @@
       "function": {
         "transactionBalanceTrigger": {
           "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
-          "s3Key": "amplify-builds/transactionBalanceTrigger-30616270356743536779-build.zip"
+          "s3Key": "amplify-builds/transactionBalanceTrigger-51687463636d506a3247-build.zip"
         }
       }
     }

@@ -33,6 +33,10 @@ export const createUser = /* GraphQL */ `
       establishments {
         nextToken
       }
+      location {
+        lat
+        lon
+      }
       createdAt
       updatedAt
       userBackgroundImageId
@@ -72,6 +76,10 @@ export const updateUser = /* GraphQL */ `
       establishments {
         nextToken
       }
+      location {
+        lat
+        lon
+      }
       createdAt
       updatedAt
       userBackgroundImageId
@@ -110,6 +118,10 @@ export const deleteUser = /* GraphQL */ `
       }
       establishments {
         nextToken
+      }
+      location {
+        lat
+        lon
       }
       createdAt
       updatedAt
@@ -245,7 +257,14 @@ export const createEstablishment = /* GraphQL */ `
       id
       name
       type
-      imageUrl
+      image {
+        key
+        location
+        id
+        createdAt
+        updatedAt
+        owner
+      }
       website
       tibis {
         nextToken
@@ -255,6 +274,7 @@ export const createEstablishment = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      establishmentImageId
       owner
     }
   }
@@ -268,7 +288,14 @@ export const updateEstablishment = /* GraphQL */ `
       id
       name
       type
-      imageUrl
+      image {
+        key
+        location
+        id
+        createdAt
+        updatedAt
+        owner
+      }
       website
       tibis {
         nextToken
@@ -278,6 +305,7 @@ export const updateEstablishment = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      establishmentImageId
       owner
     }
   }
@@ -291,7 +319,14 @@ export const deleteEstablishment = /* GraphQL */ `
       id
       name
       type
-      imageUrl
+      image {
+        key
+        location
+        id
+        createdAt
+        updatedAt
+        owner
+      }
       website
       tibis {
         nextToken
@@ -301,6 +336,7 @@ export const deleteEstablishment = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      establishmentImageId
       owner
     }
   }
@@ -318,10 +354,10 @@ export const createEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
-        imageUrl
         website
         createdAt
         updatedAt
+        establishmentImageId
         owner
       }
       user {
@@ -357,10 +393,10 @@ export const updateEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
-        imageUrl
         website
         createdAt
         updatedAt
+        establishmentImageId
         owner
       }
       user {
@@ -396,10 +432,10 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
-        imageUrl
         website
         createdAt
         updatedAt
+        establishmentImageId
         owner
       }
       user {
@@ -693,6 +729,54 @@ export const deleteTransaction = /* GraphQL */ `
         userProfileImageId
         owner
       }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createNotification = /* GraphQL */ `
+  mutation CreateNotification(
+    $input: CreateNotificationInput!
+    $condition: ModelNotificationConditionInput
+  ) {
+    createNotification(input: $input, condition: $condition) {
+      id
+      userId
+      read
+      title
+      details
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateNotification = /* GraphQL */ `
+  mutation UpdateNotification(
+    $input: UpdateNotificationInput!
+    $condition: ModelNotificationConditionInput
+  ) {
+    updateNotification(input: $input, condition: $condition) {
+      id
+      userId
+      read
+      title
+      details
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteNotification = /* GraphQL */ `
+  mutation DeleteNotification(
+    $input: DeleteNotificationInput!
+    $condition: ModelNotificationConditionInput
+  ) {
+    deleteNotification(input: $input, condition: $condition) {
+      id
+      userId
+      read
+      title
+      details
       createdAt
       updatedAt
     }

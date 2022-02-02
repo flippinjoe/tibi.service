@@ -30,6 +30,10 @@ export const onCreateUser = /* GraphQL */ `
       establishments {
         nextToken
       }
+      location {
+        lat
+        lon
+      }
       createdAt
       updatedAt
       userBackgroundImageId
@@ -66,6 +70,10 @@ export const onUpdateUser = /* GraphQL */ `
       establishments {
         nextToken
       }
+      location {
+        lat
+        lon
+      }
       createdAt
       updatedAt
       userBackgroundImageId
@@ -101,6 +109,10 @@ export const onDeleteUser = /* GraphQL */ `
       }
       establishments {
         nextToken
+      }
+      location {
+        lat
+        lon
       }
       createdAt
       updatedAt
@@ -215,7 +227,14 @@ export const onCreateEstablishment = /* GraphQL */ `
       id
       name
       type
-      imageUrl
+      image {
+        key
+        location
+        id
+        createdAt
+        updatedAt
+        owner
+      }
       website
       tibis {
         nextToken
@@ -225,6 +244,7 @@ export const onCreateEstablishment = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      establishmentImageId
       owner
     }
   }
@@ -235,7 +255,14 @@ export const onUpdateEstablishment = /* GraphQL */ `
       id
       name
       type
-      imageUrl
+      image {
+        key
+        location
+        id
+        createdAt
+        updatedAt
+        owner
+      }
       website
       tibis {
         nextToken
@@ -245,6 +272,7 @@ export const onUpdateEstablishment = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      establishmentImageId
       owner
     }
   }
@@ -255,7 +283,14 @@ export const onDeleteEstablishment = /* GraphQL */ `
       id
       name
       type
-      imageUrl
+      image {
+        key
+        location
+        id
+        createdAt
+        updatedAt
+        owner
+      }
       website
       tibis {
         nextToken
@@ -265,6 +300,7 @@ export const onDeleteEstablishment = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      establishmentImageId
       owner
     }
   }
@@ -279,10 +315,10 @@ export const onCreateEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
-        imageUrl
         website
         createdAt
         updatedAt
+        establishmentImageId
         owner
       }
       user {
@@ -315,10 +351,10 @@ export const onUpdateEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
-        imageUrl
         website
         createdAt
         updatedAt
+        establishmentImageId
         owner
       }
       user {
@@ -351,10 +387,10 @@ export const onDeleteEstablishmentTibi = /* GraphQL */ `
         id
         name
         type
-        imageUrl
         website
         createdAt
         updatedAt
+        establishmentImageId
         owner
       }
       user {
@@ -621,6 +657,45 @@ export const onDeleteTransaction = /* GraphQL */ `
         userProfileImageId
         owner
       }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateNotification = /* GraphQL */ `
+  subscription OnCreateNotification {
+    onCreateNotification {
+      id
+      userId
+      read
+      title
+      details
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateNotification = /* GraphQL */ `
+  subscription OnUpdateNotification {
+    onUpdateNotification {
+      id
+      userId
+      read
+      title
+      details
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteNotification = /* GraphQL */ `
+  subscription OnDeleteNotification {
+    onDeleteNotification {
+      id
+      userId
+      read
+      title
+      details
       createdAt
       updatedAt
     }
