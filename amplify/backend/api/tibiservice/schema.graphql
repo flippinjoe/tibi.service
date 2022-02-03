@@ -27,6 +27,7 @@ type User
   pendingBalance: Float
 
   tippingActive: Boolean
+  unreadNotifications: Boolean
 
   backgroundImage: ImagePath @hasOne
   profileImage: ImagePath @hasOne
@@ -189,6 +190,12 @@ type Transaction
 }
 
 
+enum NotificationType {
+  tip
+  system
+  newMessage
+}
+
 type Notification 
 @model
 @auth(
@@ -203,12 +210,16 @@ type Notification
   id: ID!
 
   userId: ID! @index(name: "byUser", queryField: "byUser")   ## User ID for this notification
-  read: Boolean
+  type: NotificationType!
+  expirationDate: AWSDateTime
 
   title: String!
   details: String!
 
+  read: Boolean
+
   ## Extra metadata associated with this notification
+  fromUserId: ID ## If the data is from a given user this will be populated
 
 }
 

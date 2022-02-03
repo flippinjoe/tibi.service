@@ -11,6 +11,7 @@ export const getUser = /* GraphQL */ `
       availableBalance
       pendingBalance
       tippingActive
+      unreadNotifications
       backgroundImage {
         key
         location
@@ -56,6 +57,7 @@ export const listUsers = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -90,6 +92,7 @@ export const searchUsers = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -305,6 +308,7 @@ export const getEstablishmentTibi = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -471,6 +475,7 @@ export const getTransaction = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -484,6 +489,7 @@ export const getTransaction = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -521,9 +527,12 @@ export const getNotification = /* GraphQL */ `
     getNotification(id: $id) {
       id
       userId
-      read
+      type
+      expirationDate
       title
       details
+      read
+      fromUserId
       createdAt
       updatedAt
     }
@@ -539,9 +548,12 @@ export const listNotifications = /* GraphQL */ `
       items {
         id
         userId
-        read
+        type
+        expirationDate
         title
         details
+        read
+        fromUserId
         createdAt
         updatedAt
       }
@@ -567,9 +579,12 @@ export const byUser = /* GraphQL */ `
       items {
         id
         userId
-        read
+        type
+        expirationDate
         title
         details
+        read
+        fromUserId
         createdAt
         updatedAt
       }

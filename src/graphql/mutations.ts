@@ -14,6 +14,7 @@ export const createUser = /* GraphQL */ `
       availableBalance
       pendingBalance
       tippingActive
+      unreadNotifications
       backgroundImage {
         key
         location
@@ -57,6 +58,7 @@ export const updateUser = /* GraphQL */ `
       availableBalance
       pendingBalance
       tippingActive
+      unreadNotifications
       backgroundImage {
         key
         location
@@ -100,6 +102,7 @@ export const deleteUser = /* GraphQL */ `
       availableBalance
       pendingBalance
       tippingActive
+      unreadNotifications
       backgroundImage {
         key
         location
@@ -367,6 +370,7 @@ export const createEstablishmentTibi = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -406,6 +410,7 @@ export const updateEstablishmentTibi = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -445,6 +450,7 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -600,6 +606,7 @@ export const createTransaction = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -613,6 +620,7 @@ export const createTransaction = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -655,6 +663,7 @@ export const updateTransaction = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -668,6 +677,7 @@ export const updateTransaction = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -710,6 +720,7 @@ export const deleteTransaction = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -723,6 +734,7 @@ export const deleteTransaction = /* GraphQL */ `
         availableBalance
         pendingBalance
         tippingActive
+        unreadNotifications
         createdAt
         updatedAt
         userBackgroundImageId
@@ -742,9 +754,12 @@ export const createNotification = /* GraphQL */ `
     createNotification(input: $input, condition: $condition) {
       id
       userId
-      read
+      type
+      expirationDate
       title
       details
+      read
+      fromUserId
       createdAt
       updatedAt
     }
@@ -758,9 +773,12 @@ export const updateNotification = /* GraphQL */ `
     updateNotification(input: $input, condition: $condition) {
       id
       userId
-      read
+      type
+      expirationDate
       title
       details
+      read
+      fromUserId
       createdAt
       updatedAt
     }
@@ -774,9 +792,12 @@ export const deleteNotification = /* GraphQL */ `
     deleteNotification(input: $input, condition: $condition) {
       id
       userId
-      read
+      type
+      expirationDate
       title
       details
+      read
+      fromUserId
       createdAt
       updatedAt
     }
