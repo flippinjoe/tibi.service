@@ -1,4 +1,10 @@
 /* Amplify Params - DO NOT EDIT
+	API_TIBISERVICE_GRAPHQLAPIENDPOINTOUTPUT
+	API_TIBISERVICE_GRAPHQLAPIIDOUTPUT
+	API_TIBISERVICE_GRAPHQLAPIKEYOUTPUT
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
   API_TIBISERVICE_GRAPHQLAPIENDPOINTOUTPUT
   API_TIBISERVICE_GRAPHQLAPIIDOUTPUT
   API_TIBISERVICE_GRAPHQLAPIKEYOUTPUT
@@ -98,60 +104,68 @@ const getUserForId = async (id) => {
   //   return graphqlData.data.data.getMemberFinance
 }
 
-const updateUserAvailableBalance = async (user, availableBalance) => {
-  const updateUserMutation = gql`
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
+
+const createNotification = gql`
+  mutation CreateNotification(
+    $input: CreateNotificationInput!
+    $condition: ModelNotificationConditionInput
   ) {
-    updateUser(input: $input, condition: $condition) {
+    createNotification(input: $input, condition: $condition) {
       id
-      firstName
-      lastName
-      availableBalance
-      pendingBalance
-      tippingActive
-      backgroundImage {
-        key
-        location
-        id
-        createdAt
-        updatedAt
-        owner
-      }
-      profileImage {
-        key
-        location
-        id
-        createdAt
-        updatedAt
-        owner
-      }
-      establishments {
-        nextToken
-      }
+      userId
+      type
+      expirationDate
+      title
+      details
+      read
+      fromUserId
       createdAt
       updatedAt
-      userBackgroundImageId
-      userProfileImageId
-      owner
     }
   }
-  `
+`;
 
-  const graphqlData = await graphqlOperation(
-    print(updateUserMutation),
-    {
+const updateUserMutation = gql`
+mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  updateUser(input: $input, condition: $condition) {
+    id
+    unreadNotifications
+    availableBalance
+  }
+}
+`
+
+const updateUserAvailableBalance = async (user, availableBalance, fromUser) => {
+  
+
+  const [notificationData, graphqlData] = await Promise.all([
+
+    graphqlOperation( print(createNotification), {
+      input: {
+        userId: user.id,
+        title: `${fromUser.firstName} ${fromUser.lastName.substr(0, 1)}.`,
+        details: `Sent you $${(availableBalance - (user.availableBalance || 0)).toFixed(2)}`,
+        type: "tip",
+        fromUserId: fromUser.id
+      }
+    }),
+
+    graphqlOperation( print(updateUserMutation), {
       input: {
         id: user.id,
         owner: user.owner,
-        availableBalance: availableBalance
+        availableBalance: availableBalance,
+        unreadNotifications: true
       }
-    }
-  );
-  console.log(graphqlData)
+    })
+  ])
+
+  console.log("notificationData", notificationData.data)
+
   const { updateUser } = graphqlData.data
-  console.log(graphqlData.data)
   return updateUser
 }
 
@@ -164,11 +178,16 @@ exports.handler = async (event) => {
   const record = event.Records[0].dynamodb.NewImage
   const amount = parseFloat(record.amount.N)
   const receiverId = record.transactionDestinationId.S
+  const senderId = record.transactionSourceId.S
 
   /// Bump the receiver balance by "amount"
-  const user = await getUserForId(receiverId)
-  const curAmount = user.availableBalance || 0
-  const res = await updateUserAvailableBalance(user, curAmount + amount)
+  const [fromUser, toUser] = await Promise.all([
+    getUserForId(senderId),
+    getUserForId(receiverId)
+  ])
+  
+  // TODO: Update fromUser balance
+  const res = await updateUserAvailableBalance(toUser, (toUser.availableBalance || 0) + amount, fromUser)
 
   //eslint-disable-line
   console.log(JSON.stringify(res, null, 2));

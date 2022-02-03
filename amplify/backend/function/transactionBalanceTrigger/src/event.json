@@ -24,7 +24,7 @@
                       "N": "5"
                   },
                   "transactionDestinationId": {
-                      "S": "25BB366B-7BA9-4A89-9AD8-F6ED35A08599"
+                      "S": "6d0af0ab-88e0-4425-ade6-4777f75992b5",
                   },
                   "transactionPaymentId": {
                       "S": "280CA751-5E2A-4099-8059-3F72A7018B41"
@@ -36,8 +36,8 @@
                       "S": "C0A24CD6-F728-433C-821B-F52D4A8E87F2"
                   },
                   "transactionSourceId": {
-                      "S": "6d0af0ab-88e0-4425-ade6-4777f75992b5"
-                  },
+                    "S": "25BB366B-7BA9-4A89-9AD8-F6ED35A08599"
+                },
                   "status": {
                       "NULL": true
                   },
