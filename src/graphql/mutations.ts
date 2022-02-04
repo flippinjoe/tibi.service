@@ -587,6 +587,7 @@ export const createTransaction = /* GraphQL */ `
       transactionPaymentId
       transactionSourceId
       transactionDestinationId
+      rating
       payment {
         id
         walletId
@@ -644,6 +645,7 @@ export const updateTransaction = /* GraphQL */ `
       transactionPaymentId
       transactionSourceId
       transactionDestinationId
+      rating
       payment {
         id
         walletId
@@ -701,6 +703,7 @@ export const deleteTransaction = /* GraphQL */ `
       transactionPaymentId
       transactionSourceId
       transactionDestinationId
+      rating
       payment {
         id
         walletId

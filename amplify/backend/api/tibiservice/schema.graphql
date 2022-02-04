@@ -165,6 +165,12 @@ type Payment @model
   token: String
 }
 
+enum TransactionRating {
+  good
+  great
+  awesome
+}
+
 type Transaction 
 @model 
 @auth(
@@ -183,6 +189,8 @@ type Transaction
   transactionPaymentId: ID!
   transactionSourceId: ID!
   transactionDestinationId: ID!
+
+  rating: TransactionRating
 
   payment: Payment! @hasOne(fields: ["transactionPaymentId"])
   source: User! @hasOne(fields: ["transactionSourceId"])

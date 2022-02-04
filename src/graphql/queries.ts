@@ -456,6 +456,7 @@ export const getTransaction = /* GraphQL */ `
       transactionPaymentId
       transactionSourceId
       transactionDestinationId
+      rating
       payment {
         id
         walletId
@@ -515,6 +516,7 @@ export const listTransactions = /* GraphQL */ `
         transactionPaymentId
         transactionSourceId
         transactionDestinationId
+        rating
         createdAt
         updatedAt
       }

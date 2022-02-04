@@ -460,6 +460,7 @@ export type CreateTransactionInput = {
   transactionPaymentId: string,
   transactionSourceId: string,
   transactionDestinationId: string,
+  rating?: TransactionRating | null,
 };
 
 export enum TransactionStatus {
@@ -469,12 +470,20 @@ export enum TransactionStatus {
 }
 
 
+export enum TransactionRating {
+  good = "good",
+  great = "great",
+  awesome = "awesome",
+}
+
+
 export type ModelTransactionConditionInput = {
   amount?: ModelFloatInput | null,
   status?: ModelTransactionStatusInput | null,
   transactionPaymentId?: ModelIDInput | null,
   transactionSourceId?: ModelIDInput | null,
   transactionDestinationId?: ModelIDInput | null,
+  rating?: ModelTransactionRatingInput | null,
   and?: Array< ModelTransactionConditionInput | null > | null,
   or?: Array< ModelTransactionConditionInput | null > | null,
   not?: ModelTransactionConditionInput | null,
@@ -485,6 +494,11 @@ export type ModelTransactionStatusInput = {
   ne?: TransactionStatus | null,
 };
 
+export type ModelTransactionRatingInput = {
+  eq?: TransactionRating | null,
+  ne?: TransactionRating | null,
+};
+
 export type Transaction = {
   __typename: "Transaction",
   id: string,
@@ -493,6 +507,7 @@ export type Transaction = {
   transactionPaymentId: string,
   transactionSourceId: string,
   transactionDestinationId: string,
+  rating?: TransactionRating | null,
   payment: Payment,
   source: User,
   destination: User,
@@ -507,6 +522,7 @@ export type UpdateTransactionInput = {
   transactionPaymentId?: string | null,
   transactionSourceId?: string | null,
   transactionDestinationId?: string | null,
+  rating?: TransactionRating | null,
 };
 
 export type DeleteTransactionInput = {
@@ -900,6 +916,7 @@ export type ModelTransactionFilterInput = {
   transactionPaymentId?: ModelIDInput | null,
   transactionSourceId?: ModelIDInput | null,
   transactionDestinationId?: ModelIDInput | null,
+  rating?: ModelTransactionRatingInput | null,
   and?: Array< ModelTransactionFilterInput | null > | null,
   or?: Array< ModelTransactionFilterInput | null > | null,
   not?: ModelTransactionFilterInput | null,
@@ -1593,6 +1610,7 @@ export type CreateTransactionMutation = {
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
+    rating?: TransactionRating | null,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -1655,6 +1673,7 @@ export type UpdateTransactionMutation = {
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
+    rating?: TransactionRating | null,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -1717,6 +1736,7 @@ export type DeleteTransactionMutation = {
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
+    rating?: TransactionRating | null,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -2335,6 +2355,7 @@ export type GetTransactionQuery = {
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
+    rating?: TransactionRating | null,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -2400,6 +2421,7 @@ export type ListTransactionsQuery = {
       transactionPaymentId: string,
       transactionSourceId: string,
       transactionDestinationId: string,
+      rating?: TransactionRating | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -3105,6 +3127,7 @@ export type OnCreateTransactionSubscription = {
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
+    rating?: TransactionRating | null,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -3162,6 +3185,7 @@ export type OnUpdateTransactionSubscription = {
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
+    rating?: TransactionRating | null,
     payment:  {
       __typename: "Payment",
       id: string,
@@ -3219,6 +3243,7 @@ export type OnDeleteTransactionSubscription = {
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
+    rating?: TransactionRating | null,
     payment:  {
       __typename: "Payment",
       id: string,
