@@ -171,9 +171,10 @@ const updateUserAvailableBalance = async (user, availableBalance, fromUser) => {
 
 exports.handler = async (event) => {
 
-  if (event.Records.length > 1) {
+  if (event.Records.length != 1) {
     return Promise.resolve('Not processing multiples')
   }
+  
 
   const record = event.Records[0].dynamodb.NewImage
   const amount = parseFloat(record.amount.N)
