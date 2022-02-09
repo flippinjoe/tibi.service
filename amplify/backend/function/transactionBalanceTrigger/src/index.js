@@ -174,9 +174,11 @@ exports.handler = async (event) => {
   if (event.Records.length != 1) {
     return Promise.resolve('Not processing multiples')
   }
-  
-
   const record = event.Records[0].dynamodb.NewImage
+  if (!record) {
+    return Promise.resolve('Not processing updates')
+  }
+  
   const amount = parseFloat(record.amount.N)
   const receiverId = record.transactionDestinationId.S
   const senderId = record.transactionSourceId.S
