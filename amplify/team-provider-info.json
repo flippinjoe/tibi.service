@@ -18,10 +18,17 @@
         },
         "userPoolGroups": {}
       },
+      "notifications": {
+        "Pinpoint": {
+          "Name": "tibiPinPoint-develop",
+          "Id": "98d020f15fca435eb8cd49259c62153e",
+          "Region": "us-east-1"
+        }
+      },
       "function": {
-        "transactionBalanceTrigger": {
+        "transactionsTrigger": {
           "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
-          "s3Key": "amplify-builds/transactionBalanceTrigger-4e61764d68397032584b-build.zip"
+          "s3Key": "amplify-builds/transactionsTrigger-79584e39545151654173-build.zip"
         }
       }
     }

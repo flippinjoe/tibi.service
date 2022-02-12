@@ -68,56 +68,6 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
-export const searchUsers = /* GraphQL */ `
-  query SearchUsers(
-    $filter: SearchableUserFilterInput
-    $sort: [SearchableUserSortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableUserAggregationInput]
-  ) {
-    searchUsers(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        id
-        firstName
-        lastName
-        availableBalance
-        pendingBalance
-        tippingActive
-        unreadNotifications
-        createdAt
-        updatedAt
-        userBackgroundImageId
-        userProfileImageId
-        owner
-      }
-      nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 export const getImagePath = /* GraphQL */ `
   query GetImagePath($id: ID!) {
     getImagePath(id: $id) {
@@ -153,7 +103,6 @@ export const getOccupation = /* GraphQL */ `
   query GetOccupation($id: ID!) {
     getOccupation(id: $id) {
       id
-      establishmentId
       name
       backgroundImage {
         key
@@ -163,6 +112,7 @@ export const getOccupation = /* GraphQL */ `
         updatedAt
         owner
       }
+      establishmentId
       createdAt
       updatedAt
       occupationBackgroundImageId
@@ -179,8 +129,8 @@ export const listOccupations = /* GraphQL */ `
     listOccupations(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        establishmentId
         name
+        establishmentId
         createdAt
         updatedAt
         occupationBackgroundImageId
@@ -236,52 +186,6 @@ export const listEstablishments = /* GraphQL */ `
         owner
       }
       nextToken
-    }
-  }
-`;
-export const searchEstablishments = /* GraphQL */ `
-  query SearchEstablishments(
-    $filter: SearchableEstablishmentFilterInput
-    $sort: [SearchableEstablishmentSortInput]
-    $limit: Int
-    $nextToken: String
-    $from: Int
-    $aggregates: [SearchableEstablishmentAggregationInput]
-  ) {
-    searchEstablishments(
-      filter: $filter
-      sort: $sort
-      limit: $limit
-      nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
-    ) {
-      items {
-        id
-        name
-        type
-        website
-        createdAt
-        updatedAt
-        establishmentImageId
-        owner
-      }
-      nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-            }
-          }
-        }
-      }
     }
   }
 `;
@@ -448,11 +352,12 @@ export const listPayments = /* GraphQL */ `
   }
 `;
 export const getTransaction = /* GraphQL */ `
-  query GetTransaction($id: ID!) {
-    getTransaction(id: $id) {
+  query GetTransaction($id: ID!, $createdAt: AWSDateTime!) {
+    getTransaction(id: $id, createdAt: $createdAt) {
       id
       amount
       status
+      createdAt
       transactionPaymentId
       transactionSourceId
       transactionDestinationId
@@ -497,27 +402,36 @@ export const getTransaction = /* GraphQL */ `
         userProfileImageId
         owner
       }
-      createdAt
       updatedAt
     }
   }
 `;
 export const listTransactions = /* GraphQL */ `
   query ListTransactions(
+    $id: ID
+    $createdAt: ModelStringKeyConditionInput
     $filter: ModelTransactionFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listTransactions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listTransactions(
+      id: $id
+      createdAt: $createdAt
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
         id
         amount
         status
+        createdAt
         transactionPaymentId
         transactionSourceId
         transactionDestinationId
         rating
-        createdAt
         updatedAt
       }
       nextToken

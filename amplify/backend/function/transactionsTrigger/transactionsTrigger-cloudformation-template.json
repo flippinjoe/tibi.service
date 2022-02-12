@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.3\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.19\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -59,12 +59,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "transactionBalanceTrigger",
+            "transactionsTrigger",
             {
               "Fn::Join": [
                 "",
                 [
-                  "transactionBalanceTrigger",
+                  "transactionsTrigger",
                   "-",
                   {
                     "Ref": "env"
@@ -110,12 +110,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "tibiserviceLambdaRole76b86899",
+            "tibiserviceLambdaRole3c1ec247",
             {
               "Fn::Join": [
                 "",
                 [
-                  "tibiserviceLambdaRole76b86899",
+                  "tibiserviceLambdaRole3c1ec247",
                   "-",
                   {
                     "Ref": "env"
@@ -186,62 +186,6 @@
         }
       }
     },
-    "LambdaTriggerPolicyTransaction": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy-Transaction",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:DescribeStream",
-                "dynamodb:GetRecords",
-                "dynamodb:GetShardIterator",
-                "dynamodb:ListStreams"
-              ],
-              "Resource": {
-                "Fn::ImportValue": {
-                  "Fn::Sub": "${apitibiserviceGraphQLAPIIdOutput}:GetAtt:TransactionTable:StreamArn"
-                }
-              }
-            }
-          ]
-        }
-      }
-    },
-    "LambdaEventSourceMappingTransaction": {
-      "Type": "AWS::Lambda::EventSourceMapping",
-      "DependsOn": [
-        "LambdaTriggerPolicyTransaction",
-        "LambdaExecutionRole"
-      ],
-      "Properties": {
-        "BatchSize": 100,
-        "Enabled": true,
-        "EventSourceArn": {
-          "Fn::ImportValue": {
-            "Fn::Sub": "${apitibiserviceGraphQLAPIIdOutput}:GetAtt:TransactionTable:StreamArn"
-          }
-        },
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "LambdaFunction",
-            "Arn"
-          ]
-        },
-        "StartingPosition": "LATEST"
-      }
-    },
     "AmplifyResourcesPolicy": {
       "DependsOn": [
         "LambdaExecutionRole"
@@ -307,6 +251,62 @@
             }
           ]
         }
+      }
+    },
+    "LambdaTriggerPolicyTransaction": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy-Transaction",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:DescribeStream",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:ListStreams"
+              ],
+              "Resource": {
+                "Fn::ImportValue": {
+                  "Fn::Sub": "${apitibiserviceGraphQLAPIIdOutput}:GetAtt:TransactionTable:StreamArn"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "LambdaEventSourceMappingTransaction": {
+      "Type": "AWS::Lambda::EventSourceMapping",
+      "DependsOn": [
+        "LambdaTriggerPolicyTransaction",
+        "LambdaExecutionRole"
+      ],
+      "Properties": {
+        "BatchSize": 100,
+        "Enabled": true,
+        "EventSourceArn": {
+          "Fn::ImportValue": {
+            "Fn::Sub": "${apitibiserviceGraphQLAPIIdOutput}:GetAtt:TransactionTable:StreamArn"
+          }
+        },
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "LambdaFunction",
+            "Arn"
+          ]
+        },
+        "StartingPosition": "LATEST"
       }
     }
   },

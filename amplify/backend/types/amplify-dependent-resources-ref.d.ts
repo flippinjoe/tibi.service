@@ -30,7 +30,7 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "function": {
-        "transactionBalanceTrigger": {
+        "transactionsTrigger": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",

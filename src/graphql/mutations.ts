@@ -186,7 +186,6 @@ export const createOccupation = /* GraphQL */ `
   ) {
     createOccupation(input: $input, condition: $condition) {
       id
-      establishmentId
       name
       backgroundImage {
         key
@@ -196,6 +195,7 @@ export const createOccupation = /* GraphQL */ `
         updatedAt
         owner
       }
+      establishmentId
       createdAt
       updatedAt
       occupationBackgroundImageId
@@ -210,7 +210,6 @@ export const updateOccupation = /* GraphQL */ `
   ) {
     updateOccupation(input: $input, condition: $condition) {
       id
-      establishmentId
       name
       backgroundImage {
         key
@@ -220,6 +219,7 @@ export const updateOccupation = /* GraphQL */ `
         updatedAt
         owner
       }
+      establishmentId
       createdAt
       updatedAt
       occupationBackgroundImageId
@@ -234,7 +234,6 @@ export const deleteOccupation = /* GraphQL */ `
   ) {
     deleteOccupation(input: $input, condition: $condition) {
       id
-      establishmentId
       name
       backgroundImage {
         key
@@ -244,6 +243,7 @@ export const deleteOccupation = /* GraphQL */ `
         updatedAt
         owner
       }
+      establishmentId
       createdAt
       updatedAt
       occupationBackgroundImageId
@@ -584,6 +584,7 @@ export const createTransaction = /* GraphQL */ `
       id
       amount
       status
+      createdAt
       transactionPaymentId
       transactionSourceId
       transactionDestinationId
@@ -628,7 +629,6 @@ export const createTransaction = /* GraphQL */ `
         userProfileImageId
         owner
       }
-      createdAt
       updatedAt
     }
   }
@@ -642,6 +642,7 @@ export const updateTransaction = /* GraphQL */ `
       id
       amount
       status
+      createdAt
       transactionPaymentId
       transactionSourceId
       transactionDestinationId
@@ -686,7 +687,6 @@ export const updateTransaction = /* GraphQL */ `
         userProfileImageId
         owner
       }
-      createdAt
       updatedAt
     }
   }
@@ -700,6 +700,7 @@ export const deleteTransaction = /* GraphQL */ `
       id
       amount
       status
+      createdAt
       transactionPaymentId
       transactionSourceId
       transactionDestinationId
@@ -744,7 +745,6 @@ export const deleteTransaction = /* GraphQL */ `
         userProfileImageId
         owner
       }
-      createdAt
       updatedAt
     }
   }

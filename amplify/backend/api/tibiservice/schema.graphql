@@ -9,7 +9,6 @@ type Location {
 
 type User 
 @model
-@searchable
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
@@ -72,14 +71,17 @@ type Occupation
   ]
 ) {
   id: ID!
-  establishmentId: ID @index(name: "byEstablishment", sortKeyFields: ["name"])
+
   name: String!
   backgroundImage: ImagePath! @hasOne
+
+  ## If supplied this occupation is only for this establishment
+  establishmentId: ID @index(name: "byEstablishment", sortKeyFields: ["name"])
+
 }
 
 type Establishment 
 @model
-@searchable
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
@@ -171,7 +173,7 @@ enum TransactionRating {
   awesome
 }
 
-type Transaction 
+type Transaction
 @model 
 @auth(
   rules: [
@@ -185,6 +187,8 @@ type Transaction
   id: ID!
   amount: Float
   status: TransactionStatus
+
+  createdAt: AWSDateTime!
 
   transactionPaymentId: ID!
   transactionSourceId: ID!
@@ -231,3 +235,4 @@ type Notification
 
 }
 
+ 

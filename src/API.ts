@@ -196,9 +196,9 @@ export type ModelOccupationConnection = {
 export type Occupation = {
   __typename: "Occupation",
   id: string,
-  establishmentId?: string | null,
   name: string,
   backgroundImage: ImagePath,
+  establishmentId?: string | null,
   createdAt: string,
   updatedAt: string,
   occupationBackgroundImageId: string,
@@ -259,14 +259,14 @@ export type DeleteImagePathInput = {
 
 export type CreateOccupationInput = {
   id?: string | null,
-  establishmentId?: string | null,
   name: string,
+  establishmentId?: string | null,
   occupationBackgroundImageId: string,
 };
 
 export type ModelOccupationConditionInput = {
-  establishmentId?: ModelIDInput | null,
   name?: ModelStringInput | null,
+  establishmentId?: ModelIDInput | null,
   and?: Array< ModelOccupationConditionInput | null > | null,
   or?: Array< ModelOccupationConditionInput | null > | null,
   not?: ModelOccupationConditionInput | null,
@@ -275,8 +275,8 @@ export type ModelOccupationConditionInput = {
 
 export type UpdateOccupationInput = {
   id: string,
-  establishmentId?: string | null,
   name?: string | null,
+  establishmentId?: string | null,
   occupationBackgroundImageId?: string | null,
 };
 
@@ -457,6 +457,7 @@ export type CreateTransactionInput = {
   id?: string | null,
   amount?: number | null,
   status?: TransactionStatus | null,
+  createdAt?: string | null,
   transactionPaymentId: string,
   transactionSourceId: string,
   transactionDestinationId: string,
@@ -504,6 +505,7 @@ export type Transaction = {
   id: string,
   amount?: number | null,
   status?: TransactionStatus | null,
+  createdAt: string,
   transactionPaymentId: string,
   transactionSourceId: string,
   transactionDestinationId: string,
@@ -511,7 +513,6 @@ export type Transaction = {
   payment: Payment,
   source: User,
   destination: User,
-  createdAt: string,
   updatedAt: string,
 };
 
@@ -519,6 +520,7 @@ export type UpdateTransactionInput = {
   id: string,
   amount?: number | null,
   status?: TransactionStatus | null,
+  createdAt: string,
   transactionPaymentId?: string | null,
   transactionSourceId?: string | null,
   transactionDestinationId?: string | null,
@@ -527,6 +529,7 @@ export type UpdateTransactionInput = {
 
 export type DeleteTransactionInput = {
   id: string,
+  createdAt: string,
 };
 
 export type CreateNotificationInput = {
@@ -615,161 +618,6 @@ export type ModelUserConnection = {
   nextToken?: string | null,
 };
 
-export type SearchableUserFilterInput = {
-  id?: SearchableIDFilterInput | null,
-  firstName?: SearchableStringFilterInput | null,
-  lastName?: SearchableStringFilterInput | null,
-  availableBalance?: SearchableFloatFilterInput | null,
-  pendingBalance?: SearchableFloatFilterInput | null,
-  tippingActive?: SearchableBooleanFilterInput | null,
-  unreadNotifications?: SearchableBooleanFilterInput | null,
-  createdAt?: SearchableStringFilterInput | null,
-  updatedAt?: SearchableStringFilterInput | null,
-  userBackgroundImageId?: SearchableIDFilterInput | null,
-  userProfileImageId?: SearchableIDFilterInput | null,
-  and?: Array< SearchableUserFilterInput | null > | null,
-  or?: Array< SearchableUserFilterInput | null > | null,
-  not?: SearchableUserFilterInput | null,
-};
-
-export type SearchableIDFilterInput = {
-  ne?: string | null,
-  gt?: string | null,
-  lt?: string | null,
-  gte?: string | null,
-  lte?: string | null,
-  eq?: string | null,
-  match?: string | null,
-  matchPhrase?: string | null,
-  matchPhrasePrefix?: string | null,
-  multiMatch?: string | null,
-  exists?: boolean | null,
-  wildcard?: string | null,
-  regexp?: string | null,
-  range?: Array< string | null > | null,
-};
-
-export type SearchableStringFilterInput = {
-  ne?: string | null,
-  gt?: string | null,
-  lt?: string | null,
-  gte?: string | null,
-  lte?: string | null,
-  eq?: string | null,
-  match?: string | null,
-  matchPhrase?: string | null,
-  matchPhrasePrefix?: string | null,
-  multiMatch?: string | null,
-  exists?: boolean | null,
-  wildcard?: string | null,
-  regexp?: string | null,
-  range?: Array< string | null > | null,
-};
-
-export type SearchableFloatFilterInput = {
-  ne?: number | null,
-  gt?: number | null,
-  lt?: number | null,
-  gte?: number | null,
-  lte?: number | null,
-  eq?: number | null,
-  range?: Array< number | null > | null,
-};
-
-export type SearchableBooleanFilterInput = {
-  eq?: boolean | null,
-  ne?: boolean | null,
-};
-
-export type SearchableUserSortInput = {
-  field?: SearchableUserSortableFields | null,
-  direction?: SearchableSortDirection | null,
-};
-
-export enum SearchableUserSortableFields {
-  id = "id",
-  firstName = "firstName",
-  lastName = "lastName",
-  availableBalance = "availableBalance",
-  pendingBalance = "pendingBalance",
-  tippingActive = "tippingActive",
-  unreadNotifications = "unreadNotifications",
-  createdAt = "createdAt",
-  updatedAt = "updatedAt",
-  userBackgroundImageId = "userBackgroundImageId",
-  userProfileImageId = "userProfileImageId",
-}
-
-
-export enum SearchableSortDirection {
-  asc = "asc",
-  desc = "desc",
-}
-
-
-export type SearchableUserAggregationInput = {
-  name: string,
-  type: SearchableAggregateType,
-  field: SearchableUserAggregateField,
-};
-
-export enum SearchableAggregateType {
-  terms = "terms",
-  avg = "avg",
-  min = "min",
-  max = "max",
-  sum = "sum",
-}
-
-
-export enum SearchableUserAggregateField {
-  id = "id",
-  firstName = "firstName",
-  lastName = "lastName",
-  availableBalance = "availableBalance",
-  pendingBalance = "pendingBalance",
-  tippingActive = "tippingActive",
-  unreadNotifications = "unreadNotifications",
-  createdAt = "createdAt",
-  updatedAt = "updatedAt",
-  userBackgroundImageId = "userBackgroundImageId",
-  userProfileImageId = "userProfileImageId",
-}
-
-
-export type SearchableUserConnection = {
-  __typename: "SearchableUserConnection",
-  items:  Array<User | null >,
-  nextToken?: string | null,
-  total?: number | null,
-  aggregateItems:  Array<SearchableAggregateResult | null >,
-};
-
-export type SearchableAggregateResult = {
-  __typename: "SearchableAggregateResult",
-  name: string,
-  result?: SearchableAggregateGenericResult | null,
-};
-
-export type SearchableAggregateGenericResult = SearchableAggregateScalarResult | SearchableAggregateBucketResult
-
-
-export type SearchableAggregateScalarResult = {
-  __typename: "SearchableAggregateScalarResult",
-  value: number,
-};
-
-export type SearchableAggregateBucketResult = {
-  __typename: "SearchableAggregateBucketResult",
-  buckets?:  Array<SearchableAggregateBucketResultItem | null > | null,
-};
-
-export type SearchableAggregateBucketResultItem = {
-  __typename: "SearchableAggregateBucketResultItem",
-  key: string,
-  doc_count: number,
-};
-
 export type ModelImagePathFilterInput = {
   key?: ModelStringInput | null,
   location?: ModelImageLocationInput | null,
@@ -786,8 +634,8 @@ export type ModelImagePathConnection = {
 
 export type ModelOccupationFilterInput = {
   id?: ModelIDInput | null,
-  establishmentId?: ModelIDInput | null,
   name?: ModelStringInput | null,
+  establishmentId?: ModelIDInput | null,
   and?: Array< ModelOccupationFilterInput | null > | null,
   or?: Array< ModelOccupationFilterInput | null > | null,
   not?: ModelOccupationFilterInput | null,
@@ -809,59 +657,6 @@ export type ModelEstablishmentConnection = {
   __typename: "ModelEstablishmentConnection",
   items:  Array<Establishment | null >,
   nextToken?: string | null,
-};
-
-export type SearchableEstablishmentFilterInput = {
-  id?: SearchableIDFilterInput | null,
-  name?: SearchableStringFilterInput | null,
-  website?: SearchableStringFilterInput | null,
-  createdAt?: SearchableStringFilterInput | null,
-  updatedAt?: SearchableStringFilterInput | null,
-  establishmentImageId?: SearchableIDFilterInput | null,
-  type?: SearchableStringFilterInput | null,
-  and?: Array< SearchableEstablishmentFilterInput | null > | null,
-  or?: Array< SearchableEstablishmentFilterInput | null > | null,
-  not?: SearchableEstablishmentFilterInput | null,
-};
-
-export type SearchableEstablishmentSortInput = {
-  field?: SearchableEstablishmentSortableFields | null,
-  direction?: SearchableSortDirection | null,
-};
-
-export enum SearchableEstablishmentSortableFields {
-  id = "id",
-  name = "name",
-  website = "website",
-  createdAt = "createdAt",
-  updatedAt = "updatedAt",
-  establishmentImageId = "establishmentImageId",
-}
-
-
-export type SearchableEstablishmentAggregationInput = {
-  name: string,
-  type: SearchableAggregateType,
-  field: SearchableEstablishmentAggregateField,
-};
-
-export enum SearchableEstablishmentAggregateField {
-  id = "id",
-  name = "name",
-  type = "type",
-  website = "website",
-  createdAt = "createdAt",
-  updatedAt = "updatedAt",
-  establishmentImageId = "establishmentImageId",
-}
-
-
-export type SearchableEstablishmentConnection = {
-  __typename: "SearchableEstablishmentConnection",
-  items:  Array<Establishment | null >,
-  nextToken?: string | null,
-  total?: number | null,
-  aggregateItems:  Array<SearchableAggregateResult | null >,
 };
 
 export type ModelEstablishmentTibiFilterInput = {
@@ -909,10 +704,21 @@ export type ModelPaymentFilterInput = {
   not?: ModelPaymentFilterInput | null,
 };
 
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
 export type ModelTransactionFilterInput = {
   id?: ModelIDInput | null,
   amount?: ModelFloatInput | null,
   status?: ModelTransactionStatusInput | null,
+  createdAt?: ModelStringInput | null,
   transactionPaymentId?: ModelIDInput | null,
   transactionSourceId?: ModelIDInput | null,
   transactionDestinationId?: ModelIDInput | null,
@@ -1158,7 +964,6 @@ export type CreateOccupationMutation = {
   createOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -1169,6 +974,7 @@ export type CreateOccupationMutation = {
       updatedAt: string,
       owner?: string | null,
     },
+    establishmentId?: string | null,
     createdAt: string,
     updatedAt: string,
     occupationBackgroundImageId: string,
@@ -1185,7 +991,6 @@ export type UpdateOccupationMutation = {
   updateOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -1196,6 +1001,7 @@ export type UpdateOccupationMutation = {
       updatedAt: string,
       owner?: string | null,
     },
+    establishmentId?: string | null,
     createdAt: string,
     updatedAt: string,
     occupationBackgroundImageId: string,
@@ -1212,7 +1018,6 @@ export type DeleteOccupationMutation = {
   deleteOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -1223,6 +1028,7 @@ export type DeleteOccupationMutation = {
       updatedAt: string,
       owner?: string | null,
     },
+    establishmentId?: string | null,
     createdAt: string,
     updatedAt: string,
     occupationBackgroundImageId: string,
@@ -1607,6 +1413,7 @@ export type CreateTransactionMutation = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    createdAt: string,
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
@@ -1654,7 +1461,6 @@ export type CreateTransactionMutation = {
       userProfileImageId?: string | null,
       owner?: string | null,
     },
-    createdAt: string,
     updatedAt: string,
   } | null,
 };
@@ -1670,6 +1476,7 @@ export type UpdateTransactionMutation = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    createdAt: string,
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
@@ -1717,7 +1524,6 @@ export type UpdateTransactionMutation = {
       userProfileImageId?: string | null,
       owner?: string | null,
     },
-    createdAt: string,
     updatedAt: string,
   } | null,
 };
@@ -1733,6 +1539,7 @@ export type DeleteTransactionMutation = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    createdAt: string,
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
@@ -1780,7 +1587,6 @@ export type DeleteTransactionMutation = {
       userProfileImageId?: string | null,
       owner?: string | null,
     },
-    createdAt: string,
     updatedAt: string,
   } | null,
 };
@@ -1925,54 +1731,6 @@ export type ListUsersQuery = {
   } | null,
 };
 
-export type SearchUsersQueryVariables = {
-  filter?: SearchableUserFilterInput | null,
-  sort?: Array< SearchableUserSortInput | null > | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  from?: number | null,
-  aggregates?: Array< SearchableUserAggregationInput | null > | null,
-};
-
-export type SearchUsersQuery = {
-  searchUsers?:  {
-    __typename: "SearchableUserConnection",
-    items:  Array< {
-      __typename: "User",
-      id: string,
-      firstName: string,
-      lastName: string,
-      availableBalance?: number | null,
-      pendingBalance?: number | null,
-      tippingActive?: boolean | null,
-      unreadNotifications?: boolean | null,
-      createdAt: string,
-      updatedAt: string,
-      userBackgroundImageId?: string | null,
-      userProfileImageId?: string | null,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    total?: number | null,
-    aggregateItems:  Array< {
-      __typename: "SearchableAggregateResult",
-      name: string,
-      result: ( {
-          __typename: "SearchableAggregateScalarResult",
-          value: number,
-        } | {
-          __typename: "SearchableAggregateBucketResult",
-          buckets?:  Array< {
-            __typename: string,
-            key: string,
-            doc_count: number,
-          } | null > | null,
-        }
-      ) | null,
-    } | null >,
-  } | null,
-};
-
 export type GetImagePathQueryVariables = {
   id: string,
 };
@@ -2019,7 +1777,6 @@ export type GetOccupationQuery = {
   getOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -2030,6 +1787,7 @@ export type GetOccupationQuery = {
       updatedAt: string,
       owner?: string | null,
     },
+    establishmentId?: string | null,
     createdAt: string,
     updatedAt: string,
     occupationBackgroundImageId: string,
@@ -2049,8 +1807,8 @@ export type ListOccupationsQuery = {
     items:  Array< {
       __typename: "Occupation",
       id: string,
-      establishmentId?: string | null,
       name: string,
+      establishmentId?: string | null,
       createdAt: string,
       updatedAt: string,
       occupationBackgroundImageId: string,
@@ -2116,50 +1874,6 @@ export type ListEstablishmentsQuery = {
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
-  } | null,
-};
-
-export type SearchEstablishmentsQueryVariables = {
-  filter?: SearchableEstablishmentFilterInput | null,
-  sort?: Array< SearchableEstablishmentSortInput | null > | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  from?: number | null,
-  aggregates?: Array< SearchableEstablishmentAggregationInput | null > | null,
-};
-
-export type SearchEstablishmentsQuery = {
-  searchEstablishments?:  {
-    __typename: "SearchableEstablishmentConnection",
-    items:  Array< {
-      __typename: "Establishment",
-      id: string,
-      name: string,
-      type: EstablishmentType,
-      website?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      establishmentImageId?: string | null,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    total?: number | null,
-    aggregateItems:  Array< {
-      __typename: "SearchableAggregateResult",
-      name: string,
-      result: ( {
-          __typename: "SearchableAggregateScalarResult",
-          value: number,
-        } | {
-          __typename: "SearchableAggregateBucketResult",
-          buckets?:  Array< {
-            __typename: string,
-            key: string,
-            doc_count: number,
-          } | null > | null,
-        }
-      ) | null,
-    } | null >,
   } | null,
 };
 
@@ -2344,6 +2058,7 @@ export type ListPaymentsQuery = {
 
 export type GetTransactionQueryVariables = {
   id: string,
+  createdAt: string,
 };
 
 export type GetTransactionQuery = {
@@ -2352,6 +2067,7 @@ export type GetTransactionQuery = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    createdAt: string,
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
@@ -2399,15 +2115,17 @@ export type GetTransactionQuery = {
       userProfileImageId?: string | null,
       owner?: string | null,
     },
-    createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type ListTransactionsQueryVariables = {
+  id?: string | null,
+  createdAt?: ModelStringKeyConditionInput | null,
   filter?: ModelTransactionFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListTransactionsQuery = {
@@ -2418,11 +2136,11 @@ export type ListTransactionsQuery = {
       id: string,
       amount?: number | null,
       status?: TransactionStatus | null,
+      createdAt: string,
       transactionPaymentId: string,
       transactionSourceId: string,
       transactionDestinationId: string,
       rating?: TransactionRating | null,
-      createdAt: string,
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
@@ -2706,7 +2424,6 @@ export type OnCreateOccupationSubscription = {
   onCreateOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -2717,6 +2434,7 @@ export type OnCreateOccupationSubscription = {
       updatedAt: string,
       owner?: string | null,
     },
+    establishmentId?: string | null,
     createdAt: string,
     updatedAt: string,
     occupationBackgroundImageId: string,
@@ -2732,7 +2450,6 @@ export type OnUpdateOccupationSubscription = {
   onUpdateOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -2743,6 +2460,7 @@ export type OnUpdateOccupationSubscription = {
       updatedAt: string,
       owner?: string | null,
     },
+    establishmentId?: string | null,
     createdAt: string,
     updatedAt: string,
     occupationBackgroundImageId: string,
@@ -2758,7 +2476,6 @@ export type OnDeleteOccupationSubscription = {
   onDeleteOccupation?:  {
     __typename: "Occupation",
     id: string,
-    establishmentId?: string | null,
     name: string,
     backgroundImage:  {
       __typename: "ImagePath",
@@ -2769,6 +2486,7 @@ export type OnDeleteOccupationSubscription = {
       updatedAt: string,
       owner?: string | null,
     },
+    establishmentId?: string | null,
     createdAt: string,
     updatedAt: string,
     occupationBackgroundImageId: string,
@@ -3124,6 +2842,7 @@ export type OnCreateTransactionSubscription = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    createdAt: string,
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
@@ -3171,7 +2890,6 @@ export type OnCreateTransactionSubscription = {
       userProfileImageId?: string | null,
       owner?: string | null,
     },
-    createdAt: string,
     updatedAt: string,
   } | null,
 };
@@ -3182,6 +2900,7 @@ export type OnUpdateTransactionSubscription = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    createdAt: string,
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
@@ -3229,7 +2948,6 @@ export type OnUpdateTransactionSubscription = {
       userProfileImageId?: string | null,
       owner?: string | null,
     },
-    createdAt: string,
     updatedAt: string,
   } | null,
 };
@@ -3240,6 +2958,7 @@ export type OnDeleteTransactionSubscription = {
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
+    createdAt: string,
     transactionPaymentId: string,
     transactionSourceId: string,
     transactionDestinationId: string,
@@ -3287,7 +3006,6 @@ export type OnDeleteTransactionSubscription = {
       userProfileImageId?: string | null,
       owner?: string | null,
     },
-    createdAt: string,
     updatedAt: string,
   } | null,
 };
