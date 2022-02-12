@@ -115,5 +115,11 @@
       ]
     }
   },
-  "hosting": {}
+  "hosting": {},
+  "analytics": {
+    "tibiPinPoint": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation"
+    }
+  }
 }
