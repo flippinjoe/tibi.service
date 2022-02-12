@@ -182,9 +182,11 @@ type Transaction
     { allow: public, operations: [read, update] }
   ]
 ) {
-  id: ID!
+  id: ID! @primaryKey(sortKeyFields: ["createdAt"])
   amount: Float
   status: TransactionStatus
+
+  createdAt: AWSDateTime!
 
   transactionPaymentId: ID!
   transactionSourceId: ID!
