@@ -32,8 +32,8 @@ import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './Router';
+// import './index.css';
+// import App from './Router';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { HelmetProvider } from 'react-helmet-async';
@@ -56,7 +56,8 @@ ReactDOM.render(
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <AppAuthProvider>
           <AuthProvider>
-            <App />
+            {/* <App /> */}
+            <p>Welcome</p>
           </AuthProvider>
         </AppAuthProvider>
       </LocalizationProvider>
