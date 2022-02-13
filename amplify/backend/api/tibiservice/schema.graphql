@@ -177,9 +177,8 @@ enum TransactionRating {
   awesome
 }
 
-type Transaction
+type Transaction2
 @model
-@searchable
 @auth(
   rules: [
     { allow: private, operations: [read, create, update, delete] },
@@ -194,7 +193,6 @@ type Transaction
   status: TransactionStatus
 
   createdAt: AWSDateTime!
-  updatedAt: AWSDateTime!
 
   transactionPaymentId: ID!
   transactionSourceId: ID!
