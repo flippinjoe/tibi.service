@@ -35,10 +35,24 @@ export const onCreateUser = /* GraphQL */ `
         lat
         lon
       }
+      occupations {
+        nextToken
+      }
+      activeOccupation {
+        id
+        name
+        establishmentId
+        createdAt
+        updatedAt
+        userOccupationsId
+        occupationBackgroundImageId
+        owner
+      }
       createdAt
       updatedAt
       userBackgroundImageId
       userProfileImageId
+      userActiveOccupationId
       owner
     }
   }
@@ -76,10 +90,24 @@ export const onUpdateUser = /* GraphQL */ `
         lat
         lon
       }
+      occupations {
+        nextToken
+      }
+      activeOccupation {
+        id
+        name
+        establishmentId
+        createdAt
+        updatedAt
+        userOccupationsId
+        occupationBackgroundImageId
+        owner
+      }
       createdAt
       updatedAt
       userBackgroundImageId
       userProfileImageId
+      userActiveOccupationId
       owner
     }
   }
@@ -117,10 +145,24 @@ export const onDeleteUser = /* GraphQL */ `
         lat
         lon
       }
+      occupations {
+        nextToken
+      }
+      activeOccupation {
+        id
+        name
+        establishmentId
+        createdAt
+        updatedAt
+        userOccupationsId
+        occupationBackgroundImageId
+        owner
+      }
       createdAt
       updatedAt
       userBackgroundImageId
       userProfileImageId
+      userActiveOccupationId
       owner
     }
   }
@@ -177,6 +219,7 @@ export const onCreateOccupation = /* GraphQL */ `
       establishmentId
       createdAt
       updatedAt
+      userOccupationsId
       occupationBackgroundImageId
       owner
     }
@@ -198,6 +241,7 @@ export const onUpdateOccupation = /* GraphQL */ `
       establishmentId
       createdAt
       updatedAt
+      userOccupationsId
       occupationBackgroundImageId
       owner
     }
@@ -219,6 +263,7 @@ export const onDeleteOccupation = /* GraphQL */ `
       establishmentId
       createdAt
       updatedAt
+      userOccupationsId
       occupationBackgroundImageId
       owner
     }
@@ -336,6 +381,7 @@ export const onCreateEstablishmentTibi = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       roles
@@ -373,6 +419,7 @@ export const onUpdateEstablishmentTibi = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       roles
@@ -410,6 +457,7 @@ export const onDeleteEstablishmentTibi = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       roles
@@ -547,6 +595,7 @@ export const onCreateTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       destination {
@@ -561,6 +610,7 @@ export const onCreateTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       updatedAt
@@ -602,6 +652,7 @@ export const onUpdateTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       destination {
@@ -616,6 +667,7 @@ export const onUpdateTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       updatedAt
@@ -657,6 +709,7 @@ export const onDeleteTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       destination {
@@ -671,6 +724,7 @@ export const onDeleteTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       updatedAt

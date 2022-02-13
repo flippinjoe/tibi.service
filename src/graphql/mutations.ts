@@ -38,10 +38,24 @@ export const createUser = /* GraphQL */ `
         lat
         lon
       }
+      occupations {
+        nextToken
+      }
+      activeOccupation {
+        id
+        name
+        establishmentId
+        createdAt
+        updatedAt
+        userOccupationsId
+        occupationBackgroundImageId
+        owner
+      }
       createdAt
       updatedAt
       userBackgroundImageId
       userProfileImageId
+      userActiveOccupationId
       owner
     }
   }
@@ -82,10 +96,24 @@ export const updateUser = /* GraphQL */ `
         lat
         lon
       }
+      occupations {
+        nextToken
+      }
+      activeOccupation {
+        id
+        name
+        establishmentId
+        createdAt
+        updatedAt
+        userOccupationsId
+        occupationBackgroundImageId
+        owner
+      }
       createdAt
       updatedAt
       userBackgroundImageId
       userProfileImageId
+      userActiveOccupationId
       owner
     }
   }
@@ -126,10 +154,24 @@ export const deleteUser = /* GraphQL */ `
         lat
         lon
       }
+      occupations {
+        nextToken
+      }
+      activeOccupation {
+        id
+        name
+        establishmentId
+        createdAt
+        updatedAt
+        userOccupationsId
+        occupationBackgroundImageId
+        owner
+      }
       createdAt
       updatedAt
       userBackgroundImageId
       userProfileImageId
+      userActiveOccupationId
       owner
     }
   }
@@ -198,6 +240,7 @@ export const createOccupation = /* GraphQL */ `
       establishmentId
       createdAt
       updatedAt
+      userOccupationsId
       occupationBackgroundImageId
       owner
     }
@@ -222,6 +265,7 @@ export const updateOccupation = /* GraphQL */ `
       establishmentId
       createdAt
       updatedAt
+      userOccupationsId
       occupationBackgroundImageId
       owner
     }
@@ -246,6 +290,7 @@ export const deleteOccupation = /* GraphQL */ `
       establishmentId
       createdAt
       updatedAt
+      userOccupationsId
       occupationBackgroundImageId
       owner
     }
@@ -375,6 +420,7 @@ export const createEstablishmentTibi = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       roles
@@ -415,6 +461,7 @@ export const updateEstablishmentTibi = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       roles
@@ -455,6 +502,7 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       roles
@@ -613,6 +661,7 @@ export const createTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       destination {
@@ -627,6 +676,7 @@ export const createTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       updatedAt
@@ -671,6 +721,7 @@ export const updateTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       destination {
@@ -685,6 +736,7 @@ export const updateTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       updatedAt
@@ -729,6 +781,7 @@ export const deleteTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       destination {
@@ -743,6 +796,7 @@ export const deleteTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       updatedAt

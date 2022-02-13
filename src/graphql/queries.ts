@@ -35,10 +35,24 @@ export const getUser = /* GraphQL */ `
         lat
         lon
       }
+      occupations {
+        nextToken
+      }
+      activeOccupation {
+        id
+        name
+        establishmentId
+        createdAt
+        updatedAt
+        userOccupationsId
+        occupationBackgroundImageId
+        owner
+      }
       createdAt
       updatedAt
       userBackgroundImageId
       userProfileImageId
+      userActiveOccupationId
       owner
     }
   }
@@ -62,6 +76,7 @@ export const listUsers = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       nextToken
@@ -115,6 +130,7 @@ export const getOccupation = /* GraphQL */ `
       establishmentId
       createdAt
       updatedAt
+      userOccupationsId
       occupationBackgroundImageId
       owner
     }
@@ -133,6 +149,7 @@ export const listOccupations = /* GraphQL */ `
         establishmentId
         createdAt
         updatedAt
+        userOccupationsId
         occupationBackgroundImageId
         owner
       }
@@ -217,6 +234,7 @@ export const getEstablishmentTibi = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       roles
@@ -386,6 +404,7 @@ export const getTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       destination {
@@ -400,6 +419,7 @@ export const getTransaction = /* GraphQL */ `
         updatedAt
         userBackgroundImageId
         userProfileImageId
+        userActiveOccupationId
         owner
       }
       updatedAt

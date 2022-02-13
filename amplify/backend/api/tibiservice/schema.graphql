@@ -34,8 +34,8 @@ type User
 
   location: Location
 
-  occupations: [Occupation] @hasMany
 
+  occupations: [Occupation] @hasMany
   activeOccupation: Occupation @hasOne
 }
 
@@ -177,8 +177,8 @@ enum TransactionRating {
   awesome
 }
 
-type Transaction2
-@model
+type Transaction
+@model 
 @auth(
   rules: [
     { allow: private, operations: [read, create, update, delete] },
@@ -188,7 +188,9 @@ type Transaction2
     { allow: public, operations: [read, update] }
   ]
 ) {
-  id: ID!
+
+  ## TODO: Remove this primaryKey thing
+  id: ID! @primaryKey(sortKeyFields: ["createdAt"])
   amount: Float
   status: TransactionStatus
 
