@@ -33,6 +33,10 @@ type User
   establishments: [EstablishmentTibi] @hasMany(indexName: "byUser", fields: ["id"])
 
   location: Location
+
+  occupations: [Occupation] @hasMany
+
+  activeOccupation: Occupation @hasOne
 }
 
 enum ImageLocation {
@@ -174,7 +178,8 @@ enum TransactionRating {
 }
 
 type Transaction
-@model 
+@model
+@searchable
 @auth(
   rules: [
     { allow: private, operations: [read, create, update, delete] },
@@ -189,6 +194,7 @@ type Transaction
   status: TransactionStatus
 
   createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
 
   transactionPaymentId: ID!
   transactionSourceId: ID!
