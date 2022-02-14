@@ -623,12 +623,12 @@ export const deletePayment = /* GraphQL */ `
     }
   }
 `;
-export const createTransaction = /* GraphQL */ `
-  mutation CreateTransaction(
-    $input: CreateTransactionInput!
-    $condition: ModelTransactionConditionInput
+export const createTransaction2 = /* GraphQL */ `
+  mutation CreateTransaction2(
+    $input: CreateTransaction2Input!
+    $condition: ModelTransaction2ConditionInput
   ) {
-    createTransaction(input: $input, condition: $condition) {
+    createTransaction2(input: $input, condition: $condition) {
       id
       amount
       status
@@ -683,12 +683,12 @@ export const createTransaction = /* GraphQL */ `
     }
   }
 `;
-export const updateTransaction = /* GraphQL */ `
-  mutation UpdateTransaction(
-    $input: UpdateTransactionInput!
-    $condition: ModelTransactionConditionInput
+export const updateTransaction2 = /* GraphQL */ `
+  mutation UpdateTransaction2(
+    $input: UpdateTransaction2Input!
+    $condition: ModelTransaction2ConditionInput
   ) {
-    updateTransaction(input: $input, condition: $condition) {
+    updateTransaction2(input: $input, condition: $condition) {
       id
       amount
       status
@@ -743,12 +743,12 @@ export const updateTransaction = /* GraphQL */ `
     }
   }
 `;
-export const deleteTransaction = /* GraphQL */ `
-  mutation DeleteTransaction(
-    $input: DeleteTransactionInput!
-    $condition: ModelTransactionConditionInput
+export const deleteTransaction2 = /* GraphQL */ `
+  mutation DeleteTransaction2(
+    $input: DeleteTransaction2Input!
+    $condition: ModelTransaction2ConditionInput
   ) {
-    deleteTransaction(input: $input, condition: $condition) {
+    deleteTransaction2(input: $input, condition: $condition) {
       id
       amount
       status

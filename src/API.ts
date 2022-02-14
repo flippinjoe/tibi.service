@@ -463,7 +463,7 @@ export type DeletePaymentInput = {
   id: string,
 };
 
-export type CreateTransactionInput = {
+export type CreateTransaction2Input = {
   id?: string | null,
   amount?: number | null,
   status?: TransactionStatus | null,
@@ -488,16 +488,16 @@ export enum TransactionRating {
 }
 
 
-export type ModelTransactionConditionInput = {
+export type ModelTransaction2ConditionInput = {
   amount?: ModelFloatInput | null,
   status?: ModelTransactionStatusInput | null,
   transactionPaymentId?: ModelIDInput | null,
   transactionSourceId?: ModelIDInput | null,
   transactionDestinationId?: ModelIDInput | null,
   rating?: ModelTransactionRatingInput | null,
-  and?: Array< ModelTransactionConditionInput | null > | null,
-  or?: Array< ModelTransactionConditionInput | null > | null,
-  not?: ModelTransactionConditionInput | null,
+  and?: Array< ModelTransaction2ConditionInput | null > | null,
+  or?: Array< ModelTransaction2ConditionInput | null > | null,
+  not?: ModelTransaction2ConditionInput | null,
 };
 
 export type ModelTransactionStatusInput = {
@@ -510,8 +510,8 @@ export type ModelTransactionRatingInput = {
   ne?: TransactionRating | null,
 };
 
-export type Transaction = {
-  __typename: "Transaction",
+export type Transaction2 = {
+  __typename: "Transaction2",
   id: string,
   amount?: number | null,
   status?: TransactionStatus | null,
@@ -526,7 +526,7 @@ export type Transaction = {
   updatedAt: string,
 };
 
-export type UpdateTransactionInput = {
+export type UpdateTransaction2Input = {
   id: string,
   amount?: number | null,
   status?: TransactionStatus | null,
@@ -537,7 +537,7 @@ export type UpdateTransactionInput = {
   rating?: TransactionRating | null,
 };
 
-export type DeleteTransactionInput = {
+export type DeleteTransaction2Input = {
   id: string,
   createdAt: string,
 };
@@ -726,7 +726,7 @@ export type ModelStringKeyConditionInput = {
   beginsWith?: string | null,
 };
 
-export type ModelTransactionFilterInput = {
+export type ModelTransaction2FilterInput = {
   id?: ModelIDInput | null,
   amount?: ModelFloatInput | null,
   status?: ModelTransactionStatusInput | null,
@@ -735,14 +735,14 @@ export type ModelTransactionFilterInput = {
   transactionSourceId?: ModelIDInput | null,
   transactionDestinationId?: ModelIDInput | null,
   rating?: ModelTransactionRatingInput | null,
-  and?: Array< ModelTransactionFilterInput | null > | null,
-  or?: Array< ModelTransactionFilterInput | null > | null,
-  not?: ModelTransactionFilterInput | null,
+  and?: Array< ModelTransaction2FilterInput | null > | null,
+  or?: Array< ModelTransaction2FilterInput | null > | null,
+  not?: ModelTransaction2FilterInput | null,
 };
 
-export type ModelTransactionConnection = {
-  __typename: "ModelTransactionConnection",
-  items:  Array<Transaction | null >,
+export type ModelTransaction2Connection = {
+  __typename: "ModelTransaction2Connection",
+  items:  Array<Transaction2 | null >,
   nextToken?: string | null,
 };
 
@@ -1468,14 +1468,14 @@ export type DeletePaymentMutation = {
   } | null,
 };
 
-export type CreateTransactionMutationVariables = {
-  input: CreateTransactionInput,
-  condition?: ModelTransactionConditionInput | null,
+export type CreateTransaction2MutationVariables = {
+  input: CreateTransaction2Input,
+  condition?: ModelTransaction2ConditionInput | null,
 };
 
-export type CreateTransactionMutation = {
-  createTransaction?:  {
-    __typename: "Transaction",
+export type CreateTransaction2Mutation = {
+  createTransaction2?:  {
+    __typename: "Transaction2",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
@@ -1533,14 +1533,14 @@ export type CreateTransactionMutation = {
   } | null,
 };
 
-export type UpdateTransactionMutationVariables = {
-  input: UpdateTransactionInput,
-  condition?: ModelTransactionConditionInput | null,
+export type UpdateTransaction2MutationVariables = {
+  input: UpdateTransaction2Input,
+  condition?: ModelTransaction2ConditionInput | null,
 };
 
-export type UpdateTransactionMutation = {
-  updateTransaction?:  {
-    __typename: "Transaction",
+export type UpdateTransaction2Mutation = {
+  updateTransaction2?:  {
+    __typename: "Transaction2",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
@@ -1598,14 +1598,14 @@ export type UpdateTransactionMutation = {
   } | null,
 };
 
-export type DeleteTransactionMutationVariables = {
-  input: DeleteTransactionInput,
-  condition?: ModelTransactionConditionInput | null,
+export type DeleteTransaction2MutationVariables = {
+  input: DeleteTransaction2Input,
+  condition?: ModelTransaction2ConditionInput | null,
 };
 
-export type DeleteTransactionMutation = {
-  deleteTransaction?:  {
-    __typename: "Transaction",
+export type DeleteTransaction2Mutation = {
+  deleteTransaction2?:  {
+    __typename: "Transaction2",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
@@ -2148,14 +2148,14 @@ export type ListPaymentsQuery = {
   } | null,
 };
 
-export type GetTransactionQueryVariables = {
+export type GetTransaction2QueryVariables = {
   id: string,
   createdAt: string,
 };
 
-export type GetTransactionQuery = {
-  getTransaction?:  {
-    __typename: "Transaction",
+export type GetTransaction2Query = {
+  getTransaction2?:  {
+    __typename: "Transaction2",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
@@ -2213,20 +2213,20 @@ export type GetTransactionQuery = {
   } | null,
 };
 
-export type ListTransactionsQueryVariables = {
+export type ListTransaction2sQueryVariables = {
   id?: string | null,
   createdAt?: ModelStringKeyConditionInput | null,
-  filter?: ModelTransactionFilterInput | null,
+  filter?: ModelTransaction2FilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   sortDirection?: ModelSortDirection | null,
 };
 
-export type ListTransactionsQuery = {
-  listTransactions?:  {
-    __typename: "ModelTransactionConnection",
+export type ListTransaction2sQuery = {
+  listTransaction2s?:  {
+    __typename: "ModelTransaction2Connection",
     items:  Array< {
-      __typename: "Transaction",
+      __typename: "Transaction2",
       id: string,
       amount?: number | null,
       status?: TransactionStatus | null,
@@ -2984,9 +2984,9 @@ export type OnDeletePaymentSubscription = {
   } | null,
 };
 
-export type OnCreateTransactionSubscription = {
-  onCreateTransaction?:  {
-    __typename: "Transaction",
+export type OnCreateTransaction2Subscription = {
+  onCreateTransaction2?:  {
+    __typename: "Transaction2",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
@@ -3044,9 +3044,9 @@ export type OnCreateTransactionSubscription = {
   } | null,
 };
 
-export type OnUpdateTransactionSubscription = {
-  onUpdateTransaction?:  {
-    __typename: "Transaction",
+export type OnUpdateTransaction2Subscription = {
+  onUpdateTransaction2?:  {
+    __typename: "Transaction2",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
@@ -3104,9 +3104,9 @@ export type OnUpdateTransactionSubscription = {
   } | null,
 };
 
-export type OnDeleteTransactionSubscription = {
-  onDeleteTransaction?:  {
-    __typename: "Transaction",
+export type OnDeleteTransaction2Subscription = {
+  onDeleteTransaction2?:  {
+    __typename: "Transaction2",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,

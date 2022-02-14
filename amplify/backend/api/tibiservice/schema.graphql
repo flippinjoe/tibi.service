@@ -177,7 +177,7 @@ enum TransactionRating {
   awesome
 }
 
-type Transaction
+type Transaction2
 @model 
 @auth(
   rules: [

@@ -369,9 +369,9 @@ export const listPayments = /* GraphQL */ `
     }
   }
 `;
-export const getTransaction = /* GraphQL */ `
-  query GetTransaction($id: ID!, $createdAt: AWSDateTime!) {
-    getTransaction(id: $id, createdAt: $createdAt) {
+export const getTransaction2 = /* GraphQL */ `
+  query GetTransaction2($id: ID!, $createdAt: AWSDateTime!) {
+    getTransaction2(id: $id, createdAt: $createdAt) {
       id
       amount
       status
@@ -426,16 +426,16 @@ export const getTransaction = /* GraphQL */ `
     }
   }
 `;
-export const listTransactions = /* GraphQL */ `
-  query ListTransactions(
+export const listTransaction2s = /* GraphQL */ `
+  query ListTransaction2s(
     $id: ID
     $createdAt: ModelStringKeyConditionInput
-    $filter: ModelTransactionFilterInput
+    $filter: ModelTransaction2FilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
-    listTransactions(
+    listTransaction2s(
       id: $id
       createdAt: $createdAt
       filter: $filter
