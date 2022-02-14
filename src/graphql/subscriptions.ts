@@ -560,9 +560,9 @@ export const onDeletePayment = /* GraphQL */ `
     }
   }
 `;
-export const onCreateTransaction2 = /* GraphQL */ `
-  subscription OnCreateTransaction2 {
-    onCreateTransaction2 {
+export const onCreateTransaction = /* GraphQL */ `
+  subscription OnCreateTransaction {
+    onCreateTransaction {
       id
       amount
       status
@@ -617,9 +617,9 @@ export const onCreateTransaction2 = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateTransaction2 = /* GraphQL */ `
-  subscription OnUpdateTransaction2 {
-    onUpdateTransaction2 {
+export const onUpdateTransaction = /* GraphQL */ `
+  subscription OnUpdateTransaction {
+    onUpdateTransaction {
       id
       amount
       status
@@ -674,9 +674,9 @@ export const onUpdateTransaction2 = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteTransaction2 = /* GraphQL */ `
-  subscription OnDeleteTransaction2 {
-    onDeleteTransaction2 {
+export const onDeleteTransaction = /* GraphQL */ `
+  subscription OnDeleteTransaction {
+    onDeleteTransaction {
       id
       amount
       status

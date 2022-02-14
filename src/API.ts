@@ -463,7 +463,7 @@ export type DeletePaymentInput = {
   id: string,
 };
 
-export type CreateTransaction2Input = {
+export type CreateTransactionInput = {
   id?: string | null,
   amount?: number | null,
   status?: TransactionStatus | null,
@@ -488,16 +488,17 @@ export enum TransactionRating {
 }
 
 
-export type ModelTransaction2ConditionInput = {
+export type ModelTransactionConditionInput = {
   amount?: ModelFloatInput | null,
   status?: ModelTransactionStatusInput | null,
+  createdAt?: ModelStringInput | null,
   transactionPaymentId?: ModelIDInput | null,
   transactionSourceId?: ModelIDInput | null,
   transactionDestinationId?: ModelIDInput | null,
   rating?: ModelTransactionRatingInput | null,
-  and?: Array< ModelTransaction2ConditionInput | null > | null,
-  or?: Array< ModelTransaction2ConditionInput | null > | null,
-  not?: ModelTransaction2ConditionInput | null,
+  and?: Array< ModelTransactionConditionInput | null > | null,
+  or?: Array< ModelTransactionConditionInput | null > | null,
+  not?: ModelTransactionConditionInput | null,
 };
 
 export type ModelTransactionStatusInput = {
@@ -510,8 +511,8 @@ export type ModelTransactionRatingInput = {
   ne?: TransactionRating | null,
 };
 
-export type Transaction2 = {
-  __typename: "Transaction2",
+export type Transaction = {
+  __typename: "Transaction",
   id: string,
   amount?: number | null,
   status?: TransactionStatus | null,
@@ -526,20 +527,19 @@ export type Transaction2 = {
   updatedAt: string,
 };
 
-export type UpdateTransaction2Input = {
+export type UpdateTransactionInput = {
   id: string,
   amount?: number | null,
   status?: TransactionStatus | null,
-  createdAt: string,
+  createdAt?: string | null,
   transactionPaymentId?: string | null,
   transactionSourceId?: string | null,
   transactionDestinationId?: string | null,
   rating?: TransactionRating | null,
 };
 
-export type DeleteTransaction2Input = {
+export type DeleteTransactionInput = {
   id: string,
-  createdAt: string,
 };
 
 export type CreateNotificationInput = {
@@ -716,17 +716,7 @@ export type ModelPaymentFilterInput = {
   not?: ModelPaymentFilterInput | null,
 };
 
-export type ModelStringKeyConditionInput = {
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-};
-
-export type ModelTransaction2FilterInput = {
+export type ModelTransactionFilterInput = {
   id?: ModelIDInput | null,
   amount?: ModelFloatInput | null,
   status?: ModelTransactionStatusInput | null,
@@ -735,15 +725,157 @@ export type ModelTransaction2FilterInput = {
   transactionSourceId?: ModelIDInput | null,
   transactionDestinationId?: ModelIDInput | null,
   rating?: ModelTransactionRatingInput | null,
-  and?: Array< ModelTransaction2FilterInput | null > | null,
-  or?: Array< ModelTransaction2FilterInput | null > | null,
-  not?: ModelTransaction2FilterInput | null,
+  and?: Array< ModelTransactionFilterInput | null > | null,
+  or?: Array< ModelTransactionFilterInput | null > | null,
+  not?: ModelTransactionFilterInput | null,
 };
 
-export type ModelTransaction2Connection = {
-  __typename: "ModelTransaction2Connection",
-  items:  Array<Transaction2 | null >,
+export type ModelTransactionConnection = {
+  __typename: "ModelTransactionConnection",
+  items:  Array<Transaction | null >,
   nextToken?: string | null,
+};
+
+export type SearchableTransactionFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  amount?: SearchableFloatFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  transactionPaymentId?: SearchableIDFilterInput | null,
+  transactionSourceId?: SearchableIDFilterInput | null,
+  transactionDestinationId?: SearchableIDFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  status?: SearchableStringFilterInput | null,
+  rating?: SearchableStringFilterInput | null,
+  and?: Array< SearchableTransactionFilterInput | null > | null,
+  or?: Array< SearchableTransactionFilterInput | null > | null,
+  not?: SearchableTransactionFilterInput | null,
+};
+
+export type SearchableIDFilterInput = {
+  ne?: string | null,
+  gt?: string | null,
+  lt?: string | null,
+  gte?: string | null,
+  lte?: string | null,
+  eq?: string | null,
+  match?: string | null,
+  matchPhrase?: string | null,
+  matchPhrasePrefix?: string | null,
+  multiMatch?: string | null,
+  exists?: boolean | null,
+  wildcard?: string | null,
+  regexp?: string | null,
+  range?: Array< string | null > | null,
+};
+
+export type SearchableFloatFilterInput = {
+  ne?: number | null,
+  gt?: number | null,
+  lt?: number | null,
+  gte?: number | null,
+  lte?: number | null,
+  eq?: number | null,
+  range?: Array< number | null > | null,
+};
+
+export type SearchableStringFilterInput = {
+  ne?: string | null,
+  gt?: string | null,
+  lt?: string | null,
+  gte?: string | null,
+  lte?: string | null,
+  eq?: string | null,
+  match?: string | null,
+  matchPhrase?: string | null,
+  matchPhrasePrefix?: string | null,
+  multiMatch?: string | null,
+  exists?: boolean | null,
+  wildcard?: string | null,
+  regexp?: string | null,
+  range?: Array< string | null > | null,
+};
+
+export type SearchableTransactionSortInput = {
+  field?: SearchableTransactionSortableFields | null,
+  direction?: SearchableSortDirection | null,
+};
+
+export enum SearchableTransactionSortableFields {
+  id = "id",
+  amount = "amount",
+  createdAt = "createdAt",
+  transactionPaymentId = "transactionPaymentId",
+  transactionSourceId = "transactionSourceId",
+  transactionDestinationId = "transactionDestinationId",
+  updatedAt = "updatedAt",
+}
+
+
+export enum SearchableSortDirection {
+  asc = "asc",
+  desc = "desc",
+}
+
+
+export type SearchableTransactionAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableTransactionAggregateField,
+};
+
+export enum SearchableAggregateType {
+  terms = "terms",
+  avg = "avg",
+  min = "min",
+  max = "max",
+  sum = "sum",
+}
+
+
+export enum SearchableTransactionAggregateField {
+  id = "id",
+  amount = "amount",
+  status = "status",
+  createdAt = "createdAt",
+  transactionPaymentId = "transactionPaymentId",
+  transactionSourceId = "transactionSourceId",
+  transactionDestinationId = "transactionDestinationId",
+  rating = "rating",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableTransactionConnection = {
+  __typename: "SearchableTransactionConnection",
+  items:  Array<Transaction | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
+export type SearchableAggregateResult = {
+  __typename: "SearchableAggregateResult",
+  name: string,
+  result?: SearchableAggregateGenericResult | null,
+};
+
+export type SearchableAggregateGenericResult = SearchableAggregateScalarResult | SearchableAggregateBucketResult
+
+
+export type SearchableAggregateScalarResult = {
+  __typename: "SearchableAggregateScalarResult",
+  value: number,
+};
+
+export type SearchableAggregateBucketResult = {
+  __typename: "SearchableAggregateBucketResult",
+  buckets?:  Array<SearchableAggregateBucketResultItem | null > | null,
+};
+
+export type SearchableAggregateBucketResultItem = {
+  __typename: "SearchableAggregateBucketResultItem",
+  key: string,
+  doc_count: number,
 };
 
 export type ModelNotificationFilterInput = {
@@ -1468,14 +1600,14 @@ export type DeletePaymentMutation = {
   } | null,
 };
 
-export type CreateTransaction2MutationVariables = {
-  input: CreateTransaction2Input,
-  condition?: ModelTransaction2ConditionInput | null,
+export type CreateTransactionMutationVariables = {
+  input: CreateTransactionInput,
+  condition?: ModelTransactionConditionInput | null,
 };
 
-export type CreateTransaction2Mutation = {
-  createTransaction2?:  {
-    __typename: "Transaction2",
+export type CreateTransactionMutation = {
+  createTransaction?:  {
+    __typename: "Transaction",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
@@ -1533,14 +1665,14 @@ export type CreateTransaction2Mutation = {
   } | null,
 };
 
-export type UpdateTransaction2MutationVariables = {
-  input: UpdateTransaction2Input,
-  condition?: ModelTransaction2ConditionInput | null,
+export type UpdateTransactionMutationVariables = {
+  input: UpdateTransactionInput,
+  condition?: ModelTransactionConditionInput | null,
 };
 
-export type UpdateTransaction2Mutation = {
-  updateTransaction2?:  {
-    __typename: "Transaction2",
+export type UpdateTransactionMutation = {
+  updateTransaction?:  {
+    __typename: "Transaction",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
@@ -1598,14 +1730,14 @@ export type UpdateTransaction2Mutation = {
   } | null,
 };
 
-export type DeleteTransaction2MutationVariables = {
-  input: DeleteTransaction2Input,
-  condition?: ModelTransaction2ConditionInput | null,
+export type DeleteTransactionMutationVariables = {
+  input: DeleteTransactionInput,
+  condition?: ModelTransactionConditionInput | null,
 };
 
-export type DeleteTransaction2Mutation = {
-  deleteTransaction2?:  {
-    __typename: "Transaction2",
+export type DeleteTransactionMutation = {
+  deleteTransaction?:  {
+    __typename: "Transaction",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
@@ -2148,14 +2280,13 @@ export type ListPaymentsQuery = {
   } | null,
 };
 
-export type GetTransaction2QueryVariables = {
+export type GetTransactionQueryVariables = {
   id: string,
-  createdAt: string,
 };
 
-export type GetTransaction2Query = {
-  getTransaction2?:  {
-    __typename: "Transaction2",
+export type GetTransactionQuery = {
+  getTransaction?:  {
+    __typename: "Transaction",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
@@ -2213,20 +2344,17 @@ export type GetTransaction2Query = {
   } | null,
 };
 
-export type ListTransaction2sQueryVariables = {
-  id?: string | null,
-  createdAt?: ModelStringKeyConditionInput | null,
-  filter?: ModelTransaction2FilterInput | null,
+export type ListTransactionsQueryVariables = {
+  filter?: ModelTransactionFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
-  sortDirection?: ModelSortDirection | null,
 };
 
-export type ListTransaction2sQuery = {
-  listTransaction2s?:  {
-    __typename: "ModelTransaction2Connection",
+export type ListTransactionsQuery = {
+  listTransactions?:  {
+    __typename: "ModelTransactionConnection",
     items:  Array< {
-      __typename: "Transaction2",
+      __typename: "Transaction",
       id: string,
       amount?: number | null,
       status?: TransactionStatus | null,
@@ -2238,6 +2366,51 @@ export type ListTransaction2sQuery = {
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
+  } | null,
+};
+
+export type SearchTransactionsQueryVariables = {
+  filter?: SearchableTransactionFilterInput | null,
+  sort?: Array< SearchableTransactionSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableTransactionAggregationInput | null > | null,
+};
+
+export type SearchTransactionsQuery = {
+  searchTransactions?:  {
+    __typename: "SearchableTransactionConnection",
+    items:  Array< {
+      __typename: "Transaction",
+      id: string,
+      amount?: number | null,
+      status?: TransactionStatus | null,
+      createdAt: string,
+      transactionPaymentId: string,
+      transactionSourceId: string,
+      transactionDestinationId: string,
+      rating?: TransactionRating | null,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
   } | null,
 };
 
@@ -2984,9 +3157,9 @@ export type OnDeletePaymentSubscription = {
   } | null,
 };
 
-export type OnCreateTransaction2Subscription = {
-  onCreateTransaction2?:  {
-    __typename: "Transaction2",
+export type OnCreateTransactionSubscription = {
+  onCreateTransaction?:  {
+    __typename: "Transaction",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
@@ -3044,9 +3217,9 @@ export type OnCreateTransaction2Subscription = {
   } | null,
 };
 
-export type OnUpdateTransaction2Subscription = {
-  onUpdateTransaction2?:  {
-    __typename: "Transaction2",
+export type OnUpdateTransactionSubscription = {
+  onUpdateTransaction?:  {
+    __typename: "Transaction",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,
@@ -3104,9 +3277,9 @@ export type OnUpdateTransaction2Subscription = {
   } | null,
 };
 
-export type OnDeleteTransaction2Subscription = {
-  onDeleteTransaction2?:  {
-    __typename: "Transaction2",
+export type OnDeleteTransactionSubscription = {
+  onDeleteTransaction?:  {
+    __typename: "Transaction",
     id: string,
     amount?: number | null,
     status?: TransactionStatus | null,

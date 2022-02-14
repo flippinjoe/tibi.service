@@ -369,9 +369,9 @@ export const listPayments = /* GraphQL */ `
     }
   }
 `;
-export const getTransaction2 = /* GraphQL */ `
-  query GetTransaction2($id: ID!, $createdAt: AWSDateTime!) {
-    getTransaction2(id: $id, createdAt: $createdAt) {
+export const getTransaction = /* GraphQL */ `
+  query GetTransaction($id: ID!) {
+    getTransaction(id: $id) {
       id
       amount
       status
@@ -426,22 +426,44 @@ export const getTransaction2 = /* GraphQL */ `
     }
   }
 `;
-export const listTransaction2s = /* GraphQL */ `
-  query ListTransaction2s(
-    $id: ID
-    $createdAt: ModelStringKeyConditionInput
-    $filter: ModelTransaction2FilterInput
+export const listTransactions = /* GraphQL */ `
+  query ListTransactions(
+    $filter: ModelTransactionFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listTransaction2s(
-      id: $id
-      createdAt: $createdAt
+    listTransactions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        amount
+        status
+        createdAt
+        transactionPaymentId
+        transactionSourceId
+        transactionDestinationId
+        rating
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const searchTransactions = /* GraphQL */ `
+  query SearchTransactions(
+    $filter: SearchableTransactionFilterInput
+    $sort: [SearchableTransactionSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableTransactionAggregationInput]
+  ) {
+    searchTransactions(
       filter: $filter
+      sort: $sort
       limit: $limit
       nextToken: $nextToken
-      sortDirection: $sortDirection
+      from: $from
+      aggregates: $aggregates
     ) {
       items {
         id
@@ -455,6 +477,21 @@ export const listTransaction2s = /* GraphQL */ `
         updatedAt
       }
       nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;
