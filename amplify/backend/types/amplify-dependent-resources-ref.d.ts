@@ -29,6 +29,14 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string"
         }
     },
+    "function": {
+        "postTransactionTrigger": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        }
+    },
     "analytics": {
         "tibiPinPoint": {
             "Region": "string",
