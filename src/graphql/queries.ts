@@ -2,6 +2,37 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getDevice = /* GraphQL */ `
+  query GetDevice($id: ID!) {
+    getDevice(id: $id) {
+      id
+      name
+      token
+      userId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listDevices = /* GraphQL */ `
+  query ListDevices(
+    $filter: ModelDeviceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listDevices(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        token
+        userId
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -42,9 +73,9 @@ export const getUser = /* GraphQL */ `
         id
         name
         establishmentId
+        userId
         createdAt
         updatedAt
-        userOccupationsId
         occupationBackgroundImageId
         owner
       }
@@ -128,9 +159,9 @@ export const getOccupation = /* GraphQL */ `
         owner
       }
       establishmentId
+      userId
       createdAt
       updatedAt
-      userOccupationsId
       occupationBackgroundImageId
       owner
     }
@@ -147,9 +178,9 @@ export const listOccupations = /* GraphQL */ `
         id
         name
         establishmentId
+        userId
         createdAt
         updatedAt
-        userOccupationsId
         occupationBackgroundImageId
         owner
       }

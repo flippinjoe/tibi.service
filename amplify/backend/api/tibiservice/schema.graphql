@@ -35,8 +35,18 @@ type User
   location: Location
 
 
-  occupations: [Occupation] @hasMany
+  occupations: [Occupation] @hasMany(indexName: "byUser", fields: ["id"])
   activeOccupation: Occupation @hasOne
+}
+
+type Device
+@model
+{
+  id: ID!
+  name: String!
+  token: String!
+
+  userId: ID!
 }
 
 enum ImageLocation {
@@ -82,6 +92,7 @@ type Occupation
   ## If supplied this occupation is only for this establishment
   establishmentId: ID @index(name: "byEstablishment", sortKeyFields: ["name"])
 
+  userId: ID @index(name: "byUser", sortKeyFields: ["name"])
 }
 
 type Establishment 

@@ -2,6 +2,51 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createDevice = /* GraphQL */ `
+  mutation CreateDevice(
+    $input: CreateDeviceInput!
+    $condition: ModelDeviceConditionInput
+  ) {
+    createDevice(input: $input, condition: $condition) {
+      id
+      name
+      token
+      userId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateDevice = /* GraphQL */ `
+  mutation UpdateDevice(
+    $input: UpdateDeviceInput!
+    $condition: ModelDeviceConditionInput
+  ) {
+    updateDevice(input: $input, condition: $condition) {
+      id
+      name
+      token
+      userId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteDevice = /* GraphQL */ `
+  mutation DeleteDevice(
+    $input: DeleteDeviceInput!
+    $condition: ModelDeviceConditionInput
+  ) {
+    deleteDevice(input: $input, condition: $condition) {
+      id
+      name
+      token
+      userId
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
@@ -45,9 +90,9 @@ export const createUser = /* GraphQL */ `
         id
         name
         establishmentId
+        userId
         createdAt
         updatedAt
-        userOccupationsId
         occupationBackgroundImageId
         owner
       }
@@ -103,9 +148,9 @@ export const updateUser = /* GraphQL */ `
         id
         name
         establishmentId
+        userId
         createdAt
         updatedAt
-        userOccupationsId
         occupationBackgroundImageId
         owner
       }
@@ -161,9 +206,9 @@ export const deleteUser = /* GraphQL */ `
         id
         name
         establishmentId
+        userId
         createdAt
         updatedAt
-        userOccupationsId
         occupationBackgroundImageId
         owner
       }
@@ -238,9 +283,9 @@ export const createOccupation = /* GraphQL */ `
         owner
       }
       establishmentId
+      userId
       createdAt
       updatedAt
-      userOccupationsId
       occupationBackgroundImageId
       owner
     }
@@ -263,9 +308,9 @@ export const updateOccupation = /* GraphQL */ `
         owner
       }
       establishmentId
+      userId
       createdAt
       updatedAt
-      userOccupationsId
       occupationBackgroundImageId
       owner
     }
@@ -288,9 +333,9 @@ export const deleteOccupation = /* GraphQL */ `
         owner
       }
       establishmentId
+      userId
       createdAt
       updatedAt
-      userOccupationsId
       occupationBackgroundImageId
       owner
     }

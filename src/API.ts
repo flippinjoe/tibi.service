@@ -2,38 +2,20 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateUserInput = {
+export type CreateDeviceInput = {
   id?: string | null,
-  firstName: string,
-  lastName: string,
-  availableBalance?: number | null,
-  pendingBalance?: number | null,
-  tippingActive?: boolean | null,
-  unreadNotifications?: boolean | null,
-  location?: LocationInput | null,
-  userBackgroundImageId?: string | null,
-  userProfileImageId?: string | null,
-  userActiveOccupationId?: string | null,
+  name: string,
+  token: string,
+  userId: string,
 };
 
-export type LocationInput = {
-  lat: number,
-  lon: number,
-};
-
-export type ModelUserConditionInput = {
-  firstName?: ModelStringInput | null,
-  lastName?: ModelStringInput | null,
-  availableBalance?: ModelFloatInput | null,
-  pendingBalance?: ModelFloatInput | null,
-  tippingActive?: ModelBooleanInput | null,
-  unreadNotifications?: ModelBooleanInput | null,
-  and?: Array< ModelUserConditionInput | null > | null,
-  or?: Array< ModelUserConditionInput | null > | null,
-  not?: ModelUserConditionInput | null,
-  userBackgroundImageId?: ModelIDInput | null,
-  userProfileImageId?: ModelIDInput | null,
-  userActiveOccupationId?: ModelIDInput | null,
+export type ModelDeviceConditionInput = {
+  name?: ModelStringInput | null,
+  token?: ModelStringInput | null,
+  userId?: ModelIDInput | null,
+  and?: Array< ModelDeviceConditionInput | null > | null,
+  or?: Array< ModelDeviceConditionInput | null > | null,
+  not?: ModelDeviceConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -76,6 +58,77 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type Device = {
+  __typename: "Device",
+  id: string,
+  name: string,
+  token: string,
+  userId: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateDeviceInput = {
+  id: string,
+  name?: string | null,
+  token?: string | null,
+  userId?: string | null,
+};
+
+export type DeleteDeviceInput = {
+  id: string,
+};
+
+export type CreateUserInput = {
+  id?: string | null,
+  firstName: string,
+  lastName: string,
+  availableBalance?: number | null,
+  pendingBalance?: number | null,
+  tippingActive?: boolean | null,
+  unreadNotifications?: boolean | null,
+  location?: LocationInput | null,
+  userBackgroundImageId?: string | null,
+  userProfileImageId?: string | null,
+  userActiveOccupationId?: string | null,
+};
+
+export type LocationInput = {
+  lat: number,
+  lon: number,
+};
+
+export type ModelUserConditionInput = {
+  firstName?: ModelStringInput | null,
+  lastName?: ModelStringInput | null,
+  availableBalance?: ModelFloatInput | null,
+  pendingBalance?: ModelFloatInput | null,
+  tippingActive?: ModelBooleanInput | null,
+  unreadNotifications?: ModelBooleanInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
+  userBackgroundImageId?: ModelIDInput | null,
+  userProfileImageId?: ModelIDInput | null,
+  userActiveOccupationId?: ModelIDInput | null,
+};
+
 export type ModelFloatInput = {
   ne?: number | null,
   eq?: number | null,
@@ -93,22 +146,6 @@ export type ModelBooleanInput = {
   eq?: boolean | null,
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
-};
-
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
 };
 
 export type User = {
@@ -204,9 +241,9 @@ export type Occupation = {
   name: string,
   backgroundImage: ImagePath,
   establishmentId?: string | null,
+  userId?: string | null,
   createdAt: string,
   updatedAt: string,
-  userOccupationsId?: string | null,
   occupationBackgroundImageId: string,
   owner?: string | null,
 };
@@ -268,17 +305,17 @@ export type CreateOccupationInput = {
   id?: string | null,
   name: string,
   establishmentId?: string | null,
-  userOccupationsId?: string | null,
+  userId?: string | null,
   occupationBackgroundImageId: string,
 };
 
 export type ModelOccupationConditionInput = {
   name?: ModelStringInput | null,
   establishmentId?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
   and?: Array< ModelOccupationConditionInput | null > | null,
   or?: Array< ModelOccupationConditionInput | null > | null,
   not?: ModelOccupationConditionInput | null,
-  userOccupationsId?: ModelIDInput | null,
   occupationBackgroundImageId?: ModelIDInput | null,
 };
 
@@ -286,7 +323,7 @@ export type UpdateOccupationInput = {
   id: string,
   name?: string | null,
   establishmentId?: string | null,
-  userOccupationsId?: string | null,
+  userId?: string | null,
   occupationBackgroundImageId?: string | null,
 };
 
@@ -607,6 +644,22 @@ export type DeleteNotificationInput = {
   id: string,
 };
 
+export type ModelDeviceFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  token?: ModelStringInput | null,
+  userId?: ModelIDInput | null,
+  and?: Array< ModelDeviceFilterInput | null > | null,
+  or?: Array< ModelDeviceFilterInput | null > | null,
+  not?: ModelDeviceFilterInput | null,
+};
+
+export type ModelDeviceConnection = {
+  __typename: "ModelDeviceConnection",
+  items:  Array<Device | null >,
+  nextToken?: string | null,
+};
+
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   firstName?: ModelStringInput | null,
@@ -647,10 +700,10 @@ export type ModelOccupationFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   establishmentId?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
   and?: Array< ModelOccupationFilterInput | null > | null,
   or?: Array< ModelOccupationFilterInput | null > | null,
   not?: ModelOccupationFilterInput | null,
-  userOccupationsId?: ModelIDInput | null,
   occupationBackgroundImageId?: ModelIDInput | null,
 };
 
@@ -898,6 +951,57 @@ export type ModelNotificationConnection = {
   nextToken?: string | null,
 };
 
+export type CreateDeviceMutationVariables = {
+  input: CreateDeviceInput,
+  condition?: ModelDeviceConditionInput | null,
+};
+
+export type CreateDeviceMutation = {
+  createDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateDeviceMutationVariables = {
+  input: UpdateDeviceInput,
+  condition?: ModelDeviceConditionInput | null,
+};
+
+export type UpdateDeviceMutation = {
+  updateDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteDeviceMutationVariables = {
+  input: DeleteDeviceInput,
+  condition?: ModelDeviceConditionInput | null,
+};
+
+export type DeleteDeviceMutation = {
+  deleteDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type CreateUserMutationVariables = {
   input: CreateUserInput,
   condition?: ModelUserConditionInput | null,
@@ -949,9 +1053,9 @@ export type CreateUserMutation = {
       id: string,
       name: string,
       establishmentId?: string | null,
+      userId?: string | null,
       createdAt: string,
       updatedAt: string,
-      userOccupationsId?: string | null,
       occupationBackgroundImageId: string,
       owner?: string | null,
     } | null,
@@ -1015,9 +1119,9 @@ export type UpdateUserMutation = {
       id: string,
       name: string,
       establishmentId?: string | null,
+      userId?: string | null,
       createdAt: string,
       updatedAt: string,
-      userOccupationsId?: string | null,
       occupationBackgroundImageId: string,
       owner?: string | null,
     } | null,
@@ -1081,9 +1185,9 @@ export type DeleteUserMutation = {
       id: string,
       name: string,
       establishmentId?: string | null,
+      userId?: string | null,
       createdAt: string,
       updatedAt: string,
-      userOccupationsId?: string | null,
       occupationBackgroundImageId: string,
       owner?: string | null,
     } | null,
@@ -1167,9 +1271,9 @@ export type CreateOccupationMutation = {
       owner?: string | null,
     },
     establishmentId?: string | null,
+    userId?: string | null,
     createdAt: string,
     updatedAt: string,
-    userOccupationsId?: string | null,
     occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
@@ -1195,9 +1299,9 @@ export type UpdateOccupationMutation = {
       owner?: string | null,
     },
     establishmentId?: string | null,
+    userId?: string | null,
     createdAt: string,
     updatedAt: string,
-    userOccupationsId?: string | null,
     occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
@@ -1223,9 +1327,9 @@ export type DeleteOccupationMutation = {
       owner?: string | null,
     },
     establishmentId?: string | null,
+    userId?: string | null,
     createdAt: string,
     updatedAt: string,
-    userOccupationsId?: string | null,
     occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
@@ -1858,6 +1962,44 @@ export type DeleteNotificationMutation = {
   } | null,
 };
 
+export type GetDeviceQueryVariables = {
+  id: string,
+};
+
+export type GetDeviceQuery = {
+  getDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListDevicesQueryVariables = {
+  filter?: ModelDeviceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListDevicesQuery = {
+  listDevices?:  {
+    __typename: "ModelDeviceConnection",
+    items:  Array< {
+      __typename: "Device",
+      id: string,
+      name: string,
+      token: string,
+      userId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetUserQueryVariables = {
   id: string,
 };
@@ -1908,9 +2050,9 @@ export type GetUserQuery = {
       id: string,
       name: string,
       establishmentId?: string | null,
+      userId?: string | null,
       createdAt: string,
       updatedAt: string,
-      userOccupationsId?: string | null,
       occupationBackgroundImageId: string,
       owner?: string | null,
     } | null,
@@ -2009,9 +2151,9 @@ export type GetOccupationQuery = {
       owner?: string | null,
     },
     establishmentId?: string | null,
+    userId?: string | null,
     createdAt: string,
     updatedAt: string,
-    userOccupationsId?: string | null,
     occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
@@ -2031,9 +2173,9 @@ export type ListOccupationsQuery = {
       id: string,
       name: string,
       establishmentId?: string | null,
+      userId?: string | null,
       createdAt: string,
       updatedAt: string,
-      userOccupationsId?: string | null,
       occupationBackgroundImageId: string,
       owner?: string | null,
     } | null >,
@@ -2488,6 +2630,42 @@ export type ByUserQuery = {
   } | null,
 };
 
+export type OnCreateDeviceSubscription = {
+  onCreateDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateDeviceSubscription = {
+  onUpdateDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteDeviceSubscription = {
+  onDeleteDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type OnCreateUserSubscriptionVariables = {
   owner?: string | null,
 };
@@ -2538,9 +2716,9 @@ export type OnCreateUserSubscription = {
       id: string,
       name: string,
       establishmentId?: string | null,
+      userId?: string | null,
       createdAt: string,
       updatedAt: string,
-      userOccupationsId?: string | null,
       occupationBackgroundImageId: string,
       owner?: string | null,
     } | null,
@@ -2603,9 +2781,9 @@ export type OnUpdateUserSubscription = {
       id: string,
       name: string,
       establishmentId?: string | null,
+      userId?: string | null,
       createdAt: string,
       updatedAt: string,
-      userOccupationsId?: string | null,
       occupationBackgroundImageId: string,
       owner?: string | null,
     } | null,
@@ -2668,9 +2846,9 @@ export type OnDeleteUserSubscription = {
       id: string,
       name: string,
       establishmentId?: string | null,
+      userId?: string | null,
       createdAt: string,
       updatedAt: string,
-      userOccupationsId?: string | null,
       occupationBackgroundImageId: string,
       owner?: string | null,
     } | null,
@@ -2750,9 +2928,9 @@ export type OnCreateOccupationSubscription = {
       owner?: string | null,
     },
     establishmentId?: string | null,
+    userId?: string | null,
     createdAt: string,
     updatedAt: string,
-    userOccupationsId?: string | null,
     occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
@@ -2777,9 +2955,9 @@ export type OnUpdateOccupationSubscription = {
       owner?: string | null,
     },
     establishmentId?: string | null,
+    userId?: string | null,
     createdAt: string,
     updatedAt: string,
-    userOccupationsId?: string | null,
     occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
@@ -2804,9 +2982,9 @@ export type OnDeleteOccupationSubscription = {
       owner?: string | null,
     },
     establishmentId?: string | null,
+    userId?: string | null,
     createdAt: string,
     updatedAt: string,
-    userOccupationsId?: string | null,
     occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
