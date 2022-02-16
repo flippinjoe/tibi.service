@@ -2,20 +2,38 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateDeviceInput = {
+export type CreateUserInput = {
   id?: string | null,
-  name: string,
-  token: string,
-  userId: string,
+  firstName: string,
+  lastName: string,
+  availableBalance?: number | null,
+  pendingBalance?: number | null,
+  tippingActive?: boolean | null,
+  unreadNotifications?: boolean | null,
+  location?: LocationInput | null,
+  userBackgroundImageId?: string | null,
+  userProfileImageId?: string | null,
+  userActiveOccupationId?: string | null,
 };
 
-export type ModelDeviceConditionInput = {
-  name?: ModelStringInput | null,
-  token?: ModelStringInput | null,
-  userId?: ModelIDInput | null,
-  and?: Array< ModelDeviceConditionInput | null > | null,
-  or?: Array< ModelDeviceConditionInput | null > | null,
-  not?: ModelDeviceConditionInput | null,
+export type LocationInput = {
+  lat: number,
+  lon: number,
+};
+
+export type ModelUserConditionInput = {
+  firstName?: ModelStringInput | null,
+  lastName?: ModelStringInput | null,
+  availableBalance?: ModelFloatInput | null,
+  pendingBalance?: ModelFloatInput | null,
+  tippingActive?: ModelBooleanInput | null,
+  unreadNotifications?: ModelBooleanInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
+  userBackgroundImageId?: ModelIDInput | null,
+  userProfileImageId?: ModelIDInput | null,
+  userActiveOccupationId?: ModelIDInput | null,
 };
 
 export type ModelStringInput = {
@@ -58,77 +76,6 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export type Device = {
-  __typename: "Device",
-  id: string,
-  name: string,
-  token: string,
-  userId: string,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateDeviceInput = {
-  id: string,
-  name?: string | null,
-  token?: string | null,
-  userId?: string | null,
-};
-
-export type DeleteDeviceInput = {
-  id: string,
-};
-
-export type CreateUserInput = {
-  id?: string | null,
-  firstName: string,
-  lastName: string,
-  availableBalance?: number | null,
-  pendingBalance?: number | null,
-  tippingActive?: boolean | null,
-  unreadNotifications?: boolean | null,
-  location?: LocationInput | null,
-  userBackgroundImageId?: string | null,
-  userProfileImageId?: string | null,
-  userActiveOccupationId?: string | null,
-};
-
-export type LocationInput = {
-  lat: number,
-  lon: number,
-};
-
-export type ModelUserConditionInput = {
-  firstName?: ModelStringInput | null,
-  lastName?: ModelStringInput | null,
-  availableBalance?: ModelFloatInput | null,
-  pendingBalance?: ModelFloatInput | null,
-  tippingActive?: ModelBooleanInput | null,
-  unreadNotifications?: ModelBooleanInput | null,
-  and?: Array< ModelUserConditionInput | null > | null,
-  or?: Array< ModelUserConditionInput | null > | null,
-  not?: ModelUserConditionInput | null,
-  userBackgroundImageId?: ModelIDInput | null,
-  userProfileImageId?: ModelIDInput | null,
-  userActiveOccupationId?: ModelIDInput | null,
-};
-
 export type ModelFloatInput = {
   ne?: number | null,
   eq?: number | null,
@@ -146,6 +93,22 @@ export type ModelBooleanInput = {
   eq?: boolean | null,
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type User = {
@@ -269,6 +232,44 @@ export type UpdateUserInput = {
 };
 
 export type DeleteUserInput = {
+  id: string,
+};
+
+export type CreateDeviceInput = {
+  id?: string | null,
+  name: string,
+  token: string,
+  userId: string,
+};
+
+export type ModelDeviceConditionInput = {
+  name?: ModelStringInput | null,
+  token?: ModelStringInput | null,
+  userId?: ModelIDInput | null,
+  and?: Array< ModelDeviceConditionInput | null > | null,
+  or?: Array< ModelDeviceConditionInput | null > | null,
+  not?: ModelDeviceConditionInput | null,
+};
+
+export type Device = {
+  __typename: "Device",
+  id: string,
+  name: string,
+  token: string,
+  userId: string,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateDeviceInput = {
+  id: string,
+  name?: string | null,
+  token?: string | null,
+  userId?: string | null,
+};
+
+export type DeleteDeviceInput = {
   id: string,
 };
 
@@ -644,22 +645,6 @@ export type DeleteNotificationInput = {
   id: string,
 };
 
-export type ModelDeviceFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  token?: ModelStringInput | null,
-  userId?: ModelIDInput | null,
-  and?: Array< ModelDeviceFilterInput | null > | null,
-  or?: Array< ModelDeviceFilterInput | null > | null,
-  not?: ModelDeviceFilterInput | null,
-};
-
-export type ModelDeviceConnection = {
-  __typename: "ModelDeviceConnection",
-  items:  Array<Device | null >,
-  nextToken?: string | null,
-};
-
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   firstName?: ModelStringInput | null,
@@ -679,6 +664,22 @@ export type ModelUserFilterInput = {
 export type ModelUserConnection = {
   __typename: "ModelUserConnection",
   items:  Array<User | null >,
+  nextToken?: string | null,
+};
+
+export type ModelDeviceFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  token?: ModelStringInput | null,
+  userId?: ModelIDInput | null,
+  and?: Array< ModelDeviceFilterInput | null > | null,
+  or?: Array< ModelDeviceFilterInput | null > | null,
+  not?: ModelDeviceFilterInput | null,
+};
+
+export type ModelDeviceConnection = {
+  __typename: "ModelDeviceConnection",
+  items:  Array<Device | null >,
   nextToken?: string | null,
 };
 
@@ -951,55 +952,71 @@ export type ModelNotificationConnection = {
   nextToken?: string | null,
 };
 
-export type CreateDeviceMutationVariables = {
-  input: CreateDeviceInput,
-  condition?: ModelDeviceConditionInput | null,
+export type SearchableNotificationFilterInput = {
+  id?: SearchableIDFilterInput | null,
+  userId?: SearchableIDFilterInput | null,
+  expirationDate?: SearchableStringFilterInput | null,
+  title?: SearchableStringFilterInput | null,
+  details?: SearchableStringFilterInput | null,
+  read?: SearchableBooleanFilterInput | null,
+  fromUserId?: SearchableIDFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
+  updatedAt?: SearchableStringFilterInput | null,
+  type?: SearchableStringFilterInput | null,
+  and?: Array< SearchableNotificationFilterInput | null > | null,
+  or?: Array< SearchableNotificationFilterInput | null > | null,
+  not?: SearchableNotificationFilterInput | null,
 };
 
-export type CreateDeviceMutation = {
-  createDevice?:  {
-    __typename: "Device",
-    id: string,
-    name: string,
-    token: string,
-    userId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+export type SearchableBooleanFilterInput = {
+  eq?: boolean | null,
+  ne?: boolean | null,
 };
 
-export type UpdateDeviceMutationVariables = {
-  input: UpdateDeviceInput,
-  condition?: ModelDeviceConditionInput | null,
+export type SearchableNotificationSortInput = {
+  field?: SearchableNotificationSortableFields | null,
+  direction?: SearchableSortDirection | null,
 };
 
-export type UpdateDeviceMutation = {
-  updateDevice?:  {
-    __typename: "Device",
-    id: string,
-    name: string,
-    token: string,
-    userId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+export enum SearchableNotificationSortableFields {
+  id = "id",
+  userId = "userId",
+  expirationDate = "expirationDate",
+  title = "title",
+  details = "details",
+  read = "read",
+  fromUserId = "fromUserId",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
+
+
+export type SearchableNotificationAggregationInput = {
+  name: string,
+  type: SearchableAggregateType,
+  field: SearchableNotificationAggregateField,
 };
 
-export type DeleteDeviceMutationVariables = {
-  input: DeleteDeviceInput,
-  condition?: ModelDeviceConditionInput | null,
-};
+export enum SearchableNotificationAggregateField {
+  id = "id",
+  userId = "userId",
+  type = "type",
+  expirationDate = "expirationDate",
+  title = "title",
+  details = "details",
+  read = "read",
+  fromUserId = "fromUserId",
+  createdAt = "createdAt",
+  updatedAt = "updatedAt",
+}
 
-export type DeleteDeviceMutation = {
-  deleteDevice?:  {
-    __typename: "Device",
-    id: string,
-    name: string,
-    token: string,
-    userId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+
+export type SearchableNotificationConnection = {
+  __typename: "SearchableNotificationConnection",
+  items:  Array<Notification | null >,
+  nextToken?: string | null,
+  total?: number | null,
+  aggregateItems:  Array<SearchableAggregateResult | null >,
 };
 
 export type CreateUserMutationVariables = {
@@ -1196,6 +1213,60 @@ export type DeleteUserMutation = {
     userBackgroundImageId?: string | null,
     userProfileImageId?: string | null,
     userActiveOccupationId?: string | null,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateDeviceMutationVariables = {
+  input: CreateDeviceInput,
+  condition?: ModelDeviceConditionInput | null,
+};
+
+export type CreateDeviceMutation = {
+  createDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateDeviceMutationVariables = {
+  input: UpdateDeviceInput,
+  condition?: ModelDeviceConditionInput | null,
+};
+
+export type UpdateDeviceMutation = {
+  updateDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteDeviceMutationVariables = {
+  input: DeleteDeviceInput,
+  condition?: ModelDeviceConditionInput | null,
+};
+
+export type DeleteDeviceMutation = {
+  deleteDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
     owner?: string | null,
   } | null,
 };
@@ -1962,44 +2033,6 @@ export type DeleteNotificationMutation = {
   } | null,
 };
 
-export type GetDeviceQueryVariables = {
-  id: string,
-};
-
-export type GetDeviceQuery = {
-  getDevice?:  {
-    __typename: "Device",
-    id: string,
-    name: string,
-    token: string,
-    userId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListDevicesQueryVariables = {
-  filter?: ModelDeviceFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListDevicesQuery = {
-  listDevices?:  {
-    __typename: "ModelDeviceConnection",
-    items:  Array< {
-      __typename: "Device",
-      id: string,
-      name: string,
-      token: string,
-      userId: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
 export type GetUserQueryVariables = {
   id: string,
 };
@@ -2088,6 +2121,46 @@ export type ListUsersQuery = {
       userBackgroundImageId?: string | null,
       userProfileImageId?: string | null,
       userActiveOccupationId?: string | null,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetDeviceQueryVariables = {
+  id: string,
+};
+
+export type GetDeviceQuery = {
+  getDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListDevicesQueryVariables = {
+  filter?: ModelDeviceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListDevicesQuery = {
+  listDevices?:  {
+    __typename: "ModelDeviceConnection",
+    items:  Array< {
+      __typename: "Device",
+      id: string,
+      name: string,
+      token: string,
+      userId: string,
+      createdAt: string,
+      updatedAt: string,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
@@ -2630,39 +2703,49 @@ export type ByUserQuery = {
   } | null,
 };
 
-export type OnCreateDeviceSubscription = {
-  onCreateDevice?:  {
-    __typename: "Device",
-    id: string,
-    name: string,
-    token: string,
-    userId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+export type SearchNotificationsQueryVariables = {
+  filter?: SearchableNotificationFilterInput | null,
+  sort?: Array< SearchableNotificationSortInput | null > | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  from?: number | null,
+  aggregates?: Array< SearchableNotificationAggregationInput | null > | null,
 };
 
-export type OnUpdateDeviceSubscription = {
-  onUpdateDevice?:  {
-    __typename: "Device",
-    id: string,
-    name: string,
-    token: string,
-    userId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteDeviceSubscription = {
-  onDeleteDevice?:  {
-    __typename: "Device",
-    id: string,
-    name: string,
-    token: string,
-    userId: string,
-    createdAt: string,
-    updatedAt: string,
+export type SearchNotificationsQuery = {
+  searchNotifications?:  {
+    __typename: "SearchableNotificationConnection",
+    items:  Array< {
+      __typename: "Notification",
+      id: string,
+      userId: string,
+      type: NotificationType,
+      expirationDate?: string | null,
+      title: string,
+      details: string,
+      read?: boolean | null,
+      fromUserId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+    total?: number | null,
+    aggregateItems:  Array< {
+      __typename: "SearchableAggregateResult",
+      name: string,
+      result: ( {
+          __typename: "SearchableAggregateScalarResult",
+          value: number,
+        } | {
+          __typename: "SearchableAggregateBucketResult",
+          buckets?:  Array< {
+            __typename: string,
+            key: string,
+            doc_count: number,
+          } | null > | null,
+        }
+      ) | null,
+    } | null >,
   } | null,
 };
 
@@ -2857,6 +2940,57 @@ export type OnDeleteUserSubscription = {
     userBackgroundImageId?: string | null,
     userProfileImageId?: string | null,
     userActiveOccupationId?: string | null,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateDeviceSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateDeviceSubscription = {
+  onCreateDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateDeviceSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateDeviceSubscription = {
+  onUpdateDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteDeviceSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteDeviceSubscription = {
+  onDeleteDevice?:  {
+    __typename: "Device",
+    id: string,
+    name: string,
+    token: string,
+    userId: string,
+    createdAt: string,
+    updatedAt: string,
     owner?: string | null,
   } | null,
 };

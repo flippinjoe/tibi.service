@@ -2,37 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getDevice = /* GraphQL */ `
-  query GetDevice($id: ID!) {
-    getDevice(id: $id) {
-      id
-      name
-      token
-      userId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listDevices = /* GraphQL */ `
-  query ListDevices(
-    $filter: ModelDeviceFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listDevices(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        token
-        userId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -108,6 +77,39 @@ export const listUsers = /* GraphQL */ `
         userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getDevice = /* GraphQL */ `
+  query GetDevice($id: ID!) {
+    getDevice(id: $id) {
+      id
+      name
+      token
+      userId
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listDevices = /* GraphQL */ `
+  query ListDevices(
+    $filter: ModelDeviceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listDevices(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        token
+        userId
+        createdAt
+        updatedAt
         owner
       }
       nextToken
@@ -593,6 +595,54 @@ export const byUser = /* GraphQL */ `
         updatedAt
       }
       nextToken
+    }
+  }
+`;
+export const searchNotifications = /* GraphQL */ `
+  query SearchNotifications(
+    $filter: SearchableNotificationFilterInput
+    $sort: [SearchableNotificationSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableNotificationAggregationInput]
+  ) {
+    searchNotifications(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        userId
+        type
+        expirationDate
+        title
+        details
+        read
+        fromUserId
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
+        }
+      }
     }
   }
 `;

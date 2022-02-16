@@ -2,42 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateDevice = /* GraphQL */ `
-  subscription OnCreateDevice {
-    onCreateDevice {
-      id
-      name
-      token
-      userId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateDevice = /* GraphQL */ `
-  subscription OnUpdateDevice {
-    onUpdateDevice {
-      id
-      name
-      token
-      userId
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteDevice = /* GraphQL */ `
-  subscription OnDeleteDevice {
-    onDeleteDevice {
-      id
-      name
-      token
-      userId
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser($owner: String) {
     onCreateUser(owner: $owner) {
@@ -199,6 +163,45 @@ export const onDeleteUser = /* GraphQL */ `
       userBackgroundImageId
       userProfileImageId
       userActiveOccupationId
+      owner
+    }
+  }
+`;
+export const onCreateDevice = /* GraphQL */ `
+  subscription OnCreateDevice($owner: String) {
+    onCreateDevice(owner: $owner) {
+      id
+      name
+      token
+      userId
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateDevice = /* GraphQL */ `
+  subscription OnUpdateDevice($owner: String) {
+    onUpdateDevice(owner: $owner) {
+      id
+      name
+      token
+      userId
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteDevice = /* GraphQL */ `
+  subscription OnDeleteDevice($owner: String) {
+    onDeleteDevice(owner: $owner) {
+      id
+      name
+      token
+      userId
+      createdAt
+      updatedAt
       owner
     }
   }

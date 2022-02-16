@@ -41,7 +41,14 @@ type User
 
 type Device
 @model
-{
+@auth(
+  rules: [
+    { allow: owner, operations: [read, create, update, delete] }, 
+    { allow: groups, groups: ["admin"], operations: [create, update, delete] }, 
+    { allow: private, operations: [read, create, update, delete] },
+    { allow: public, operations: [read] }
+  ]
+) {
   id: ID!
   name: String!
   token: String!
@@ -227,6 +234,7 @@ enum NotificationType {
 }
 
 type Notification 
+@searchable
 @model
 @auth(
   rules: [

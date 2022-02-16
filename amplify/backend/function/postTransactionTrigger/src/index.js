@@ -22,6 +22,7 @@ Amplify Params - DO NOT EDIT */
  const endpoint = new urlParse(appsyncUrl).hostname.toString();
  const apiKey = process.env.API_TIBISERVICE_GRAPHQLAPIKEYOUTPUT;
  
+ const notifier = new aws.Pinpoint({ region: 'us-east-1' });
  
  aws.config.update({ region });
  
@@ -69,19 +70,6 @@ Amplify Params - DO NOT EDIT */
    });
  }
  
- const graphqlOperation2 = async (query, variables) => {
-   return axios({
-     url: process.env.API_TIBISERVICE_GRAPHQLAPIENDPOINTOUTPUT,
-     method: 'post',
-     headers: {
-       'x-api-key': process.env.API_TIBISERVICE_GRAPHQLAPIKEYOUTPUT
-     },
-     data: {
-       query,
-       variables
-     }
-   }).then(res => res.data);
- }
  
  const getUserForId = async (id) => {
    const getUserQuery = gql`
@@ -93,12 +81,21 @@ Amplify Params - DO NOT EDIT */
          pendingBalance
          availableBalance
        }
+       listDevices(filter: { userId: { eq: $id } }) {
+         items {
+           id
+           token
+         }
+       }
      }
    `
  
    const graphqlData = await graphqlOperation(print(getUserQuery), { id: id });
-   const { getUser } = graphqlData.data
-   return getUser
+   const { getUser, listDevices } = graphqlData.data
+   return {
+     ...getUser,
+     devices: listDevices.items
+   }
    //   return graphqlData.data.data.getMemberFinance
  }
  
@@ -135,17 +132,64 @@ Amplify Params - DO NOT EDIT */
    }
  }
  `
+
+const convertTokensToMap = (tokens, channel) => {
+  return tokens.reduce((prev, curr) => {
+    if (!curr) {
+      return prev
+    }
+    prev[curr] = {
+      'ChannelType': channel,
+    }
+    return prev
+  }, {})
+}
+
  
  const updateUserAvailableBalance = async (user, availableBalance, fromUser) => {
    
- 
-   const [notificationData, graphqlData] = await Promise.all([
+    const title = `${fromUser.firstName} ${fromUser.lastName.substr(0, 1)}.`
+    const details = `Sent you $${(availableBalance - (user.availableBalance || 0)).toFixed(2)}`
+
+    console.log(`Sending to `, user.devices.map(d => d.token).join(' | '))
+    // console.log(process.env)
+   const [pushData, notificationData, graphqlData] = await Promise.all([
+
+    /// Send a pinpoint thing here
+    new Promise((resolve, reject) => {
+      notifier.sendMessages({
+        'ApplicationId': '98d020f15fca435eb8cd49259c62153e',
+        'MessageRequest': {
+          'Addresses': convertTokensToMap(user.devices.map(d => d.token), 'APNS'),
+            'MessageConfiguration': {
+              'APNSMessage': {
+                'Action': 'OPEN_APP',
+                'Body': title + details,
+                'Priority': 'normal',
+                'SilentPush': false,
+                'Title': 'New Tip',
+                'TimeToLive': 60,
+                'Url': 'https://dev.tibi.app'
+              }
+            }
+          }
+      }, (err, data) => {
+        
+        if (err) {
+          console.log('Error', err)
+          reject(err)
+        }
+        else {
+          resolve(data)
+        }
+      })
+    }),
  
      graphqlOperation( print(createNotification), {
        input: {
          userId: user.id,
-         title: `${fromUser.firstName} ${fromUser.lastName.substr(0, 1)}.`,
-         details: `Sent you $${(availableBalance - (user.availableBalance || 0)).toFixed(2)}`,
+         title,
+         details,
          type: "tip",
          fromUserId: fromUser.id
        }
@@ -161,7 +205,8 @@ Amplify Params - DO NOT EDIT */
      })
    ])
  
-   console.log("notificationData", notificationData.data)
+  //  console.log("notificationData", notificationData.data)
+   console.log('push data', JSON.stringify(pushData, null, 2))
  
    const { updateUser } = graphqlData.data
    return updateUser

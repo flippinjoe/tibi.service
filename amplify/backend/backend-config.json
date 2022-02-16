@@ -108,16 +108,15 @@
                     "resourceName": "tibiservice",
                     "attributes": [
                         "GraphQLAPIIdOutput",
-                        "GraphQLAPIEndpointOutput"
+                        "GraphQLAPIEndpointOutput",
+                        "GraphQLAPIKeyOutput"
                     ]
                 },
                 {
-                    "category": "api",
-                    "resourceName": "tibiservice",
+                    "category": "analytics",
+                    "resourceName": "tibiPinpoint",
                     "attributes": [
-                        "GraphQLAPIIdOutput",
-                        "GraphQLAPIEndpointOutput",
-                        "GraphQLAPIKeyOutput"
+                        "Id"
                     ]
                 }
             ]

@@ -27,6 +27,10 @@
     "apitibiserviceGraphQLAPIKeyOutput": {
       "Type": "String",
       "Default": "apitibiserviceGraphQLAPIKeyOutput"
+    },
+    "pinpointProjectId": {
+      "Type": "String",
+      "Default": "analyticstibiPinPointId"
     }
   },
   "Conditions": {
@@ -90,6 +94,9 @@
             },
             "API_TIBISERVICE_GRAPHQLAPIKEYOUTPUT": {
               "Ref": "apitibiserviceGraphQLAPIKeyOutput"
+            },
+            "PINPOINT_PROJECT_ID": {
+              "Ref": "pinpointProjectId"
             }
           }
         },
