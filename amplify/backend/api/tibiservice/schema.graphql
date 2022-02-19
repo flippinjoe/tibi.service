@@ -247,9 +247,10 @@ type Notification
 ) {
   id: ID!
 
-  userId: ID! @index(name: "byUser", queryField: "byUser")   ## User ID for this notification
+  userId: ID! @index(name: "byUser", queryField: "byUser", sortKeyFields: ["createdAt"])   ## User ID for this notification
   type: NotificationType!
   expirationDate: AWSDateTime
+  createdAt: AWSDateTime!
 
   title: String!
   details: String!
