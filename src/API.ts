@@ -124,7 +124,7 @@ export type User = {
   profileImage?: ImagePath | null,
   establishments?: ModelEstablishmentTibiConnection | null,
   location?: Location | null,
-  occupations?: ModelOccupationConnection | null,
+  occupations?: ModelUserOccupationsConnection | null,
   activeOccupation?: Occupation | null,
   createdAt: string,
   updatedAt: string,
@@ -204,10 +204,28 @@ export type Occupation = {
   name: string,
   backgroundImage: ImagePath,
   establishmentId?: string | null,
-  userId?: string | null,
+  users?: ModelUserOccupationsConnection | null,
   createdAt: string,
   updatedAt: string,
   occupationBackgroundImageId: string,
+  owner?: string | null,
+};
+
+export type ModelUserOccupationsConnection = {
+  __typename: "ModelUserOccupationsConnection",
+  items:  Array<UserOccupations | null >,
+  nextToken?: string | null,
+};
+
+export type UserOccupations = {
+  __typename: "UserOccupations",
+  id: string,
+  userID: string,
+  occupationID: string,
+  user: User,
+  occupation: Occupation,
+  createdAt: string,
+  updatedAt: string,
   owner?: string | null,
 };
 
@@ -306,14 +324,12 @@ export type CreateOccupationInput = {
   id?: string | null,
   name: string,
   establishmentId?: string | null,
-  userId?: string | null,
   occupationBackgroundImageId: string,
 };
 
 export type ModelOccupationConditionInput = {
   name?: ModelStringInput | null,
   establishmentId?: ModelIDInput | null,
-  userId?: ModelIDInput | null,
   and?: Array< ModelOccupationConditionInput | null > | null,
   or?: Array< ModelOccupationConditionInput | null > | null,
   not?: ModelOccupationConditionInput | null,
@@ -324,7 +340,6 @@ export type UpdateOccupationInput = {
   id: string,
   name?: string | null,
   establishmentId?: string | null,
-  userId?: string | null,
   occupationBackgroundImageId?: string | null,
 };
 
@@ -582,9 +597,10 @@ export type DeleteTransactionInput = {
 
 export type CreateNotificationInput = {
   id?: string | null,
-  userId: string,
+  toUserId: string,
   type: NotificationType,
   expirationDate?: string | null,
+  createdAt?: string | null,
   title: string,
   details: string,
   read?: boolean | null,
@@ -599,9 +615,10 @@ export enum NotificationType {
 
 
 export type ModelNotificationConditionInput = {
-  userId?: ModelIDInput | null,
+  toUserId?: ModelIDInput | null,
   type?: ModelNotificationTypeInput | null,
   expirationDate?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
   title?: ModelStringInput | null,
   details?: ModelStringInput | null,
   read?: ModelBooleanInput | null,
@@ -619,22 +636,23 @@ export type ModelNotificationTypeInput = {
 export type Notification = {
   __typename: "Notification",
   id: string,
-  userId: string,
+  toUserId: string,
   type: NotificationType,
   expirationDate?: string | null,
+  createdAt?: string | null,
   title: string,
   details: string,
   read?: boolean | null,
   fromUserId?: string | null,
-  createdAt: string,
   updatedAt: string,
 };
 
 export type UpdateNotificationInput = {
   id: string,
-  userId?: string | null,
+  toUserId?: string | null,
   type?: NotificationType | null,
   expirationDate?: string | null,
+  createdAt?: string | null,
   title?: string | null,
   details?: string | null,
   read?: boolean | null,
@@ -642,6 +660,30 @@ export type UpdateNotificationInput = {
 };
 
 export type DeleteNotificationInput = {
+  id: string,
+};
+
+export type CreateUserOccupationsInput = {
+  id?: string | null,
+  userID: string,
+  occupationID: string,
+};
+
+export type ModelUserOccupationsConditionInput = {
+  userID?: ModelIDInput | null,
+  occupationID?: ModelIDInput | null,
+  and?: Array< ModelUserOccupationsConditionInput | null > | null,
+  or?: Array< ModelUserOccupationsConditionInput | null > | null,
+  not?: ModelUserOccupationsConditionInput | null,
+};
+
+export type UpdateUserOccupationsInput = {
+  id: string,
+  userID?: string | null,
+  occupationID?: string | null,
+};
+
+export type DeleteUserOccupationsInput = {
   id: string,
 };
 
@@ -701,7 +743,6 @@ export type ModelOccupationFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   establishmentId?: ModelIDInput | null,
-  userId?: ModelIDInput | null,
   and?: Array< ModelOccupationFilterInput | null > | null,
   or?: Array< ModelOccupationFilterInput | null > | null,
   not?: ModelOccupationFilterInput | null,
@@ -934,9 +975,10 @@ export type SearchableAggregateBucketResultItem = {
 
 export type ModelNotificationFilterInput = {
   id?: ModelIDInput | null,
-  userId?: ModelIDInput | null,
+  toUserId?: ModelIDInput | null,
   type?: ModelNotificationTypeInput | null,
   expirationDate?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
   title?: ModelStringInput | null,
   details?: ModelStringInput | null,
   read?: ModelBooleanInput | null,
@@ -954,13 +996,13 @@ export type ModelNotificationConnection = {
 
 export type SearchableNotificationFilterInput = {
   id?: SearchableIDFilterInput | null,
-  userId?: SearchableIDFilterInput | null,
+  toUserId?: SearchableIDFilterInput | null,
   expirationDate?: SearchableStringFilterInput | null,
+  createdAt?: SearchableStringFilterInput | null,
   title?: SearchableStringFilterInput | null,
   details?: SearchableStringFilterInput | null,
   read?: SearchableBooleanFilterInput | null,
   fromUserId?: SearchableIDFilterInput | null,
-  createdAt?: SearchableStringFilterInput | null,
   updatedAt?: SearchableStringFilterInput | null,
   type?: SearchableStringFilterInput | null,
   and?: Array< SearchableNotificationFilterInput | null > | null,
@@ -980,13 +1022,13 @@ export type SearchableNotificationSortInput = {
 
 export enum SearchableNotificationSortableFields {
   id = "id",
-  userId = "userId",
+  toUserId = "toUserId",
   expirationDate = "expirationDate",
+  createdAt = "createdAt",
   title = "title",
   details = "details",
   read = "read",
   fromUserId = "fromUserId",
-  createdAt = "createdAt",
   updatedAt = "updatedAt",
 }
 
@@ -999,14 +1041,14 @@ export type SearchableNotificationAggregationInput = {
 
 export enum SearchableNotificationAggregateField {
   id = "id",
-  userId = "userId",
+  toUserId = "toUserId",
   type = "type",
   expirationDate = "expirationDate",
+  createdAt = "createdAt",
   title = "title",
   details = "details",
   read = "read",
   fromUserId = "fromUserId",
-  createdAt = "createdAt",
   updatedAt = "updatedAt",
 }
 
@@ -1017,6 +1059,15 @@ export type SearchableNotificationConnection = {
   nextToken?: string | null,
   total?: number | null,
   aggregateItems:  Array<SearchableAggregateResult | null >,
+};
+
+export type ModelUserOccupationsFilterInput = {
+  id?: ModelIDInput | null,
+  userID?: ModelIDInput | null,
+  occupationID?: ModelIDInput | null,
+  and?: Array< ModelUserOccupationsFilterInput | null > | null,
+  or?: Array< ModelUserOccupationsFilterInput | null > | null,
+  not?: ModelUserOccupationsFilterInput | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -1062,7 +1113,7 @@ export type CreateUserMutation = {
       lon: number,
     } | null,
     occupations?:  {
-      __typename: "ModelOccupationConnection",
+      __typename: "ModelUserOccupationsConnection",
       nextToken?: string | null,
     } | null,
     activeOccupation?:  {
@@ -1070,7 +1121,6 @@ export type CreateUserMutation = {
       id: string,
       name: string,
       establishmentId?: string | null,
-      userId?: string | null,
       createdAt: string,
       updatedAt: string,
       occupationBackgroundImageId: string,
@@ -1128,7 +1178,7 @@ export type UpdateUserMutation = {
       lon: number,
     } | null,
     occupations?:  {
-      __typename: "ModelOccupationConnection",
+      __typename: "ModelUserOccupationsConnection",
       nextToken?: string | null,
     } | null,
     activeOccupation?:  {
@@ -1136,7 +1186,6 @@ export type UpdateUserMutation = {
       id: string,
       name: string,
       establishmentId?: string | null,
-      userId?: string | null,
       createdAt: string,
       updatedAt: string,
       occupationBackgroundImageId: string,
@@ -1194,7 +1243,7 @@ export type DeleteUserMutation = {
       lon: number,
     } | null,
     occupations?:  {
-      __typename: "ModelOccupationConnection",
+      __typename: "ModelUserOccupationsConnection",
       nextToken?: string | null,
     } | null,
     activeOccupation?:  {
@@ -1202,7 +1251,6 @@ export type DeleteUserMutation = {
       id: string,
       name: string,
       establishmentId?: string | null,
-      userId?: string | null,
       createdAt: string,
       updatedAt: string,
       occupationBackgroundImageId: string,
@@ -1342,7 +1390,10 @@ export type CreateOccupationMutation = {
       owner?: string | null,
     },
     establishmentId?: string | null,
-    userId?: string | null,
+    users?:  {
+      __typename: "ModelUserOccupationsConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     occupationBackgroundImageId: string,
@@ -1370,7 +1421,10 @@ export type UpdateOccupationMutation = {
       owner?: string | null,
     },
     establishmentId?: string | null,
-    userId?: string | null,
+    users?:  {
+      __typename: "ModelUserOccupationsConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     occupationBackgroundImageId: string,
@@ -1398,7 +1452,10 @@ export type DeleteOccupationMutation = {
       owner?: string | null,
     },
     establishmentId?: string | null,
-    userId?: string | null,
+    users?:  {
+      __typename: "ModelUserOccupationsConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     occupationBackgroundImageId: string,
@@ -1979,14 +2036,14 @@ export type CreateNotificationMutation = {
   createNotification?:  {
     __typename: "Notification",
     id: string,
-    userId: string,
+    toUserId: string,
     type: NotificationType,
     expirationDate?: string | null,
+    createdAt?: string | null,
     title: string,
     details: string,
     read?: boolean | null,
     fromUserId?: string | null,
-    createdAt: string,
     updatedAt: string,
   } | null,
 };
@@ -2000,14 +2057,14 @@ export type UpdateNotificationMutation = {
   updateNotification?:  {
     __typename: "Notification",
     id: string,
-    userId: string,
+    toUserId: string,
     type: NotificationType,
     expirationDate?: string | null,
+    createdAt?: string | null,
     title: string,
     details: string,
     read?: boolean | null,
     fromUserId?: string | null,
-    createdAt: string,
     updatedAt: string,
   } | null,
 };
@@ -2021,15 +2078,144 @@ export type DeleteNotificationMutation = {
   deleteNotification?:  {
     __typename: "Notification",
     id: string,
-    userId: string,
+    toUserId: string,
     type: NotificationType,
     expirationDate?: string | null,
+    createdAt?: string | null,
     title: string,
     details: string,
     read?: boolean | null,
     fromUserId?: string | null,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateUserOccupationsMutationVariables = {
+  input: CreateUserOccupationsInput,
+  condition?: ModelUserOccupationsConditionInput | null,
+};
+
+export type CreateUserOccupationsMutation = {
+  createUserOccupations?:  {
+    __typename: "UserOccupations",
+    id: string,
+    userID: string,
+    occupationID: string,
+    user:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      tippingActive?: boolean | null,
+      unreadNotifications?: boolean | null,
+      createdAt: string,
+      updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
+      userActiveOccupationId?: string | null,
+      owner?: string | null,
+    },
+    occupation:  {
+      __typename: "Occupation",
+      id: string,
+      name: string,
+      establishmentId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      occupationBackgroundImageId: string,
+      owner?: string | null,
+    },
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateUserOccupationsMutationVariables = {
+  input: UpdateUserOccupationsInput,
+  condition?: ModelUserOccupationsConditionInput | null,
+};
+
+export type UpdateUserOccupationsMutation = {
+  updateUserOccupations?:  {
+    __typename: "UserOccupations",
+    id: string,
+    userID: string,
+    occupationID: string,
+    user:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      tippingActive?: boolean | null,
+      unreadNotifications?: boolean | null,
+      createdAt: string,
+      updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
+      userActiveOccupationId?: string | null,
+      owner?: string | null,
+    },
+    occupation:  {
+      __typename: "Occupation",
+      id: string,
+      name: string,
+      establishmentId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      occupationBackgroundImageId: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteUserOccupationsMutationVariables = {
+  input: DeleteUserOccupationsInput,
+  condition?: ModelUserOccupationsConditionInput | null,
+};
+
+export type DeleteUserOccupationsMutation = {
+  deleteUserOccupations?:  {
+    __typename: "UserOccupations",
+    id: string,
+    userID: string,
+    occupationID: string,
+    user:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      tippingActive?: boolean | null,
+      unreadNotifications?: boolean | null,
+      createdAt: string,
+      updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
+      userActiveOccupationId?: string | null,
+      owner?: string | null,
+    },
+    occupation:  {
+      __typename: "Occupation",
+      id: string,
+      name: string,
+      establishmentId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      occupationBackgroundImageId: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -2075,7 +2261,7 @@ export type GetUserQuery = {
       lon: number,
     } | null,
     occupations?:  {
-      __typename: "ModelOccupationConnection",
+      __typename: "ModelUserOccupationsConnection",
       nextToken?: string | null,
     } | null,
     activeOccupation?:  {
@@ -2083,7 +2269,6 @@ export type GetUserQuery = {
       id: string,
       name: string,
       establishmentId?: string | null,
-      userId?: string | null,
       createdAt: string,
       updatedAt: string,
       occupationBackgroundImageId: string,
@@ -2224,7 +2409,10 @@ export type GetOccupationQuery = {
       owner?: string | null,
     },
     establishmentId?: string | null,
-    userId?: string | null,
+    users?:  {
+      __typename: "ModelUserOccupationsConnection",
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
     occupationBackgroundImageId: string,
@@ -2246,7 +2434,6 @@ export type ListOccupationsQuery = {
       id: string,
       name: string,
       establishmentId?: string | null,
-      userId?: string | null,
       createdAt: string,
       updatedAt: string,
       occupationBackgroundImageId: string,
@@ -2637,14 +2824,14 @@ export type GetNotificationQuery = {
   getNotification?:  {
     __typename: "Notification",
     id: string,
-    userId: string,
+    toUserId: string,
     type: NotificationType,
     expirationDate?: string | null,
+    createdAt?: string | null,
     title: string,
     details: string,
     read?: boolean | null,
     fromUserId?: string | null,
-    createdAt: string,
     updatedAt: string,
   } | null,
 };
@@ -2661,42 +2848,14 @@ export type ListNotificationsQuery = {
     items:  Array< {
       __typename: "Notification",
       id: string,
-      userId: string,
+      toUserId: string,
       type: NotificationType,
       expirationDate?: string | null,
+      createdAt?: string | null,
       title: string,
       details: string,
       read?: boolean | null,
       fromUserId?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type ByUserQueryVariables = {
-  userId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelNotificationFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ByUserQuery = {
-  byUser?:  {
-    __typename: "ModelNotificationConnection",
-    items:  Array< {
-      __typename: "Notification",
-      id: string,
-      userId: string,
-      type: NotificationType,
-      expirationDate?: string | null,
-      title: string,
-      details: string,
-      read?: boolean | null,
-      fromUserId?: string | null,
-      createdAt: string,
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
@@ -2718,14 +2877,14 @@ export type SearchNotificationsQuery = {
     items:  Array< {
       __typename: "Notification",
       id: string,
-      userId: string,
+      toUserId: string,
       type: NotificationType,
       expirationDate?: string | null,
+      createdAt?: string | null,
       title: string,
       details: string,
       read?: boolean | null,
       fromUserId?: string | null,
-      createdAt: string,
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
@@ -2746,6 +2905,70 @@ export type SearchNotificationsQuery = {
         }
       ) | null,
     } | null >,
+  } | null,
+};
+
+export type GetUserOccupationsQueryVariables = {
+  id: string,
+};
+
+export type GetUserOccupationsQuery = {
+  getUserOccupations?:  {
+    __typename: "UserOccupations",
+    id: string,
+    userID: string,
+    occupationID: string,
+    user:  {
+      __typename: "User",
+      id: string,
+      firstName: string,
+      lastName: string,
+      availableBalance?: number | null,
+      pendingBalance?: number | null,
+      tippingActive?: boolean | null,
+      unreadNotifications?: boolean | null,
+      createdAt: string,
+      updatedAt: string,
+      userBackgroundImageId?: string | null,
+      userProfileImageId?: string | null,
+      userActiveOccupationId?: string | null,
+      owner?: string | null,
+    },
+    occupation:  {
+      __typename: "Occupation",
+      id: string,
+      name: string,
+      establishmentId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      occupationBackgroundImageId: string,
+      owner?: string | null,
+    },
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListUserOccupationsQueryVariables = {
+  filter?: ModelUserOccupationsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUserOccupationsQuery = {
+  listUserOccupations?:  {
+    __typename: "ModelUserOccupationsConnection",
+    items:  Array< {
+      __typename: "UserOccupations",
+      id: string,
+      userID: string,
+      occupationID: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -2791,7 +3014,7 @@ export type OnCreateUserSubscription = {
       lon: number,
     } | null,
     occupations?:  {
-      __typename: "ModelOccupationConnection",
+      __typename: "ModelUserOccupationsConnection",
       nextToken?: string | null,
     } | null,
     activeOccupation?:  {
@@ -2799,7 +3022,6 @@ export type OnCreateUserSubscription = {
       id: string,
       name: string,
       establishmentId?: string | null,
-      userId?: string | null,
       createdAt: string,
       updatedAt: string,
       occupationBackgroundImageId: string,
@@ -2856,7 +3078,7 @@ export type OnUpdateUserSubscription = {
       lon: number,
     } | null,
     occupations?:  {
-      __typename: "ModelOccupationConnection",
+      __typename: "ModelUserOccupationsConnection",
       nextToken?: string | null,
     } | null,
     activeOccupation?:  {
@@ -2864,7 +3086,6 @@ export type OnUpdateUserSubscription = {
       id: string,
       name: string,
       establishmentId?: string | null,
-      userId?: string | null,
       createdAt: string,
       updatedAt: string,
       occupationBackgroundImageId: string,
@@ -2921,7 +3142,7 @@ export type OnDeleteUserSubscription = {
       lon: number,
     } | null,
     occupations?:  {
-      __typename: "ModelOccupationConnection",
+      __typename: "ModelUserOccupationsConnection",
       nextToken?: string | null,
     } | null,
     activeOccupation?:  {
@@ -2929,7 +3150,6 @@ export type OnDeleteUserSubscription = {
       id: string,
       name: string,
       establishmentId?: string | null,
-      userId?: string | null,
       createdAt: string,
       updatedAt: string,
       occupationBackgroundImageId: string,
@@ -2940,186 +3160,6 @@ export type OnDeleteUserSubscription = {
     userBackgroundImageId?: string | null,
     userProfileImageId?: string | null,
     userActiveOccupationId?: string | null,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnCreateDeviceSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnCreateDeviceSubscription = {
-  onCreateDevice?:  {
-    __typename: "Device",
-    id: string,
-    name: string,
-    token: string,
-    userId: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateDeviceSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnUpdateDeviceSubscription = {
-  onUpdateDevice?:  {
-    __typename: "Device",
-    id: string,
-    name: string,
-    token: string,
-    userId: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteDeviceSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnDeleteDeviceSubscription = {
-  onDeleteDevice?:  {
-    __typename: "Device",
-    id: string,
-    name: string,
-    token: string,
-    userId: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnCreateImagePathSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnCreateImagePathSubscription = {
-  onCreateImagePath?:  {
-    __typename: "ImagePath",
-    key: string,
-    location: ImageLocation,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateImagePathSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnUpdateImagePathSubscription = {
-  onUpdateImagePath?:  {
-    __typename: "ImagePath",
-    key: string,
-    location: ImageLocation,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteImagePathSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnDeleteImagePathSubscription = {
-  onDeleteImagePath?:  {
-    __typename: "ImagePath",
-    key: string,
-    location: ImageLocation,
-    id: string,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnCreateOccupationSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnCreateOccupationSubscription = {
-  onCreateOccupation?:  {
-    __typename: "Occupation",
-    id: string,
-    name: string,
-    backgroundImage:  {
-      __typename: "ImagePath",
-      key: string,
-      location: ImageLocation,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
-    establishmentId?: string | null,
-    userId?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    occupationBackgroundImageId: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateOccupationSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnUpdateOccupationSubscription = {
-  onUpdateOccupation?:  {
-    __typename: "Occupation",
-    id: string,
-    name: string,
-    backgroundImage:  {
-      __typename: "ImagePath",
-      key: string,
-      location: ImageLocation,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
-    establishmentId?: string | null,
-    userId?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    occupationBackgroundImageId: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteOccupationSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnDeleteOccupationSubscription = {
-  onDeleteOccupation?:  {
-    __typename: "Occupation",
-    id: string,
-    name: string,
-    backgroundImage:  {
-      __typename: "ImagePath",
-      key: string,
-      location: ImageLocation,
-      id: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    },
-    establishmentId?: string | null,
-    userId?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    occupationBackgroundImageId: string,
     owner?: string | null,
   } | null,
 };
@@ -3229,27 +3269,16 @@ export type OnDeleteEstablishmentSubscription = {
   } | null,
 };
 
-export type OnCreateEstablishmentTibiSubscriptionVariables = {
+export type OnCreateUserOccupationsSubscriptionVariables = {
   owner?: string | null,
 };
 
-export type OnCreateEstablishmentTibiSubscription = {
-  onCreateEstablishmentTibi?:  {
-    __typename: "EstablishmentTibi",
+export type OnCreateUserOccupationsSubscription = {
+  onCreateUserOccupations?:  {
+    __typename: "UserOccupations",
     id: string,
-    userId: string,
-    establishmentId: string,
-    establishment:  {
-      __typename: "Establishment",
-      id: string,
-      name: string,
-      type: EstablishmentType,
-      website?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      establishmentImageId?: string | null,
-      owner?: string | null,
-    },
+    userID: string,
+    occupationID: string,
     user:  {
       __typename: "User",
       id: string,
@@ -3266,34 +3295,32 @@ export type OnCreateEstablishmentTibiSubscription = {
       userActiveOccupationId?: string | null,
       owner?: string | null,
     },
-    roles: Array< string | null >,
+    occupation:  {
+      __typename: "Occupation",
+      id: string,
+      name: string,
+      establishmentId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      occupationBackgroundImageId: string,
+      owner?: string | null,
+    },
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
   } | null,
 };
 
-export type OnUpdateEstablishmentTibiSubscriptionVariables = {
+export type OnUpdateUserOccupationsSubscriptionVariables = {
   owner?: string | null,
 };
 
-export type OnUpdateEstablishmentTibiSubscription = {
-  onUpdateEstablishmentTibi?:  {
-    __typename: "EstablishmentTibi",
+export type OnUpdateUserOccupationsSubscription = {
+  onUpdateUserOccupations?:  {
+    __typename: "UserOccupations",
     id: string,
-    userId: string,
-    establishmentId: string,
-    establishment:  {
-      __typename: "Establishment",
-      id: string,
-      name: string,
-      type: EstablishmentType,
-      website?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      establishmentImageId?: string | null,
-      owner?: string | null,
-    },
+    userID: string,
+    occupationID: string,
     user:  {
       __typename: "User",
       id: string,
@@ -3310,34 +3337,32 @@ export type OnUpdateEstablishmentTibiSubscription = {
       userActiveOccupationId?: string | null,
       owner?: string | null,
     },
-    roles: Array< string | null >,
+    occupation:  {
+      __typename: "Occupation",
+      id: string,
+      name: string,
+      establishmentId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      occupationBackgroundImageId: string,
+      owner?: string | null,
+    },
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
   } | null,
 };
 
-export type OnDeleteEstablishmentTibiSubscriptionVariables = {
+export type OnDeleteUserOccupationsSubscriptionVariables = {
   owner?: string | null,
 };
 
-export type OnDeleteEstablishmentTibiSubscription = {
-  onDeleteEstablishmentTibi?:  {
-    __typename: "EstablishmentTibi",
+export type OnDeleteUserOccupationsSubscription = {
+  onDeleteUserOccupations?:  {
+    __typename: "UserOccupations",
     id: string,
-    userId: string,
-    establishmentId: string,
-    establishment:  {
-      __typename: "Establishment",
-      id: string,
-      name: string,
-      type: EstablishmentType,
-      website?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      establishmentImageId?: string | null,
-      owner?: string | null,
-    },
+    userID: string,
+    occupationID: string,
     user:  {
       __typename: "User",
       id: string,
@@ -3354,345 +3379,18 @@ export type OnDeleteEstablishmentTibiSubscription = {
       userActiveOccupationId?: string | null,
       owner?: string | null,
     },
-    roles: Array< string | null >,
+    occupation:  {
+      __typename: "Occupation",
+      id: string,
+      name: string,
+      establishmentId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      occupationBackgroundImageId: string,
+      owner?: string | null,
+    },
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
-  } | null,
-};
-
-export type OnCreateWalletSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnCreateWalletSubscription = {
-  onCreateWallet?:  {
-    __typename: "Wallet",
-    id: string,
-    cryptoHash?: string | null,
-    cryptoBalance?: string | null,
-    payments?:  {
-      __typename: "ModelPaymentConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnUpdateWalletSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnUpdateWalletSubscription = {
-  onUpdateWallet?:  {
-    __typename: "Wallet",
-    id: string,
-    cryptoHash?: string | null,
-    cryptoBalance?: string | null,
-    payments?:  {
-      __typename: "ModelPaymentConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnDeleteWalletSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnDeleteWalletSubscription = {
-  onDeleteWallet?:  {
-    __typename: "Wallet",
-    id: string,
-    cryptoHash?: string | null,
-    cryptoBalance?: string | null,
-    payments?:  {
-      __typename: "ModelPaymentConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
-  } | null,
-};
-
-export type OnCreatePaymentSubscription = {
-  onCreatePayment?:  {
-    __typename: "Payment",
-    id: string,
-    walletId: string,
-    name?: string | null,
-    fee?: number | null,
-    isDefault?: boolean | null,
-    type?: PaymentType | null,
-    description?: string | null,
-    token?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdatePaymentSubscription = {
-  onUpdatePayment?:  {
-    __typename: "Payment",
-    id: string,
-    walletId: string,
-    name?: string | null,
-    fee?: number | null,
-    isDefault?: boolean | null,
-    type?: PaymentType | null,
-    description?: string | null,
-    token?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeletePaymentSubscription = {
-  onDeletePayment?:  {
-    __typename: "Payment",
-    id: string,
-    walletId: string,
-    name?: string | null,
-    fee?: number | null,
-    isDefault?: boolean | null,
-    type?: PaymentType | null,
-    description?: string | null,
-    token?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateTransactionSubscription = {
-  onCreateTransaction?:  {
-    __typename: "Transaction",
-    id: string,
-    amount?: number | null,
-    status?: TransactionStatus | null,
-    createdAt: string,
-    transactionPaymentId: string,
-    transactionSourceId: string,
-    transactionDestinationId: string,
-    rating?: TransactionRating | null,
-    payment:  {
-      __typename: "Payment",
-      id: string,
-      walletId: string,
-      name?: string | null,
-      fee?: number | null,
-      isDefault?: boolean | null,
-      type?: PaymentType | null,
-      description?: string | null,
-      token?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    },
-    source:  {
-      __typename: "User",
-      id: string,
-      firstName: string,
-      lastName: string,
-      availableBalance?: number | null,
-      pendingBalance?: number | null,
-      tippingActive?: boolean | null,
-      unreadNotifications?: boolean | null,
-      createdAt: string,
-      updatedAt: string,
-      userBackgroundImageId?: string | null,
-      userProfileImageId?: string | null,
-      userActiveOccupationId?: string | null,
-      owner?: string | null,
-    },
-    destination:  {
-      __typename: "User",
-      id: string,
-      firstName: string,
-      lastName: string,
-      availableBalance?: number | null,
-      pendingBalance?: number | null,
-      tippingActive?: boolean | null,
-      unreadNotifications?: boolean | null,
-      createdAt: string,
-      updatedAt: string,
-      userBackgroundImageId?: string | null,
-      userProfileImageId?: string | null,
-      userActiveOccupationId?: string | null,
-      owner?: string | null,
-    },
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateTransactionSubscription = {
-  onUpdateTransaction?:  {
-    __typename: "Transaction",
-    id: string,
-    amount?: number | null,
-    status?: TransactionStatus | null,
-    createdAt: string,
-    transactionPaymentId: string,
-    transactionSourceId: string,
-    transactionDestinationId: string,
-    rating?: TransactionRating | null,
-    payment:  {
-      __typename: "Payment",
-      id: string,
-      walletId: string,
-      name?: string | null,
-      fee?: number | null,
-      isDefault?: boolean | null,
-      type?: PaymentType | null,
-      description?: string | null,
-      token?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    },
-    source:  {
-      __typename: "User",
-      id: string,
-      firstName: string,
-      lastName: string,
-      availableBalance?: number | null,
-      pendingBalance?: number | null,
-      tippingActive?: boolean | null,
-      unreadNotifications?: boolean | null,
-      createdAt: string,
-      updatedAt: string,
-      userBackgroundImageId?: string | null,
-      userProfileImageId?: string | null,
-      userActiveOccupationId?: string | null,
-      owner?: string | null,
-    },
-    destination:  {
-      __typename: "User",
-      id: string,
-      firstName: string,
-      lastName: string,
-      availableBalance?: number | null,
-      pendingBalance?: number | null,
-      tippingActive?: boolean | null,
-      unreadNotifications?: boolean | null,
-      createdAt: string,
-      updatedAt: string,
-      userBackgroundImageId?: string | null,
-      userProfileImageId?: string | null,
-      userActiveOccupationId?: string | null,
-      owner?: string | null,
-    },
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteTransactionSubscription = {
-  onDeleteTransaction?:  {
-    __typename: "Transaction",
-    id: string,
-    amount?: number | null,
-    status?: TransactionStatus | null,
-    createdAt: string,
-    transactionPaymentId: string,
-    transactionSourceId: string,
-    transactionDestinationId: string,
-    rating?: TransactionRating | null,
-    payment:  {
-      __typename: "Payment",
-      id: string,
-      walletId: string,
-      name?: string | null,
-      fee?: number | null,
-      isDefault?: boolean | null,
-      type?: PaymentType | null,
-      description?: string | null,
-      token?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    },
-    source:  {
-      __typename: "User",
-      id: string,
-      firstName: string,
-      lastName: string,
-      availableBalance?: number | null,
-      pendingBalance?: number | null,
-      tippingActive?: boolean | null,
-      unreadNotifications?: boolean | null,
-      createdAt: string,
-      updatedAt: string,
-      userBackgroundImageId?: string | null,
-      userProfileImageId?: string | null,
-      userActiveOccupationId?: string | null,
-      owner?: string | null,
-    },
-    destination:  {
-      __typename: "User",
-      id: string,
-      firstName: string,
-      lastName: string,
-      availableBalance?: number | null,
-      pendingBalance?: number | null,
-      tippingActive?: boolean | null,
-      unreadNotifications?: boolean | null,
-      createdAt: string,
-      updatedAt: string,
-      userBackgroundImageId?: string | null,
-      userProfileImageId?: string | null,
-      userActiveOccupationId?: string | null,
-      owner?: string | null,
-    },
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateNotificationSubscription = {
-  onCreateNotification?:  {
-    __typename: "Notification",
-    id: string,
-    userId: string,
-    type: NotificationType,
-    expirationDate?: string | null,
-    title: string,
-    details: string,
-    read?: boolean | null,
-    fromUserId?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateNotificationSubscription = {
-  onUpdateNotification?:  {
-    __typename: "Notification",
-    id: string,
-    userId: string,
-    type: NotificationType,
-    expirationDate?: string | null,
-    title: string,
-    details: string,
-    read?: boolean | null,
-    fromUserId?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteNotificationSubscription = {
-  onDeleteNotification?:  {
-    __typename: "Notification",
-    id: string,
-    userId: string,
-    type: NotificationType,
-    expirationDate?: string | null,
-    title: string,
-    details: string,
-    read?: boolean | null,
-    fromUserId?: string | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };

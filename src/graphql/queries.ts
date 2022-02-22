@@ -42,7 +42,6 @@ export const getUser = /* GraphQL */ `
         id
         name
         establishmentId
-        userId
         createdAt
         updatedAt
         occupationBackgroundImageId
@@ -161,7 +160,9 @@ export const getOccupation = /* GraphQL */ `
         owner
       }
       establishmentId
-      userId
+      users {
+        nextToken
+      }
       createdAt
       updatedAt
       occupationBackgroundImageId
@@ -180,7 +181,6 @@ export const listOccupations = /* GraphQL */ `
         id
         name
         establishmentId
-        userId
         createdAt
         updatedAt
         occupationBackgroundImageId
@@ -532,14 +532,14 @@ export const getNotification = /* GraphQL */ `
   query GetNotification($id: ID!) {
     getNotification(id: $id) {
       id
-      userId
+      toUserId
       type
       expirationDate
+      createdAt
       title
       details
       read
       fromUserId
-      createdAt
       updatedAt
     }
   }
@@ -553,45 +553,14 @@ export const listNotifications = /* GraphQL */ `
     listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        userId
+        toUserId
         type
         expirationDate
+        createdAt
         title
         details
         read
         fromUserId
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const byUser = /* GraphQL */ `
-  query ByUser(
-    $userId: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelNotificationFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    byUser(
-      userId: $userId
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        userId
-        type
-        expirationDate
-        title
-        details
-        read
-        fromUserId
-        createdAt
         updatedAt
       }
       nextToken
@@ -617,14 +586,14 @@ export const searchNotifications = /* GraphQL */ `
     ) {
       items {
         id
-        userId
+        toUserId
         type
         expirationDate
+        createdAt
         title
         details
         read
         fromUserId
-        createdAt
         updatedAt
       }
       nextToken
@@ -643,6 +612,61 @@ export const searchNotifications = /* GraphQL */ `
           }
         }
       }
+    }
+  }
+`;
+export const getUserOccupations = /* GraphQL */ `
+  query GetUserOccupations($id: ID!) {
+    getUserOccupations(id: $id) {
+      id
+      userID
+      occupationID
+      user {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        tippingActive
+        unreadNotifications
+        createdAt
+        updatedAt
+        userBackgroundImageId
+        userProfileImageId
+        userActiveOccupationId
+        owner
+      }
+      occupation {
+        id
+        name
+        establishmentId
+        createdAt
+        updatedAt
+        occupationBackgroundImageId
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listUserOccupations = /* GraphQL */ `
+  query ListUserOccupations(
+    $filter: ModelUserOccupationsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserOccupations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        occupationID
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
     }
   }
 `;

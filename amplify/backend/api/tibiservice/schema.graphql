@@ -35,12 +35,13 @@ type User
   location: Location
 
 
-  occupations: [Occupation] @hasMany(indexName: "byUser", fields: ["id"])
+  # occupations: [Occupation] @hasMany(indexName: "byUser", fields: ["id"])
+  occupations: [Occupation] @manyToMany(relationName: "UserOccupations")
   activeOccupation: Occupation @hasOne
 }
 
 type Device
-@model
+@model(subscriptions: null)
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
@@ -68,7 +69,8 @@ enum EstablishmentType {
   custom
 }
 
-type ImagePath @model 
+type ImagePath
+@model(subscriptions: null) 
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
@@ -82,7 +84,7 @@ type ImagePath @model
 }
 
 type Occupation 
-@model 
+@model(subscriptions: null) 
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
@@ -99,7 +101,9 @@ type Occupation
   ## If supplied this occupation is only for this establishment
   establishmentId: ID @index(name: "byEstablishment", sortKeyFields: ["name"])
 
-  userId: ID @index(name: "byUser", sortKeyFields: ["name"])
+  # userId: ID @index(name: "byUser", sortKeyFields: ["name"])
+
+  users: [User] @manyToMany(relationName: "UserOccupations")
 }
 
 type Establishment 
@@ -122,7 +126,7 @@ type Establishment
 }
 
 type EstablishmentTibi 
-@model 
+@model(subscriptions: null)
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
@@ -148,7 +152,7 @@ enum PaymentType {
 }
 
 type Wallet 
-@model 
+@model(subscriptions: null)
 @auth(
   rules: [
     { allow: owner, operations: [read, create, update, delete] }, 
@@ -169,7 +173,8 @@ enum TransactionStatus {
   refunded
 }
 
-type Payment @model 
+type Payment
+@model(subscriptions: null)
 @auth(
   rules: [
     { allow: private, operations: [read, create, update, delete] },
@@ -196,7 +201,7 @@ enum TransactionRating {
 }
 
 type Transaction
-@model
+@model(subscriptions: null)
 @searchable
 @auth(
   rules: [
@@ -235,7 +240,7 @@ enum NotificationType {
 
 type Notification 
 @searchable
-@model
+@model(subscriptions: null)
 @auth(
   rules: [
     { allow: private, operations: [read, create, update, delete] },
@@ -247,7 +252,8 @@ type Notification
 ) {
   id: ID!
 
-  userId: ID! @index(name: "byUser", queryField: "byUser", sortKeyFields: ["createdAt"])   ## User ID for this notification
+  toUserId: ID! @index(name: "byUser", sortKeyFields: ["createdAt"])
+  # userId: ID! @index(name: "byUser", queryField: "byUser")   ## User ID for this notification
   type: NotificationType!
   expirationDate: AWSDateTime
   createdAt: AWSDateTime!

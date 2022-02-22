@@ -45,7 +45,6 @@ export const createUser = /* GraphQL */ `
         id
         name
         establishmentId
-        userId
         createdAt
         updatedAt
         occupationBackgroundImageId
@@ -103,7 +102,6 @@ export const updateUser = /* GraphQL */ `
         id
         name
         establishmentId
-        userId
         createdAt
         updatedAt
         occupationBackgroundImageId
@@ -161,7 +159,6 @@ export const deleteUser = /* GraphQL */ `
         id
         name
         establishmentId
-        userId
         createdAt
         updatedAt
         occupationBackgroundImageId
@@ -286,7 +283,9 @@ export const createOccupation = /* GraphQL */ `
         owner
       }
       establishmentId
-      userId
+      users {
+        nextToken
+      }
       createdAt
       updatedAt
       occupationBackgroundImageId
@@ -311,7 +310,9 @@ export const updateOccupation = /* GraphQL */ `
         owner
       }
       establishmentId
-      userId
+      users {
+        nextToken
+      }
       createdAt
       updatedAt
       occupationBackgroundImageId
@@ -336,7 +337,9 @@ export const deleteOccupation = /* GraphQL */ `
         owner
       }
       establishmentId
-      userId
+      users {
+        nextToken
+      }
       createdAt
       updatedAt
       occupationBackgroundImageId
@@ -858,14 +861,14 @@ export const createNotification = /* GraphQL */ `
   ) {
     createNotification(input: $input, condition: $condition) {
       id
-      userId
+      toUserId
       type
       expirationDate
+      createdAt
       title
       details
       read
       fromUserId
-      createdAt
       updatedAt
     }
   }
@@ -877,14 +880,14 @@ export const updateNotification = /* GraphQL */ `
   ) {
     updateNotification(input: $input, condition: $condition) {
       id
-      userId
+      toUserId
       type
       expirationDate
+      createdAt
       title
       details
       read
       fromUserId
-      createdAt
       updatedAt
     }
   }
@@ -896,15 +899,132 @@ export const deleteNotification = /* GraphQL */ `
   ) {
     deleteNotification(input: $input, condition: $condition) {
       id
-      userId
+      toUserId
       type
       expirationDate
+      createdAt
       title
       details
       read
       fromUserId
+      updatedAt
+    }
+  }
+`;
+export const createUserOccupations = /* GraphQL */ `
+  mutation CreateUserOccupations(
+    $input: CreateUserOccupationsInput!
+    $condition: ModelUserOccupationsConditionInput
+  ) {
+    createUserOccupations(input: $input, condition: $condition) {
+      id
+      userID
+      occupationID
+      user {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        tippingActive
+        unreadNotifications
+        createdAt
+        updatedAt
+        userBackgroundImageId
+        userProfileImageId
+        userActiveOccupationId
+        owner
+      }
+      occupation {
+        id
+        name
+        establishmentId
+        createdAt
+        updatedAt
+        occupationBackgroundImageId
+        owner
+      }
       createdAt
       updatedAt
+      owner
+    }
+  }
+`;
+export const updateUserOccupations = /* GraphQL */ `
+  mutation UpdateUserOccupations(
+    $input: UpdateUserOccupationsInput!
+    $condition: ModelUserOccupationsConditionInput
+  ) {
+    updateUserOccupations(input: $input, condition: $condition) {
+      id
+      userID
+      occupationID
+      user {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        tippingActive
+        unreadNotifications
+        createdAt
+        updatedAt
+        userBackgroundImageId
+        userProfileImageId
+        userActiveOccupationId
+        owner
+      }
+      occupation {
+        id
+        name
+        establishmentId
+        createdAt
+        updatedAt
+        occupationBackgroundImageId
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteUserOccupations = /* GraphQL */ `
+  mutation DeleteUserOccupations(
+    $input: DeleteUserOccupationsInput!
+    $condition: ModelUserOccupationsConditionInput
+  ) {
+    deleteUserOccupations(input: $input, condition: $condition) {
+      id
+      userID
+      occupationID
+      user {
+        id
+        firstName
+        lastName
+        availableBalance
+        pendingBalance
+        tippingActive
+        unreadNotifications
+        createdAt
+        updatedAt
+        userBackgroundImageId
+        userProfileImageId
+        userActiveOccupationId
+        owner
+      }
+      occupation {
+        id
+        name
+        establishmentId
+        createdAt
+        updatedAt
+        occupationBackgroundImageId
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;
