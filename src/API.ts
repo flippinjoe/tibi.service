@@ -639,7 +639,7 @@ export type Notification = {
   toUserId: string,
   type: NotificationType,
   expirationDate?: string | null,
-  createdAt?: string | null,
+  createdAt: string,
   title: string,
   details: string,
   read?: boolean | null,
@@ -994,71 +994,14 @@ export type ModelNotificationConnection = {
   nextToken?: string | null,
 };
 
-export type SearchableNotificationFilterInput = {
-  id?: SearchableIDFilterInput | null,
-  toUserId?: SearchableIDFilterInput | null,
-  expirationDate?: SearchableStringFilterInput | null,
-  createdAt?: SearchableStringFilterInput | null,
-  title?: SearchableStringFilterInput | null,
-  details?: SearchableStringFilterInput | null,
-  read?: SearchableBooleanFilterInput | null,
-  fromUserId?: SearchableIDFilterInput | null,
-  updatedAt?: SearchableStringFilterInput | null,
-  type?: SearchableStringFilterInput | null,
-  and?: Array< SearchableNotificationFilterInput | null > | null,
-  or?: Array< SearchableNotificationFilterInput | null > | null,
-  not?: SearchableNotificationFilterInput | null,
-};
-
-export type SearchableBooleanFilterInput = {
-  eq?: boolean | null,
-  ne?: boolean | null,
-};
-
-export type SearchableNotificationSortInput = {
-  field?: SearchableNotificationSortableFields | null,
-  direction?: SearchableSortDirection | null,
-};
-
-export enum SearchableNotificationSortableFields {
-  id = "id",
-  toUserId = "toUserId",
-  expirationDate = "expirationDate",
-  createdAt = "createdAt",
-  title = "title",
-  details = "details",
-  read = "read",
-  fromUserId = "fromUserId",
-  updatedAt = "updatedAt",
-}
-
-
-export type SearchableNotificationAggregationInput = {
-  name: string,
-  type: SearchableAggregateType,
-  field: SearchableNotificationAggregateField,
-};
-
-export enum SearchableNotificationAggregateField {
-  id = "id",
-  toUserId = "toUserId",
-  type = "type",
-  expirationDate = "expirationDate",
-  createdAt = "createdAt",
-  title = "title",
-  details = "details",
-  read = "read",
-  fromUserId = "fromUserId",
-  updatedAt = "updatedAt",
-}
-
-
-export type SearchableNotificationConnection = {
-  __typename: "SearchableNotificationConnection",
-  items:  Array<Notification | null >,
-  nextToken?: string | null,
-  total?: number | null,
-  aggregateItems:  Array<SearchableAggregateResult | null >,
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
 };
 
 export type ModelUserOccupationsFilterInput = {
@@ -2039,7 +1982,7 @@ export type CreateNotificationMutation = {
     toUserId: string,
     type: NotificationType,
     expirationDate?: string | null,
-    createdAt?: string | null,
+    createdAt: string,
     title: string,
     details: string,
     read?: boolean | null,
@@ -2060,7 +2003,7 @@ export type UpdateNotificationMutation = {
     toUserId: string,
     type: NotificationType,
     expirationDate?: string | null,
-    createdAt?: string | null,
+    createdAt: string,
     title: string,
     details: string,
     read?: boolean | null,
@@ -2081,7 +2024,7 @@ export type DeleteNotificationMutation = {
     toUserId: string,
     type: NotificationType,
     expirationDate?: string | null,
-    createdAt?: string | null,
+    createdAt: string,
     title: string,
     details: string,
     read?: boolean | null,
@@ -2827,7 +2770,7 @@ export type GetNotificationQuery = {
     toUserId: string,
     type: NotificationType,
     expirationDate?: string | null,
-    createdAt?: string | null,
+    createdAt: string,
     title: string,
     details: string,
     read?: boolean | null,
@@ -2851,7 +2794,7 @@ export type ListNotificationsQuery = {
       toUserId: string,
       type: NotificationType,
       expirationDate?: string | null,
-      createdAt?: string | null,
+      createdAt: string,
       title: string,
       details: string,
       read?: boolean | null,
@@ -2862,25 +2805,25 @@ export type ListNotificationsQuery = {
   } | null,
 };
 
-export type SearchNotificationsQueryVariables = {
-  filter?: SearchableNotificationFilterInput | null,
-  sort?: Array< SearchableNotificationSortInput | null > | null,
+export type NotificationsByUserQueryVariables = {
+  toUserId: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelNotificationFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
-  from?: number | null,
-  aggregates?: Array< SearchableNotificationAggregationInput | null > | null,
 };
 
-export type SearchNotificationsQuery = {
-  searchNotifications?:  {
-    __typename: "SearchableNotificationConnection",
+export type NotificationsByUserQuery = {
+  notificationsByUser?:  {
+    __typename: "ModelNotificationConnection",
     items:  Array< {
       __typename: "Notification",
       id: string,
       toUserId: string,
       type: NotificationType,
       expirationDate?: string | null,
-      createdAt?: string | null,
+      createdAt: string,
       title: string,
       details: string,
       read?: boolean | null,
@@ -2888,23 +2831,6 @@ export type SearchNotificationsQuery = {
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
-    total?: number | null,
-    aggregateItems:  Array< {
-      __typename: "SearchableAggregateResult",
-      name: string,
-      result: ( {
-          __typename: "SearchableAggregateScalarResult",
-          value: number,
-        } | {
-          __typename: "SearchableAggregateBucketResult",
-          buckets?:  Array< {
-            __typename: string,
-            key: string,
-            doc_count: number,
-          } | null > | null,
-        }
-      ) | null,
-    } | null >,
   } | null,
 };
 

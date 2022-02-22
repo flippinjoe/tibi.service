@@ -567,22 +567,22 @@ export const listNotifications = /* GraphQL */ `
     }
   }
 `;
-export const searchNotifications = /* GraphQL */ `
-  query SearchNotifications(
-    $filter: SearchableNotificationFilterInput
-    $sort: [SearchableNotificationSortInput]
+export const notificationsByUser = /* GraphQL */ `
+  query NotificationsByUser(
+    $toUserId: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelNotificationFilterInput
     $limit: Int
     $nextToken: String
-    $from: Int
-    $aggregates: [SearchableNotificationAggregationInput]
   ) {
-    searchNotifications(
+    notificationsByUser(
+      toUserId: $toUserId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
       filter: $filter
-      sort: $sort
       limit: $limit
       nextToken: $nextToken
-      from: $from
-      aggregates: $aggregates
     ) {
       items {
         id
@@ -597,21 +597,6 @@ export const searchNotifications = /* GraphQL */ `
         updatedAt
       }
       nextToken
-      total
-      aggregateItems {
-        name
-        result {
-          ... on SearchableAggregateScalarResult {
-            value
-          }
-          ... on SearchableAggregateBucketResult {
-            buckets {
-              key
-              doc_count
-            }
-          }
-        }
-      }
     }
   }
 `;

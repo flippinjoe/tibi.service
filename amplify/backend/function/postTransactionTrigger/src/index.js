@@ -107,7 +107,7 @@ Amplify Params - DO NOT EDIT */
    ) {
      createNotification(input: $input, condition: $condition) {
        id
-       userId
+       toUserId
        type
        expirationDate
        title
@@ -187,7 +187,7 @@ const convertTokensToMap = (tokens, channel) => {
  
      graphqlOperation( print(createNotification), {
        input: {
-         userId: user.id,
+         toUserId: user.id,
          title,
          details,
          type: "tip",
