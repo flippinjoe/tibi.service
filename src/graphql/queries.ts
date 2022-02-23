@@ -532,7 +532,7 @@ export const getNotification = /* GraphQL */ `
   query GetNotification($id: ID!) {
     getNotification(id: $id) {
       id
-      toUserId
+      userId
       type
       expirationDate
       createdAt
@@ -553,7 +553,7 @@ export const listNotifications = /* GraphQL */ `
     listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        toUserId
+        userId
         type
         expirationDate
         createdAt
@@ -567,17 +567,17 @@ export const listNotifications = /* GraphQL */ `
     }
   }
 `;
-export const notificationsByUser = /* GraphQL */ `
-  query NotificationsByUser(
-    $toUserId: ID!
+export const getNotificationsByUser = /* GraphQL */ `
+  query GetNotificationsByUser(
+    $userId: ID!
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelNotificationFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    notificationsByUser(
-      toUserId: $toUserId
+    getNotificationsByUser(
+      userId: $userId
       createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
@@ -586,7 +586,7 @@ export const notificationsByUser = /* GraphQL */ `
     ) {
       items {
         id
-        toUserId
+        userId
         type
         expirationDate
         createdAt

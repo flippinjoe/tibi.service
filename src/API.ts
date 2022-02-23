@@ -597,7 +597,7 @@ export type DeleteTransactionInput = {
 
 export type CreateNotificationInput = {
   id?: string | null,
-  toUserId: string,
+  userId: string,
   type: NotificationType,
   expirationDate?: string | null,
   createdAt?: string | null,
@@ -615,7 +615,7 @@ export enum NotificationType {
 
 
 export type ModelNotificationConditionInput = {
-  toUserId?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
   type?: ModelNotificationTypeInput | null,
   expirationDate?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
@@ -636,7 +636,7 @@ export type ModelNotificationTypeInput = {
 export type Notification = {
   __typename: "Notification",
   id: string,
-  toUserId: string,
+  userId: string,
   type: NotificationType,
   expirationDate?: string | null,
   createdAt: string,
@@ -649,7 +649,7 @@ export type Notification = {
 
 export type UpdateNotificationInput = {
   id: string,
-  toUserId?: string | null,
+  userId?: string | null,
   type?: NotificationType | null,
   expirationDate?: string | null,
   createdAt?: string | null,
@@ -975,7 +975,7 @@ export type SearchableAggregateBucketResultItem = {
 
 export type ModelNotificationFilterInput = {
   id?: ModelIDInput | null,
-  toUserId?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
   type?: ModelNotificationTypeInput | null,
   expirationDate?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
@@ -1979,7 +1979,7 @@ export type CreateNotificationMutation = {
   createNotification?:  {
     __typename: "Notification",
     id: string,
-    toUserId: string,
+    userId: string,
     type: NotificationType,
     expirationDate?: string | null,
     createdAt: string,
@@ -2000,7 +2000,7 @@ export type UpdateNotificationMutation = {
   updateNotification?:  {
     __typename: "Notification",
     id: string,
-    toUserId: string,
+    userId: string,
     type: NotificationType,
     expirationDate?: string | null,
     createdAt: string,
@@ -2021,7 +2021,7 @@ export type DeleteNotificationMutation = {
   deleteNotification?:  {
     __typename: "Notification",
     id: string,
-    toUserId: string,
+    userId: string,
     type: NotificationType,
     expirationDate?: string | null,
     createdAt: string,
@@ -2767,7 +2767,7 @@ export type GetNotificationQuery = {
   getNotification?:  {
     __typename: "Notification",
     id: string,
-    toUserId: string,
+    userId: string,
     type: NotificationType,
     expirationDate?: string | null,
     createdAt: string,
@@ -2791,7 +2791,7 @@ export type ListNotificationsQuery = {
     items:  Array< {
       __typename: "Notification",
       id: string,
-      toUserId: string,
+      userId: string,
       type: NotificationType,
       expirationDate?: string | null,
       createdAt: string,
@@ -2805,8 +2805,8 @@ export type ListNotificationsQuery = {
   } | null,
 };
 
-export type NotificationsByUserQueryVariables = {
-  toUserId: string,
+export type GetNotificationsByUserQueryVariables = {
+  userId: string,
   createdAt?: ModelStringKeyConditionInput | null,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelNotificationFilterInput | null,
@@ -2814,13 +2814,13 @@ export type NotificationsByUserQueryVariables = {
   nextToken?: string | null,
 };
 
-export type NotificationsByUserQuery = {
-  notificationsByUser?:  {
+export type GetNotificationsByUserQuery = {
+  getNotificationsByUser?:  {
     __typename: "ModelNotificationConnection",
     items:  Array< {
       __typename: "Notification",
       id: string,
-      toUserId: string,
+      userId: string,
       type: NotificationType,
       expirationDate?: string | null,
       createdAt: string,

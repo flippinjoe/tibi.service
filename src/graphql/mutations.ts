@@ -861,7 +861,7 @@ export const createNotification = /* GraphQL */ `
   ) {
     createNotification(input: $input, condition: $condition) {
       id
-      toUserId
+      userId
       type
       expirationDate
       createdAt
@@ -880,7 +880,7 @@ export const updateNotification = /* GraphQL */ `
   ) {
     updateNotification(input: $input, condition: $condition) {
       id
-      toUserId
+      userId
       type
       expirationDate
       createdAt
@@ -899,7 +899,7 @@ export const deleteNotification = /* GraphQL */ `
   ) {
     deleteNotification(input: $input, condition: $condition) {
       id
-      toUserId
+      userId
       type
       expirationDate
       createdAt
