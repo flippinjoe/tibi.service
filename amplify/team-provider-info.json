@@ -28,7 +28,7 @@
       "function": {
         "postTransactionTrigger": {
           "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
-          "s3Key": "amplify-builds/postTransactionTrigger-64366c587357756b7970-build.zip"
+          "s3Key": "amplify-builds/postTransactionTrigger-436a3579545043757430-build.zip"
         }
       }
     }
