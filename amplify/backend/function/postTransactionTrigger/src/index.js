@@ -187,7 +187,7 @@ const convertTokensToMap = (tokens, channel) => {
  
      graphqlOperation( print(createNotification), {
        input: {
-         toUserId: user.id,
+        userId: user.id,
          title,
          details,
          type: "tip",
