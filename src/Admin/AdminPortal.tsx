@@ -1,6 +1,6 @@
 import { CssBaseline, useMediaQuery } from '@mui/material';
 import { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Outlet, Route, Routes, useRoutes } from 'react-router-dom';
 import { PrivateRoute } from './AdminAuth';
 import { AuthProvider } from './contexts/AuthContext';
 import Home from './screens/Home';
@@ -14,6 +14,21 @@ import EstablishmentList from './screens/establishments/EstablishmentList';
 import EstablishmentEdit from './screens/establishments/EstablishmentEdit';
 
 const drawerWidth = 256;
+
+// const AdminRouter2 = () => {
+//   return useRoutes([
+//     {
+//       path: '/',
+//       element: () => <Home />
+//     },
+//     {
+//       path: 'thing',
+//       element: () => <p>Hello</p>
+//     }
+//   ]);
+// };
+
+// export default AdminRouter2;
 
 const AdminRouter = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -44,14 +59,14 @@ const AdminRouter = () => {
           <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             <Header onDrawerToggle={handleToggleDrawer} />
             <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: '#eaeff1' }}>
-              <Router>
-                <Routes>
-                  <Route path="/admin/login" element={<Login />} />
-                  <PrivateRoute path="/admin/establishments" element={<EstablishmentList />} />
-                  <PrivateRoute path="/admin/establishments/:id" element={<EstablishmentEdit />} />
-                  <PrivateRoute path="/" element={<Home />} />
-                </Routes>
-              </Router>
+              <Routes>
+                <Route path="/admin/login" element={<Login />} />
+                <Route path="establishments" element={<PrivateRoute />}>
+                  <Route path="" element={<EstablishmentList />} />
+                  <Route path=":id" element={<EstablishmentEdit />} />
+                </Route>
+                {/* <PrivateRoute path="/" element={<Home />} /> */}
+              </Routes>
             </Box>
             {/* <Box component="footer" sx={{ p: 2, bgcolor: '#eaeff1' }}>
                 <Copyright />

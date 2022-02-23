@@ -2,14 +2,18 @@
 // screen if you're not yet authenticated.
 
 import React from 'react';
-import { Navigate, Route } from 'react-router';
+import { Navigate, Outlet, Route } from 'react-router';
 import { RouteProps } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 
 export const PrivateRoute = ({ children, element: SomeC, ...rest }: RouteProps) => {
-  return (
-    <Route {...rest} element={<RequireAuth redirectTo="/admin/login">{children}</RequireAuth>} />
-  );
+  const auth = useAuth();
+
+  if (!auth.initialized) {
+    return <p>Initializing...</p>;
+  }
+
+  return auth.user ? <Outlet /> : <Navigate to={'/admin/login'} />;
   // let auth = useAuth();
 
   //   console.log(`Private route: has login - ${auth.user} | ${auth.initialized}`)

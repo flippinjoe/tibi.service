@@ -65,7 +65,7 @@ const CrudEdit = <T,>(props: CrudEditProps<T>) => {
       });
     };
     return (
-      <FormControl>
+      <FormControl key={f.id.toString()}>
         <InputLabel htmlFor={f.id.toString()}>{f.name}</InputLabel>
         <Input
           id={f.id.toString()}

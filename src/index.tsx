@@ -1,5 +1,6 @@
 // mock api
 import './Portal/_apis_';
+import './index.css';
 
 // i18n
 import './Portal/locales/i18n';
@@ -34,7 +35,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import './index.css';
 // import App from './Router';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+// import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { HelmetProvider } from 'react-helmet-async';
 // amplify
@@ -47,6 +48,8 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { AuthProvider } from './Portal/contexts/AwsCognitoContext';
 // Providers
 import { AuthProvider as AppAuthProvider } from 'Admin/contexts/AuthContext';
+import App from './Router';
+import { BrowserRouter } from 'react-router-dom';
 
 Amplify.configure(awsconfig);
 
@@ -55,10 +58,11 @@ ReactDOM.render(
     <HelmetProvider>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <AppAuthProvider>
-          <AuthProvider>
-            {/* <App /> */}
-            <p>Welcome</p>
-          </AuthProvider>
+          <BrowserRouter>
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </BrowserRouter>
         </AppAuthProvider>
       </LocalizationProvider>
     </HelmetProvider>
