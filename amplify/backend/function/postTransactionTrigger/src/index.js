@@ -145,15 +145,13 @@ const convertTokensToMap = (tokens, channel) => {
   }, {})
 }
 
- 
- const updateUserAvailableBalance = async (user, availableBalance, fromUser) => {
-   
-    const title = `${fromUser.firstName} ${fromUser.lastName.substr(0, 1)}.`
-    const details = `Sent you $${(availableBalance - (user.availableBalance || 0)).toFixed(2)}`
+const notifyUserTipped = async (user, availableBalance, fromUser) => {
+  const title = `${fromUser.firstName} ${fromUser.lastName.substr(0, 1)}.`
+  const details = `Sent you $${(availableBalance - (user.availableBalance || 0)).toFixed(2)}`
 
-    console.log(`Sending to `, user.devices.map(d => d.token).join(' | '))
-    // console.log(process.env)
-   const [pushData, notificationData, graphqlData] = await Promise.all([
+
+  // console.log(process.env)
+  return await Promise.all([
 
     /// Send a pinpoint thing here
     new Promise((resolve, reject) => {
@@ -193,20 +191,24 @@ const convertTokensToMap = (tokens, channel) => {
          type: "tip",
          fromUserId: fromUser.id
        }
-     }),
- 
-     graphqlOperation( print(updateUserMutation), {
-       input: {
-         id: user.id,
-         owner: user.owner,
-         availableBalance: availableBalance,
-         unreadNotifications: true
-       }
      })
    ])
+}
  
-  //  console.log("notificationData", notificationData.data)
-   console.log('push data', JSON.stringify(pushData, null, 2))
+ const updateUserAvailableBalance = async (user, availableBalance) => {
+   
+    console.log(`Sending to `, user.devices.map(d => d.token).join(' | '))
+
+
+    const graphqlData = await graphqlOperation( print(updateUserMutation), {
+      input: {
+        id: user.id,
+        owner: user.owner,
+        availableBalance: availableBalance,
+        unreadNotifications: true
+      }
+    })
+  
  
    const { updateUser } = graphqlData.data
    return updateUser
@@ -233,10 +235,15 @@ const convertTokensToMap = (tokens, channel) => {
    ])
    
    // TODO: Update fromUser balance
-   const res = await updateUserAvailableBalance(toUser, (toUser.availableBalance || 0) + amount, fromUser)
- 
+   const res = await updateUserAvailableBalance(toUser, (toUser.availableBalance || 0) + amount)
+   const res2 = await updateUserAvailableBalance(fromUser, (fromUser.availableBalance || 0) - amount)
+
+   const notification = await notifyUserTipped(toUser, (toUser.availableBalance || 0) + amount, fromUser).catch(ex => {
+     return { err: ex }
+   })
+
    //eslint-disable-line
-   console.log(JSON.stringify(res, null, 2));
+   console.log(JSON.stringify({ res, res2, notification }, null, 2));
    // event.Records.forEach(record => {
    //   console.log(record.eventID);
    //   console.log(record.eventName);
