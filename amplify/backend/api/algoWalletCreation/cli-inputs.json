@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/wallet/algo": {
+      "name": "/wallet/algo",
+      "lambdaFunction": "algoWalletCreate",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

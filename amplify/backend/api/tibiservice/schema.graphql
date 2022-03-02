@@ -25,6 +25,9 @@ type User
   availableBalance: Float
   pendingBalance: Float
 
+  ## id for user on sendwyre
+  sendwyreUserId: String
+
   tippingActive: Boolean
   unreadNotifications: Boolean
 
