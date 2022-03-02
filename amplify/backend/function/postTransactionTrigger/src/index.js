@@ -107,7 +107,7 @@ Amplify Params - DO NOT EDIT */
    ) {
      createNotification(input: $input, condition: $condition) {
        id
-       toUserId
+       userId
        type
        expirationDate
        title
