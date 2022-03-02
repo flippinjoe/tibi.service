@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-tibiservice-develop-191322-unauthRole",
       "StackName": "amplify-tibiservice-develop-191322",
       "StackId": "arn:aws:cloudformation:us-east-2:775952047413:stack/amplify-tibiservice-develop-191322/1ecc7790-3823-11ec-b99c-0aa9570074f2",
-      "AmplifyAppId": "d2fsbyc8v5822g"
+      "AmplifyAppId": "d2fsbyc8v5822g",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-tibiservice-develop-191322-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
@@ -29,6 +30,10 @@
         "postTransactionTrigger": {
           "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
           "s3Key": "amplify-builds/postTransactionTrigger-436a3579545043757430-build.zip"
+        },
+        "algoWalletCreate": {
+          "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
+          "s3Key": "amplify-builds/algoWalletCreate-72655857313361414565-build.zip"
         }
       }
     }

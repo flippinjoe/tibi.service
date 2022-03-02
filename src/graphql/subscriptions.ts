@@ -10,6 +10,7 @@ export const onCreateUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
+      sendwyreUserId
       tippingActive
       unreadNotifications
       backgroundImage {
@@ -64,6 +65,7 @@ export const onUpdateUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
+      sendwyreUserId
       tippingActive
       unreadNotifications
       backgroundImage {
@@ -118,6 +120,7 @@ export const onDeleteUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
+      sendwyreUserId
       tippingActive
       unreadNotifications
       backgroundImage {
@@ -260,6 +263,7 @@ export const onCreateUserOccupations = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        sendwyreUserId
         tippingActive
         unreadNotifications
         createdAt
@@ -296,6 +300,7 @@ export const onUpdateUserOccupations = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        sendwyreUserId
         tippingActive
         unreadNotifications
         createdAt
@@ -332,6 +337,7 @@ export const onDeleteUserOccupations = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        sendwyreUserId
         tippingActive
         unreadNotifications
         createdAt

@@ -10,6 +10,7 @@ export const getUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
+      sendwyreUserId
       tippingActive
       unreadNotifications
       backgroundImage {
@@ -69,6 +70,7 @@ export const listUsers = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        sendwyreUserId
         tippingActive
         unreadNotifications
         createdAt
@@ -261,6 +263,7 @@ export const getEstablishmentTibi = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        sendwyreUserId
         tippingActive
         unreadNotifications
         createdAt
@@ -431,6 +434,7 @@ export const getTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        sendwyreUserId
         tippingActive
         unreadNotifications
         createdAt
@@ -446,6 +450,7 @@ export const getTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        sendwyreUserId
         tippingActive
         unreadNotifications
         createdAt
@@ -612,6 +617,7 @@ export const getUserOccupations = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
+        sendwyreUserId
         tippingActive
         unreadNotifications
         createdAt
