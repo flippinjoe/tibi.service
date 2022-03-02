@@ -1,41 +1,35 @@
 {
-  "develop": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-tibiservice-develop-191322-authRole",
-      "UnauthRoleArn": "arn:aws:iam::775952047413:role/amplify-tibiservice-develop-191322-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::775952047413:role/amplify-tibiservice-develop-191322-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
-      "UnauthRoleName": "amplify-tibiservice-develop-191322-unauthRole",
-      "StackName": "amplify-tibiservice-develop-191322",
-      "StackId": "arn:aws:cloudformation:us-east-2:775952047413:stack/amplify-tibiservice-develop-191322/1ecc7790-3823-11ec-b99c-0aa9570074f2",
-      "AmplifyAppId": "d2fsbyc8v5822g",
-      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-tibiservice-develop-191322-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
-    },
-    "categories": {
-      "auth": {
-        "tibiservice": {
-          "appleAppId": "com.joesapps.tibi"
+    "develop": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-tibiservice-develop-191322-authRole",
+            "UnauthRoleArn": "arn:aws:iam::775952047413:role/amplify-tibiservice-develop-191322-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::775952047413:role/amplify-tibiservice-develop-191322-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
+            "UnauthRoleName": "amplify-tibiservice-develop-191322-unauthRole",
+            "StackName": "amplify-tibiservice-develop-191322",
+            "StackId": "arn:aws:cloudformation:us-east-2:775952047413:stack/amplify-tibiservice-develop-191322/1ecc7790-3823-11ec-b99c-0aa9570074f2",
+            "AmplifyAppId": "d2fsbyc8v5822g",
+            "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-tibiservice-develop-191322-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
         },
-        "userPoolGroups": {}
-      },
-      "notifications": {
-        "Pinpoint": {
-          "Name": "tibiPinPoint-develop",
-          "Id": "98d020f15fca435eb8cd49259c62153e",
-          "Region": "us-east-1"
+        "categories": {
+            "auth": {
+                "tibiservice": {
+                    "appleAppId": "com.joesapps.tibi"
+                },
+                "userPoolGroups": {}
+            },
+            "notifications": {},
+            "function": {
+                "postTransactionTrigger": {
+                    "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
+                    "s3Key": "amplify-builds/postTransactionTrigger-436a3579545043757430-build.zip"
+                },
+                "algoWalletCreate": {
+                    "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
+                    "s3Key": "amplify-builds/algoWalletCreate-72655857313361414565-build.zip"
+                }
+            }
         }
-      },
-      "function": {
-        "postTransactionTrigger": {
-          "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
-          "s3Key": "amplify-builds/postTransactionTrigger-436a3579545043757430-build.zip"
-        },
-        "algoWalletCreate": {
-          "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
-          "s3Key": "amplify-builds/algoWalletCreate-72655857313361414565-build.zip"
-        }
-      }
     }
-  }
 }
