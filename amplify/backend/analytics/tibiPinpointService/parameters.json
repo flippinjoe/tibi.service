@@ -1,0 +1,22 @@
+{
+    "appName": "tibiPinpointService",
+    "roleName": "pinpointLambdaRole1f029896",
+    "cloudformationPolicyName": "cloudformationPolicy1f029896",
+    "cloudWatchPolicyName": "cloudWatchPolicy1f029896",
+    "pinpointPolicyName": "pinpointPolicy1f029896",
+    "authPolicyName": "pinpoint_amplify_1f029896",
+    "unauthPolicyName": "pinpoint_amplify_1f029896",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    },
+    "appId": "c4616e8768354178adc60d02d8cc7581"
+}
