@@ -73,20 +73,6 @@
           ]
         }
       }
-    },
-    "algoWalletCreation": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "algoWalletCreate",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        }
-      ]
     }
   },
   "storage": {
@@ -127,11 +113,6 @@
           ]
         }
       ]
-    },
-    "algoWalletCreate": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     }
   },
   "hosting": {},

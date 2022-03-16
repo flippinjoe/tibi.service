@@ -47,5 +47,12 @@ export type AmplifyDependentResourcesAttributes = {
             "Region": "string",
             "LambdaExecutionRole": "string"
         }
+    },
+    "analytics": {
+        "tibiPinpointService": {
+            "Region": "string",
+            "Id": "string",
+            "appName": "string"
+        }
     }
 }
