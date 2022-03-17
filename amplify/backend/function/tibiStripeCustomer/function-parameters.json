@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "api": {
+      "tibiservice": [
+        "Query",
+        "Mutation"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "secretNames": [
+    "STRIPE_KEY",
+    "STRIPE_PUBLISH_KEY"
+  ]
+}
