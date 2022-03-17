@@ -30,6 +30,9 @@
         "postTransactionTrigger": {
           "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
           "s3Key": "amplify-builds/postTransactionTrigger-57793566547963737673-build.zip"
+        },
+        "tibiStripeCustomer": {
+          "secretsPathAmplifyAppId": "d2fsbyc8v5822g"
         }
       }
     }

@@ -27,6 +27,9 @@ type User
 
   ## id for user on sendwyre
   sendwyreUserId: String
+  
+    ## For stripe data
+  stp_customerId: String
 
   tippingActive: Boolean
   unreadNotifications: Boolean

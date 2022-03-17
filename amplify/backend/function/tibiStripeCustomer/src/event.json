@@ -1,0 +1,7 @@
+{
+  "httpMethod": "GET",
+  "path": "/stripeId",
+  "params": {
+    "userId": "6d0af0ab-88e0-4425-ade6-4777f75992b5"
+  }
+}

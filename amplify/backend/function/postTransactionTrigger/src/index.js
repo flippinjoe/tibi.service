@@ -11,11 +11,9 @@ Amplify Params - DO NOT EDIT */
  */
  const https = require('https')
  var aws = require('aws-sdk')
- const axios = require('axios');
  const gql = require('graphql-tag');
  const graphql = require('graphql');
  const { print } = graphql;
- const moment = require('moment')
  const urlParse = require("url").URL;
  const appsyncUrl = process.env.API_TIBISERVICE_GRAPHQLAPIENDPOINTOUTPUT;
  const region = process.env.REGION;
