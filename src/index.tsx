@@ -1,39 +1,39 @@
 // mock api
-// import './Portal/_apis_';
-// import './index.css';
+import './Portal/_apis_';
+import './index.css';
 
 // i18n
-// import './Portal/locales/i18n';
+import './Portal/locales/i18n';
 
 // highlight
-// import './Portal/utils/highlight';
+import './Portal/utils/highlight';
 
-// // scroll bar
-// import 'simplebar/src/simplebar.css';
+// scroll bar
+import 'simplebar/src/simplebar.css';
 
-// // map
-// import 'mapbox-gl/dist/mapbox-gl.css';
+// map
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-// // lightbox
-// import 'react-image-lightbox/style.css';
+// lightbox
+import 'react-image-lightbox/style.css';
 
-// // editor
-// import 'react-quill/dist/quill.snow.css';
-// import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+// editor
+import 'react-quill/dist/quill.snow.css';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-// // slick-carousel
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
+// slick-carousel
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-// // lazy image
-// import 'lazysizes';
-// import 'lazysizes/plugins/attrchange/ls.attrchange';
-// import 'lazysizes/plugins/object-fit/ls.object-fit';
-// import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+// lazy image
+import 'lazysizes';
+import 'lazysizes/plugins/attrchange/ls.attrchange';
+import 'lazysizes/plugins/object-fit/ls.object-fit';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './index.css';
+import './index.css';
 // import App from './Router';
 // import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
