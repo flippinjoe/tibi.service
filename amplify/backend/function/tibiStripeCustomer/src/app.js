@@ -122,7 +122,6 @@ const graphqlOperation = async (query, variables) => {
 
       result.on("end", () => {
         const finalData = JSON.parse(data.toString())
-        console.log(finalData)
         resolve(finalData);
       });
     });
@@ -147,7 +146,7 @@ const getUserForId = async (id) => {
   `
 
   const graphqlData = await graphqlOperation(print(getUserQuery), { id: id });
-  return graphqlData.data
+  return graphqlData.data.getUser
 }
 
 const updateUserMutation = gql`
@@ -166,12 +165,18 @@ const createOrGetCustomerIdForUser = async (userId) => {
   return getUserForId(userId)
   .then(async (user) => {
     if (user.stp_customerId && user.stp_customerId.length > 0) {
-      return user.stp_customerId
+      console.log(`User already has stripe account`)
+      return {
+        id: user.stp_customerId,
+        isNew: false
+      }
     }
 
     try {
+      console.log(`No stripe account yet, creating now`)
       const { stripe, publishKey } = await getStripe()
-      const customer = await stripe.customer.create()
+      const customer = await stripe.customers.create()
+
       // TODO: Save customer ID
       await graphqlOperation( print(updateUserMutation), {
         input: {
@@ -181,7 +186,7 @@ const createOrGetCustomerIdForUser = async (userId) => {
         }
       })
 
-      return customer.id
+      return { id: customer.id, isNew: true }
     }
     catch (ex) {
       console.error(`Error creating stripe account`)
@@ -199,11 +204,8 @@ const createOrGetCustomerIdForUser = async (userId) => {
 app.get('/stripeId', async (req, res) => {
 
   try {
-    const stripe = await createOrGetCustomerIdForUser(req.params.userId)
-    res.json({
-      id: customer.id,
-      isNew: true
-    })
+    const customerData = await createOrGetCustomerIdForUser(req.query.userId)
+    res.json(customerData)
   }
   catch (ex) {
     res.status(500)
