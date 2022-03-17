@@ -21,11 +21,6 @@ export type AmplifyDependentResourcesAttributes = {
             "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
-        },
-        "algoWalletCreation": {
-            "RootUrl": "string",
-            "ApiName": "string",
-            "ApiId": "string"
         }
     },
     "storage": {
@@ -36,12 +31,6 @@ export type AmplifyDependentResourcesAttributes = {
     },
     "function": {
         "postTransactionTrigger": {
-            "Name": "string",
-            "Arn": "string",
-            "Region": "string",
-            "LambdaExecutionRole": "string"
-        },
-        "algoWalletCreate": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
