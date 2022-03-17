@@ -161,7 +161,7 @@ const updateUserMutation = gql`
  }
  `
 
-const createOrGetCustomerIdForUser = async (userId) => {
+const createOrGetCustomerIdForUser = async (userId, stripeRef = null) => {
   return getUserForId(userId)
   .then(async (user) => {
     if (user.stp_customerId && user.stp_customerId.length > 0) {
@@ -174,7 +174,7 @@ const createOrGetCustomerIdForUser = async (userId) => {
 
     try {
       console.log(`No stripe account yet, creating now`)
-      const { stripe, publishKey } = await getStripe()
+      const { stripe, publishKey } = stripeRef || await getStripe()
       const customer = await stripe.customers.create()
 
       // TODO: Save customer ID
@@ -212,6 +212,38 @@ app.get('/stripeId', async (req, res) => {
     res.send({
       error: ex.message
     })
+  }
+});
+
+app.post('/payment-sheet', async (req, res) => {
+  // Use an existing Customer ID if this is a returning customer.
+  try {
+    const { stripe, publishKey } = await getStripe()
+    const customer = await createOrGetCustomerIdForUser(req.query.userId, { stripe, publishKey });
+    const ephemeralKey = await stripe.ephemeralKeys.create(
+      {customer: customer.id},
+      {apiVersion: '2020-08-27'}
+    );
+
+    const paymentIntent = await stripe.paymentIntents.create({
+     ...req.body,
+      customer: customer.id,
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+  
+    res.json({
+      paymentIntent: paymentIntent.client_secret,
+      ephemeralKey: ephemeralKey.secret,
+      customer: customer.id,
+      publishableKey: publishKey
+    });
+  } catch (ex) {
+    console.log('ERROR DOING THINGS')
+    console.error(ex)
+    res.status(500)
+    res.json({ error: ex.message })
   }
 });
 
