@@ -7,6 +7,13 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/ephemeralKey": {
+      "name": "/ephemeralKey",
+      "lambdaFunction": "tibiStripeCustomer",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

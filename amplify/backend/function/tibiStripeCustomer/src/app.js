@@ -215,6 +215,24 @@ app.get('/stripeId', async (req, res) => {
   }
 });
 
+app.get('/ephemeralKey', async (req, res) => {
+  try {
+    const { stripe, publishKey } = await getStripe()
+    const customer = await createOrGetCustomerIdForUser(req.query.userId, { stripe, publishKey });
+    const ephemeralKey = await stripe.ephemeralKeys.create(
+      {customer: customer.id},
+      {apiVersion: '2020-08-27'}
+    );
+    res.json({ customer, ephemeralKey })
+  }
+  catch (err) {
+    console.log('Error getting ephemeral Key')
+    console.error(ex)
+    res.status(500)
+    res.json({ error: ex.message })
+  }
+})
+
 app.post('/payment-sheet', async (req, res) => {
   // Use an existing Customer ID if this is a returning customer.
   try {
