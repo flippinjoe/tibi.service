@@ -21,6 +21,11 @@ export type AmplifyDependentResourcesAttributes = {
             "GraphQLAPIKeyOutput": "string",
             "GraphQLAPIIdOutput": "string",
             "GraphQLAPIEndpointOutput": "string"
+        },
+        "gateway": {
+            "RootUrl": "string",
+            "ApiName": "string",
+            "ApiId": "string"
         }
     },
     "storage": {
@@ -31,6 +36,12 @@ export type AmplifyDependentResourcesAttributes = {
     },
     "function": {
         "postTransactionTrigger": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
+        },
+        "tibiStripeCustomer": {
             "Name": "string",
             "Arn": "string",
             "Region": "string",
