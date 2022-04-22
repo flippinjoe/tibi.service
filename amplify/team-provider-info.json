@@ -34,7 +34,7 @@
         "tibiStripeCustomer": {
           "secretsPathAmplifyAppId": "d2fsbyc8v5822g",
           "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
-          "s3Key": "amplify-builds/tibiStripeCustomer-2f49356c30756f757033-build.zip"
+          "s3Key": "amplify-builds/tibiStripeCustomer-476f3044354350593946-build.zip"
         }
       }
     }

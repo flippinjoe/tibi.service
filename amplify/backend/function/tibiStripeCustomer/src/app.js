@@ -221,9 +221,9 @@ app.get('/ephemeralKey', async (req, res) => {
     const customer = await createOrGetCustomerIdForUser(req.query.userId, { stripe, publishKey });
     const ephemeralKey = await stripe.ephemeralKeys.create(
       {customer: customer.id},
-      {apiVersion: '2020-08-27'}
+      {apiVersion: req.query.apiVersion }
     );
-    res.json({ customer, ephemeralKey })
+    res.json(ephemeralKey)
   }
   catch (err) {
     console.log('Error getting ephemeral Key')
