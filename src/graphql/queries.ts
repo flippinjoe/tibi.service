@@ -10,17 +10,9 @@ export const getUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
-      sendwyreUserId
+      stp_customerId
       tippingActive
       unreadNotifications
-      backgroundImage {
-        key
-        location
-        id
-        createdAt
-        updatedAt
-        owner
-      }
       profileImage {
         key
         location
@@ -50,7 +42,6 @@ export const getUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      userBackgroundImageId
       userProfileImageId
       userActiveOccupationId
       owner
@@ -70,12 +61,11 @@ export const listUsers = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -263,12 +253,11 @@ export const getEstablishmentTibi = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -434,12 +423,11 @@ export const getTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -450,12 +438,11 @@ export const getTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -617,12 +604,11 @@ export const getUserOccupations = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
