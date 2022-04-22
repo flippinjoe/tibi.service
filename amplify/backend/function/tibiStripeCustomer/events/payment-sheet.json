@@ -3,7 +3,8 @@
   "path": "/payment-sheet",
   "body": "{\"amount\":1099,\"currency\":\"usd\"}",
   "queryStringParameters": {
-    "userId": "6d0af0ab-88e0-4425-ade6-4777f75992b5"
+    "userId": "6d0af0ab-88e0-4425-ade6-4777f75992b5",
+    "apiVersion": "2020-08-27"
   },
   "headers": {
     "Content-Type": "application/json"

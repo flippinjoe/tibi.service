@@ -227,7 +227,7 @@ app.get('/ephemeralKey', async (req, res) => {
   }
   catch (err) {
     console.log('Error getting ephemeral Key')
-    console.error(ex)
+    console.error(err)
     res.status(500)
     res.json({ error: ex.message })
   }
@@ -240,7 +240,7 @@ app.post('/payment-sheet', async (req, res) => {
     const customer = await createOrGetCustomerIdForUser(req.query.userId, { stripe, publishKey });
     const ephemeralKey = await stripe.ephemeralKeys.create(
       {customer: customer.id},
-      {apiVersion: '2020-08-27'}
+      {apiVersion: req.query.apiVersion || "2020-08-27"}
     );
 
     const paymentIntent = await stripe.paymentIntents.create({
