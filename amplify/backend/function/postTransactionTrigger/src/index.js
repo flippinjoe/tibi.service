@@ -143,7 +143,7 @@ const convertTokensToMap = (tokens, channel) => {
   }, {})
 }
 
-const notifyUserTipped = async (user, availableBalance, fromUser) => {
+const notifyUserTipped = async (user, availableBalance, fromUser, transactionId) => {
   const title = `${fromUser.firstName} ${fromUser.lastName.substr(0, 1)}.`
   const details = `Sent you $${(availableBalance - (user.availableBalance || 0)).toFixed(2)}`
 
@@ -187,7 +187,8 @@ const notifyUserTipped = async (user, availableBalance, fromUser) => {
          title,
          details,
          type: "tip",
-         fromUserId: fromUser.id
+         fromUserId: fromUser.id,
+         transactionId
        }
      })
    ])
@@ -208,8 +209,8 @@ const notifyUserTipped = async (user, availableBalance, fromUser) => {
     })
   
  
-   const { updateUser } = graphqlData.data
-   return updateUser
+  //  const { updateUser } = graphqlData.data
+   return (graphqlData.data && graphqlData.data.updateUser) || user
  }
  
  exports.handler = async (event) => {
@@ -222,6 +223,7 @@ const notifyUserTipped = async (user, availableBalance, fromUser) => {
      return Promise.resolve('Not processing updates')
    }
    
+   const id = record.id.S
    const amount = parseFloat(record.amount.N)
    const receiverId = record.transactionDestinationId.S
    const senderId = record.transactionSourceId.S
@@ -236,7 +238,12 @@ const notifyUserTipped = async (user, availableBalance, fromUser) => {
    const res = await updateUserAvailableBalance(toUser, (toUser.availableBalance || 0) + amount)
    const res2 = await updateUserAvailableBalance(fromUser, (fromUser.availableBalance || 0) - amount)
 
-   const notification = await notifyUserTipped(toUser, (toUser.availableBalance || 0) + amount, fromUser).catch(ex => {
+   const notification = await notifyUserTipped(
+     toUser, 
+     (toUser.availableBalance || 0) + amount, 
+     fromUser,
+     id
+  ).catch(ex => {
      return { err: ex }
    })
 

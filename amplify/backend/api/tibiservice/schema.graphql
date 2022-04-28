@@ -269,7 +269,7 @@ type Notification
 
   ## Extra metadata associated with this notification
   fromUserId: ID ## If the data is from a given user this will be populated
-
+  transactionId: ID
 }
 
  
