@@ -154,7 +154,7 @@ const notifyUserTipped = async (user, availableBalance, fromUser) => {
     /// Send a pinpoint thing here
     new Promise((resolve, reject) => {
       notifier.sendMessages({
-        'ApplicationId': '98d020f15fca435eb8cd49259c62153e',
+        'ApplicationId': 'c4616e8768354178adc60d02d8cc7581',
         'MessageRequest': {
           'Addresses': convertTokensToMap(user.devices.map(d => d.token), 'APNS'),
             'MessageConfiguration': {
