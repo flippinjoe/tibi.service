@@ -13,17 +13,9 @@ export const createUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
-      sendwyreUserId
+      stp_customerId
       tippingActive
       unreadNotifications
-      backgroundImage {
-        key
-        location
-        id
-        createdAt
-        updatedAt
-        owner
-      }
       profileImage {
         key
         location
@@ -53,7 +45,6 @@ export const createUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      userBackgroundImageId
       userProfileImageId
       userActiveOccupationId
       owner
@@ -71,17 +62,9 @@ export const updateUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
-      sendwyreUserId
+      stp_customerId
       tippingActive
       unreadNotifications
-      backgroundImage {
-        key
-        location
-        id
-        createdAt
-        updatedAt
-        owner
-      }
       profileImage {
         key
         location
@@ -111,7 +94,6 @@ export const updateUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      userBackgroundImageId
       userProfileImageId
       userActiveOccupationId
       owner
@@ -129,17 +111,9 @@ export const deleteUser = /* GraphQL */ `
       lastName
       availableBalance
       pendingBalance
-      sendwyreUserId
+      stp_customerId
       tippingActive
       unreadNotifications
-      backgroundImage {
-        key
-        location
-        id
-        createdAt
-        updatedAt
-        owner
-      }
       profileImage {
         key
         location
@@ -169,7 +143,6 @@ export const deleteUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      userBackgroundImageId
       userProfileImageId
       userActiveOccupationId
       owner
@@ -468,12 +441,11 @@ export const createEstablishmentTibi = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -510,12 +482,11 @@ export const updateEstablishmentTibi = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -552,12 +523,11 @@ export const deleteEstablishmentTibi = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -712,12 +682,11 @@ export const createTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -728,12 +697,11 @@ export const createTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -774,12 +742,11 @@ export const updateTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -790,12 +757,11 @@ export const updateTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -836,12 +802,11 @@ export const deleteTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -852,12 +817,11 @@ export const deleteTransaction = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -938,12 +902,11 @@ export const createUserOccupations = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -978,12 +941,11 @@ export const updateUserOccupations = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner
@@ -1018,12 +980,11 @@ export const deleteUserOccupations = /* GraphQL */ `
         lastName
         availableBalance
         pendingBalance
-        sendwyreUserId
+        stp_customerId
         tippingActive
         unreadNotifications
         createdAt
         updatedAt
-        userBackgroundImageId
         userProfileImageId
         userActiveOccupationId
         owner

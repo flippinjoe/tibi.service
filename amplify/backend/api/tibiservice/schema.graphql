@@ -26,7 +26,7 @@ type User
   pendingBalance: Float
 
   ## id for user on sendwyre
-  sendwyreUserId: String
+  # sendwyreUserId: String
   
     ## For stripe data
   stp_customerId: String
@@ -34,7 +34,6 @@ type User
   tippingActive: Boolean
   unreadNotifications: Boolean
 
-  backgroundImage: ImagePath @hasOne
   profileImage: ImagePath @hasOne
   establishments: [EstablishmentTibi] @hasMany(indexName: "byUser", fields: ["id"])
 

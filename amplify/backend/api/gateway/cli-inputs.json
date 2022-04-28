@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/payment-sheet": {
+      "name": "/payment-sheet",
+      "lambdaFunction": "tibiStripeCustomer",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/ephemeralKey": {
+      "name": "/ephemeralKey",
+      "lambdaFunction": "tibiStripeCustomer",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

@@ -29,10 +29,12 @@
       "function": {
         "postTransactionTrigger": {
           "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
-          "s3Key": "amplify-builds/postTransactionTrigger-57793566547963737673-build.zip"
+          "s3Key": "amplify-builds/postTransactionTrigger-6d3651316f4e43554865-build.zip"
         },
         "tibiStripeCustomer": {
-          "secretsPathAmplifyAppId": "d2fsbyc8v5822g"
+          "secretsPathAmplifyAppId": "d2fsbyc8v5822g",
+          "deploymentBucketName": "amplify-tibiservice-develop-191322-deployment",
+          "s3Key": "amplify-builds/tibiStripeCustomer-476f3044354350593946-build.zip"
         }
       }
     }
